@@ -1,0 +1,7 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+ems:
+ resource: "@EmsBundle/Resources/config/routing.yml"
+ prefix: /
