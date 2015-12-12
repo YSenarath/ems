@@ -1,0 +1,55 @@
+{# AppBundle/Resources/views/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}Emosys{% endblock %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    {% block otherstylesheets %}{% endblock %}
+</head>
+<body>
+{% block nevigationbar %}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand glyphicon glyphicon-grain" href="{{ path('homepage') }}">Emosys</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ path('about') }}"> About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a>
+                    </li>
+                    <li><a href="{{ path('login_route') }}"><span class="glyphicon glyphicon-log-in"></span>
+                            {% set user = app.user %}
+                            {% if (user != null) %}
+                                {{ user.username }}
+                            {% else %}
+                                Login
+                            {% endif %}
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+</body>
+</html>

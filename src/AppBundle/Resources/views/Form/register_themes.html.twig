@@ -1,0 +1,46 @@
+{#{% block integer_widget %}
+    <div class="integer_widget widget">
+        {% set type = type|default('number') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+
+{% block text_widget %}
+    <div class="text_widget widget">
+        {% set type = type|default('text') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+
+{% block password_widget %}
+    <div class="password_widget widget"">
+        {% set type = type|default('password') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}#}
+
+
+{# make the form fragment customization #}
+{% block form_row %}
+    <div class="form-row">
+        <tr>
+            <td align="right">{{ form_label(form) }}</td><td width="10"></td>
+            <td>{{ form_widget(form) }}<br>{{ form_errors(form) }}</td>
+        </tr>
+    </div>
+{% endblock form_row %}
+
+{# form_errors.html.twig #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

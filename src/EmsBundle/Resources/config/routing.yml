@@ -1,3 +1,0 @@
-blog_list:
- path: /ems
- defaults: { _controller: EmsBundle:Ems:list }
