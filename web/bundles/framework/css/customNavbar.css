@@ -1,12 +1,20 @@
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a, .navbar-inverse .navbar-nav .open .dropdown-menu {
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a, .navbar-inverse .navbar-nav .open .dropdown-menu {
     background-color: #000000;
-    color:#ffffff;
-}
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover{
-    background: #303030   ;
-    color:#ffffff;
+    color: #ffffff;
 }
 
-.navbar-inverse .navbar-brand{
-    color:#ffffff;
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
+    background: #303030;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    background-color: #000000;
+    background-image: none;
 }
