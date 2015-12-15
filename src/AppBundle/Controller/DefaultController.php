@@ -19,15 +19,23 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        //        return $this->render('default/index.html.twig', array(
-        //            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        //        ));
-        // return new Response('<html><body>Hello This is Homepage</body></html>');
+
         return $this->render(
             'AppBundle::index.html.twig'
         );
     }
+
+    /**
+     * @Route("/home", name="systemHome")
+     */
+    public function systemHomeAction(Request $request)
+    {
+        //return new Response("<h1>Welcome</h1>");
+        return $this->render(
+            'AppBundle::home.html.twig'
+        );
+    }
+
     /**
      * @Route("/about", name="about")
      */

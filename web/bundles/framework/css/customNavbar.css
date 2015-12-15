@@ -1,0 +1,12 @@
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a, .navbar-inverse .navbar-nav .open .dropdown-menu {
+    background-color: #000000;
+    color:#ffffff;
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover{
+    background: #303030   ;
+    color:#ffffff;
+}
+
+.navbar-inverse .navbar-brand{
+    color:#ffffff;
+}

@@ -18,6 +18,18 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
+    {#Custom dropdown#}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/customNavbar.css') }}"/>
+
+    {#Foter style#}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/footerStyle.css') }}"/>
+
+    <link rel="shortcut icon" href="http://www.bittersandjiggers.com/icons/icon_6496.png">
+    <style type="text/css">
+
+
+    </style>
+
     {% block otherstylesheets %}{% endblock %}
 </head>
 <body>
@@ -25,11 +37,23 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand glyphicon glyphicon-grain" href="{{ path('homepage') }}">Emosys</a>
+                <div class="active">
+                    <a class="navbar-brand " href="{{ path('homepage') }}">EMOsys</a>
+                </div>
+
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ path('about') }}"> About</a></li>
+                    <li><a href="{{ path('systemHome') }}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="true">Reports<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('reportAreas') }}">Areas</a></li>
+                            <li><a href="{{ path('reportSummery') }}">Summery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('about') }}"> About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a>
@@ -49,7 +73,20 @@
 {% endblock %}
 
 <div id="content">
-    {% block body %}{% endblock %}
+    {% block body %}
+
+    {% endblock %}
+    {% block footer %}
+        <footer class="footer">
+            <div class="container" align="center">
+                Copyright &copy; 2015 Quadro. All rights reserved.
+            </div>
+        </footer>
+    {% endblock %}
+    {% block script %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https:////netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    {% endblock %}
 </div>
 </body>
 </html>
