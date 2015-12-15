@@ -21,17 +21,6 @@ class DefaultController extends Controller
     {
 
         return $this->render(
-            'AppBundle::index.html.twig'
-        );
-    }
-
-    /**
-     * @Route("/home", name="systemHome")
-     */
-    public function systemHomeAction(Request $request)
-    {
-        //return new Response("<h1>Welcome</h1>");
-        return $this->render(
             'AppBundle::home.html.twig'
         );
     }
