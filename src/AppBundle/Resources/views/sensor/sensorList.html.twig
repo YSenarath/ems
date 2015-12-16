@@ -6,15 +6,65 @@
     <h1 align="center">
         Sensor
     </h1>
+    <div class="container">
+        <div class="row">
 
-    <ul>
-        {% for sensor in sensors %}
+            Sort By :
+            <button type="button" onclick="" class="btn btn-sm">Type</button>
 
-            {% if sensor.getSensorId|trim is not empty %}
-                <li><h3><a href="#"> {{ sensor.getSensorId }}</a></h3></li>
-            {% endif %}
+        </div>
+        <div class="row">
 
-        {% endfor %}
-    </ul>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Sensor ID</th>
+                    <th>Sensor Type</th>
+                    <th>Sensor Model</th>
+                    <th>Sensor Location</th>
+                    <th>Installed Date</th>
+
+                </tr>
+
+                {% for sensor in sensors  %}
+                    <tr>
+                        {% if sensor.getSensorId|trim is not empty %}
+                            <td><a href="#"> {{ sensor.getSensorId }}</a></td>
+
+                            {% if sensor.getTypeId|trim is not empty %}
+                                <td>{{ sensor.getTypeId }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                            {% if sensor.getModelId|trim is not empty %}
+                                <td>{{ sensor.getModelId }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                            {% if sensor.getLocId|trim is not empty %}
+                                <td> {{ sensor.getLocId }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                            {% if sensor.getInsDate|trim is not empty %}
+                                <td>{{ sensor.getInsDate }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
+
 
 {% endblock %}
