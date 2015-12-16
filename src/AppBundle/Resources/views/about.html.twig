@@ -1,5 +1,17 @@
 {# AppBundle/Resources/views/about.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
+{% block otherstylesheets %}
+
+<style>
+    h1 {
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+        font-size: 50px;
+        padding: 40px 25px;
+        text-align: center;
+        /*text-transform: uppercase;*/
+        text-rendering: optimizeLegibility;
+</style>
+{% endblock %}
 
 {% block body %}
     <h1 align="center">Environment Monitoring System</h1>
