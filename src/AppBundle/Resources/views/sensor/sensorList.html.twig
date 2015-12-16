@@ -1,0 +1,15 @@
+<html>
+<head></head>
+<body>
+<h1>Welcome to Environment Management System</h1>
+
+<ul>
+
+    {% for sensor in sensors %}
+        <li>{{ sensor.getModel }}</li>
+    {% endfor %}
+
+</ul>
+
+</body>
+</html>
