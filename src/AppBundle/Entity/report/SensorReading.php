@@ -11,7 +11,7 @@ namespace AppBundle\Entity\report;
 
 abstract class SensorReading
 {
-    protected $sensor_id;
+    protected $sensorId;
     protected $timestamp;
 
     /**
@@ -19,15 +19,15 @@ abstract class SensorReading
      */
     public function getSensorId()
     {
-        return $this->sensor_id;
+        return $this->sensorId;
     }
 
     /**
-     * @param mixed $sensor_id
+     * @param mixed $sensorId
      */
-    public function setSensorId($sensor_id)
+    public function setSensorId($sensorId)
     {
-        $this->sensor_id = $sensor_id;
+        $this->sensorId = $sensorId;
     }
 
     /**

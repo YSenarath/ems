@@ -11,24 +11,24 @@ namespace AppBundle\Entity\report;
 
 class AirQlyReading extends SensorReading
 {
-    private $air_qty_percentage;
-    private $oxygen_percentage;
-    private $co2_percentage;
+    private $airQtyPercentage;
+    private $oxygenPercentage;
+    private $co2Percentage;
 
     /**
      * @return mixed
      */
     public function getAirQtyPercentage()
     {
-        return $this->air_qty_percentage;
+        return $this->airQtyPercentage;
     }
 
     /**
-     * @param mixed $air_qty_percentage
+     * @param mixed $airQtyPercentage
      */
-    public function setAirQtyPercentage($air_qty_percentage)
+    public function setAirQtyPercentage($airQtyPercentage)
     {
-        $this->air_qty_percentage = $air_qty_percentage;
+        $this->airQtyPercentage = $airQtyPercentage;
     }
 
     /**
@@ -36,15 +36,15 @@ class AirQlyReading extends SensorReading
      */
     public function getCo2Percentage()
     {
-        return $this->co2_percentage;
+        return $this->co2Percentage;
     }
 
     /**
-     * @param mixed $co2_percentage
+     * @param mixed $co2Percentage
      */
-    public function setCo2Percentage($co2_percentage)
+    public function setCo2Percentage($co2Percentage)
     {
-        $this->co2_percentage = $co2_percentage;
+        $this->co2Percentage = $co2Percentage;
     }
 
     /**
@@ -52,15 +52,15 @@ class AirQlyReading extends SensorReading
      */
     public function getOxygenPercentage()
     {
-        return $this->oxygen_percentage;
+        return $this->oxygenPercentage;
     }
 
     /**
-     * @param mixed $oxygen_percentage
+     * @param mixed $oxygenPercentage
      */
-    public function setOxygenPercentage($oxygen_percentage)
+    public function setOxygenPercentage($oxygenPercentage)
     {
-        $this->oxygen_percentage = $oxygen_percentage;
+        $this->oxygenPercentage = $oxygenPercentage;
     }
 
 

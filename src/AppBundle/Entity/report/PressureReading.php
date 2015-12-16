@@ -11,22 +11,22 @@ namespace AppBundle\Entity\report;
 
 class PressureReading extends SensorReading
 {
-    private $pressure_value;
+    private $pressureValue;
 
     /**
      * @return mixed
      */
     public function getPressureValue()
     {
-        return $this->pressure_value;
+        return $this->pressureValue;
     }
 
     /**
-     * @param mixed $pressure_value
+     * @param mixed $pressureValue
      */
-    public function setPressureValue($pressure_value)
+    public function setPressureValue($pressureValue)
     {
-        $this->pressure_value = $pressure_value;
+        $this->pressureValue = $pressureValue;
     }
 
 }

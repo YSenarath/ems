@@ -11,22 +11,22 @@ namespace AppBundle\Entity\report;
 
 class HumidityReading extends SensorReading
 {
-    private $humidity_value;
+    private $humidityValue;
 
     /**
      * @return mixed
      */
     public function getHumidityValue()
     {
-        return $this->humidity_value;
+        return $this->humidityValue;
     }
 
     /**
-     * @param mixed $humidity_value
+     * @param mixed $humidityValue
      */
-    public function setHumidityValue($humidity_value)
+    public function setHumidityValue($humidityValue)
     {
-        $this->humidity_value = $humidity_value;
+        $this->humidityValue = $humidityValue;
     }
 
 
