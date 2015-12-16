@@ -11,22 +11,22 @@ namespace AppBundle\Entity\report;
 
 class TempReading extends  SensorReading
 {
-    private $temp_value;
+    private $tempValue;
 
     /**
      * @return mixed
      */
     public function getTempValue()
     {
-        return $this->temp_value;
+        return $this->tempValue;
     }
 
     /**
-     * @param mixed $temp_value
+     * @param mixed $tempValue
      */
-    public function setTempValue($temp_value)
+    public function setTempValue($tempValue)
     {
-        $this->temp_value = $temp_value;
+        $this->tempValue = $tempValue;
     }
 
 }

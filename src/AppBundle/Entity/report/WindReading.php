@@ -11,7 +11,7 @@ namespace AppBundle\Entity\report;
 
 class WindReading extends SensorReading
 {
-    private $wind_speed;
+    private $windSpeed;
     private $direction;
 
     /**
@@ -19,15 +19,15 @@ class WindReading extends SensorReading
      */
     public function getWindSpeed()
     {
-        return $this->wind_speed;
+        return $this->windSpeed;
     }
 
     /**
-     * @param mixed $wind_speed
+     * @param mixed $windSpeed
      */
-    public function setWindSpeed($wind_speed)
+    public function setWindSpeed($windSpeed)
     {
-        $this->wind_speed = $wind_speed;
+        $this->windSpeed = $windSpeed;
     }
 
     /**

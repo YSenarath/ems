@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\reports;
 
+use AppBundle\Entity\report\Area;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -12,8 +13,13 @@ class ReportController extends Controller
      */
     public function areaAction()
     {
+        $areas[] = new Area();
+        // save the User
+        $connection = $this->get('database_connection');
+        $areaController = new AreaController($connection);
+        $areas=$areaController ->getAllAreasAction();
 
-        return $this->render('@App/reports/areas.html.twig');
+        return $this->render('@App/reports/areas.html.twig', array('areas' => $areas));
     }
 
     /**
