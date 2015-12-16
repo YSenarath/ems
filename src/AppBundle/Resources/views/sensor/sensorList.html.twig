@@ -1,15 +1,20 @@
-<html>
-<head></head>
-<body>
-<h1>Welcome to Environment Management System</h1>
+{% extends 'AppBundle::base.html.twig' %}
 
-<ul>
 
-    {% for sensor in sensors %}
-        <li>{{ sensor.getModel }}</li>
-    {% endfor %}
+{% block body %}
 
-</ul>
+    <h1 align="center">
+        Sensor
+    </h1>
 
-</body>
-</html>
+    <ul>
+        {% for sensor in sensors %}
+
+            {% if sensor.getSensorId|trim is not empty %}
+                <li><h3><a href="#"> {{ sensor.getSensorId }}</a></h3></li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}
