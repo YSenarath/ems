@@ -27,12 +27,14 @@ class HumidityReadingController extends Controller
 
     public function humidityLastReadingSearchAction($sensor_id)
     {
-        $lastReading = $this->connection->fetchAssoc(
-            'SELECT * FROM humidity WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+        $lastReading = $this->connection->executeQuery(
+            'SELECT humidity_value FROM humidity WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
+        $lastReading=$lastReading->fetchAll();
+
         if ($lastReading != null) {
-            return $lastReading;
+            return $lastReading[0]["humidity_value"];
         }
 
         return false;
