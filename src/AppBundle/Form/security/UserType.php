@@ -6,7 +6,8 @@
  * Time: 3:32 AM
  */
 // src/AppBundle/Form/UserType.php
-namespace AppBundle\Form;
+
+namespace AppBundle\Form\security;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

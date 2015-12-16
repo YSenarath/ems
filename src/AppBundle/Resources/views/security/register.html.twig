@@ -1,46 +1,22 @@
 {# AppBundle/Resources/views/security/login.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block otherstylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/App/Resources/views/security/register.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/App/Resources/views/security/login.css') }}">
-{% endblock %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
 
 {# To remove the nevigation bar on login page #}
 {# {% block nevigationbar %} {% endblock %} #}
 
-{% form_theme form 'AppBundle:Form:register_themes.html.twig' %}
-
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-centered table-bordered">
-                <div class="wrath-content-box"><span>Register</span></div>
-                {{ form_start(form) }}
-                <table>
-                    {{ form_row(form.id) }}
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.roleId) }}
-                    {{ form_row(form.plainPassword.first) }}
-                    {{ form_row(form.plainPassword.second) }}
-                    <tr>
-                        <td></td>
-                        </td>
-                        <td width="10"></td>
-                        <td align="right">
-                            <button type="submit" class="btn btn-success btn-sm form-control">Register!</button>
-                        <td>
-                        <td></td>
-                    </tr>
-                    <div class="clearfix"></div>
-                </table>
-                {{ form_end(form) }}
-                <br>
-            </div>
+    <dev class="container-fluid">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" class="btn btn-default pull-right"/>
+            {{ form_end(form) }}
         </div>
-    </div>
-
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+    </dev>
 {% endblock body %}
