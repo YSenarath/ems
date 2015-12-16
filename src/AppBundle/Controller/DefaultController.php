@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\security\DatabaseUser;
 use AppBundle\Controller\security\UserController;
-use AppBundle\Form\UserType;
+use AppBundle\Form\security\UserType;
 
 class DefaultController extends Controller
 {
@@ -57,11 +57,15 @@ class DefaultController extends Controller
             $userController = new UserController($connection);
             $employeeController = new EmployeeController($connection);
             if ($employeeController->employeeSearchAction($user->getId())) {
-                $userController->userAddAction(
-                    $user->getId(),
-                    $user->getUsername(),
-                    $user->getPassword(),
-                    $user->getRoleId());
+                if (!$userController->userSearchAction($user->getUsername())) {
+                    $userController->userAddAction(
+                        $user->getId(),
+                        $user->getUsername(),
+                        $user->getPassword(),
+                        $user->getRoleId());
+                } else {
+                    return $this->redirectToRoute('register');
+                }
                 return $this->redirectToRoute('homepage');
             } else {
                 return $this->redirectToRoute('register');
