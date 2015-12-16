@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\sensor\Sensor;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 class SensorController extends  Controller{
