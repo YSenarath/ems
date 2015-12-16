@@ -48,4 +48,19 @@ class AreaController extends Controller
 
     }
 
+    public function getAreaIdAction($areaName)
+    {
+        $result = $this->connection->fetchAssoc('SELECT area_code FROM area WHERE name=?', array($areaName));
+        // $result = $result->fetchAll();
+
+        if ($result != null) {
+            //print_r($result["area_code"]);
+
+            return $result["area_code"];
+        }
+
+        return false;
+
+    }
+
 }

@@ -11,7 +11,7 @@ namespace AppBundle\Controller\reports;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class WindController extends Controller
+class WindReadingController extends Controller
 {
     private $connection;
 
@@ -19,21 +19,22 @@ class WindController extends Controller
      * WindController constructor.
      * @param $connection
      */
-    public function __construct($connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function presuureLastReadingSearchAction(Connection $sensor_id)
+    public function windLastReadingSearchAction( $sensor_id)
     {
         $lastReading = $this->connection->fetchAssoc(
-            'SELECT * FROM pressure WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+            'SELECT wind_speed,direction FROM wind WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
         if ($lastReading != null) {
+
+           // print_r($lastReading);
             return $lastReading;
         }
-
         return false;
     }
 }

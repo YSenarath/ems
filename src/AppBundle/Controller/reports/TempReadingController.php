@@ -19,19 +19,22 @@ class TempReadingController extends Controller
      * TempReadingController constructor.
      * @param $connection
      */
-    public function __construct($connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function tempLastReadingSearchAction(Connection $sensor_id)
+    public function tempLastReadingSearchAction($sensor_id)
     {
-        $lastReading = $this->connection->fetchAssoc(
-            'SELECT * FROM temp WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+        //print_r($sensor_id);
+        $lastReading = $this->connection->executeQuery(
+            'SELECT temp_value  FROM temp WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
+        $lastReading=$lastReading->fetchAll();
+
         if ($lastReading != null) {
-            return $lastReading;
+            return $lastReading[0]["temp_value"];
         }
 
         return false;

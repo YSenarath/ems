@@ -2,22 +2,35 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
 
-<style>
-    h1 {
-        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-        font-size: 50px;
-        padding: 40px 25px;
-        text-align: center;
-        /*text-transform: uppercase;*/
-        text-rendering: optimizeLegibility;
-</style>
+    <style>
+        h1 {
+            font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+            font-size: 50px;
+            padding: 40px 25px 0px 0px;
+            text-align: center;
+            /*text-transform: uppercase;*/
+            text-rendering: optimizeLegibility;
+        }
+
+        #logoImage {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
     <h1 align="center">Environment Monitoring System</h1>
     <br>
     <div style="padding: 20px 0 10px 100px;">
-        <p>Developed for the semester project of <b>CS 3042 Database Systems</b> module in semester 4.</p>.
+
+        <div id="logoImage">
+            <img src="{{ asset('bundles/framework/images/logo.png') }}" alt="Company Logo"
+                 style="width:350px;height:200px;">
+        </div>
+        <p>Developed for the semester project of <b>CS 3042 Database Systems</b> module in semester 4.</p>
         <p>Developer team -</p>
         <ul>
             <li>Nadheesh Jihan</li>
@@ -27,4 +40,5 @@
         </ul>
 
     </div>
+
 {% endblock %}

@@ -27,7 +27,7 @@ class AirQlyReadingController extends Controller
     public function airQtlLastReadingSearchAction($sensor_id)
     {
         $lastReading = $this->connection->fetchAssoc(
-            'SELECT * FROM air_qty WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+            'SELECT air_qty_percentage,oxygen_percentage,co2_percentage FROM air_qty WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
         if ($lastReading != null) {
