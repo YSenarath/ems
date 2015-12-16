@@ -13,19 +13,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class SensorController extends  Controller{
 
+    private $connection;
 
-    /**
-     * @Route("/sensor", name="sensor_list")
-     */
-    public function sensorAction() {
-
-        $sensors = $this-> getDoctrine()
-
-            ->getRepository('AppBundle:sensor\Sensor')
-            ->findAll();
-
-
-        return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors'=>$sensors));
-        ;
+    public function __construct($connection)
+    {
+        $this->connection = $connection;
     }
+
+
+    public function sensorListAction($username)
+    {
+        $sensor = $this->connection->fetchAssoc('SELECT * FROM sensor WHERE user_name = ?', array($username));
+
+        if ($sensor != null)
+            return $sensor;
+        return false;
+    }
+
+
 }
