@@ -11,6 +11,7 @@ namespace AppBundle\Controller\sensor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\sensor\Sensor;
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class SensorController extends  Controller{
@@ -45,6 +46,52 @@ class SensorController extends  Controller{
         }
 
         return $sensors;
+    }
+
+    public function searchSensor($sensor_id)
+    {
+        $s =$this->connection->fetchAssoc('SELECT * FROM sensor WHERE sensor_id = ?', array($sensor_id));
+
+        //print_r($result);
+        $sensor = new Sensor();
+
+        if ($s != null) {
+                $sensor->setSensorId($s["sensor_id"]);
+                $sensor->setTypeId($s["type_id"]);
+                $sensor->setModelId($s["model_id"]);
+                $sensor->setInsDate($s["installed_date"]);
+                $sensor->setTMin($s["threshold_min"]);
+                $sensor->setTMax($s["threshold_max"]);
+                $sensor->setLocId($s["location_id"]);
+
+        }else{
+            return false;
+        }
+
+        return $sensor;
+    }
+
+    public function sensorAddAction(Sensor $sensor)
+    {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('INSERT INTO sensor (sensor_id ,threshold_min , threshold_max , location_id, type_id , model_id , installed_date ) VALUES (?,?,?,?, ?, ?, ?)');
+
+            $statement->bindValue(1, $sensor->getSensorId());
+            $statement->bindValue(2, $sensor->getTMin());
+            $statement->bindValue(3, $sensor->getTMax());
+            $statement->bindValue(4, $sensor->getLocId());
+            $statement->bindValue(5, $sensor->getTypeId());
+            $statement->bindValue(6, $sensor->getModelId());
+            $statement->bindValue(7, $sensor->getInsDate()->format('Y-m-d'));
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
     }
 
 
