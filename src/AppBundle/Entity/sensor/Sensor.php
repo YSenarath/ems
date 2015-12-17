@@ -18,7 +18,7 @@ class Sensor
     protected $loc_id;
     protected $type_id;
     protected $model_id;
-    protected $ins_data;
+    protected $ins_date;
 
     /**
      * @return mixed
@@ -119,17 +119,17 @@ class Sensor
     /**
      * @return mixed
      */
-    public function getInsData()
+    public function getInsDate()
     {
-        return $this->ins_data;
+        return $this->ins_date;
     }
 
     /**
-     * @param mixed $ins_data
+     * @param mixed $ins_date
      */
-    public function setInsData($ins_data)
+    public function setInsDate($ins_date)
     {
-        $this->ins_data = $ins_data;
+        $this->ins_date = $ins_date;
     }
 
 

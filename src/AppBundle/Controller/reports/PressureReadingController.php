@@ -8,8 +8,8 @@
 
 namespace AppBundle\Controller\reports;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\DBAL\Connection;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PressureReadingController extends Controller
 {
@@ -19,19 +19,21 @@ class PressureReadingController extends Controller
      * PressureReadingController constructor.
      * @param $connection
      */
-    public function __construct($connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function pressureLastReadingSearchAction(Connection $sensor_id)
+    public function pressureLastReadingSearchAction($sensor_id)
     {
-        $lastReading = $this->connection->fetchAssoc(
-            'SELECT * FROM pressure WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+        $lastReading = $this->connection->executeQuery(
+            'SELECT pressure_value FROM pressure WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
+        $lastReading = $lastReading->fetchAll();
+
         if ($lastReading != null) {
-            return $lastReading;
+            return $lastReading[0]["pressure_value"];
         }
 
         return false;
