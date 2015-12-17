@@ -87,6 +87,11 @@ class ReportController extends Controller
 
         $noOfLocations = count($locationIdArray);
 
+        // Debug code
+        if ($noOfLocations == 0) {
+            $noOfLocations = 1;
+        }
+
         $areaTemp = round($areaTemp / $noOfLocations, 2);
         $areaHumidity = round($areaHumidity / $noOfLocations, 2);
         $areaPressure = round($areaPressure / $noOfLocations / 1000, 2);

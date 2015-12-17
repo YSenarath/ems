@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 
 
@@ -33,8 +33,8 @@ class SensorType extends AbstractType
             ->add('type_id', TextType::class , array('label' => 'Type'))
             ->add('model_id', TextType::class , array('label' => 'Model'))
             ->add('ins_date', DateType::class , array('label' => 'Installed Date'))
-            ->add('t_min', NumberType::class , array('label' => 'Threshold Min'))
-            ->add('t_max', NumberType::class , array('label' => 'Threshold Max'));
+            ->add('t_min', IntegerType::class , array('label' => 'Threshold Min'))
+            ->add('t_max', IntegerType::class , array('label' => 'Threshold Max'));
 
 
     }

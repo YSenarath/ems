@@ -6,17 +6,13 @@
     <title>{% block title %}Emosys{% endblock %}</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     {#Custom dropdown#}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/customNavbar.css') }}"/>
@@ -76,16 +72,22 @@
                     <li><a href="{{ path('about') }}"> About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a>
+                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
                     </li>
-                    <li><a href="{{ path('login_route') }}"><span class="glyphicon glyphicon-log-in"></span>
-                            {% set user = app.user %}
-                            {% if (user != null) %}
-                                {{ user.username }}
-                            {% else %}
-                                Login
-                            {% endif %}
-                        </a></li>
+                    <li class="dropdown">
+                        {% set user = app.user %}
+                        {% if (user != null) %}
+                        <a href="#" class="dropdown-toggle glyphicon glyphicon-log-in" data-toggle="dropdown"> {{ user.username }}<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="{{ path('logout') }}"> Log Out</a></li>
+                        </ul>
+                        {% else %}
+                    <li><a href="{{ path('login_route') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                    {% endif %}
+                    </li>
                 </ul>
             </div>
         </div>

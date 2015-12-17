@@ -21,7 +21,7 @@ class LocationController extends Controller
 
     public function getLocationsAction()
     {
-        $locations = $this->connection->fetchAll('SELECT location_id, longitude, latitude FROM location');
+        $locations = $this->connection->fetchAll('SELECT address, longitude, latitude FROM location');
 
         if ($locations != null)
             return $locations;
