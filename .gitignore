@@ -35,3 +35,5 @@
 
 #Idea file
 /.idea/
+.idea/
+.idea/*
