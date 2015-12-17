@@ -11,7 +11,7 @@
             color: #333;
             font-family: Helvetica, Arial, sans-serif;
             font-size: 20px;
-            width:25%;
+            width: 25%;
             border-collapse: collapse;
             border-spacing: 0;
         }
@@ -23,15 +23,15 @@
         }
 
         td {
-            color:#FF5722;
+            color: #FF5722;
             background: #F5F5F5;
             text-align: left;
             padding: 5px;
         }
 
         /* Cells in even rows (2,4,6...) are one color */
-        tr  {
-            //color: ;
+        tr {
+        / / color:;
             text-align: center;
             background: #F5F5F5;
             padding: 5px;
@@ -40,11 +40,18 @@
         #areaMean {
 
         }
+        #errorMsg{
+            margin: 10px 0px;
+            padding:12px;
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+
         /*background: #FEFEFE;*/
 
         /*tr td:hover {*/
-            /*background: #666;*/
-            /*color: #FFF;*/
+        /*background: #666;*/
+        /*color: #FFF;*/
         /*}*/
 
         /* Hover cell effect! */
@@ -52,58 +59,57 @@
     </style>
 
 {% endblock %}
+
 {% block body %}
 
     <h1 align="center">
         {{ areaName }}
     </h1>
 
-    <div id="areaMean"  align="center">
-        <table>
-            <tr>
-                <td>Temperature</td>
-                <td>{{ meanTemp }} °C</td>
-            </tr>
-            <tr>
-                <td>Humidity</td>
-                <td>{{ meanHumidity }} %</td>
-            </tr>
-            <tr>
-                <td>Pressure</td>
-                <td>{{ meanPressure }} KPa</td>
-            </tr>
-            <tr>
-                <td>Wind speed</td>
-                <td>{{ meanWind['speed'] }} m/s</td>
-            </tr>
-            <tr>
-                <td>Wind Direction</td>
-                <td>{{ meanWind['direction'] }}</td>
-            </tr>
-            <tr>
-                <td>Air Quality</td>
-                <td> {{ meanAir['airQly'] }} %</td>
-            </tr>
-            <tr>
-                <td>Oxygen content</td>
-                <td> {{ meanAir['O2'] }} %</td>
-            </tr>
-            <tr>
-                <td>Carbon diaoxide content</td>
-                <td> {{ meanAir['CO2'] }} %</td>
-            </tr>
-        </table>
-        {#<p>Temperature : {{ meanTemp }} °C</p>#}
-        {#<p>Humidity : {{ meanHumidity }} %</p>#}
-        {#<p>Pressure : {{ meanPressure }} KPa</p>#}
-        {#<p>Wind speed : {{ meanWind['speed'] }} m/s</p>#}
-        {#<p>Wind Direction : {{ meanWind['direction'] }}</p>#}
+    {% if (error is defined) %}
+        <div id="errorMsg" align="center">
+            {{ error }}
+        </div>
 
-        {#<p>Air Quality : {{ meanAir['airQly'] }} %</p>#}
-        {#<p>Oxygen content : {{ meanAir['O2'] }} %</p>#}
-        {#<p>Carbon diaoxide content : {{ meanAir['CO2'] }} %</p>#}
-    </div>
+    {% endif %}
 
-
+    {% if (noOfLocations is defined) %}
+        <div id="areaMean" align="center">
+            <table>
+                <tr>
+                    <td>Temperature</td>
+                    <td>{{ meanTemp }} °C</td>
+                </tr>
+                <tr>
+                    <td>Humidity</td>
+                    <td>{{ meanHumidity }} %</td>
+                </tr>
+                <tr>
+                    <td>Pressure</td>
+                    <td>{{ meanPressure }} KPa</td>
+                </tr>
+                <tr>
+                    <td>Wind speed</td>
+                    <td>{{ meanWind['speed'] }} m/s</td>
+                </tr>
+                <tr>
+                    <td>Wind Direction</td>
+                    <td>{{ meanWind['direction'] }}</td>
+                </tr>
+                <tr>
+                    <td>Air Quality</td>
+                    <td> {{ meanAir['airQly'] }} %</td>
+                </tr>
+                <tr>
+                    <td>Oxygen content</td>
+                    <td> {{ meanAir['O2'] }} %</td>
+                </tr>
+                <tr>
+                    <td>Carbon diaoxide content</td>
+                    <td> {{ meanAir['CO2'] }} %</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
 
 {% endblock %}
