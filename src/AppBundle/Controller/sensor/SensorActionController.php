@@ -9,8 +9,14 @@
 namespace AppBundle\Controller\sensor;
 
 use AppBundle\Entity\sensor\Sensor;
+use AppBundle\Form\sensor\SensorType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Controller\security\EmployeeController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SensorActionController extends  Controller
 {
@@ -32,8 +38,44 @@ class SensorActionController extends  Controller
     /**
      * @Route("/sensor/find", name="find_sensor")
      */
-    public function summeryAction()
+    public function findAction()
     {
         return $this->render('AppBundle:sensor:findSensor.htlm.twig');
+    }
+
+    /**
+     * @Route("/sensor/add", name="add_sensor")
+     */
+    public function addSensorAction(Request $request)
+    {
+
+        $sensor = new Sensor();
+        $sensor->setInsDate((new \DateTime('today')));
+
+        // build the form
+        $form = $this->createForm(SensorType::class, $sensor);
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            //add sensor
+            $connection = $this->get('database_connection');
+            $sensorController = new SensorController($connection);
+            if (!$sensorController->searchSensor($sensor->getSensorId())) {
+                    $sensorController->sensorAddAction($sensor);
+            } else{
+                //---------------------------------------
+                //------implement later---------------
+                print_r("The Sensor ID exists");
+                return $this->redirectToRoute('find_sensor');
+                }
+
+        }
+
+        return $this->render(
+            'AppBundle:sensor:addSensor.htlm.twig',
+            array('form' => $form->createView())
+        );
     }
 }
