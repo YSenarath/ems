@@ -25,7 +25,7 @@ class SensorController extends  Controller{
 
     public function getAllSensors()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM sensor ORDER BY sensor_id');
+        $result = $this->connection->executeQuery('SELECT * FROM sensor ORDER BY installed_date DESC');
         $result = $result->fetchAll();
 
         //print_r($result);

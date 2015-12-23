@@ -8,6 +8,8 @@
 
 namespace AppBundle\Controller\sensor;
 
+
+use AppBundle\Controller\reports\LocationController;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Form\sensor\SensorType;
 
@@ -40,7 +42,7 @@ class SensorActionController extends  Controller
      */
     public function findAction()
     {
-        return $this->render('AppBundle:sensor:findSensor.htlm.twig');
+        return $this->render('AppBundle:sensor:findSensor.html.twig');
     }
 
     /**
@@ -52,29 +54,49 @@ class SensorActionController extends  Controller
         $sensor = new Sensor();
         $sensor->setInsDate((new \DateTime('today')));
 
+        $connection = $this->get('database_connection');
+
+        $modelController = new ModelController($connection);
+        $typeController = new TypeController($connection);
+
+        $models = $modelController->getAllModelNames();
+        $types = $typeController->getAllTypeNames();
+
         // build the form
-        $form = $this->createForm(SensorType::class, $sensor);
+        $form = $this->createForm(SensorType::class, $sensor ,
+            array(
+                'models' => $models,
+                'types' => $types
+            ));
+
 
         //Handle submission (will only happen on POST)
         $form->handleRequest($request);
+
         if ($form->isValid() && $form->isSubmitted()) {
 
             //add sensor
-            $connection = $this->get('database_connection');
             $sensorController = new SensorController($connection);
+
             if (!$sensorController->searchSensor($sensor->getSensorId())) {
+                if ($sensor->getTMax() > $sensor->getTMin()){
                     $sensorController->sensorAddAction($sensor);
+                }else{
+                    printf("TMax <= TMin");
+                    return $this->redirectToRoute('add_sensor');
+                }
+
             } else{
                 //---------------------------------------
                 //------implement later---------------
-                print_r("The Sensor ID exists");
+                printf("The Sensor ID exists");
                 return $this->redirectToRoute('find_sensor');
-                }
-
+            }
+            return $this->redirectToRoute('sensor_list');
         }
 
         return $this->render(
-            'AppBundle:sensor:addSensor.htlm.twig',
+            'AppBundle:sensor:addSensor.html.twig',
             array('form' => $form->createView())
         );
     }
