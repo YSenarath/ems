@@ -37,7 +37,7 @@ class LocationController extends Controller
         $result =$this->connection->executeQuery('SELECT location.location_id , area.name FROM location NATURAL JOIN area ORDER BY area.name ');
         $result = $result->fetchAll();
 
-        print_r($result);
+        //print_r($result);
 
         $tempArea = null;
         $tempLocation = null;

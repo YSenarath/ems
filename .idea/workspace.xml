@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/ModelController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/ModelController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorActionController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorActionController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/sensor/SensorType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/sensor/SensorType.php" />
     </list>
     <ignored path="DB_EMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,12 +72,12 @@
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/sensor/ModelController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.52">
-              <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
+              <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
               <folding>
                 <element signature="e#133#162#0#PHP" expanded="true" />
-                <marker date="1450844196918" expanded="true" signature="426:471" placeholder="SELECT * FRO..sensor_model..." />
-                <marker date="1450844196918" expanded="true" signature="955:981" placeholder="SELECT * FRO..sensor_model..." />
-                <marker date="1450844196918" expanded="true" signature="1595:1666" placeholder="SELECT model..sensor_model..." />
+                <marker date="1450844255984" expanded="true" signature="426:471" placeholder="SELECT * FRO..sensor_model..." />
+                <marker date="1450844255984" expanded="true" signature="955:981" placeholder="SELECT * FRO..sensor_model..." />
+                <marker date="1450844255984" expanded="true" signature="1595:1666" placeholder="SELECT model..sensor_model..." />
               </folding>
             </state>
           </provider>
@@ -88,11 +86,11 @@
       <file leaf-file-name="LocationController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.129032">
-              <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+            <state vertical-scroll-proportion="-7.451613">
+              <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
               <folding>
-                <marker date="1450844162574" expanded="true" signature="519:568" placeholder="SELECT addre..location..." />
-                <marker date="1450844162574" expanded="true" signature="808:898" placeholder="SELECT locat..location..." />
+                <marker date="1450844226947" expanded="true" signature="519:568" placeholder="SELECT addre..location..." />
+                <marker date="1450844226947" expanded="true" signature="808:898" placeholder="SELECT locat..location..." />
               </folding>
             </state>
           </provider>
@@ -665,7 +663,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450842501126</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add sensor form edited">
+      <created>1450844215651</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1450844215651</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -715,7 +719,8 @@
     <MESSAGE value="Merge branch 'master' of https://bitbucket.org/quadro-2/ems&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;src/AppBundle/Controller/sensor/SensorController.php&#10;" />
     <MESSAGE value="ad sensor form edited" />
     <MESSAGE value="Merge branch 'master' of https://bitbucket.org/quadro-2/ems&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;src/AppBundle/Form/sensor/SensorType.php&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://bitbucket.org/quadro-2/ems&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;src/AppBundle/Form/sensor/SensorType.php&#10;" />
+    <MESSAGE value="add sensor form edited" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sensor form edited" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1098,11 +1103,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.129032">
-          <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+        <state vertical-scroll-proportion="-7.451613">
+          <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
           <folding>
-            <marker date="1450844162574" expanded="true" signature="519:568" placeholder="SELECT addre..location..." />
-            <marker date="1450844162574" expanded="true" signature="808:898" placeholder="SELECT locat..location..." />
+            <marker date="1450844226947" expanded="true" signature="519:568" placeholder="SELECT addre..location..." />
+            <marker date="1450844226947" expanded="true" signature="808:898" placeholder="SELECT locat..location..." />
           </folding>
         </state>
       </provider>
@@ -1110,12 +1115,12 @@
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/sensor/ModelController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52">
-          <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
+          <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
           <folding>
             <element signature="e#133#162#0#PHP" expanded="true" />
-            <marker date="1450844196918" expanded="true" signature="426:471" placeholder="SELECT * FRO..sensor_model..." />
-            <marker date="1450844196918" expanded="true" signature="955:981" placeholder="SELECT * FRO..sensor_model..." />
-            <marker date="1450844196918" expanded="true" signature="1595:1666" placeholder="SELECT model..sensor_model..." />
+            <marker date="1450844255984" expanded="true" signature="426:471" placeholder="SELECT * FRO..sensor_model..." />
+            <marker date="1450844255984" expanded="true" signature="955:981" placeholder="SELECT * FRO..sensor_model..." />
+            <marker date="1450844255984" expanded="true" signature="1595:1666" placeholder="SELECT model..sensor_model..." />
           </folding>
         </state>
       </provider>
