@@ -15,12 +15,12 @@
     color: black;
 }
 
-a {
+#sidebar a {
     color: #009688;
     font-weight: bold;
     text-decoration: none;
 }
-a:hover {
+#sidebar a:hover {
     color:#80CBC4;
     text-decoration: underline;
 }

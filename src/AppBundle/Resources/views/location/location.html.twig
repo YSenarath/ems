@@ -1,0 +1,42 @@
+{# AppBundle/Resources/views/about.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+    <style>
+        #map {
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class = "container-fluid" style="margin-top: -25pt" id="head">
+        <h1 style="color: #5eb5e0" >Locations</h1>
+    </div>
+    <div class = "container-fluid" id="map">
+        <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 6.95, lng: 79.86},
+                    zoom: 13
+                });
+
+                {% for loc in locations %}
+                    var $title = {{ loc['address']|json_encode|raw }};
+                    var $long = {{ loc['longitude']|json_encode|raw }};
+                    var $lati = {{ loc['latitude']|json_encode|raw }};
+                    var marker = new google.maps.Marker({
+                        position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                        map: map,
+                        title: $title
+                    });
+                {% endfor %}
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                async defer></script>
+    </div>
+{% endblock %}

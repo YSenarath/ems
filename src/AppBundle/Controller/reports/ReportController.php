@@ -44,6 +44,17 @@ class ReportController extends Controller
         $areaId = $areaController->getAreaIdAction($viewArea);
         $locationIdArray = $locationController->getLocationIdsAction($areaId);
         $sensorIdArray = array();
+
+        $noOfLocations = count($locationIdArray);
+        if ($noOfLocations <= 0) {
+            return $this->render(
+                '@App/reports/areaView.html.twig',
+                array(
+                    'areaName' => $viewArea,
+                    'error' => 'No locations in the area',
+                )
+            );
+        }
         foreach ($locationIdArray as $locationId) {
             $sensorIdArray = array_merge($sensorIdArray, $sensorController->getSensorIdsByLocationAction($locationId));
         }
@@ -85,8 +96,6 @@ class ReportController extends Controller
             }
         }
 
-        $noOfLocations = count($locationIdArray);
-
         $areaTemp = round($areaTemp / $noOfLocations, 2);
         $areaHumidity = round($areaHumidity / $noOfLocations, 2);
         $areaPressure = round($areaPressure / $noOfLocations / 1000, 2);
@@ -110,6 +119,7 @@ class ReportController extends Controller
             '@App/reports/areaView.html.twig',
             array(
                 'areaName' => $viewArea,
+                'noOfLocations' => $noOfLocations,
                 'meanTemp' => $areaTemp,
                 'meanHumidity' => $areaHumidity,
                 'meanPressure' => $areaPressure,

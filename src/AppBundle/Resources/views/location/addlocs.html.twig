@@ -1,0 +1,75 @@
+{# AppBundle/Resources/views/about.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+    <style>
+        #map {
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Add Locations</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="address">Address</label>
+                <div class="col-md-6">
+                    <input id="address" name="address" placeholder="placeholder" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="longitude">longitude</label>
+                <div class="col-md-4">
+                    <input id="longitude" name="longitude" placeholder="placeholder" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="latitude">latitude</label>
+                <div class="col-md-4">
+                    <input id="latitude" name="latitude" placeholder="placeholder" class="form-control input-md" type="text">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="areas">Areas</label>
+                <div class="col-md-4">
+                    <select id="areas" name="areas" class="form-control">
+                        <option value="1">Select Area</option>
+                        <option value="2">Mattakkuliya</option>
+                        <option value="3">Modera</option>
+                        <option value="4">Aluthmawatha</option>
+                        <option value="5">Mahawatte</option>
+                        <option value="6">Bluemandhal</option>
+                        <option value="7">Kotahena East</option>
+                        <option value="8">Kotahena South</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnadd"></label>
+                <div class="col-md-4">
+                    <button id="btnadd" name="btnadd" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+{% endblock %}

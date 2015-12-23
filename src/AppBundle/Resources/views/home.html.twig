@@ -2,10 +2,11 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    <h1 align="center">
+    <h1 align="center" class="text-primary">
         Welcome
     </h1>
     {#<img src="http://www.bittersandjiggers.com/icons/icon_6496.png" alt="App Logo" align="middle" style="width:30%;height:40%; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)">#}
-    <img src="{{ asset('bundles/framework/images/app_logo.png') }}" alt="App Logo" align="middle" style="width:500px;height:500px; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)">
+    <img src="{{ asset('bundles/framework/images/app_logo.png') }}" alt="App Logo" align="middle"
+         style="width:300pt; height:300pt; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)">
 
 {% endblock %}

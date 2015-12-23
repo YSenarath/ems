@@ -2,14 +2,15 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Controller\security\EmployeeController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Controller\security\EmployeeController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\security\DatabaseUser;
 use AppBundle\Controller\security\UserController;
+use AppBundle\Controller\location\LocationController;
 use AppBundle\Form\security\UserType;
 
 class DefaultController extends Controller
@@ -74,6 +75,30 @@ class DefaultController extends Controller
         return $this->render(
             'AppBundle:security:register.html.twig',
             array('form' => $form->createView())
+        );
+    }
+
+    //by dulanjaya
+    /**
+     * @Route("/location", name="location")
+     */
+    public function locationAction()
+    {
+        $conn = $this->get('database_connection');
+        $locations = new LocationController($conn);
+        $locs = $locations->getLocationsAction();
+        return $this->render(
+            'AppBundle:location:location.html.twig', array('locations'=>$locs)
+        );
+    }
+
+    /**
+     * @Route("/addlocs", name="addlocs")
+     */
+    public function addlocAction()
+    {
+        return $this->render(
+            'AppBundle:location:addlocs.html.twig'
         );
     }
 }
