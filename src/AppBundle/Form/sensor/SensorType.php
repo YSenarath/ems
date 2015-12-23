@@ -31,12 +31,13 @@ class SensorType extends AbstractType
 
         $models = $options['models'];
         $types = $options['types'];
+        $locations = $options['locations'];
 
-        //print_r($types);
+        //print_r($locations);
 
         $builder
             ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
-            ->add('loc_id', TextType::class, array('label' => 'Location ID'))
+            ->add('loc_id', ChoiceType::class, array('label' => 'Location ID' , 'choices' => $locations))
             ->add('type_id', ChoiceType::class, array('label' => 'Type' , 'choices' => $types))
             ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'choices' => $models ))
             ->add('ins_date', DateType::class, array('label' => 'Installed Date'))
@@ -52,6 +53,7 @@ class SensorType extends AbstractType
             'data_class' => 'AppBundle\Entity\sensor\Sensor',
             'models' => null,
             'types' => null,
+            'locations' => null,
         ));
     }
 }

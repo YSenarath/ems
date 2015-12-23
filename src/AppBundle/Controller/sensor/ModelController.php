@@ -77,7 +77,9 @@ class ModelController
         foreach ($result as $s) {
             if ($s != null) {
                 if ($tempManufacture != $s["manufacturer"]) {
+                    $tempModel = $s["manufacturer"];
                     if($tempModel != null){
+
                         $models[$s["manufacturer"]] = $tempModel;
                         $tempModel = null;
                     }

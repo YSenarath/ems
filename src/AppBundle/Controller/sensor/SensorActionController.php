@@ -9,7 +9,7 @@
 namespace AppBundle\Controller\sensor;
 
 
-use AppBundle\Controller\reports\LocationController;
+use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Form\sensor\SensorType;
 
@@ -58,15 +58,18 @@ class SensorActionController extends  Controller
 
         $modelController = new ModelController($connection);
         $typeController = new TypeController($connection);
+        $locationController = new LocationController($connection);
 
         $models = $modelController->getAllModelNames();
         $types = $typeController->getAllTypeNames();
+        $locations = $locationController ->getAllLocationNames();
 
         // build the form
         $form = $this->createForm(SensorType::class, $sensor ,
             array(
                 'models' => $models,
-                'types' => $types
+                'types' => $types,
+                'locations' => $locations
             ));
 
 
