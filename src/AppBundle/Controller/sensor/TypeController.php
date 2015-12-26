@@ -44,7 +44,7 @@ class TypeController
         $result = $this->connection->executeQuery('SELECT * FROM sensor_type');
         $result = $result->fetchAll();
 
-        //print_r($result);
+
         $types[] = new Type();
 
         foreach ($result as $s) {
@@ -58,6 +58,7 @@ class TypeController
             }
 
         }
+        return $types;
     }
 
     public function getAllTypeNames(){

@@ -1,0 +1,135 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+    <style>
+
+        h3 {
+            padding: 15px;
+            color: #009688;
+        }
+
+        table {
+            color: #333;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 20px;
+            width: 25%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        td, th {
+            border: 1px solid transparent; /* No more visible border */
+            height: 30px;
+            transition: all 0.3s; /* Simple transition for hover effect */
+        }
+
+        td {
+            color: #FF5722;
+            background: #F5F5F5;
+            text-align: left;
+            padding: 5px;
+        }
+
+        /* Cells in even rows (2,4,6...) are one color */
+        tr {
+        / / color:;
+            text-align: center;
+            background: #F5F5F5;
+            padding: 5px;
+        }
+
+        #areaMean {
+
+        }
+        #errorMsg{
+            margin: 10px 0px;
+            padding:12px;
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+
+        /*background: #FEFEFE;*/
+
+        /*tr td:hover {*/
+        /*background: #666;*/
+        /*color: #FFF;*/
+        /*}*/
+
+        /* Hover cell effect! */
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <h1 align="center">
+        Sensor
+    </h1>
+    <div class="container">
+
+
+        <div>
+            <h3>
+                Sensor : {{sensor.getSensorId}}
+            </h3>
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-striped" >
+                 <tr>
+                     <td>Sensor Type</td>
+                     {% if sensor.getTypeId|trim is not empty %}
+                         <td>{{sensor.getTypeId }}</td>
+                     {% else %}
+                         <td >Not Set</td>
+                     {% endif %}
+                 </tr>
+                <tr>
+                    <td>Sensor Model</td>
+                    {% if sensor.getModelId|trim is not empty %}
+                        <td>{{sensor.getModelId }}</td>
+                    {% else %}
+                        <td >Not Set</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Sensor Location</td>
+                    {% if sensor.getLocId|trim is not empty %}
+                        <td>{{sensor.getLocId}}</td>
+                    {% else %}
+                        <td >Not Set</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Installation Date</td>
+                    {% if sensor.getInsDate|trim is not empty %}
+                        <td>{{sensor.getInsDate }}</td>
+                    {% else %}
+                        <td >Not Set</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Threshold Max</td>
+                    {% if sensor.getTMax|trim is not empty %}
+                        <td>{{sensor.getTMax }}</td>
+                    {% else %}
+                        <td >Not Set</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Threshold Min</td>
+                    {% if sensor.getTMin|trim is not empty %}
+                        <td>{{sensor.getTMin }}</td>
+                    {% else %}
+                        <td >Not Set</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

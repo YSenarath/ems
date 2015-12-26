@@ -1,0 +1,40 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+
+{% block body %}
+
+    <h1 align="center">
+        Sensor Types
+    </h1>
+    <div class="container">
+
+
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Type</th>
+                    <th>Response Interval</th>
+                </tr>
+
+                {% for t in types  %}
+                    <tr>
+                        {% if t.type|trim is not empty %}
+                            <td>{{t.type }}</td>
+
+                            {% if t.getResInterval|trim is not empty %}
+                                <td>{{ t.getResInterval }} | <a href="#" >change</a> </td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

@@ -25,7 +25,7 @@ class SensorController extends  Controller{
 
     public function getAllSensors()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM sensor ORDER BY installed_date DESC');
+        $result = $this->connection->executeQuery('SELECT * FROM sensor NATURAL JOIN sensor_type ORDER BY installed_date DESC');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -35,7 +35,7 @@ class SensorController extends  Controller{
             if ($s != null) {
                 $sensor = new Sensor();
                 $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeId($s["type_id"]);
+                $sensor->setTypeId($s["type"]);
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setTMin($s["threshold_min"]);
@@ -78,14 +78,14 @@ class SensorController extends  Controller{
 
     public function searchSensor($sensor_id)
     {
-        $s =$this->connection->fetchAssoc('SELECT * FROM sensor WHERE sensor_id = ?', array($sensor_id));
+        $s =$this->connection->fetchAssoc('SELECT * FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?', array($sensor_id));
 
         //print_r($result);
         $sensor = new Sensor();
 
         if ($s != null) {
                 $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeId($s["type_id"]);
+                $sensor->setTypeId($s["type"]);
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setTMin($s["threshold_min"]);

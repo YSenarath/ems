@@ -14,12 +14,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 use AppBundle\Entity\sensor\Model;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class SensorType extends AbstractType
@@ -40,7 +41,7 @@ class SensorType extends AbstractType
             ->add('loc_id', ChoiceType::class, array('label' => 'Location ID' , 'choices' => $locations))
             ->add('type_id', ChoiceType::class, array('label' => 'Type' , 'choices' => $types))
             ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'choices' => $models ))
-            ->add('ins_date', DateType::class, array('label' => 'Installed Date'))
+            ->add('ins_date', DateType::class, array('label' => 'Installed Date',))
             ->add('t_min', NumberType::class, array('label' => 'Threshold Min'))
             ->add('t_max', NumberType::class, array('label' => 'Threshold Max'));
 

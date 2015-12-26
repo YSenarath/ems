@@ -91,4 +91,24 @@ class ModelController
         return $models;
     }
 
+    public function addModelAction(Model $model)
+    {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('INSERT INTO sensor_model (model_id ,manufacturer , unit , detection_range ) VALUES (?,?,?,?)');
+
+            $statement->bindValue(1, $model->getModelId());
+            $statement->bindValue(2, $model->getManufacture());
+            $statement->bindValue(3, $model->getUnit());
+            $statement->bindValue(4, $model->getDetRange());
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
+
 }

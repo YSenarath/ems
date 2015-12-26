@@ -1,0 +1,56 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+
+{% block body %}
+
+    <h1 align="center">
+        Sensor Models
+    </h1>
+    <div class="container">
+
+
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Model ID</th>
+                    <th>Manufacturer</th>
+                    <th>Basic Unit</th>
+                    <th>Detection Range</th>
+
+                </tr>
+
+                {% for m in models  %}
+                    <tr>
+                        {% if m.modelId|trim is not empty %}
+                            <td>{{ m.modelId }}</td>
+
+                            {% if m.manufacture|trim is not empty %}
+                                <td>{{ m.manufacture }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                            {% if m.unit|trim is not empty %}
+                                <td>{{ m.unit }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+                            {% if m.getDetRange|trim is not empty %}
+                                <td> {{ m.getDetRange }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

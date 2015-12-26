@@ -30,7 +30,7 @@
                 {% for sensor in sensors  %}
                     <tr>
                         {% if sensor.getSensorId|trim is not empty %}
-                            <td><a href="#"> {{ sensor.getSensorId }}</a></td>
+                            <td><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
 
                             {% if sensor.getTypeId|trim is not empty %}
                                 <td>{{ sensor.getTypeId }}</td>

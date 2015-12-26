@@ -11,7 +11,10 @@ namespace AppBundle\Controller\sensor;
 
 use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
+use AppBundle\Entity\sensor\Model;
+use AppBundle\Entity\sensor\Type;
 use AppBundle\Form\sensor\SensorType;
+use AppBundle\Form\sensor\ModelType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,9 +27,29 @@ class SensorActionController extends  Controller
 {
 
     /**
+     * @Route("/sensor/view", name="viewSensor")
+     * @param Request $request
+     * @return Response|void
+     */
+    public function viewSensorAction(Request $request)
+    {
+
+        $connection = $this->get('database_connection');
+        $sensorId = $request->query->get('id');
+        $sensorController = new SensorController($connection);
+        $sensor=$sensorController ->searchSensor($sensorId);
+
+        if(!$sensor){
+            return $this->render('AppBundle:sensor:sensorNotFound.html.twig');
+        }else{
+            return $this->render('AppBundle:sensor:viewSensor.html.twig', array('sensor' => $sensor));
+        }
+    }
+
+    /**
      * @Route("/sensor/list", name="sensor_list")
      */
-    public function areaAction()
+    public function listSensorAction()
     {
         $sensors[] = new Sensor();
 
@@ -35,6 +58,35 @@ class SensorActionController extends  Controller
         $sensors=$sensorController ->getAllSensors();
 
         return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
+    }
+
+    /**
+     * @Route("/model/list", name="model_list")
+     */
+    public function listModelAction()
+    {
+        $models[] = new Model();
+
+        $connection = $this->get('database_connection');
+        $modelController = new ModelController($connection);
+        $models=$modelController->getAllModels();
+
+        return $this->render('AppBundle:sensor:modelList.html.twig', array('models' => $models));
+    }
+
+    /**
+     * @Route("/type/list", name="type_list")
+     */
+    public function listTypesAction()
+    {
+        $types[] = new Type();
+
+        $connection = $this->get('database_connection');
+        $typeController = new TypeController($connection);
+        $types=$typeController->getAllTypes();
+
+        //print_r($types);
+        return $this->render('AppBundle:sensor:typeList.html.twig', array('types' => $types));
     }
 
     /**
@@ -100,6 +152,44 @@ class SensorActionController extends  Controller
 
         return $this->render(
             'AppBundle:sensor:addSensor.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/model/add", name="add_model")
+     */
+    public function addModelAction(Request $request)
+    {
+
+        $model = new Model();
+
+        // build the form
+        $form = $this->createForm(ModelType::class, $model );
+
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            //add model
+            $connection = $this->get('database_connection');
+            $modelController = new ModelController($connection);
+
+            if (!$modelController->searchModel($model->getModelId())) {
+                    $modelController->addModelAction($model);
+            } else{
+                //---------------------------------------
+                //------implement later---------------
+                printf("The Model ID exists");
+                return $this->redirectToRoute('add_model');
+            }
+            return $this->redirectToRoute('model_list');
+        }
+
+        return $this->render(
+            'AppBundle:sensor:addModel.html.twig',
             array('form' => $form->createView())
         );
     }
