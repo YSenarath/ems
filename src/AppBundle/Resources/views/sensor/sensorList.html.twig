@@ -1,5 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block otherstylesheets %}
+    <script src="{{ asset('bundles/framework/javascript/sorttable.js') }}"></script>
+{% endblock %}
+
 
 {% block body %}
 
@@ -9,15 +13,15 @@
     <div class="container">
         <div class="row">
 
-            Sort By :
-            <button type="button" onclick="" class="btn btn-sm">Type</button>
+            Please Click the table column header to sort by.
+            <hr>
 
         </div>
         <div class="row">
 
         </div>
         <div class="row">
-            <table class="table table-striped">
+            <table class="table table-striped sortable">
                 <tr>
                     <th>Sensor ID</th>
                     <th>Sensor Type</th>

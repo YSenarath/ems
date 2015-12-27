@@ -49,7 +49,7 @@ class SensorController extends  Controller{
     }
 
     /**
-     * Created by Shehan
+     * Created by ShehanGemba
      * @param $locationId
      * @return array
      * @throws \Doctrine\DBAL\DBALException
