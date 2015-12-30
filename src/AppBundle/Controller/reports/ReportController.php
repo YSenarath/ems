@@ -71,23 +71,23 @@ class ReportController extends Controller
 
         foreach ($sensorIdArray as $sensorId) {
             switch ($sensorId[1]) {
-                case 1://temp
+                case "temp"://temp
                     $areaTemp += $tempController->tempLastReadingSearchAction($sensorId[0]);
                     break;
-                case 2://air
+                case "air_qty"://air
                     $lastAirReading = $airController->airQtlLastReadingSearchAction($sensorId[0]);
 
                     $areaAirQty += $lastAirReading["air_qty_percentage"];
                     $areaAirO2 += $lastAirReading["oxygen_percentage"];
                     $areaAirCo2 += $lastAirReading["co2_percentage"];
                     break;
-                case  3://humidity
+                case  "humidity"://humidity
                     $areaHumidity += $humidityController->humidityLastReadingSearchAction($sensorId[0]);
                     break;
-                case 4://pressure
+                case "pressure"://pressure
                     $areaPressure += $pressureController->pressureLastReadingSearchAction($sensorId[0]);
                     break;
-                case 5://wind
+                case "wind"://wind
                     $lastWindReading = $windController->windLastReadingSearchAction($sensorId[0]);
 
                     $areaWindSpeed += $lastWindReading["wind_speed"];

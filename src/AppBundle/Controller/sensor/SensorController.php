@@ -58,7 +58,7 @@ class SensorController extends  Controller{
     {
 
         $result = $this->connection->executeQuery(
-            'SELECT sensor_id,type_id FROM sensor WHERE location_id=? ORDER BY sensor_id',
+            'SELECT sensor_id,type_name FROM sensor WHERE location_id=? ORDER BY sensor_id',
             array($locationId)
         );
         $result = $result->fetchAll();
@@ -67,7 +67,7 @@ class SensorController extends  Controller{
 
         foreach ($result as $a) {
             if ($a != null) {
-                $sensorIdArray[] = array($a["sensor_id"], $a["type_id"]);
+                $sensorIdArray[] = array($a["sensor_id"], $a["type_name"]);
             }
         }
 
