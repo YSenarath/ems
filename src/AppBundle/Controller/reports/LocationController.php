@@ -26,7 +26,10 @@ class LocationController extends Controller
 
     public function getLocationIdsAction($areaId)
     {
-        $result = $this->connection->executeQuery('SELECT location_id FROM location WHERE area_code=? ORDER BY location_id',array($areaId));
+        $result = $this->connection->executeQuery(
+            'SELECT location_id FROM location WHERE area_code=? ORDER BY location_id',
+            array($areaId)
+        );
         $result = $result->fetchAll();
         //print_r($result);
         $locationIdArray = array();
@@ -36,9 +39,32 @@ class LocationController extends Controller
                 $locationIdArray[] = $a["location_id"];
             }
         }
+
         //print_r($locationIdArray);
 
         return $locationIdArray;
+
+    }
+
+    public function getLocationDetailsAction($areaId)
+    {
+        $locations = $this->connection->executeQuery(
+            'SELECT location_id,address, longitude, latitude FROM location WHERE area_code=? ORDER BY location_id',
+            array($areaId)
+        );
+        $locationsResult = $locations->fetchAll();
+        $locationArray = array();
+        //print_r($result);
+        if ($locationsResult != null) {
+            foreach ($locationsResult as $loc) {
+                if ($loc != null) {
+                    $locationArray[] = array($loc["location_id"],$loc["address"],$loc["longitude"],$loc["latitude"]);
+                }
+            }
+            return $locationArray;
+        }
+        //print_r($locationArray);
+        return false;
 
     }
 }

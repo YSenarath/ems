@@ -1,61 +1,75 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaView.css') }}"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <style>
+        #map {
+            height: 400px;
+            width: 600px;
 
-        h1 {
-            padding: 15px;
+        }
+
+        .locUl{
+            width: 100%;
+        }
+        .locLi {
+            padding: 10px;
+            margin: 1px;
+            font-size: 12pt;
+            //background-color: #FAFAFA;
+        }
+
+        .locLi a {
             color: #009688;
         }
 
-        table {
-            color: #333;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 20px;
-            width: 25%;
-            border-collapse: collapse;
-            border-spacing: 0;
+        .locLi a:hover, a:visited, a:link, a:active {
+            text-decoration: none;
         }
 
-        td, th {
-            border: 1px solid transparent; /* No more visible border */
+        .filterform {
+            width: 220px;
+            font-size: 15px;
+            display: block;
+            padding: 10px 0px 25px 250px;
+        }
+
+        .filterform input {
+            /*-moz-border-radius:5px;*/
+            /*border-radius:5px;*/
+
+            width: 250px;
             height: 30px;
-            transition: all 0.3s; /* Simple transition for hover effect */
+            background: #EEEEEE;
+            border: none;
+            font-size: 15pt;
+            color: #63717f;
+            padding-left: 45px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
         }
 
-        td {
-            color: #FF5722;
-            background: #F5F5F5;
-            text-align: left;
-            padding: 5px;
+        .filterform input#search::-webkit-input-placeholder {
+            color: #65737e;
         }
 
-        /* Cells in even rows (2,4,6...) are one color */
-        tr {
-        / / color:;
-            text-align: center;
-            background: #F5F5F5;
-            padding: 5px;
+        .filterform input#search:-moz-placeholder { /* Firefox 18- */
+            color: #65737e;
         }
 
-        #areaMean {
-
-        }
-        #errorMsg{
-            margin: 10px 0px;
-            padding:12px;
-            color: #D8000C;
-            background-color: #FFBABA;
+        .filterform input#search::-moz-placeholder { /* Firefox 19+ */
+            color: #65737e;
         }
 
-        /*background: #FEFEFE;*/
+        .filterform input#search:-ms-input-placeholder {
+            color: #65737e;
+        }
 
-        /*tr td:hover {*/
-        /*background: #666;*/
-        /*color: #FFF;*/
-        /*}*/
-
-        /* Hover cell effect! */
-
+        .filterform input#search:hover, .container-1 input#search:focus, .container-1 input#search:active {
+            outline: none;
+            background: #ffffff;
+        }
     </style>
 
 {% endblock %}
@@ -73,43 +87,144 @@
 
     {% endif %}
 
+
     {% if (noOfLocations is defined) %}
-        <div id="areaMean" align="center">
-            <table>
-                <tr>
-                    <td>Temperature</td>
-                    <td>{{ meanTemp }} °C</td>
-                </tr>
-                <tr>
-                    <td>Humidity</td>
-                    <td>{{ meanHumidity }} %</td>
-                </tr>
-                <tr>
-                    <td>Pressure</td>
-                    <td>{{ meanPressure }} KPa</td>
-                </tr>
-                <tr>
-                    <td>Wind speed</td>
-                    <td>{{ meanWind['speed'] }} m/s</td>
-                </tr>
-                <tr>
-                    <td>Wind Direction</td>
-                    <td>{{ meanWind['direction'] }}</td>
-                </tr>
-                <tr>
-                    <td>Air Quality</td>
-                    <td> {{ meanAir['airQly'] }} %</td>
-                </tr>
-                <tr>
-                    <td>Oxygen content</td>
-                    <td> {{ meanAir['O2'] }} %</td>
-                </tr>
-                <tr>
-                    <td>Carbon diaoxide content</td>
-                    <td> {{ meanAir['CO2'] }} %</td>
-                </tr>
-            </table>
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="areaMean" align="center">
+                        <table>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>{{ meanTemp }} °C</td>
+                            </tr>
+                            <tr>
+                                <td>Humidity</td>
+                                <td>{{ meanHumidity }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>{{ meanPressure }} KPa</td>
+                            </tr>
+                            <tr>
+                                <td>Wind speed</td>
+                                <td>{{ meanWind['speed'] }} m/s</td>
+                            </tr>
+                            <tr>
+                                <td>Wind Direction</td>
+                                <td>{{ meanWind['direction'] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Air Quality</td>
+                                <td> {{ meanAir['airQly'] }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Oxygen content</td>
+                                <td> {{ meanAir['O2'] }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Carbon diaoxide content</td>
+                                <td> {{ meanAir['CO2'] }} %</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div id="map">
+                        <script>
+                            var map;
+                            function initMap() {
+                                map = new google.maps.Map(document.getElementById('map'), {
+                                    center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
+                                    zoom: 12
+                                });
+
+                                {% for loc in locations %}
+                                var $title = {{ loc[1]|json_encode|raw }};
+                                var $long = {{ loc[2]|json_encode|raw }};
+                                var $lati = {{ loc[3]|json_encode|raw }};
+                                var marker = new google.maps.Marker({
+                                    position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                                    map: map,
+                                    title: $title
+                                });
+                                {% endfor %}
+                            }
+                        </script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                                async defer></script>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <div id="header">
+            <h3 style="padding: 25px 5px 5px 50px;">Locations</h3>
+
+        </div>
+        <div class="container">
+            <ul class="list locUl" id="list">
+                {% for loc in locations %}
+                    <li class="col-md-3 locLi"><a
+                    href="{{ path('reportLocationView', {'viewArea': areaName,'viewLocation': loc[1]}) }}"> {{ loc[1] }} </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
     {% endif %}
 
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script>
+        (function ($) {
+            // custom css expression for a case-insensitive contains()
+            jQuery.expr[':'].Contains = function (a, i, m) {
+                return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+            };
+
+
+            function listFilter(header, list) { // header is any element, list is an unordered list
+                // create and add the filter form to the header
+                var form = $("<form>").attr({"class": "filterform", "action": "#"}),
+                        input = $("<input>").attr({
+                            "class": "filterinput",
+                            "type": "text",
+                            "placeholder": "Search locations ..."
+                        });
+
+                $(form).append(input).appendTo(header);
+                $(input)
+                        .change(function () {
+                            var filter = $(this).val();
+                            if (filter) {
+                                // this finds all links in a list that contain the input,
+                                // and hide the ones not containing the input while showing the ones that do
+                                $(list).find("a:not(:Contains(" + filter + "))").parent().slideUp();
+                                $(list).find("a:Contains(" + filter + ")").parent().slideDown();
+                            } else {
+                                $(list).find("li").slideDown();
+                            }
+                            return false;
+                        })
+                        .keyup(function () {
+                            // fire the above change event after every letter
+                            $(this).change();
+                        });
+            }
+
+
+            //ondomready
+            $(function () {
+                listFilter($("#header"), $("#list"));
+            });
+        }(jQuery));
+
+    </script>
 {% endblock %}

@@ -63,4 +63,19 @@ class AreaController extends Controller
 
     }
 
+    public function getAreaDetailsAction($areaName)
+    {
+        $result = $this->connection->fetchAssoc('SELECT area_code,center_longitude,center_latitude FROM area WHERE name=?', array($areaName));
+        // $result = $result->fetchAll();
+
+        if ($result != null) {
+            //print_r($result["area_code"]);
+
+            return array($result["area_code"],$result["center_longitude"],$result["center_latitude"]);
+        }
+
+        return false;
+
+    }
+
 }

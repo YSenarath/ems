@@ -54,7 +54,7 @@ class SensorController extends  Controller{
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getSensorIdsByLocationAction($locationId)
+    public function getSensorDetailsByLocationAction($locationId)
     {
 
         $result = $this->connection->executeQuery(

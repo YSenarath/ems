@@ -10,14 +10,16 @@
     <h1 align="center">
         Areas
     </h1>
-
-    <ul id="sidebar">
-        {% for area in areas %}
-            {% if area.name|trim is not empty %}
-                <li><h3><a href="{{ path('reportAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a></h3></li>
-            {% endif %}
-                    {% endfor %}
-             <li><h3><a href="{{ path('reportAreaView', {'viewArea':  "Test"}) }}">Test</a></h3></li>
-    </ul>
+    <div class="container">
+        <ul class="list-unstyled" >
+            {% for area in areas %}
+                {% if area.name|trim is not empty %}
+                    <li  class="col-md-3"><h3><a href="{{ path('reportAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a></h3>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li  class="col-md-3"><h3><a href="{{ path('reportAreaView', {'viewArea':  "Test"}) }}">Test</a></h3></li>
+        </ul>
+    </div>
     {% if (js is defined) %}{{ js|raw }}{% endif %}
 {% endblock %}

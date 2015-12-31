@@ -1,7 +1,7 @@
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a, .navbar-inverse .navbar-nav .open .dropdown-menu {
-    background-color: #000000;
-    color: #ffffff;
-}
+     background-color: #000000;
+     color: #ffffff;
+ }
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
     background: #303030;
