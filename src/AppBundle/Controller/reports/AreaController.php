@@ -26,6 +26,10 @@ class AreaController extends Controller
         $this->connection = $connection;
     }
 
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function getAllAreasAction()
     {
         $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY name');
@@ -48,21 +52,25 @@ class AreaController extends Controller
 
     }
 
-    public function getAreaIdAction($areaName)
-    {
-        $result = $this->connection->fetchAssoc('SELECT area_code FROM area WHERE name=?', array($areaName));
-        // $result = $result->fetchAll();
-
-        if ($result != null) {
-            //print_r($result["area_code"]);
-
-            return $result["area_code"];
-        }
-
-        return false;
-
-    }
-
+//    public function getAreaIdAction($areaName)
+//    {
+//        $result = $this->connection->fetchAssoc('SELECT area_code FROM area WHERE name=?', array($areaName));
+//        // $result = $result->fetchAll();
+//
+//        if ($result != null) {
+//            //print_r($result["area_code"]);
+//
+//            return $result["area_code"];
+//        }
+//
+//        return false;
+//
+//    }
+//
+    /**
+     * @param $areaName
+     * @return Area|bool
+     */
     public function getAreaDetailsAction($areaName)
     {
         $result = $this->connection->fetchAssoc('SELECT area_code,center_longitude,center_latitude FROM area WHERE name=?', array($areaName));
@@ -71,7 +79,13 @@ class AreaController extends Controller
         if ($result != null) {
             //print_r($result["area_code"]);
 
-            return array($result["area_code"],$result["center_longitude"],$result["center_latitude"]);
+            $area=new Area();
+            $area->setAreaCode($result["area_code"]);
+            $area->setCenterLongitude($result["center_longitude"]);
+            $area->setCenterLatitude($result["center_latitude"]);
+
+            return $area;
+            // return array("area_code"=>$result["area_code"],"center_longitude"=>$result["center_longitude"],"center_latitude"=>$result["center_latitude"]);
         }
 
         return false;

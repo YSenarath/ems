@@ -1,7 +1,45 @@
 {% extends 'AppBundle::base.html.twig' %}
+{% block otherstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportLocationViewStyle.css') }}"/>
+    <style>
+
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1 id="heading" align="center">
-        {{ locationName }}, {{ areaName }}
+    <h1 id="loctionHeading" align="center">
+        {{ location.getAddress() }}, {{ areaName }}
     </h1>
+    <div id="locationCoordinates">
+        Latitude: {{ location.getLatitude() }} Longitude: {{ location.getLongitude() }}
+    </div>
+
+    <div>
+        <h3 id="installedSensors">
+            Installed sensors
+        </h3>
+    </div>
+    <div id="sensorInformation" align="center">
+        <table>
+            <tr>
+                <th>Sensor Id</th>
+                <th>Type</th>
+                <th>Manufacturer</th>
+                <th>Unit</th>
+                <th>Insalled Date</th>
+                <th>Last reading</th>
+            </tr>
+            {% for sensor in sensorDetail %}
+                <tr>
+
+                    <td><a href="#"> {{ sensor.getSensorId() }} </a></td>
+                    <td>{{ sensor.getTypeName() }}</td>
+                    <td>{{ sensor.getManufacturer() }}</td>
+                    <td>{{ sensor.getUnit() }}</td>
+                    <td>{{ sensor.getInsDate() }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 {% endblock %}

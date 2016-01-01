@@ -14,12 +14,47 @@ class Area
     private $name;
     private $areaSize;
 
+    private $centerLongitude;
+    private $centerLatitude;
+
     /**
      * @return mixed
      */
     public function getAreaCode()
     {
         return $this->areaCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCenterLatitude()
+    {
+        return $this->centerLatitude;
+    }
+
+    /**
+     * @param mixed $centerLatitude
+     */
+    public function setCenterLatitude($centerLatitude)
+    {
+        $this->centerLatitude = $centerLatitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCenterLongitude()
+    {
+        return $this->centerLongitude;
+    }
+
+    /**
+     * @param mixed $centerLongitude
+     */
+    public function setCenterLongitude($centerLongitude)
+    {
+        $this->centerLongitude = $centerLongitude;
     }
 
     /**

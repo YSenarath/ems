@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\reports;
 
+use AppBundle\Entity\report\PressureReading;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -24,16 +25,23 @@ class PressureReadingController extends Controller
         $this->connection = $connection;
     }
 
+    /**
+     * @param $sensor_id
+     * @return PressureReading|bool
+     */
     public function pressureLastReadingSearchAction($sensor_id)
     {
-        $lastReading = $this->connection->executeQuery(
-            'SELECT pressure_value FROM pressure WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+        $lastReading = $this->connection->fetchAssoc(
+            'SELECT timestamp,pressure_value FROM pressure WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
-        $lastReading = $lastReading->fetchAll();
 
         if ($lastReading != null) {
-            return $lastReading[0]["pressure_value"];
+            $pressureReading = new PressureReading();
+            $pressureReading->setTimestamp($lastReading["timestamp"]);
+            $pressureReading->setPressureValue($lastReading["pressure_value"]);
+
+            return $pressureReading;
         }
 
         return false;

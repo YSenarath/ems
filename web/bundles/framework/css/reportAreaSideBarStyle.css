@@ -1,13 +1,5 @@
-/*#sidebar li*/
-/*{*/
-/*display: inline;*/
-/*list-style-type: none;*/
-/*padding-right: 20px;*/
-/*}*/
 #sidebar.li {
     padding: 30px 25px 30px 25px;
-    /*background: url(index.php?img=pngPlugin) 2px 50% no-repeat;*/
-/ / color: black;
 }
 
 .container .list-unstyled .col-md-3 a {

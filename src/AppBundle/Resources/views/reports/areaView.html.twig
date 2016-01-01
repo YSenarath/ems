@@ -1,77 +1,7 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaView.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaViewStyle.css') }}"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <style>
-        #map {
-            height: 400px;
-            width: 600px;
-
-        }
-
-        .locUl{
-            width: 100%;
-        }
-        .locLi {
-            padding: 10px;
-            margin: 1px;
-            font-size: 12pt;
-            //background-color: #FAFAFA;
-        }
-
-        .locLi a {
-            color: #009688;
-        }
-
-        .locLi a:hover, a:visited, a:link, a:active {
-            text-decoration: none;
-        }
-
-        .filterform {
-            width: 220px;
-            font-size: 15px;
-            display: block;
-            padding: 10px 0px 25px 250px;
-        }
-
-        .filterform input {
-            /*-moz-border-radius:5px;*/
-            /*border-radius:5px;*/
-
-            width: 250px;
-            height: 30px;
-            background: #EEEEEE;
-            border: none;
-            font-size: 15pt;
-            color: #63717f;
-            padding-left: 45px;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-        }
-
-        .filterform input#search::-webkit-input-placeholder {
-            color: #65737e;
-        }
-
-        .filterform input#search:-moz-placeholder { /* Firefox 18- */
-            color: #65737e;
-        }
-
-        .filterform input#search::-moz-placeholder { /* Firefox 19+ */
-            color: #65737e;
-        }
-
-        .filterform input#search:-ms-input-placeholder {
-            color: #65737e;
-        }
-
-        .filterform input#search:hover, .container-1 input#search:focus, .container-1 input#search:active {
-            outline: none;
-            background: #ffffff;
-        }
-    </style>
-
 {% endblock %}
 
 {% block body %}
@@ -87,10 +17,8 @@
 
     {% endif %}
 
-
     {% if (noOfLocations is defined) %}
         <div class="container-fluid">
-
 
             <div class="row">
                 <div class="col-md-6">
@@ -143,9 +71,9 @@
                                 });
 
                                 {% for loc in locations %}
-                                var $title = {{ loc[1]|json_encode|raw }};
-                                var $long = {{ loc[2]|json_encode|raw }};
-                                var $lati = {{ loc[3]|json_encode|raw }};
+                                var $title = {{ loc.getAddress()|json_encode|raw }};
+                                var $long = {{ loc.getLongitude()|json_encode|raw }};
+                                var $lati = {{ loc.getLatitude()|json_encode|raw }};
                                 var marker = new google.maps.Marker({
                                     position: {lat: parseFloat($lati), lng: parseFloat($long)},
                                     map: map,
@@ -161,16 +89,15 @@
             </div>
         </div>
 
-
         <div id="header">
-            <h3 style="padding: 25px 5px 5px 50px;">Locations</h3>
+            <h3>Locations</h3>
 
         </div>
         <div class="container">
             <ul class="list locUl" id="list">
                 {% for loc in locations %}
-                    <li class="col-md-3 locLi"><a
-                    href="{{ path('reportLocationView', {'viewArea': areaName,'viewLocation': loc[1]}) }}"> {{ loc[1] }} </a>
+                    <li class="col-md-5 locLi"><a
+                                href="{{ path('reportLocationView', {'viewArea': areaName,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a>
                     </li>
                 {% endfor %}
             </ul>
@@ -178,9 +105,6 @@
 
 
     {% endif %}
-
-
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script>
         (function ($) {

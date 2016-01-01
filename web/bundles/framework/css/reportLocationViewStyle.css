@@ -1,0 +1,69 @@
+#locationCoordinates {
+    text-align: center;
+    padding: 5px 0px 25px 0px;
+}
+
+#installedSensors{
+    padding: 5px 0px 25px 50px;
+}
+#sensorInformation table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    width: 80%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+#sensorInformation td, #sensorInformation th {
+    border: 1px solid transparent; /* No more visible border */
+    height: 50px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+
+}
+
+#sensorInformation th {
+
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#sensorInformation td {
+    /*color: #FF5722;*/
+    /*background: #F5F5F5;*/
+    text-align: center;
+    /*padding: 5 px;*/
+}
+
+#sensorInformation tr {
+    text-align: center;
+    /*background: #F5F5F5;*/
+    /*padding: 5 px;*/
+}
+
+/*table #sensorInformation {*/
+/*font-size: 16px;*/
+/*font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;*/
+/*border-collapse: collapse;*/
+/*border-spacing: 0;*/
+/*width: 100%;*/
+
+/*}*/
+
+/*#sensorInformation td, #sensorInformation th {*/
+/*border: 1px solid #ddd;*/
+/*text-align: left;*/
+/*padding: 8px;*/
+/*width: 100px;*/
+/*}*/
+
+/*#sensorInformation tr:nth-child(even) {*/
+/*background-color: #f2f2f2*/
+/*}*/
+
+/*#sensorInformation th {*/
+/*padding-top: 11px;*/
+/*padding-bottom: 11px;*/
+/*background-color: #4CAF50;*/
+/*color: white;*/
+/*}*/

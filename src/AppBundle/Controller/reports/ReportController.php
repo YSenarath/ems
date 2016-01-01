@@ -2,8 +2,17 @@
 
 namespace AppBundle\Controller\reports;
 
+use AppBundle\Controller\location;
+use AppBundle\Controller\location\LocationController;
 use AppBundle\Controller\sensor\SensorController;
+use AppBundle\Entity\report\AirQlyReading;
 use AppBundle\Entity\report\Area;
+use AppBundle\Entity\report\HumidityReading;
+use AppBundle\Entity\report\LocationEntity;
+use AppBundle\Entity\report\PressureReading;
+use AppBundle\Entity\report\TempReading;
+use AppBundle\Entity\report\WindReading;
+use AppBundle\Entity\sensor\Sensor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -42,11 +51,19 @@ class ReportController extends Controller
 
         $area = $areaController->getAreaDetailsAction($viewArea);
         //print_r($area);
-        $areaId = $area[0];
-        $locationArray = $locationController->getLocationDetailsAction($areaId);
-        //  $locationIdArray = $locationController->getLocationIdsAction($areaId);
+        if (!$area) {
+            return $this->render(
+                '@App/reports/areaView.html.twig',
+                array(
+                    'areaName' => $viewArea,
+                    'error' => 'No such area',
+                )
+            );
+        }
+
+        $areaId = $area->getAreaCode();
+        $locationArray = $locationController->getLocationDetailsByAreaAction($areaId);
         // print_r($locationArray);
-        $sensorArray = array();
 
         $noOfLocations = count($locationArray);
         if (!$locationArray) {
@@ -59,11 +76,16 @@ class ReportController extends Controller
             );
         }
 
-        foreach ($locationArray as $location){
+        $sensorArray = array();
+        foreach ($locationArray as $location) {
+            /* @var $location LocationEntity */
             //print_r($location[0]."<br>");
-            $sensorArray = array_merge($sensorArray, $sensorController->getSensorDetailsByLocationAction($location[0]));
+            $sensorArray = array_merge(
+                $sensorArray,
+                $sensorController->getSensorDetailsByLocationAction($location->getLocationId())
+            );
         }
-
+        //print_r($sensorArray);
         $areaHumidity = 0;
         $areaTemp = 0;
         $areaWindSpeed = 0;
@@ -75,30 +97,47 @@ class ReportController extends Controller
         $areaAirCo2 = 0;
 
         foreach ($sensorArray as $sensorDetail) {
-           // print_r($sensorDetail);
-            switch ($sensorDetail[1]) {
+            /* @var $sensorDetail Sensor */
+            // print_r($sensorDetail);
+            switch ($sensorDetail->getTypeName()) {
                 case "temp"://temp
-                   // print_r($sensorDetail[0].'<br>');
-                    $areaTemp += $tempController->tempLastReadingSearchAction($sensorDetail[0]);
+                    $lastReading = ($tempController->tempLastReadingSearchAction($sensorDetail->getSensorId()));
+                    /* @var $lastReading TempReading */
+                    if ($lastReading != null) {
+                        $areaTemp += $lastReading->getTempValue();
+                    }
                     break;
                 case "air_qty"://air
-                    $lastAirReading = $airController->airQtlLastReadingSearchAction($sensorDetail[0]);
+                    $lastReading = $airController->airQtlLastReadingSearchAction($sensorDetail->getSensorId());
 
-                    $areaAirQty += $lastAirReading["air_qty_percentage"];
-                    $areaAirO2 += $lastAirReading["oxygen_percentage"];
-                    $areaAirCo2 += $lastAirReading["co2_percentage"];
+                    /* @var $lastReading AirQlyReading */
+                    if ($lastReading != null) {
+                        $areaAirQty += $lastReading->getAirQtyPercentage();
+                        $areaAirO2 += $lastReading->getOxygenPercentage();
+                        $areaAirCo2 += $lastReading->getCo2Percentage();
+                    }
                     break;
                 case  "humidity"://humidity
-                    $areaHumidity += $humidityController->humidityLastReadingSearchAction($sensorDetail[0]);
+                    $lastReading = $humidityController->humidityLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading HumidityReading */
+                    if ($lastReading != null) {
+                        $areaHumidity += $lastReading->getHumidityValue();
+                    }
                     break;
                 case "pressure"://pressure
-                    $areaPressure += $pressureController->pressureLastReadingSearchAction($sensorDetail[0]);
+                    $lastReading = $pressureController->pressureLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading PressureReading */
+                    if ($lastReading != null) {
+                        $areaPressure += $lastReading->getPressureValue();
+                    }
                     break;
                 case "wind"://wind
-                    $lastWindReading = $windController->windLastReadingSearchAction($sensorDetail[0]);
-
-                    $areaWindSpeed += $lastWindReading["wind_speed"];
-                    $areaWindDirection += $lastWindReading["direction"];
+                    $lastReading = $windController->windLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading WindReading */
+                    if ($lastReading != null) {
+                        $areaWindSpeed += $lastReading->getWindSpeed();
+                        $areaWindDirection += $lastReading->getDirection();
+                    }
                     break;
             }
         }
@@ -126,8 +165,8 @@ class ReportController extends Controller
             '@App/reports/areaView.html.twig',
             array(
                 'areaName' => $viewArea,
-                'area_longitude' => $area[1],
-                'area_latitude' => $area[2],
+                'area_longitude' => $area->getCenterLongitude(),
+                'area_latitude' => $area->getCenterLatitude(),
                 'noOfLocations' => $noOfLocations,
                 'meanTemp' => $areaTemp,
                 'meanHumidity' => $areaHumidity,
@@ -142,8 +181,33 @@ class ReportController extends Controller
     /**
      * @Route("/reports/areas/{viewArea}/{viewLocation}", name="reportLocationView")
      */
-    public function reportLocationViewAction($viewArea,$viewLocation){
-        return $this->render('@App/reports/locationView.html.twig',array('areaName'=>$viewArea,'locationName'=>$viewLocation));
+    public function reportLocationViewAction($viewArea, $viewLocation)
+    {
+        $connection = $this->get('database_connection');
+
+        $locationController = new LocationController($connection);
+
+        $sensorController = new SensorController($connection);
+        $tempController = new TempReadingController($connection);
+        $humidityController = new HumidityReadingController($connection);
+        $pressureController = new PressureReadingController($connection);
+        $windController = new WindReadingController($connection);
+        $airController = new AirQlyReadingController($connection);
+
+        $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
+
+        $sensorArray =$sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
+
+        //print_r($sensorArray);
+
+        return $this->render(
+            '@App/reports/locationView.html.twig',
+            array(
+                'areaName' => $viewArea,
+                'location' => $locationDetail,
+                'sensorDetail'=>$sensorArray
+            )
+        );
     }
 
     /**

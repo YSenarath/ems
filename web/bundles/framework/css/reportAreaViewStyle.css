@@ -1,0 +1,108 @@
+h1 {
+    padding: 10px;
+    color: #009688;
+}
+
+table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    width: 50%;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+td, th {
+    border: 1px solid transparent; /* No more visible border */
+    height: 50px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+}
+
+td {
+    color: #FF5722;
+    background: #F5F5F5;
+    text-align: left;
+    padding: 5px;
+}
+
+tr {
+    text-align: center;
+    background: #F5F5F5;
+    padding: 5px;
+}
+
+#errorMsg {
+    margin: 10px 0px;
+    padding: 12px;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+#map {
+    height: 400px;
+    width: 600px;
+
+}
+
+.locUl {
+    width: 100%;
+}
+
+.locLi {
+    padding: 10px;
+    margin: 1px;
+    font-size: 12pt;
+}
+
+.locLi a {
+    color: #009688;
+}
+
+.locLi a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+}
+
+.filterform {
+    width: 220px;
+    font-size: 15px;
+    display: block;
+    padding: 10px 0px 25px 250px;
+}
+
+.filterform input {
+    width: 250px;
+    height: 30px;
+    background: #EEEEEE;
+    border: thin;
+    font-size: 15pt;
+    color: #63717f;
+    padding-left: 45px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+}
+
+.filterform input#search::-webkit-input-placeholder {
+    color: #65737e;
+}
+
+.filterform input#search:-moz-placeholder { /* Firefox 18- */
+    color: #65737e;
+}
+
+.filterform input#search::-moz-placeholder { /* Firefox 19+ */
+    color: #65737e;
+}
+
+.filterform input#search:-ms-input-placeholder {
+    color: #65737e;
+}
+
+.filterform input#search:hover, .container-1 input#search:focus, .container-1 input#search:active {
+    outline: none;
+    background: #ffffff;
+}
+
+#header h3 {
+    padding: 25px 5px 5px 50px;
+}

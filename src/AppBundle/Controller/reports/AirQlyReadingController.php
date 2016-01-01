@@ -8,8 +8,9 @@
 
 namespace AppBundle\Controller\reports;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\report\AirQlyReading;
 use Doctrine\DBAL\Connection;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AirQlyReadingController extends Controller
 {
@@ -24,17 +25,26 @@ class AirQlyReadingController extends Controller
         $this->connection = $connection;
     }
 
+    /**
+     * @param $sensor_id
+     * @return AirQlyReading|bool
+     */
     public function airQtlLastReadingSearchAction($sensor_id)
     {
         $lastReading = $this->connection->fetchAssoc(
-            'SELECT air_qty_percentage,oxygen_percentage,co2_percentage FROM air_qty WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
+            'SELECT timestamp,air_qty_percentage,oxygen_percentage,co2_percentage FROM air_qty WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1',
             array($sensor_id)
         );
         if ($lastReading != null) {
-            return $lastReading;
+            $airQtyReading = new AirQlyReading();
+            $airQtyReading->setTimestamp($lastReading["timestamp"]);
+            $airQtyReading->setAirQtyPercentage($lastReading["air_qty_percentage"]);
+            $airQtyReading->setOxygenPercentage($lastReading["oxygen_percentage"]);
+            $airQtyReading->setCo2Percentage($lastReading["co2_percentage"]);
+
+            return $airQtyReading;
         }
 
         return false;
     }
-
 }
