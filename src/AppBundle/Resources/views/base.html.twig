@@ -17,7 +17,7 @@
 
 
     {#Custom dropdown#}
-    <link rel="stylesheet" href="{{ asset('bundles/framework/css/customNavbar.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/bootstrapNavbarStyle.css') }}"/>
 
     {#Foter style#}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/footerStyle.css') }}"/>
@@ -79,7 +79,8 @@
                     <li class="dropdown">
                         {% set user = app.user %}
                         {% if (user != null) %}
-                        <a href="#" class="dropdown-toggle glyphicon glyphicon-log-in" data-toggle="dropdown"> {{ user.username }}<b
+                        <a href="#" class="dropdown-toggle glyphicon glyphicon-log-in"
+                           data-toggle="dropdown"> {{ user.username }}<b
                                     class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
