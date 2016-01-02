@@ -1,3 +1,6 @@
+
+body{}
+
 #loctionHeading {
     color: #E91E63;
 }
@@ -79,7 +82,7 @@
 }
 
 #section1 {
-    height: 450px;
+    height: 500px;
     color: #fff;
     background-color: #009688;
 }

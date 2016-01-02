@@ -23,6 +23,10 @@ class SensorController extends Controller
         $this->connection = $connection;
     }
 
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function getAllSensors()
     {
         $result = $this->connection->executeQuery(
@@ -116,6 +120,10 @@ class SensorController extends Controller
     }
 
 
+    /**
+     * @param $sensor_id
+     * @return Sensor|bool
+     */
     public function searchSensor($sensor_id)
     {
         $s = $this->connection->fetchAssoc(
@@ -128,7 +136,7 @@ class SensorController extends Controller
 
         if ($s != null) {
             $sensor->setSensorId($s["sensor_id"]);
-            $sensor->setTypeName($s["type"]);
+            $sensor->setTypeName($s["type_name"]);
             $sensor->setModelId($s["model_id"]);
             $sensor->setInsDate($s["installed_date"]);
             $sensor->setTMin($s["threshold_min"]);
@@ -142,6 +150,11 @@ class SensorController extends Controller
         return $sensor;
     }
 
+    /**
+     * @param Sensor $sensor
+     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function sensorAddAction(Sensor $sensor)
     {
         $this->connection->beginTransaction();

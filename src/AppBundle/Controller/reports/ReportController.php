@@ -10,11 +10,18 @@ use AppBundle\Entity\report\Area;
 use AppBundle\Entity\report\HumidityReading;
 use AppBundle\Entity\report\LocationEntity;
 use AppBundle\Entity\report\PressureReading;
+use AppBundle\Entity\report\SensorReadingSearcher;
 use AppBundle\Entity\report\TempReading;
 use AppBundle\Entity\report\WindReading;
 use AppBundle\Entity\sensor\Sensor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ReportController extends Controller
 {
@@ -196,7 +203,7 @@ class ReportController extends Controller
 
         $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
 
-        $sensorArray =$sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
+        $sensorArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
 
         //print_r($sensorArray);
 
@@ -205,10 +212,83 @@ class ReportController extends Controller
             array(
                 'areaName' => $viewArea,
                 'location' => $locationDetail,
-                'sensorDetail'=>$sensorArray
+                'sensorDetail' => $sensorArray,
             )
         );
     }
+
+    /**
+     * @Route("/reports/areas/{viewArea}/{viewLocation}/{sensorId}", name="reportSensorReadings")
+     */
+    public function reportSensorReadingsAction(Request $request, $viewArea, $viewLocation, $sensorId)
+    {
+        $connection = $this->get('database_connection');
+
+        $sensorController = new SensorController($connection);
+        $sensor = $sensorController->searchSensor($sensorId);
+
+
+        $srs = new SensorReadingSearcher();
+        $srs->setReadingLimit(50);
+        $srs->setEndDate(new \DateTime('today'));
+       // 'attr' => array(
+        $form = $this->createFormBuilder($srs)
+            ->add('readingLimit', IntegerType::class, array('attr' => array('min' =>1, 'max' =>1000,'style' => 'width: 400px')))
+            ->add(
+                'startDate',
+                DateType::class,
+                array(
+                    'input' => 'datetime',
+                    'widget' => 'choice',
+                    'years' => range(2010, date('Y')),
+                    'attr' => array('style' => 'width: 400px')
+                )
+            )
+            ->add(
+                'endDate',
+                DateType::class,
+                array(
+                    'input' => 'datetime',
+                    'widget' => 'choice',
+                    'years' => range(2010, date('Y')),
+                    'attr' => array('style' => 'width: 400px')
+                )
+            )
+            ->add('Show', SubmitType::class, array('label' => 'Show'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $readingLimit = $form["readingLimit"]->getData();
+            $startDate = $form["startDate"]->getData();
+            $endDate = $form["endDate"]->getData();
+
+            /* @var $startDate \DateTime */
+            /* @var $endDate \DateTime */
+            return $this->render(
+                '@App/reports/sensorReadings.html.twig',
+                array(
+                    'sensor' => $sensor,
+                    'readingLimit' => $readingLimit,
+                    'startDate' => $startDate->format("Y-m-d"),
+                    'endDate' => $endDate->format("Y-m-d"),
+                )
+            );
+        }
+
+        //print_r($sensorArray);
+
+        return $this->render(
+            '@App/reports/sensorReadingSearch.html.twig',
+            array(
+                'sensor' => $sensor,
+                'form' => $form->createView(),
+            )
+        );
+    }
+
 
     /**
      * @Route("/reports/summery", name="reportSummery")

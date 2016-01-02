@@ -8,12 +8,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1 id="loctionHeading" align="center">
-        {{ location.getAddress() }}, {{ areaName }}
-    </h1>
-    <div id="locationCoordinates">
-        Latitude: {{ location.getLatitude() }} Longitude: {{ location.getLongitude() }}
+    <div id="headings">
+        <h1 id="loctionHeading" align="center">
+            {{ location.getAddress() }}, {{ areaName }}
+        </h1>
+        <div id="locationCoordinates">
+            Latitude: {{ location.getLatitude() }} | Longitude: {{ location.getLongitude() }}
+        </div>
     </div>
+
     <div id="section1" class="container-fluid">
         <div>
             <h3 id="installedSensors">
@@ -40,41 +43,15 @@
                         <td>{{ sensor.getManufacturer() }}</td>
                         <td>{{ sensor.getUnit() }}</td>
                         <td>{{ sensor.getInsDate() }}</td>
-                        <td id="sensorReadingLink"> <a href="#">View Readings</a></td>
+                        <td id="sensorReadingLink"><a
+                                    href="{{ path('reportSensorReadings', {'viewArea': areaName,'viewLocation': location.getAddress(),'sensorId':sensor.getSensorId()}) }}">View
+                                Readings</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-    {#<div id="section2" class="container-fluid">#}
-        {#<div>#}
-            {#<h3 id="sensorReadings">#}
-                {#Sensor readings#}
-            {#</h3>#}
-        {#</div>#}
-        {#<div>#}
-            {#<div>#}
-
-            {#</div>#}
-            {#<div id="sensorReading" align="center">#}
-                {#<table id="sensorReadingTable ">#}
-                    {#<thead>#}
-                    {#<tr>#}
-                        {#<th>Time Stamp</th>#}
-                        {#<th>Reading</th>#}
-
-                    {#</tr>#}
-                    {#</thead>#}
-                    {#<tbody>#}
-
-                    {#</tbody>#}
-                {#</table>#}
-            {#</div>#}
-
-        {#</div>#}
-        {#<script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>#}
-    {#</div>#}
-
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
 
 {% endblock %}

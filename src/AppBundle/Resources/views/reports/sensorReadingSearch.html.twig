@@ -1,0 +1,33 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+
+    <style>
+        .formContainer {
+            padding: 50px;
+            background-color: #FF5722;
+            color: white;
+        }
+        #headongs{
+            color:#9C27B0;
+        }
+
+    </style>
+{% endblock %}
+{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+{% block body %}
+    <div id="headongs" align="center">
+    <h1>Sensor {{sensor.getSensorId()   }}</h1>
+    <h3 style="padding: 3px 0px 40px 0px;">Filter sensor readings</h3>
+    </div>
+    <div class="container-fluid ">
+
+        <div class="col-sm-4 col-md-offset-4 formContainer">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
+

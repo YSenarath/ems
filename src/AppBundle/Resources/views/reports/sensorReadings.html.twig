@@ -1,0 +1,14 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% block body %}
+    <h1 align="center">
+        Sensor Readings
+    </h1>
+
+    <div>
+        <p>{{ sensor.getSensorId() }}</p>
+        <p>{{ readingLimit }}</p>
+        <p>{{ startDate}}</p>
+        <p>{{ endDate}}</p>
+        <p></p>
+    </div>
+{% endblock %}
