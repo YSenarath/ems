@@ -5,6 +5,7 @@
     <style>
 
     </style>
+
 {% endblock %}
 {% block body %}
     <div id="headings">
@@ -25,52 +26,89 @@
             )
         </h2>
     </div>
-    <div id="sensorReading" align="center">
-        <table id="sensorReadingTable" class="sortable">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
+    <div class="tabs">
+        <ul class="tab-links">
+            <li class="active"><a href="#tab1">Tabular</a></li>
+            <li><a href="#tab2">Graphical</a></li>
+        </ul>
 
-                {% if readings[0].getAirQtyPercentage is defined %} {#Air qty#}
-                    <th>Air Quality (%)</th>
-                    <th>CO<sub>2</sub> (%)</th>
-                    <th>Oxygen (%)</th>
-                {% elseif readings[0].getTempValue is defined %} {#Temp#}
-                    <th>Temperature( °C)</th>
-                {% elseif readings[0].getPressureValue is defined %} {#Pressure#}
-                    <th>Pressure( KPa)</th>
-                {% elseif readings[0].getWindSpeed is defined %} {#Wind#}
-                    <th>Speed (m/s)</th>
-                    <th>Direction ( degrees)</th>
-                {% elseif readings[0].getHumidityValue is defined %} {#Humidity#}
-                    <th>Humidity (%)</th>
+        <div class="tab-content">
+            <div id="tab1" class="tab active">
+                {% if readings[0] is defined %}
+                    <div class="component" id="sensorReading" align="center">
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+
+                                {% if readings[0].getAirQtyPercentage is defined %} {#Air qty#}
+                                    <th>Air Quality (%)</th>
+                                    <th>CO<sub>2</sub> (%)</th>
+                                    <th>Oxygen (%)</th>
+                                {% elseif readings[0].getTempValue is defined %} {#Temp#}
+                                    <th>Temperature( °C)</th>
+                                {% elseif readings[0].getPressureValue is defined %} {#Pressure#}
+                                    <th>Pressure( KPa)</th>
+                                {% elseif readings[0].getWindSpeed is defined %} {#Wind#}
+                                    <th>Speed (m/s)</th>
+                                    <th>Direction ( degrees)</th>
+                                {% elseif readings[0].getHumidityValue is defined %} {#Humidity#}
+                                    <th>Humidity (%)</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in readings %}
+                                <tr>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+                                    {% if reading.getAirQtyPercentage is defined %} {#Air qty#}
+                                        <td>{{ reading.getAirQtyPercentage() }}</td>
+                                        <td>{{ reading.getCo2Percentage() }}</td>
+                                        <td>{{ reading.getOxygenPercentage() }}</td>
+                                    {% elseif reading.getTempValue is defined %} {#Temp#}
+                                        <td>{{ reading.getTempValue() }}
+                                    {% elseif reading.getPressureValue is defined %} {#Pressure#}
+                                        <td>{{ reading.getPressureValue() /1000 }}</td>
+                                    {% elseif reading.getWindSpeed is defined %} {#Wind#}
+                                        <td>{{ reading.getWindSpeed() }}</td>
+                                        <td>{{ reading.getDirection() }}</td>
+                                    {% elseif reading.getHumidityValue is defined %} {#Humidity#}
+                                        <td>{{ reading.getHumidityValue() }}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div id="errorMsg" align="center">
+                        No sensor readings for filter
+                    </div>
                 {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for reading in readings %}
-                <tr>
-                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
-                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
-                    {% if reading.getAirQtyPercentage is defined %} {#Air qty#}
-                        <td>{{ reading.getAirQtyPercentage() }}</td>
-                        <td>{{ reading.getCo2Percentage() }}</td>
-                        <td>{{ reading.getOxygenPercentage() }}</td>
-                    {% elseif reading.getTempValue is defined %} {#Temp#}
-                        <td>{{ reading.getTempValue() }}
-                    {% elseif reading.getPressureValue is defined %} {#Pressure#}
-                        <td>{{ reading.getPressureValue() /1000 }}</td>
-                    {% elseif reading.getWindSpeed is defined %} {#Wind#}
-                        <td>{{ reading.getWindSpeed() }}</td>
-                        <td>{{ reading.getDirection() }}</td>
-                    {% elseif reading.getHumidityValue is defined %} {#Humidity#}
-                        <td>{{ reading.getHumidityValue() }}</td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+
+            </div>
+            <div id="tab2" class="tab">
+            </div>
+        </div>
     </div>
+
     <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('.tabs .tab-links a').on('click', function (e) {
+                var currentAttrValue = jQuery(this).attr('href');
+
+                // Show/Hide Tabs
+                jQuery('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
+
+                // Change/remove current tab to active
+                jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                e.preventDefault();
+            });
+        });
+    </script>
+
 {% endblock %}
