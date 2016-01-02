@@ -1,9 +1,7 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportLocationViewStyle.css') }}"/>
     <style>
-
     </style>
 {% endblock %}
 
@@ -39,9 +37,30 @@
                     <tr>
 
                         <td id="sensorIdLink"><a href="#">{{ sensor.getSensorId() }}</a></td>
-                        <td>{{ sensor.getTypeName() }}</td>
+                        {% if sensor.getTypeName()=='air_qty' %} {#Air qty#}
+                            <td>Air Quality</td>
+                        {% elseif sensor.getTypeName()=='temp' %} {#Temp#}
+                            <td>Temperature</td>
+                        {% elseif sensor.getTypeName()=='pressure' %} {#Pressure#}
+                            <td>Pressure</td>
+                        {% elseif sensor.getTypeName()=='wind' %} {#Wind#}
+                            <td>Wind</td>
+                        {% elseif sensor.getTypeName()=='humidity' %} {#Humidity#}
+                            <td>Humidity</td>
+                        {% endif %}
                         <td>{{ sensor.getManufacturer() }}</td>
-                        <td>{{ sensor.getUnit() }}</td>
+                        {% if sensor.getUnit()=='percent' %} {#Air qty#}
+                            <td>%</td>
+                        {% elseif sensor.getUnit()=='Pa' %} {#Temp#}
+                            <td>(K)Pa</td>
+                        {% elseif sensor.getUnit()=='°C' %} {#Pressure#}
+                            <td>°C</td>
+                        {% elseif sensor.getUnit()=='m/s' %} {#Wind#}
+                            <td>m/s</td>
+                        {% else %}
+                            <td>{{ sensor.getUnit() }}</td>
+                        {% endif %}
+                        {#<td>{{ sensor.getUnit() }}</td>#}
                         <td>{{ sensor.getInsDate() }}</td>
                         <td id="sensorReadingLink"><a
                                     href="{{ path('reportSensorReadings', {'viewArea': areaName,'viewLocation': location.getAddress(),'sensorId':sensor.getSensorId()}) }}">View

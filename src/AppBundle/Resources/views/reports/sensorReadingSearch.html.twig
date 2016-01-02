@@ -1,24 +1,30 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
-
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportSensorReadingSearcherStyle.css') }}"/>
     <style>
-        .formContainer {
-            padding: 50px;
-            background-color: #FF5722;
-            color: white;
-        }
-        #headongs{
-            color:#9C27B0;
-        }
-
     </style>
 {% endblock %}
 {% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
 {% block body %}
-    <div id="headongs" align="center">
-    <h1>Sensor {{sensor.getSensorId()   }}</h1>
-    <h3 style="padding: 3px 0px 40px 0px;">Filter sensor readings</h3>
+    <div id="headings" align="center">
+        <h2>
+            Sensor {{ sensor.getSensorId() }}
+            (
+            {% if sensor.getTypeName()=='air_qty' %} {#Air qty#}
+                Air Quality
+            {% elseif sensor.getTypeName()=='temp' %} {#Temp#}
+                Temperature
+            {% elseif sensor.getTypeName()=='pressure' %} {#Pressure#}
+                Pressure
+            {% elseif sensor.getTypeName()=='wind' %} {#Wind#}
+                Wind
+            {% elseif sensor.getTypeName()=='humidity' %} {#Humidity#}
+                Humidity
+            {% endif %}
+            )
+        </h2>
+        <h3 style="padding: 3px 0px 40px 0px;">Filter sensor readings</h3>
     </div>
     <div class="container-fluid ">
 

@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e717dedb-037b-4d77-8905-b26dfb8819ff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadingSearch.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingSearcherStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/ReportController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/ReportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/locationView.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/locationView.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadingSearch.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadingSearch.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" />
     </list>
     <ignored path="DB_EMS.iws" />
@@ -49,6 +57,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -58,13 +67,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/bundles/framework/css/customNavbar.css" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/home.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Post.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/EMSController.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/sensor/Model.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/sensor/Type.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/sensor/findSensor.htlm.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/sensor/AddSensor.php" />
@@ -88,27 +90,34 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/areaView.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/AreaController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/Area.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/LocationEntity.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/sensor/Sensor.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php" />
         <option value="$PROJECT_DIR$/web/config.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/framework/js/sorttable.js" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/locationView.html.twig" />
-        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" />
         <option value="$PROJECT_DIR$/web/bundles/framework/js/jquery.leanModal.min.js" />
         <option value="$PROJECT_DIR$/web/bundles/framework/js/jquery-1.9.1.min.js" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/WindReading.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/report/AirQlyReading.php" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadings.css" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadingSearch.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/reports/locationView.html.twig" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/reports/ReportController.php" />
+        <option value="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingSearcherStyle.css" />
       </list>
     </option>
   </component>
@@ -184,32 +193,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -367,133 +350,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sensor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="report" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sensor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="security" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -523,32 +380,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emsDB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="location" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -559,6 +390,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -735,15 +567,22 @@
       <option name="project" value="LOCAL" />
       <updated>1451673624134</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="SensorReading search">
+      <created>1451741070753</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1451741070753</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1609375" sideWeight="0.8981481" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1609375" sideWeight="0.8981481" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.50208336" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.027484143" sideWeight="0.49375" order="8" side_tool="false" content_ui="tabs" />
@@ -751,7 +590,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21864952" sideWeight="0.10185185" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -789,50 +627,16 @@
     <MESSAGE value="sensor updated" />
     <MESSAGE value="Daily commit" />
     <MESSAGE value="Location view" />
-    <option name="LAST_COMMIT_MESSAGE" value="Location view" />
+    <MESSAGE value="SensorReading search" />
+    <option name="LAST_COMMIT_MESSAGE" value="SensorReading search" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/sensor/ModelType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6922094">
-          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/sensor/Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.064516">
-          <caret line="70" column="31" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/sensor/TypeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.67742">
-          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/sensor/SensorType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/reports.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/sensor/viewSensor.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.5644956">
@@ -875,24 +679,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/areas.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47113165">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/AirQlyReading.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11778291">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/Area.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33371824">
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -900,34 +691,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.09930716">
           <caret line="44" column="46" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86374134">
-          <caret line="49" column="1" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84411085">
-          <caret line="48" column="1" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9030023">
-          <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6674365">
-          <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+          <folding>
+            <marker date="1451658393286" expanded="true" signature="690:722" placeholder="SELECT * FRO... area" />
+            <marker date="1451658393286" expanded="true" signature="1748:1820" placeholder="SELECT area_... area" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -935,6 +702,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.74595845">
           <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -942,13 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84411085">
-          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -970,20 +731,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.68609864">
           <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="39.576923">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1001,17 +749,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/areaView.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.485426">
-          <caret line="99" column="128" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/location/LocationController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26681614">
           <caret line="111" column="56" selection-start-line="111" selection-start-column="56" selection-end-line="111" selection-end-column="56" />
+          <folding>
+            <element signature="e#132#175#0#PHP" expanded="false" />
+            <marker date="1451658559249" expanded="true" signature="544:593" placeholder="SELECT addre... location" />
+            <marker date="1451658559249" expanded="true" signature="859:949" placeholder="SELECT locat... location" />
+            <marker date="1451658559249" expanded="true" signature="2619:2719" placeholder="SELECT locat... location" />
+            <marker date="1451658559249" expanded="true" signature="3801:3878" placeholder="SELECT locat... location" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1033,6 +781,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57174885">
           <caret line="316" column="20" selection-start-line="316" selection-start-column="20" selection-end-line="316" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,13 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20964126">
           <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.038116593">
-          <caret line="138" column="46" selection-start-line="138" selection-start-column="46" selection-end-line="138" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1078,10 +820,246 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/sensor/Sensor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4002242">
+          <caret line="65" column="31" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="31" />
+          <folding>
+            <element signature="e#321#357#0#PHP" expanded="false" />
+            <element signature="e#410#442#0#PHP" expanded="false" />
+            <element signature="e#447#528#0#PHP" expanded="false" />
+            <element signature="e#534#579#0#PHP" expanded="false" />
+            <element signature="e#584#687#0#PHP" expanded="false" />
+            <element signature="e#693#725#0#PHP" expanded="false" />
+            <element signature="e#730#795#0#PHP" expanded="false" />
+            <element signature="e#801#838#0#PHP" expanded="false" />
+            <element signature="e#843#914#0#PHP" expanded="false" />
+            <element signature="e#921#953#0#PHP" expanded="false" />
+            <element signature="e#958#1032#0#PHP" expanded="false" />
+            <element signature="e#1038#1080#0#PHP" expanded="false" />
+            <element signature="e#1085#1175#0#PHP" expanded="false" />
+            <element signature="e#1181#1213#0#PHP" expanded="false" />
+            <element signature="e#1218#1284#0#PHP" expanded="false" />
+            <element signature="e#1290#1328#0#PHP" expanded="false" />
+            <element signature="e#1333#1407#0#PHP" expanded="false" />
+            <element signature="e#1413#1445#0#PHP" expanded="false" />
+            <element signature="e#1450#1516#0#PHP" expanded="false" />
+            <element signature="e#1522#1560#0#PHP" expanded="false" />
+            <element signature="e#1565#1639#0#PHP" expanded="false" />
+            <element signature="e#1645#1677#0#PHP" expanded="false" />
+            <element signature="e#1682#1750#0#PHP" expanded="false" />
+            <element signature="e#1756#1795#0#PHP" expanded="false" />
+            <element signature="e#1800#1878#0#PHP" expanded="false" />
+            <element signature="e#1884#1916#0#PHP" expanded="false" />
+            <element signature="e#1921#1995#0#PHP" expanded="false" />
+            <element signature="e#2001#2043#0#PHP" expanded="false" />
+            <element signature="e#2048#2138#0#PHP" expanded="false" />
+            <element signature="e#2144#2176#0#PHP" expanded="false" />
+            <element signature="e#2181#2253#0#PHP" expanded="false" />
+            <element signature="e#2259#2300#0#PHP" expanded="false" />
+            <element signature="e#2305#2391#0#PHP" expanded="false" />
+            <element signature="e#2397#2429#0#PHP" expanded="false" />
+            <element signature="e#2434#2506#0#PHP" expanded="false" />
+            <element signature="e#2512#2553#0#PHP" expanded="false" />
+            <element signature="e#2558#2644#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/sensor/SensorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.961538">
+          <caret line="112" column="41" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="41" />
+          <folding>
+            <element signature="e#134#169#0#PHP" expanded="true" />
+            <marker date="1451716448039" expanded="true" signature="628:702" placeholder="SELECT * FRO... sensor" />
+            <marker date="1451716448039" expanded="true" signature="1668:1745" placeholder="SELECT senso... sensor" />
+            <marker date="1451716448039" expanded="true" signature="2479:2644" placeholder="SELECT senso... sensor" />
+            <marker date="1451716448039" expanded="true" signature="3458:3523" placeholder="SELECT * FRO... sensor" />
+            <marker date="1451716448039" expanded="true" signature="4428:4567" placeholder="INSERT INTO sensor... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/HumidityReadingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.26923">
+          <caret line="83" column="145" selection-start-line="83" selection-start-column="145" selection-end-line="83" selection-end-column="145" />
+          <folding>
+            <element signature="e#134#178#0#PHP" expanded="true" />
+            <marker date="1451746381104" expanded="true" signature="760:856" placeholder="SELECT times... humidity" />
+            <marker date="1451746381104" expanded="true" signature="1434:1531" placeholder="SELECT times... " />
+            <marker date="1451746381104" expanded="true" signature="2244:2376" placeholder="SELECT times... humidity" />
+            <marker date="1451746381104" expanded="true" signature="2244:2969" placeholder="SELECT times... humidity" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/PressureReadingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.615385">
+          <caret line="82" column="145" selection-start-line="82" selection-start-column="145" selection-end-line="82" selection-end-column="145" />
+          <folding>
+            <element signature="e#133#177#0#PHP" expanded="true" />
+            <marker date="1451746381107" expanded="true" signature="759:855" placeholder="SELECT times... pressure" />
+            <marker date="1451746381107" expanded="true" signature="1433:1530" placeholder="SELECT times... " />
+            <marker date="1451746381107" expanded="true" signature="2243:2375" placeholder="SELECT times... pressure" />
+            <marker date="1451746381107" expanded="true" signature="2243:2969" placeholder="SELECT times... pressure" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/TempReadingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.615385">
+          <caret line="90" column="51" selection-start-line="89" selection-start-column="137" selection-end-line="90" selection-end-column="51" />
+          <folding>
+            <element signature="e#133#173#0#PHP" expanded="true" />
+            <marker date="1451746315683" expanded="true" signature="781:870" placeholder="SELECT times... temp" />
+            <marker date="1451746315683" expanded="true" signature="1521:1611" placeholder="SELECT times... temp" />
+            <marker date="1451746315683" expanded="true" signature="2401:2496" placeholder="SELECT times... temp" />
+            <marker date="1451746315683" expanded="true" signature="2401:2525" placeholder="SELECT times... temp" />
+            <marker date="1451746315683" expanded="true" signature="2401:2526" placeholder="SELECT times... temp" />
+            <marker date="1451746315683" expanded="true" signature="2401:2605" placeholder="SELECT times... temp" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/WindReadingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.846153">
+          <caret line="89" column="147" selection-start-line="89" selection-start-column="147" selection-end-line="89" selection-end-column="147" />
+          <folding>
+            <element signature="e#133#173#0#PHP" expanded="true" />
+            <marker date="1451746381097" expanded="true" signature="733:831" placeholder="SELECT times... wind" />
+            <marker date="1451746381097" expanded="true" signature="1479:1578" placeholder="SELECT times... " />
+            <marker date="1451746381097" expanded="true" signature="2365:2433" placeholder="SELECT times... wind" />
+            <marker date="1451746381097" expanded="true" signature="2365:2499" placeholder="SELECT times... wind" />
+            <marker date="1451746381097" expanded="true" signature="2365:2578" placeholder="SELECT times... wind" />
+            <marker date="1451746381097" expanded="true" signature="2365:3165" placeholder="SELECT times... wind" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/AirQlyReadingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-30.384615">
+          <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
+          <folding>
+            <element signature="e#133#175#0#PHP" expanded="true" />
+            <marker date="1451746381101" expanded="true" signature="749:881" placeholder="SELECT times... air_qty" />
+            <marker date="1451746381101" expanded="true" signature="1613:1746" placeholder="SELECT times... " />
+            <marker date="1451746381101" expanded="true" signature="2615:2717" placeholder="SELECT times... air_qty" />
+            <marker date="1451746381101" expanded="true" signature="2615:2783" placeholder="SELECT times... air_qty" />
+            <marker date="1451746381101" expanded="true" signature="2615:2862" placeholder="SELECT times... air_qty" />
+            <marker date="1451746381101" expanded="true" signature="2615:3536" placeholder="SELECT times... air_qty" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/AirQlyReading.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.346153">
+          <caret line="52" column="39" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="39" />
+          <folding>
+            <element signature="e#269#301#0#PHP" expanded="false" />
+            <element signature="e#306#395#0#PHP" expanded="false" />
+            <element signature="e#401#450#0#PHP" expanded="false" />
+            <element signature="e#455#574#0#PHP" expanded="false" />
+            <element signature="e#580#612#0#PHP" expanded="false" />
+            <element signature="e#617#700#0#PHP" expanded="false" />
+            <element signature="e#706#752#0#PHP" expanded="false" />
+            <element signature="e#757#864#0#PHP" expanded="false" />
+            <element signature="e#870#902#0#PHP" expanded="false" />
+            <element signature="e#907#996#0#PHP" expanded="false" />
+            <element signature="e#1002#1051#0#PHP" expanded="false" />
+            <element signature="e#1056#1175#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/HumidityReading.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1923075">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="36" />
+          <folding>
+            <element signature="e#209#241#0#PHP" expanded="false" />
+            <element signature="e#246#329#0#PHP" expanded="false" />
+            <element signature="e#335#381#0#PHP" expanded="false" />
+            <element signature="e#386#493#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/PressureReading.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24775785">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/TempReading.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24775785">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/WindReading.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.615385">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReading.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72421527">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.4573991">
+          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019058296">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/areas.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4573991">
+          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/areaView.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8867713">
+          <caret line="99" column="128" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="128" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/reports.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2959641">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,59 +1067,80 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.019058296">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/sensor/Sensor.php">
+    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="65" column="31" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadings.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/locationView.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34304932">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.019058296">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73318386">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.72421527">
+          <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/report/SensorReadingSearcher.php">
+    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36210763">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/ReportController.php">
+    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37556055">
-          <caret line="238" column="32" selection-start-line="238" selection-start-column="32" selection-end-line="238" selection-end-column="32" />
-          <folding>
-            <element signature="e#48#82#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-22.884615">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/reports/sensorReadingSearch.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.5336323">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingSearcherStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20964126">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/reports/ReportController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21412556">
+          <caret line="294" column="10" selection-start-line="294" selection-start-column="10" selection-end-line="294" selection-end-column="10" />
+          <folding>
+            <element signature="e#48#82#0#PHP" expanded="true" />
+            <element signature="e#1068#1430#0#PHP" expanded="false" />
+            <element signature="e#7514#8271#0#PHP" expanded="false" />
+            <element signature="e#8047#8084#0#PHP" expanded="true" />
+            <element signature="e#9200#12273#0#PHP" expanded="false" />
+            <element signature="e#15829#15868#0#PHP" expanded="true" />
+            <element signature="e#16096#16140#0#PHP" expanded="true" />
+            <element signature="e#16427#16459#1#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

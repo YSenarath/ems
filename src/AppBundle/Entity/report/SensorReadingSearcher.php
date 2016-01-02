@@ -17,7 +17,7 @@ class SensorReadingSearcher
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
      */
-    protected $readingLimit;
+    protected $noOfReadings;
 
     /**
      * @Assert\NotBlank()
@@ -50,17 +50,17 @@ class SensorReadingSearcher
     /**
      * @return mixed
      */
-    public function getReadingLimit()
+    public function getNoOfReadings()
     {
-        return $this->readingLimit;
+        return $this->noOfReadings;
     }
 
     /**
-     * @param mixed $readingLimit
+     * @param mixed $noOfReadings
      */
-    public function setReadingLimit($readingLimit)
+    public function setNoOfReadings($noOfReadings)
     {
-        $this->readingLimit = $readingLimit;
+        $this->noOfReadings = $noOfReadings;
     }
 
     /**

@@ -29,6 +29,31 @@ class TempReadingController extends Controller
      * @param $sensor_id
      * @return TempReading|bool
      */
+    public function tempFirstReadingSearchAction($sensor_id)
+    {
+        //print_r($sensor_id);
+        $lastReading = $this->connection->fetchAssoc(
+            'SELECT timestamp,temp_value  FROM temp WHERE sensor_id = ? ORDER BY timestamp ASC LIMIT 1',
+            array($sensor_id)
+        );
+        //$lastReading=$lastReading->();
+
+        if ($lastReading != null) {
+            //print_r($lastReading);
+            $tempReading = new TempReading();
+            $tempReading->setTimestamp($lastReading["timestamp"]);
+            $tempReading->setTempValue($lastReading["temp_value"]);
+
+            return $tempReading;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $sensor_id
+     * @return TempReading|bool
+     */
     public function tempLastReadingSearchAction($sensor_id)
     {
         //print_r($sensor_id);
@@ -48,5 +73,37 @@ class TempReadingController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * @param $sensor_id
+     * @param $noOfReadigs
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function tempReadingsSearchAction($sensor_id, $noOfReadings, $startDate, $endDate)
+    {
+        //print_r($sensor_id);
+        $quarry = $this->connection->executeQuery(
+            'SELECT timestamp,temp_value  FROM temp WHERE sensor_id = ? AND date(timestamp) BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
+            array($sensor_id, $startDate, $endDate)
+        );
+        //$lastReading=$lastReading->();
+        $lastReadings = $quarry->fetchAll();
+        $tempReadings = array();
+        foreach ($lastReadings as $lastReading) {
+            if ($lastReading != null) {
+                //print_r($lastReading);
+                $tempReading = new TempReading();
+                $tempReading->setTimestamp($lastReading["timestamp"]);
+                $tempReading->setTempValue($lastReading["temp_value"]);
+
+                $tempReadings[]= $tempReading;
+            }
+        }
+
+        return $tempReadings;
     }
 }

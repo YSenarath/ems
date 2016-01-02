@@ -1,0 +1,47 @@
+body {
+    background-color: #E0E0E0;
+}
+
+#headings {
+    color: #9C27B0;
+}
+
+#sensorReading {
+    height: 75vh;
+    overflow: auto
+}
+
+#sensorReading table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    width: 50%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+#sensorReading td, #sensorReading th {
+    border: 1px solid transparent; /* No more visible border */
+    height: 50px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+
+}
+
+#sensorReading th {
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+#sensorReading td {
+    color: #F57C00;
+/ / background: #F5F5F5;
+    text-align: center;
+    padding: 5px;
+}
+
+#sensorReading tr {
+    text-align: center;
+/ / background: #F5F5F5;
+    padding: 5px;
+}
+
