@@ -1,5 +1,5 @@
  body {
-    background-color: #E0E0E0;
+    /*background-color: #E0E0E0;*/
 }
 #loctionHeading {
     color: #E91E63;
@@ -84,7 +84,7 @@
 #section1 {
     height: 500px;
     color: #fff;
-    background-color: #009688;
+    background-color: #1976D2;
 }
 
 #section2 {

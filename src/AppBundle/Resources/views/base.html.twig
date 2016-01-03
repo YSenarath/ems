@@ -2,14 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{% block title %}Emosys{% endblock %}</title>
+
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>#}
+
+    {#animations#}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/animsition.min.css') }}"/>
+    <script src="{{ asset('bundles/framework/js/animsition.min.js') }}"></script>
 
     <!-- Latest compiled JavaScript -->
     {#Dropdowns dont work because of this#}
@@ -23,11 +29,11 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/footerStyle.css') }}"/>
 
     <link rel="shortcut icon" href="{{ asset('bundles/framework/images/icon.png') }}">
+
     <style type="text/css">
 
 
     </style>
-
     {% block otherstylesheets %}{% endblock %}
 </head>
 <body>
@@ -64,12 +70,12 @@
 
                     {#u can enter the link here  like  <li><a href="{{ path('about') }}"> About</a></li> #}
                     {#<li class="dropdown">#}
-                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
-                           {#aria-expanded="true">Reports<span class="caret"></span></a>#}
-                        {#<ul class="dropdown-menu">#}
-                            {#<li><a href="{{ path('reportAreas') }}">Areas</a></li>#}
-                            {#<li><a href="{{ path('reportSummery') }}">Summery</a></li>#}
-                        {#</ul>#}
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
+                    {#aria-expanded="true">Reports<span class="caret"></span></a>#}
+                    {#<ul class="dropdown-menu">#}
+                    {#<li><a href="{{ path('reportAreas') }}">Areas</a></li>#}
+                    {#<li><a href="{{ path('reportSummery') }}">Summery</a></li>#}
+                    {#</ul>#}
                     {#</li>#}
                     <li><a href="{{ path('reportAreas') }}">Reports</a></li>
                     <li><a href="{{ path('about') }}"> About</a></li>
@@ -99,9 +105,11 @@
 {% endblock %}
 
 <div id="content">
-    {% block body %}
+    <div class="animsition">
+        {% block body %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
     {% block footer %}
         <footer class="footer">
             <div class="container" align="center">
@@ -110,9 +118,35 @@
         </footer>
     {% endblock %}
     {% block script %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https:////netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script>
+            $(".animsition").animsition({
+                inClass: 'fade-in',
+                outClass: 'fade-out',
+                inDuration: 1000,
+                outDuration: 500,
+                linkElement: '.animsition-link',
+                // e.g. linkElement: 'a:not([target="_blank"]):not([href^=#])'
+                loading: true,
+                loadingParentElement: 'body', //animsition wrapper element
+                loadingClass: 'animsition-loading',
+                loadingInner: '', // e.g '<img src="loading.svg" />'
+                timeout: false,
+                timeoutCountdown: 5000,
+                onLoadEvent: true,
+                browser: ['animation-duration', '-webkit-animation-duration'],
+                // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+                // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+                overlay: false,
+                overlayClass: 'animsition-overlay-slide',
+                overlayParentElement: 'body',
+                transition: function (url) {
+                    window.location.href = url;
+                }
+            });
+        </script>
     {% endblock %}
 </div>
+
 </body>
 </html>

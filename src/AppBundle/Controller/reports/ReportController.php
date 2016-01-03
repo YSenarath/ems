@@ -415,13 +415,20 @@ class ReportController extends Controller
                 case "air_qty"://air
                     /* @var $readings AirQlyReading[] */
                     $arr = array();
-//                    $arr[] = array(
-//                        array('label' => 'Timestamp', 'type' => 'string'),
-//                        array('label' => 'temperature', 'type' => 'number'),
-//                    );
-//                    foreach ($readings as $reading) {
-//                        $arr[] = array($reading->getTimestamp(), $reading->getTempValue());
-//                    }
+                    $arr[] = array(
+                        array('label' => 'Timestamp', 'type' => 'string'),
+                        array('label' => 'Air Quality (%)', 'type' => 'number'),
+                        array('label' => 'CO2 (%)', 'type' => 'number'),
+                        array('label' => 'Oxygen (%)', 'type' => 'number'),
+                    );
+                    foreach ($readings as $reading) {
+                        $arr[] = array(
+                            $reading->getTimestamp(),
+                            $reading->getAirQtyPercentage(),
+                            $reading->getCo2Percentage(),
+                            $reading->getOxygenPercentage(),
+                        );
+                    }
 
                     $lineChart->getData()->setArrayToDataTable($arr);
                     break;
@@ -454,20 +461,22 @@ class ReportController extends Controller
                 case "wind"://wind
                     /* @var $readings WindReading[] */
                     $arr = array();
-//                    $arr[] = array(
-//                        array('label' => 'Timestamp', 'type' => 'string'),
-//                        array('label' => 'Wind speed (m/s)', 'type' => 'number'),
-//                    );
-//                    foreach ($readings as $reading) {
-//                        $arr[] = array($reading->getTimestamp(), $reading->getWindSpeed());
-//                    }
+                    $arr[] = array(
+                        array('label' => 'Timestamp', 'type' => 'string'),
+                        array('label' => 'Wind speed (m/s)', 'type' => 'number'),
+                    );
+                    foreach ($readings as $reading) {
+                        $arr[] = array($reading->getTimestamp(), $reading->getWindSpeed());
+                    }
 
                     $lineChart->getData()->setArrayToDataTable($arr);
                     break;
             }
 
             $lineChart->getOptions()->getChartArea()->setTop(50);
-            $lineChart->getOptions()->setEnableInteractivity(true);
+            //$lineChart->getOptions()->getChartArea()->setLeft(50);
+            //$lineChart->getOptions()->setEnableInteractivity(true);
+            $lineChart->getOptions()->setCurveType('function');
 
             $lineChart->getOptions()->setHeight(700);
             $lineChart->getOptions()->setWidth(1500);
@@ -475,6 +484,13 @@ class ReportController extends Controller
             $lineChart->getOptions()->getHAxis()->setSlantedTextAngle(90);
             $lineChart->getOptions()->getHAxis()->setSlantedText(true);
             $lineChart->getOptions()->getHAxis()->setShowTextEvery(1);
+
+           // $lineChart->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+            $lineChart->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+            $lineChart->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+
+            $lineChart->getOptions()->getTooltip()->setIsHtml(true);
+            $lineChart->getOptions()->getTooltip()->setIgnoreBounds(true);
 
 
             //end of charts

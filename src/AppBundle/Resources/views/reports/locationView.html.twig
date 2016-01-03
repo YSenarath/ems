@@ -63,7 +63,7 @@
                         {#<td>{{ sensor.getUnit() }}</td>#}
                         <td>{{ sensor.getInsDate() }}</td>
                         <td id="sensorReadingLink"><a
-                                    href="{{ path('reportSensorReadings', {'viewArea': areaName,'viewLocation': location.getAddress(),'sensorId':sensor.getSensorId()}) }}">View
+                                                      href="{{ path('reportSensorReadings', {'viewArea': areaName,'viewLocation': location.getAddress(),'sensorId':sensor.getSensorId()}) }}">View
                                 Readings</a></td>
                     </tr>
                 {% endfor %}

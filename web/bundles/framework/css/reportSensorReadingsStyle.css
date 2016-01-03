@@ -1,5 +1,5 @@
 body {
-    background-color: #E0E0E0;
+    /*background-color: #E0E0E0;*/
 }
 
 /* bootstrap hack: fix content width inside hidden tabs */
@@ -55,7 +55,7 @@ body {
 }
 
 #sensorReading td {
-    color: #F57C00;
+    color: #00897B;
 / / background: #F5F5F5;
     text-align: center;
     padding: 5px;
@@ -188,8 +188,8 @@ td.user-name {
 .tab-links a {
     padding: 9px 15px;
     display: inline-block;
-    border-radius: 3px 3px 0px 0px;
-    background: #FF9800;
+    border-radius: 5px;
+    background: #fff;
     font-size: 16px;
     font-weight: 600;
     color: #4c4c4c;
@@ -198,12 +198,12 @@ td.user-name {
 }
 
 .tab-links a:hover {
-    background: #FFB74D;
+    background: #80CBC4;
     text-decoration: none;
 }
 
 li.active a, li.active a:hover {
-    background: #fff;
+    background: #26A69A;
     color: #4c4c4c;
 }
 

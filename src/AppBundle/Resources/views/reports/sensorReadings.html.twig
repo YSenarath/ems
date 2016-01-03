@@ -26,15 +26,16 @@
             )
         </h2>
     </div>
-    <div class="tabs">
-        <ul class="tab-links">
-            <li class="active"><a href="#tabular">Tabular</a></li>
-            <li><a href="#graphical">Graphical</a></li>
-        </ul>
+    {% if readings[0] is defined %}
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="active"><a href="#tabular">Tabular</a></li>
+                <li><a href="#graphical">Graphical</a></li>
+            </ul>
 
-        <div class="tab-content">
-            <div id="tabular" class="tab active">
-                {% if readings[0] is defined %}
+            <div class="tab-content">
+                <div id="tabular" class="tab active">
+
                     <div class="component" id="sensorReading" align="center">
                         <table id="sensorReadingTable" class="sortable">
                             <thead>
@@ -82,39 +83,38 @@
                             </tbody>
                         </table>
                     </div>
-                {% else %}
-                    <div id="errorMsg" align="center" >
-                        No sensor readings for filter
-                    </div>
-                {% endif %}
 
+                </div>
+                <div id="graphical" class="tab">
+                    <div id="div_chart" align="center"></div>
+                    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                    <script type="text/javascript">
+                        {{ gc_draw(lineChart, 'div_chart') }}
+                    </script>
+                </div>
             </div>
-            <div id="graphical" class="tab">
-                <div id="div_chart" align="center"></div>
+            <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+            <script>
+                jQuery(document).ready(function () {
+                    jQuery('.tabs .tab-links a').on('click', function (e) {
+                        var currentAttrValue = jQuery(this).attr('href');
 
-                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                <script type="text/javascript">
-                    {{ gc_draw(lineChart, 'div_chart') }}
-                </script>
-            </div>
+                        // Show/Hide Tabs
+                        jQuery('.tabs ' + currentAttrValue).slideDown(1500).siblings().slideUp(1500);
+
+                        // Change/remove current tab to active
+                        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                        e.preventDefault();
+                    });
+                });
+            </script>
         </div>
-    </div>
+    {% else %}
+        <div id="errorMsg" align="center">
+            No sensor readings for filter
+        </div>
+    {% endif %}
 
-    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
-    <script>
-        jQuery(document).ready(function () {
-            jQuery('.tabs .tab-links a').on('click', function (e) {
-                var currentAttrValue = jQuery(this).attr('href');
-
-                // Show/Hide Tabs
-                jQuery('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
-
-                // Change/remove current tab to active
-                jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
-
-                e.preventDefault();
-            });
-        });
-    </script>
 
 {% endblock %}
