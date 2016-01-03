@@ -28,12 +28,12 @@
     </div>
     <div class="tabs">
         <ul class="tab-links">
-            <li class="active"><a href="#tab1">Tabular</a></li>
-            <li><a href="#tab2">Graphical</a></li>
+            <li class="active"><a href="#tabular">Tabular</a></li>
+            <li><a href="#graphical">Graphical</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="tab1" class="tab active">
+            <div id="tabular" class="tab active">
                 {% if readings[0] is defined %}
                     <div class="component" id="sensorReading" align="center">
                         <table id="sensorReadingTable" class="sortable">
@@ -83,13 +83,19 @@
                         </table>
                     </div>
                 {% else %}
-                    <div id="errorMsg" align="center">
+                    <div id="errorMsg" align="center" >
                         No sensor readings for filter
                     </div>
                 {% endif %}
 
             </div>
-            <div id="tab2" class="tab">
+            <div id="graphical" class="tab">
+                <div id="div_chart" align="center"></div>
+
+                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                <script type="text/javascript">
+                    {{ gc_draw(lineChart, 'div_chart') }}
+                </script>
             </div>
         </div>
     </div>

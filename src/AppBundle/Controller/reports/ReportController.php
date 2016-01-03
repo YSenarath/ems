@@ -15,11 +15,13 @@ use AppBundle\Entity\report\SensorReadingSearcher;
 use AppBundle\Entity\report\TempReading;
 use AppBundle\Entity\report\WindReading;
 use AppBundle\Entity\sensor\Sensor;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\LineChart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\SubType;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -215,7 +217,7 @@ class ReportController extends Controller
     /**
      * @Route("/reports/areas/{viewArea}/{viewLocation}/{sensorId}", name="reportSensorReadings")
      */
-    public function reportSensorReadingsAction(Request $request, $viewArea, $viewLocation, $sensorId)
+    public function reportSensorReadingsAction(Request $request, $sensorId)
     {
         $connection = $this->get('database_connection');
 
@@ -229,7 +231,7 @@ class ReportController extends Controller
         $airController = new AirQlyReadingController($connection);
 
 
-        $startDate = date('Y-m-d',strtotime('01/01/2010'));
+        $startDate = date('Y-m-d', strtotime('01/01/2010'));
         $endDate = date('Y-m-d');
 
         /* @var $sensor Sensor */
@@ -243,7 +245,7 @@ class ReportController extends Controller
 
                 //print_r($firstReading->getTimestamp());
                 $startDate = date('Y-m-d', strtotime($firstReading->getTimestamp()));
-                $endDate = date('Y-m-d',  strtotime($lastReading->getTimestamp()));
+                $endDate = date('Y-m-d', strtotime($lastReading->getTimestamp()));
 
                 break;
             case "air_qty"://air
@@ -254,8 +256,8 @@ class ReportController extends Controller
                 /* @var $firstReading AirQlyReading */
                 /* @var $lastReading AirQlyReading */
 
-                $startDate = date('Y-m-d',strtotime($firstReading->getTimestamp()));
-                $endDate = date('Y-m-d',strtotime($lastReading->getTimestamp()));
+                $startDate = date('Y-m-d', strtotime($firstReading->getTimestamp()));
+                $endDate = date('Y-m-d', strtotime($lastReading->getTimestamp()));
 
                 break;
             case  "humidity"://humidity
@@ -264,7 +266,7 @@ class ReportController extends Controller
                 /* @var $firstReading HumidityReading */
                 /* @var $lastReading HumidityReading */
                 //print_r($firstReading->getTimestamp());
-                $startDate = date('Y-m-d',strtotime($firstReading->getTimestamp()));
+                $startDate = date('Y-m-d', strtotime($firstReading->getTimestamp()));
                 $endDate = date('Y-m-d', strtotime($lastReading->getTimestamp()));
 
                 break;
@@ -275,7 +277,7 @@ class ReportController extends Controller
                 /* @var $lastReading PressureReading */
                 //print_r($firstReading->getTimestamp());
                 $startDate = date('Y-m-d', strtotime($firstReading->getTimestamp()));
-                $endDate = date('Y-m-d',strtotime($lastReading->getTimestamp()));
+                $endDate = date('Y-m-d', strtotime($lastReading->getTimestamp()));
 
                 break;
             case "wind"://wind
@@ -283,9 +285,9 @@ class ReportController extends Controller
                 $lastReading = $windController->windLastReadingSearchAction($sensor->getSensorId());
                 /* @var $firstReading WindReading */
                 /* @var $lastReading WindReading */
-               // print_r($firstReading->getTimestamp());
+                // print_r($firstReading->getTimestamp());
                 $startDate = date('Y-m-d', strtotime($firstReading->getTimestamp()));
-                $endDate = date('Y-m-d',strtotime($lastReading->getTimestamp()));
+                $endDate = date('Y-m-d', strtotime($lastReading->getTimestamp()));
                 break;
         }
 
@@ -306,8 +308,8 @@ class ReportController extends Controller
                 array(
                     'input' => 'datetime',
                     'widget' => 'choice',
-                    'years' => range(date('Y',strtotime($startDate)), date('Y',strtotime($endDate))),
-                    'months' => range(date('m',strtotime($startDate)), date('m',strtotime($endDate))),
+                    'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
+                    'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
                     'attr' => array('style' => 'width: 400px'),
                 )
             )
@@ -318,8 +320,8 @@ class ReportController extends Controller
                     'input' => 'datetime',
                     'widget' => 'choice',
 
-                    'years' => range(date('Y',strtotime($startDate)), date('Y',strtotime($endDate))),
-                    'months' => range(date('m',strtotime($startDate)), date('m',strtotime($endDate))),
+                    'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
+                    'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
                     'attr' => array('style' => 'width: 400px'),
                 )
             )
@@ -337,42 +339,158 @@ class ReportController extends Controller
             /* @var $startDate \DateTime */
             /* @var $endDate \DateTime */
 
-            $readings=array();
+            $readings = array();
             /* @var $readings SensorReading[] */
             switch ($sensor->getTypeName()) {
                 case "temp"://temp
-                    $readings = $tempController->tempReadingsSearchAction($sensor->getSensorId(),$readingLimit,$startDate->format("Y-m-d"),$endDate->format("Y-m-d"));
+                    $readings = $tempController->tempReadingsSearchAction(
+                        $sensor->getSensorId(),
+                        $readingLimit,
+                        $startDate->format("Y-m-d"),
+                        $endDate->format("Y-m-d")
+                    );
                     /* @var $readings TempReading[] */
                     break;
                 case "air_qty"://air
-                    $readings = $airController->airQtlReadingsSearchAction($sensor->getSensorId(),$readingLimit,$startDate->format("Y-m-d"),$endDate->format("Y-m-d"));
+                    $readings = $airController->airQtlReadingsSearchAction(
+                        $sensor->getSensorId(),
+                        $readingLimit,
+                        $startDate->format("Y-m-d"),
+                        $endDate->format("Y-m-d")
+                    );
                     /* @var $readings AirQlyReading[] */
 
                     break;
                 case  "humidity"://humidity
-                    $readings = $humidityController->humidityReadingsSearchAction($sensor->getSensorId(),$readingLimit,$startDate->format("Y-m-d"),$endDate->format("Y-m-d"));
+                    $readings = $humidityController->humidityReadingsSearchAction(
+                        $sensor->getSensorId(),
+                        $readingLimit,
+                        $startDate->format("Y-m-d"),
+                        $endDate->format("Y-m-d")
+                    );
                     /* @var $readings HumidityReading[] */
 
                     break;
                 case "pressure"://pressure
-                    $readings = $pressureController->pressureReadingsSearchAction($sensor->getSensorId(),$readingLimit,$startDate->format("Y-m-d"),$endDate->format("Y-m-d"));
+                    $readings = $pressureController->pressureReadingsSearchAction(
+                        $sensor->getSensorId(),
+                        $readingLimit,
+                        $startDate->format("Y-m-d"),
+                        $endDate->format("Y-m-d")
+                    );
                     /* @var $readings PressureReading[] */
 
                     break;
                 case "wind"://wind
-                    $readings = $windController->windReadingsSearchAction($sensor->getSensorId(),$readingLimit,$startDate->format("Y-m-d"),$endDate->format("Y-m-d"));
+                    $readings = $windController->windReadingsSearchAction(
+                        $sensor->getSensorId(),
+                        $readingLimit,
+                        $startDate->format("Y-m-d"),
+                        $endDate->format("Y-m-d")
+                    );
                     /* @var $readings WindReading[] */
                     break;
             }
-           // print_r($readings);
+            // print_r($readings);
+
+
+            //google graphs
+            //
+            $lineChart = new LineChart();
+            switch ($sensor->getTypeName()) {
+                case "temp"://temp
+                    /* @var $readings TempReading[] */
+                    $arr = array();
+                    $arr[] = array(
+                        array('label' => 'Timestamp', 'type' => 'string'),
+                        array('label' => 'temperature (°C)', 'type' => 'number'),
+                    );
+                    foreach ($readings as $reading) {
+                        $arr[] = array($reading->getTimestamp(), $reading->getTempValue());
+                    }
+
+                    $lineChart->getData()->setArrayToDataTable($arr);
+
+                    break;
+                case "air_qty"://air
+                    /* @var $readings AirQlyReading[] */
+                    $arr = array();
+//                    $arr[] = array(
+//                        array('label' => 'Timestamp', 'type' => 'string'),
+//                        array('label' => 'temperature', 'type' => 'number'),
+//                    );
+//                    foreach ($readings as $reading) {
+//                        $arr[] = array($reading->getTimestamp(), $reading->getTempValue());
+//                    }
+
+                    $lineChart->getData()->setArrayToDataTable($arr);
+                    break;
+                case  "humidity"://humidity
+                    /* @var $readings HumidityReading[] */
+                    $arr = array();
+                    $arr[] = array(
+                        array('label' => 'Timestamp', 'type' => 'string'),
+                        array('label' => 'humidity (%)', 'type' => 'number'),
+                    );
+                    foreach ($readings as $reading) {
+                        $arr[] = array($reading->getTimestamp(), $reading->getHumidityValue());
+                    }
+
+                    $lineChart->getData()->setArrayToDataTable($arr);
+                    break;
+                case "pressure"://pressure
+                    /* @var $readings PressureReading[] */
+                    $arr = array();
+                    $arr[] = array(
+                        array('label' => 'Timestamp', 'type' => 'string'),
+                        array('label' => 'pressure (KPa)', 'type' => 'number'),
+                    );
+                    foreach ($readings as $reading) {
+                        $arr[] = array($reading->getTimestamp(), $reading->getPressureValue() / 1000);
+                    }
+
+                    $lineChart->getData()->setArrayToDataTable($arr);
+                    break;
+                case "wind"://wind
+                    /* @var $readings WindReading[] */
+                    $arr = array();
+//                    $arr[] = array(
+//                        array('label' => 'Timestamp', 'type' => 'string'),
+//                        array('label' => 'Wind speed (m/s)', 'type' => 'number'),
+//                    );
+//                    foreach ($readings as $reading) {
+//                        $arr[] = array($reading->getTimestamp(), $reading->getWindSpeed());
+//                    }
+
+                    $lineChart->getData()->setArrayToDataTable($arr);
+                    break;
+            }
+
+            $lineChart->getOptions()->getChartArea()->setTop(50);
+            $lineChart->getOptions()->setEnableInteractivity(true);
+
+            $lineChart->getOptions()->setHeight(700);
+            $lineChart->getOptions()->setWidth(1500);
+
+            $lineChart->getOptions()->getHAxis()->setSlantedTextAngle(90);
+            $lineChart->getOptions()->getHAxis()->setSlantedText(true);
+            $lineChart->getOptions()->getHAxis()->setShowTextEvery(1);
+
+
+            //end of charts
+
+
             return $this->render(
                 '@App/reports/sensorReadings.html.twig',
                 array(
                     'sensor' => $sensor,
-                    'readings'=>$readings
+                    'readings' => $readings,
+                    'lineChart' => $lineChart,
                 )
             );
-        }
+
+
+        }//end of form submission
 
         //print_r($sensorArray);
 

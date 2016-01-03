@@ -16,6 +16,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
+
+//            google charting bundle CMENGoogleChartsBundle (https://packagist.org/packages/cmen/google-charts-bundle)
+//            Installation https://github.com/cmen/CMENGoogleChartsBundle/blob/HEAD/Resources/doc/installation.md
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
