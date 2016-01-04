@@ -1,0 +1,21 @@
+body{
+    background-color: #F2F2F2;
+    padding-top: 50px;
+}
+
+.customHeader th {
+    cursor: pointer;
+}
+
+/*td , th{*/
+    /*text-align: center;*/
+/*}*/
+
+h1{
+    margin : 40px 0 20px ;
+}
+
+hr{
+    border-bottom: 1px solid #101010;
+}
+

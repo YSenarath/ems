@@ -18,8 +18,8 @@
 
                 {% for t in types  %}
                     <tr>
-                        {% if t.type|trim is not empty %}
-                            <td>{{t.type }}</td>
+                        {% if t.typeName|trim is not empty %}
+                            <td>{{t.typeName }}</td>
 
                             {% if t.getResInterval|trim is not empty %}
                                 <td>{{ t.getResInterval }} | <a href="#" >change</a> </td>

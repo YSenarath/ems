@@ -1,7 +1,7 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
-    <script src="{{ asset('bundles/framework/javascript/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
 {% endblock %}
 
 
@@ -22,7 +22,8 @@
         </div>
         <div class="row">
             <table class="table table-striped sortable">
-                <tr>
+                <tr class="customHeader">
+                    <th>No</th>
                     <th>Sensor ID</th>
                     <th>Sensor Type</th>
                     <th>Sensor Model</th>
@@ -34,28 +35,30 @@
                 {% for sensor in sensors  %}
                     <tr>
                         {% if sensor.getSensorId|trim is not empty %}
-                            <td><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
+                            <td class="col-md-1">{{ loop.index-1 }}</td>
+                            <td class="col-md-2"><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
 
-                            {% if sensor.getTypeId|trim is not empty %}
-                                <td>{{ sensor.getTypeId }}</td>
+                            {% if sensor.getTypeName|trim is not empty %}
+
+                                <td class="col-md-2">{{ sensor.getTypename }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if sensor.getModelId|trim is not empty %}
-                                <td>{{ sensor.getModelId }}</td>
+                                <td class="col-md-2">{{ sensor.getModelId }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if sensor.getLocId|trim is not empty %}
-                                <td> {{ sensor.getLocId }}</td>
+                                <td class="col-md-2"> {{ sensor.getLocId }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if sensor.getInsDate|trim is not empty %}
-                                <td>{{ sensor.getInsDate }}</td>
+                                <td class="col-md-3">{{ sensor.getInsDate }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}

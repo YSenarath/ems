@@ -20,16 +20,16 @@ class TypeController
         $this->connection = $connection;
     }
 
-    public function searchType($type_id)
+    public function searchType($type_name)
     {
-        $s =$this->connection->fetchAssoc('SELECT * FROM sensor_type WHERE type_id = ?', array($type_id));
+        $s =$this->connection->fetchAssoc('SELECT * FROM sensor_type WHERE type_name = ?', array($type_name));
 
         //print_r($result);
         $type = new Type();
 
         if ($s != null) {
-            $type->setTypeId($s["type_id"]);
-            $type->setType($s["type"]);
+
+            $type->setTypeName($s["type_name"]);
             $type->setResInterval($s["res_intervel"]);
 
         }else{
@@ -51,8 +51,8 @@ class TypeController
 
             if ($s != null) {
                 $type = new Type();
-                $type->setTypeId($s["type_id"]);
-                $type->setType($s["type"]);
+
+                $type->setTypeName($s["type_name"]);
                 $type->setResInterval($s["res_intervel"]);
                 $types[] = $type;
             }
@@ -62,7 +62,7 @@ class TypeController
     }
 
     public function getAllTypeNames(){
-        $result = $this->connection->executeQuery('SELECT type_id , type FROM sensor_type');
+        $result = $this->connection->executeQuery('SELECT type_name FROM sensor_type');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -70,7 +70,7 @@ class TypeController
 
             if ($s != null) {
 
-                $types[$s["type"]] = $s["type_id"];
+                $types[$s["type_name"]] = $s["type_name"];
             }
         }
         return $types;

@@ -12,41 +12,25 @@ namespace AppBundle\Entity\sensor;
 class Type
 {
 
-    protected $type_id;
-    protected $type;
+    protected $type_name;
     protected $res_interval;
 
     /**
      * @return mixed
      */
-    public function getTypeId()
+    public function getTypeName()
     {
-        return $this->type_id;
+        return $this->type_name;
     }
 
     /**
-     * @param mixed $type_id
+     * @param mixed $type_name
      */
-    public function setTypeId($type_id)
+    public function setTypeName($type_name)
     {
-        $this->type_id = $type_id;
+        $this->type_name = $type_name;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
 
     /**
      * @return mixed

@@ -25,7 +25,7 @@ class SensorController extends  Controller{
 
     public function getAllSensors()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM sensor NATURAL JOIN sensor_type ORDER BY installed_date DESC');
+        $result = $this->connection->executeQuery('SELECT * FROM sensor  ORDER BY installed_date DESC');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -35,7 +35,7 @@ class SensorController extends  Controller{
             if ($s != null) {
                 $sensor = new Sensor();
                 $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeId($s["type"]);
+                $sensor->setTypeName($s["type_name"]);
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setTMin($s["threshold_min"]);
@@ -151,13 +151,13 @@ class SensorController extends  Controller{
         $this->connection->beginTransaction();
 
         try{
-            $statement = $this->connection->prepare('INSERT INTO sensor (sensor_id ,threshold_min , threshold_max , location_id, type_id , model_id , installed_date ) VALUES (?,?,?,?, ?, ?, ?)');
+            $statement = $this->connection->prepare('INSERT INTO sensor (sensor_id ,threshold_min , threshold_max , location_id, type_name , model_id , installed_date ) VALUES (?,?,?,?, ?, ?, ?)');
 
             $statement->bindValue(1, $sensor->getSensorId());
             $statement->bindValue(2, $sensor->getTMin());
             $statement->bindValue(3, $sensor->getTMax());
             $statement->bindValue(4, $sensor->getLocId());
-            $statement->bindValue(5, $sensor->getTypeId());
+            $statement->bindValue(5, $sensor->getTypeName());
             $statement->bindValue(6, $sensor->getModelId());
             $statement->bindValue(7, $sensor->getInsDate()->format('Y-m-d'));
 

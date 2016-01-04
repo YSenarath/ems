@@ -2,7 +2,7 @@
 
 
 {% block otherstylesheets %}
-    <script src="{{ asset('bundles/framework/javascript/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -13,33 +13,34 @@
     <div class="container">
         <div class="row">
             <table class="table table-striped sortable">
-                <tr>
+                <tr class="customHeader">
+                    <th>No.</th>
                     <th>Model ID</th>
                     <th>Manufacturer</th>
                     <th>Basic Unit</th>
                     <th>Detection Range</th>
 
                 </tr>
-
                 {% for m in models  %}
                     <tr>
                         {% if m.modelId|trim is not empty %}
-                            <td>{{ m.modelId }}</td>
+                            <td class="col-md-1">{{ loop.index-1 }}</td>
+                            <td class="col-md-3">{{ m.modelId }}</td>
 
                             {% if m.manufacture|trim is not empty %}
-                                <td>{{ m.manufacture }}</td>
+                                <td class="col-md-4">{{ m.manufacture }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if m.unit|trim is not empty %}
-                                <td>{{ m.unit }}</td>
+                                <td class="col-md-2">{{ m.unit }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if m.getDetRange|trim is not empty %}
-                                <td> {{ m.getDetRange }}</td>
+                                <td class="col-md-2"> {{ m.getDetRange }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}

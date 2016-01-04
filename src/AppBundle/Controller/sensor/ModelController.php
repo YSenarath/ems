@@ -76,15 +76,17 @@ class ModelController
         $models = null;
         foreach ($result as $s) {
             if ($s != null) {
-                if ($tempManufacture != $s["manufacturer"]) {
-                    $tempManufacture = $s["manufacturer"];
-                    if($tempModel != null){
+                if ($tempManufacture != $s["manufacturer"] ) {
 
-                        $models[$s["manufacturer"]] = $tempModel;
+                    if ($tempModel != null) {
+                        $models[$tempManufacture] = $tempModel;
                         $tempModel = null;
                     }
+                    $tempManufacture = $s["manufacturer"];
                 }
                 $tempModel[$s["model_id"]] = $s["model_id"];
+
+
             }
         }
 

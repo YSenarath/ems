@@ -79,8 +79,8 @@
             <table class="table table-striped" >
                  <tr>
                      <td>Sensor Type</td>
-                     {% if sensor.getTypeId|trim is not empty %}
-                         <td>{{sensor.getTypeId }}</td>
+                     {% if sensor.getTypeName|trim is not empty %}
+                         <td>{{sensor.getTypeName }}</td>
                      {% else %}
                          <td >Not Set</td>
                      {% endif %}
