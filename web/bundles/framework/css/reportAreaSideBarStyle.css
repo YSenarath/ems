@@ -1,5 +1,5 @@
-#sidebar.li {
-    padding: 30px 25px 30px 25px;
+.col-md-3 {
+    padding: 25px 25px 0px 25px;
 }
 
 .container .list-unstyled .col-md-3 a {
@@ -11,4 +11,9 @@
 .container .list-unstyled .col-md-3 a:hover, a:visited, a:link, a:active {
     color: #80CBC4;
     text-decoration: none;
+}
+#areaListContainer{
+    margin-top:100px;
+    height: 60vh;
+    overflow: auto;
 }

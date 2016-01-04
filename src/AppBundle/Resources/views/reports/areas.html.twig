@@ -10,7 +10,7 @@
     <h1 align="center">
         Areas
     </h1>
-    <div class="container ">
+    <div class="container "  id="areaListContainer">
         <ul class="list-unstyled">
             {% for area in areas %}
                 {% if area.name|trim is not empty %}
@@ -19,8 +19,7 @@
                     </li>
                 {% endif %}
             {% endfor %}
-            <li class="col-md-3"><h3><a href="{{ path('reportAreaView', {'viewArea':  "Test"}) }}">Test</a></h3>
-            </li>
+
         </ul>
     </div>
 

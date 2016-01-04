@@ -1,5 +1,6 @@
 {# AppBundle/Resources/views/about.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
+
 {% block otherstylesheets %}
 
     <style>
@@ -13,11 +14,12 @@
         }
 
         #logoImage {
-            position: fixed;
+            position: relative;
             bottom: 0;
             right: 0;
 
         }
+
     </style>
 {% endblock %}
 
@@ -26,10 +28,6 @@
     <br>
     <div style="padding: 20px 0 10px 100px;">
 
-        <div id="logoImage">
-            <img src="{{ asset('bundles/framework/images/logo.png') }}" alt="Company Logo"
-                 style="width:350px;height:200px;">
-        </div>
         <p>Developed for the semester project of <b>CS 3042 Database Systems</b> module in semester 4.</p>
         <p>Developer team -</p>
         <ul>
@@ -38,7 +36,15 @@
             <li>Yasas Senarath</li>
             <li>Dulanjaya Tennekoon</li>
         </ul>
+        <div id="logoImage">
+            <img class="img-responsive pull-right pull-bottom" src="{{ asset('bundles/framework/images/logo.png') }}"
+                 alt="Company Logo"
+                 style="width:350px;height:200px;">
+        </div>
+
 
     </div>
+
+
 
 {% endblock %}

@@ -23,7 +23,7 @@ body {
 
 #sensorReading {
     height: 75vh;
-    overflow: auto
+    overflow: auto;
 }
 
 #errorMsg {
