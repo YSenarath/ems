@@ -16,49 +16,9 @@ class Sensor
     protected $t_min;
     protected $t_max;
     protected $loc_id;
-    protected $type_name;
+    protected $type_id;
     protected $model_id;
     protected $ins_date;
-
-    /**
-     * Created by Shehan
-     */
-    private $manufacturer;
-    private $unit;
-
-
-    /**
-     * @return mixed
-     */
-    public function getManufacturer()
-    {
-        return $this->manufacturer;
-    }
-
-    /**
-     * @param mixed $manufacturer
-     */
-    public function setManufacturer($manufacturer)
-    {
-        $this->manufacturer = $manufacturer;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * @param mixed $unit
-     */
-    public function setUnit($unit)
-    {
-        $this->unit = $unit;
-    }
-
 
     /**
      * @return mixed
@@ -127,17 +87,17 @@ class Sensor
     /**
      * @return mixed
      */
-    public function getTypeName()
+    public function getTypeId()
     {
-        return $this->type_name;
+        return $this->type_id;
     }
 
     /**
-     * @param mixed $type_name
+     * @param mixed $type_id
      */
-    public function setTypeName($type_name)
+    public function setTypeId($type_id)
     {
-        $this->type_name = $type_name;
+        $this->type_id = $type_id;
     }
 
     /**

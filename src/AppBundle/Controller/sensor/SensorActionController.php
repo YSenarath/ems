@@ -13,6 +13,7 @@ use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Type;
+use AppBundle\Form\sensor\FindSensor;
 use AppBundle\Form\sensor\SensorType;
 use AppBundle\Form\sensor\ModelType;
 
@@ -58,7 +59,9 @@ class SensorActionController extends  Controller
         $sensors=$sensorController ->getAllSensors();
 
         return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
+
     }
+
 
     /**
      * @Route("/model/list", name="model_list")
@@ -92,9 +95,27 @@ class SensorActionController extends  Controller
     /**
      * @Route("/sensor/find", name="find_sensor")
      */
-    public function findAction()
+    public function findAction(Request $request)
     {
-        return $this->render('AppBundle:sensor:findSensor.html.twig');
+        $sensor = new Sensor();
+
+        // build the form
+        $form = $this->createForm(FindSensor::class, $sensor );
+
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+
+
+            return $this->redirectToRoute('sensor_list');
+        }
+
+        return $this->render(
+            'AppBundle:sensor:findSensor.html.twig',
+            array('form' => $form->createView())
+        );
     }
 
     /**

@@ -3,7 +3,7 @@ Git::Init
 http://symfony.com/doc/current/cookbook/workflow/new_project_git.html
 
 And After Cloning for the first time....run
-	composer install
+	cc
 
 Note: 
 	Press Enter if u feel stuck...:)
