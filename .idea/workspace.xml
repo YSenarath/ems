@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e717dedb-037b-4d77-8905-b26dfb8819ff" name="Default" comment="Added resources">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/js/animsition.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/js/sorttable.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/animsition.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/bootstrapNavbarStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/footerStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingSearcherStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/animsition.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/bootstrapNavbarStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/footerStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaSideBarStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportAreaViewStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportLocationViewStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingSearcherStyle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/symfony_requirements" afterPath="$PROJECT_DIR$/bin/symfony_requirements" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterPath="$PROJECT_DIR$/var/SymfonyRequirements.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/config.php" afterPath="$PROJECT_DIR$/web/config.php" />
     </list>
     <ignored path="DB_EMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,7 +44,18 @@
     <favorites_list name="DB_EMS" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="reportSensorReadingsStyle.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -181,6 +187,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -194,11 +236,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Documents\Programming\phpStorm\projects\EMS\web\bundles\framework\css" />
       <recent name="E:\Documents\Programming\phpStorm\projects\EMS\web\bundles\framework\js" />
       <recent name="E:\Documents\Programming\phpStorm\projects\EMS\web\bundles\framework\images" />
       <recent name="E:\Documents\Programming\phpStorm\projects\emsDB\web\bundles\framework\js" />
       <recent name="E:\Documents\Programming\phpStorm\projects\emsDB\web\bundles\framework\css" />
-      <recent name="E:\Documents\Programming\phpStorm\projects\emsDB\web\bundles\framework\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp\www\ems\web\bundles\framework\javascript" />
@@ -397,7 +439,13 @@
       <option name="project" value="LOCAL" />
       <updated>1451893123487</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Added resources">
+      <created>1451893236568</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1451893236568</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -765,6 +813,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321859">
           <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/framework/css/reportSensorReadingsStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
