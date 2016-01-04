@@ -8,10 +8,10 @@
  */
 namespace AppBundle\Controller\sensor;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\sensor\Sensor;
 use Doctrine\DBAL\Connection;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 
 class SensorController extends  Controller{
@@ -49,50 +49,97 @@ class SensorController extends  Controller{
     }
 
     /**
-     * Created by ShehanGemba
+     * Created by Shehan
      * @param $locationId
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getSensorIdsByLocationAction($locationId)
+    public function getSensorDetailsByLocationAction($locationId)
     {
 
         $result = $this->connection->executeQuery(
-            'SELECT sensor_id,type_id FROM sensor WHERE location_id=? ORDER BY sensor_id',
+            'SELECT sensor_id,type_name FROM sensor WHERE location_id=? ORDER BY sensor_id',
             array($locationId)
         );
         $result = $result->fetchAll();
         //print_r($result);
-        $sensorIdArray = array();
+        $sensorArray = array();
 
         foreach ($result as $a) {
             if ($a != null) {
-                $sensorIdArray[] = array($a["sensor_id"], $a["type_id"]);
+                $sensor = new Sensor();
+                $sensor->setSensorId($a["sensor_id"]);
+                $sensor->setTypeName($a["type_name"]);
+                $sensorArray[] = $sensor;
             }
         }
 
-        //print_r($sensorIdArray);
+        //print_r($sensorArray);
 
-        return $sensorIdArray;
+        return $sensorArray;
     }
 
+    /**
+     * @param $locationId
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSensorsByLocationAction($locationId)
+    {
+
+        $result = $this->connection->executeQuery(
+            'SELECT sensor_id,type_name,installed_date,manufacturer,unit FROM sensor,sensor_model WHERE location_id=? AND sensor.model_id=sensor_model.model_id ORDER BY sensor_id',
+            array($locationId)
+        );
+        $result = $result->fetchAll();
+        $sensorArray = array();
+
+        foreach ($result as $a) {
+            if ($a != null) {
+                $sensor = new Sensor();
+
+                $sensor->setSensorId($a["sensor_id"]);
+                $sensor->setTypeName($a["type_name"]);
+                $sensor->setInsDate($a["installed_date"]);
+                $sensor->setManufacturer($a["manufacturer"]);
+                $sensor->setUnit($a["unit"]);
+
+                $sensorArray[] = $sensor;
+            }
+        }
+
+        //print_r($sensorArray);
+
+        return $sensorArray;
+    }
+
+
+    /**
+     * Created by nadheesh
+     * Modified by Shehan
+     * @param $sensor_id
+     * @return Sensor|bool
+     */
     public function searchSensor($sensor_id)
     {
-        $s =$this->connection->fetchAssoc('SELECT * FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?', array($sensor_id));
+        $s = $this->connection->fetchAssoc(
+            'SELECT * FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?',
+            array($sensor_id)
+        );
 
         //print_r($result);
         $sensor = new Sensor();
 
         if ($s != null) {
-                $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeId($s["type"]);
-                $sensor->setModelId($s["model_id"]);
-                $sensor->setInsDate($s["installed_date"]);
-                $sensor->setTMin($s["threshold_min"]);
-                $sensor->setTMax($s["threshold_max"]);
-                $sensor->setLocId($s["location_id"]);
+            $sensor->setSensorId($s["sensor_id"]);
+            $sensor->setTypeName($s["type_name"]);
+            $sensor->setModelId($s["model_id"]);
+            $sensor->setInsDate($s["installed_date"]);
+            $sensor->setTMin($s["threshold_min"]);
+            $sensor->setTMax($s["threshold_max"]);
+            $sensor->setLocId($s["location_id"]);
 
-        }else{
+        } else {
             return false;
         }
 
