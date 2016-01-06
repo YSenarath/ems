@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\location;
 
+use AppBundle\Controller\reports\AreaController;
 use AppBundle\Entity\location\Location;
 use AppBundle\Form\location\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -81,6 +82,24 @@ class LocationActionController extends Controller
         $areas = $locations->getArea();
         return $this->render(
             'AppBundle:location:areas.html.twig', array('areas'=>$areas)
+        );
+    }
+
+    /**
+     * @Route("/location/area/{viewArea}", name="locationAreaView")
+     */
+    public function specificLocationAction($viewArea) {
+        $conn = $this->get('database_connection');
+        $locationController = new LocationController($conn);
+        $areaController = new AreaController($conn);
+        $area = $areaController->getAreaDetailsAction($viewArea);
+        $areaId = $area->getAreaCode();
+        $locationArray = $locationController->getLocationDetailsByAreaAction($areaId);
+        return $this->render(
+            '@App/location/areaView.html.twig',
+            array(
+                'locations' => $locationArray,
+            )
         );
     }
 }
