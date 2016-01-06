@@ -72,7 +72,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/area", name="area")
+     * @Route("/location/area", name="areaView")
      */
     public function areaAction()
     {
