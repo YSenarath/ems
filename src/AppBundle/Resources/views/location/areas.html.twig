@@ -1,0 +1,26 @@
+{# AppBundle/Resources/views/location/areas.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+ {% block otherstylesheets %}
+     {#Sidebar style#}
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+ {% endblock %}
+
+{% block body %}
+    <h1 align="center">
+        Areas
+    </h1>
+    <div class="container "  id="areaListContainer">
+        <ul class="list-unstyled">
+            {% for area in areas %}
+                {% if area.name|trim is not empty %}
+                    <li class="col-md-3"><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a>
+                        </h3>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
+    {% if (js is defined) %}{{ js|raw }}{% endif %}
+{% endblock %}
