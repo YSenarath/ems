@@ -1,0 +1,18 @@
+{# AppBundle/Resources/views/about.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+
+
+{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <dev class="container">
+        <h2>Add Locations</h2>
+        <hr>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </dev>
+{% endblock %}

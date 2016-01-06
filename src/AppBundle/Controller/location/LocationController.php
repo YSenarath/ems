@@ -7,6 +7,7 @@
  */
 namespace AppBundle\Controller\location;
 
+use AppBundle\Entity\report\Area;
 use AppBundle\Entity\report\LocationEntity;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -154,6 +155,68 @@ class LocationController extends Controller
         //print_r($locationArray);
         return false;
 
+    }
+
+    /**
+     * By: Dulanjaya Tennekoon
+     * Date: 1/4/2016
+     * Time: 5.12pm
+     */
+
+    public function addLocation(Location $location) {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('INSERT INTO location (address , longitude, latitude, area_code ) VALUES (?,?,?,?)');
+
+            $statement->bindValue(1, $location->getAddress());
+            $statement->bindValue(2, $location->getLongitude());
+            $statement->bindValue(3, $location->getLatitude());
+            $statement->bindValue(4, $location->getAreaCode());
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
+
+    /*By Dulanjaya*/
+    public function getAllAreas() {
+        $result=$this->connection->executeQuery('SELECT area_code,name FROM area ORDER BY area_code');
+        $results = $result->fetchAll();
+
+        $areas = null;
+        foreach ($results as $s) {
+            if ($s != null) {
+
+                $areas[$s["name"]] = $s["area_code"];
+
+            }
+        }
+        return $areas;
+    }
+//    In order to view the areas
+    public function getArea()
+    {
+        $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY name');
+        $result = $result->fetchAll();
+
+        //print_r($result);
+        $areas[] = new Area();
+
+        foreach ($result as $a) {
+            if ($a != null) {
+                $tmpArea = new Area();
+                $tmpArea->setAreaCode($a["area_code"]);
+                $tmpArea->setName($a["name"]);
+                $tmpArea->setAreaSize($a["area_size"]);
+                $areas[] = $tmpArea;
+            }
+        }
+
+        return $areas;
     }
 }
 
