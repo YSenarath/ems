@@ -17,10 +17,6 @@ body {
 
 /* bootstrap hack end */
 
-#headings {
-    color: #9C27B0;
-}
-
 #sensorReading {
     height: 75vh;
     overflow: auto;
@@ -223,3 +219,11 @@ li.active a, li.active a:hover {
     display: block;
 }
 
+#headings {
+    color: #9C27B0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:24px;
+    margin-top: 5px; margin-bottom: 0px;
+    text-align: center;
+    font-weight: normal;
+}

@@ -104,11 +104,11 @@ tr {
     background: #ffffff;
 }
 
-#header h3 {
-    padding: 25px 5px 5px 50px;
-}
+/*#header  {*/
+    /*padding: 25px 5px 5px 50px;*/
+/*}*/
 
 #locationAddressList{
-    height: 20vh;
+    height: 18vh;
     overflow: auto;
 }

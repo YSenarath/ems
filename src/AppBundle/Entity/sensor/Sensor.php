@@ -25,33 +25,15 @@ class Sensor
      * @Assert\Type(type="double")
      */
     protected $t_max;
-
-
     protected $loc_id;
     protected $type_name;
     protected $model_id;
     protected $ins_date;
-    protected $ins_before;
+
     /**
      * Created by Shehan
      */
     private $manufacturer;
-
-    /**
-     * @return mixed
-     */
-    public function getInsBefore()
-    {
-        return $this->ins_before;
-    }
-
-    /**
-     * @param mixed $ins_before
-     */
-    public function setInsBefore($ins_before)
-    {
-        $this->ins_before = $ins_before;
-    }
     private $unit;
 
 

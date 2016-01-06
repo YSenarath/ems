@@ -13,7 +13,7 @@
         <ul class="list-unstyled">
             {% for area in areas %}
                 {% if area.name|trim is not empty %}
-                    <li class="col-md-3"><h3><a  href="#">{{ area.name }}</a>
+                    <li class="col-md-3"><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a>
                         </h3>
                     </li>
                 {% endif %}
