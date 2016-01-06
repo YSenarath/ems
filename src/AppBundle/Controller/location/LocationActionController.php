@@ -70,4 +70,17 @@ class LocationActionController extends Controller
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * @Route("/location/area", name="area")
+     */
+    public function areaAction()
+    {
+        $conn = $this->get('database_connection');
+        $locations = new LocationController($conn);
+        $areas = $locations->getArea();
+        return $this->render(
+            'AppBundle:location:areas.html.twig', array('areas'=>$areas)
+        );
+    }
 }
