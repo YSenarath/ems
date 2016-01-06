@@ -8,13 +8,25 @@
 
 namespace AppBundle\Entity\sensor;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Sensor
 {
 
     protected $sensor_id;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="double")
+     */
     protected $t_min;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="double")
+     */
     protected $t_max;
+
+
     protected $loc_id;
     protected $type_name;
     protected $model_id;

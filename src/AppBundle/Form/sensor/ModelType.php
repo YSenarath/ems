@@ -29,8 +29,8 @@ class ModelType extends AbstractType
 
         $builder
             ->add('model_id', TextType::class, array('label' => 'Model ID'))
-            ->add('manufacture', TextType::class, array('label' => 'Manufacture'))
-            ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'choices'=>array('°C'=>'°C' , 'Percentage'=>'Percentage','m/s'=>'m/s', 'Pascal' => 'Pa')))
+            ->add('manufacture', TextType::class, array('label' => 'Manufacture' ))
+            ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'placeholder'=>'--Select a Unit--' ,'choices'=>array('°C'=>'°C' , 'Percentage'=>'Percentage','m/s'=>'m/s', 'Pascal' => 'Pa')))
             ->add('det_range', NumberType::class, array('label' => 'Detection Range' ))
             ->add('submit', SubmitType::class, array('label' => 'Save',));
 
