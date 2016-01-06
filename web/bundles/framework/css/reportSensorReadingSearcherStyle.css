@@ -5,8 +5,15 @@ body {
     padding: 50px;
     background-color: #00897B;
     color: white;
+    border-radius: 10px;
 }
 
 #headings {
     color: #9C27B0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:24px;
+    margin-top: 5px; margin-bottom: 0px;
+    text-align: center;
+    font-weight: normal;
+    //color: #222;
 }

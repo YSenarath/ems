@@ -21,46 +21,6 @@ class Sensor
     protected $ins_date;
 
     /**
-     * Created by Shehan
-     */
-    private $manufacturer;
-    private $unit;
-
-
-    /**
-     * @return mixed
-     */
-    public function getManufacturer()
-    {
-        return $this->manufacturer;
-    }
-
-    /**
-     * @param mixed $manufacturer
-     */
-    public function setManufacturer($manufacturer)
-    {
-        $this->manufacturer = $manufacturer;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * @param mixed $unit
-     */
-    public function setUnit($unit)
-    {
-        $this->unit = $unit;
-    }
-
-
-    /**
      * @return mixed
      */
     public function getSensorId()

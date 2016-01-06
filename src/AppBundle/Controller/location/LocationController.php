@@ -7,6 +7,7 @@
  */
 namespace AppBundle\Controller\location;
 
+use AppBundle\Entity\location\Location;
 use AppBundle\Entity\report\LocationEntity;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -62,34 +63,6 @@ class LocationController extends Controller
         return $locations;
     }
 
-//    /**
-//     * Created by Shehan
-//     * @param $areaId
-//     * @return array
-//     * @throws \Doctrine\DBAL\DBALException
-//     */
-//    public function getLocationIdsAction($areaId)
-//    {
-//        $result = $this->connection->executeQuery(
-//            'SELECT location_id FROM location WHERE area_code=? ORDER BY location_id',
-//            array($areaId)
-//        );
-//        $result = $result->fetchAll();
-//        //print_r($result);
-//        $locationIdArray = array();
-//
-//        foreach ($result as $a) {
-//            if ($a != null) {
-//                $locationIdArray[] = $a["location_id"];
-//            }
-//        }
-//
-//        //print_r($locationIdArray);
-//
-//        return $locationIdArray;
-//
-//    }
-//
     /**
      * Created by Shehan
      * @param $areaId

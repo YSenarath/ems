@@ -6,7 +6,7 @@
  * Time: 3:43 PM
  */
 
-namespace AppBundle\Controller\reports;
+namespace AppBundle\Controller\location;
 
 
 use AppBundle\Entity\report\Area;

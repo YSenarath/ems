@@ -14,63 +14,74 @@
             Latitude: {{ location.getLatitude() }} | Longitude: {{ location.getLongitude() }}
         </div>
     </div>
+    {% if sensorDetails[0]['sensor'].getTypeName is defined %}
+        <div id="section1" class="container-fluid">
 
-    <div id="section1" class="container-fluid">
-        <div>
-            <h3 id="installedSensors">
-                Installed sensors
-            </h3>
-        </div>
-        <div id="sensorInformation" align="center">
-            <table id="sensorTable" class="sortable">
-                <thead>
-                <tr>
-                    <th>Sensor Id</th>
-                    <th>Type</th>
-                    <th>Manufacturer</th>
-                    <th>Unit</th>
-                    <th>Insalled Date</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for sensor in sensorDetail %}
-                    <tr>
-
-                        <td id="sensorIdLink"><a href="#">{{ sensor.getSensorId() }}</a></td>
-                        {% if sensor.getTypeName()=='air_qty' %} {#Air qty#}
-                            <td>Air Quality</td>
-                        {% elseif sensor.getTypeName()=='temp' %} {#Temp#}
-                            <td>Temperature</td>
-                        {% elseif sensor.getTypeName()=='pressure' %} {#Pressure#}
-                            <td>Pressure</td>
-                        {% elseif sensor.getTypeName()=='wind' %} {#Wind#}
-                            <td>Wind</td>
-                        {% elseif sensor.getTypeName()=='humidity' %} {#Humidity#}
-                            <td>Humidity</td>
-                        {% endif %}
-                        <td>{{ sensor.getManufacturer() }}</td>
-                        {% if sensor.getUnit()=='percent' %} {#Air qty#}
-                            <td>%</td>
-                        {% elseif sensor.getUnit()=='Pa' %} {#Temp#}
-                            <td>(K)Pa</td>
-                        {% elseif sensor.getUnit()=='°C' %} {#Pressure#}
-                            <td>°C</td>
-                        {% elseif sensor.getUnit()=='m/s' %} {#Wind#}
-                            <td>m/s</td>
-                        {% else %}
-                            <td>{{ sensor.getUnit() }}</td>
-                        {% endif %}
-                        {#<td>{{ sensor.getUnit() }}</td>#}
-                        <td>{{ sensor.getInsDate() }}</td>
-                        <td id="sensorReadingLink"><a
-                                                      href="{{ path('reportSensorReadings', {'viewArea': areaName,'viewLocation': location.getAddress(),'sensorId':sensor.getSensorId()}) }}">View
-                                Readings</a></td>
+            <div>
+                <h3 id="installedSensors">
+                    Installed sensors
+                </h3>
+            </div>
+            <div id="sensorInformation" align="center">
+                <table id="sensorTable" class="sortable">
+                    <thead>
+                    <tr title="click to sort by column">
+                        <th>Sensor ID</th>
+                        <th>Type</th>
+                        <th>Manufacturer</th>
+                        <th>Unit</th>
+                        <th>Insalled Date</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for sensorDetail in sensorDetails %}
+                        <tr>
+
+                            <td id="sensorIdLink" title="view sensor"><a
+                                        href="{{ path('viewSensor') }}?id={{ sensorDetail['sensor'].getSensorId() }}">{{ sensorDetail['sensor'].getSensorId() }}</a>
+                            </td>
+                            {% if sensorDetail['sensor'].getTypeName()=='air_qty' %} {#Air qty#}
+                                <td>Air Quality</td>
+                            {% elseif sensorDetail['sensor'].getTypeName()=='temp' %} {#Temp#}
+                                <td>Temperature</td>
+                            {% elseif sensorDetail['sensor'].getTypeName()=='pressure' %} {#Pressure#}
+                                <td>Pressure</td>
+                            {% elseif sensorDetail['sensor'].getTypeName()=='wind' %} {#Wind#}
+                                <td>Wind</td>
+                            {% elseif sensorDetail['sensor'].getTypeName()=='humidity' %} {#Humidity#}
+                                <td>Humidity</td>
+                            {% endif %}
+                            <td>{{ sensorDetail['model'].getManufacture() }}</td>
+                            {% if sensorDetail['model'].getUnit()=='percent' %} {#Air qty#}
+                                <td>%</td>
+                            {% elseif sensorDetail['model'].getUnit()=='Pa' %} {#Temp#}
+                                <td>(K)Pa</td>
+                            {% elseif sensorDetail['model'].getUnit()=='°C' %} {#Pressure#}
+                                <td>°C</td>
+                            {% elseif sensorDetail['model'].getUnit()=='m/s' %} {#Wind#}
+                                <td>m/s</td>
+                            {% else %}
+                                <td>{{ sensorDetail['model'].getUnit() }}</td>
+                            {% endif %}
+                            {#<td>{{ sensor.getUnit() }}</td>#}
+                            <td>{{ sensorDetail['sensor'].getInsDate() }}</td>
+                            <td id="sensorReadingLink">
+                                <a href="{{ path('reportSensorReadings') }}?id={{ sensorDetail['sensor'].getSensorId() }}">View
+                                    Readings
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    {% else %}
+        <div id="errorMsg" align="center">
+            No sensors installed
+        </div>
+    {% endif %}
+
 
 {% endblock %}
