@@ -77,28 +77,4 @@ class DefaultController extends Controller
             array('form' => $form->createView())
         );
     }
-
-    //by dulanjaya
-    /**
-     * @Route("/location", name="location")
-     */
-    public function locationAction()
-    {
-        $conn = $this->get('database_connection');
-        $locations = new LocationController($conn);
-        $locs = $locations->getLocationsAction();
-        return $this->render(
-            'AppBundle:location:location.html.twig', array('locations'=>$locs)
-        );
-    }
-
-    /**
-     * @Route("/addlocs", name="addlocs")
-     */
-    public function addlocAction()
-    {
-        return $this->render(
-            'AppBundle:location:addlocs.html.twig'
-        );
-    }
 }
