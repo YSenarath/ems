@@ -31,6 +31,34 @@
                 {% endfor %}
             </table>
         </div>
+
+        <div>
+            <div id="map" style=" height: 400px;width: 600px;">
+                <script>
+                    var map;
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
+                            zoom: 12
+                        });
+
+                        {% for loc in locations %}
+                        var $title = {{ loc.getAddress()|json_encode|raw }};
+                        var $long = {{ loc.getLongitude()|json_encode|raw }};
+                        var $lati = {{ loc.getLatitude()|json_encode|raw }};
+                        var marker = new google.maps.Marker({
+                            position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                            map: map,
+                            title: $title
+                        });
+                        {% endfor %}
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                        async defer></script>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
