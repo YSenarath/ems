@@ -34,7 +34,7 @@ class EmployeeController extends Controller
             $employee->setFirstName($result['first_name']);
             $employee->setLastName($result['last_name']);
             $employee->setNIC($result['NIC']);
-            $employee->setTelNo(['tel_no']);
+            $employee->setTelNo($result['tel_no']);
             return $employee;
         }
         return false;
@@ -87,5 +87,31 @@ class EmployeeController extends Controller
             $this->connection->rollBack();
             // throw $e;
         }
+    }
+
+    /**
+     *
+     */
+    public function getAllEmployees()
+    {
+        $sql = 'SELECT * FROM employee';
+        $result = $this->connection->executeQuery($sql);
+        $result = $result->fetchAll();
+
+        $employees = array();
+
+        foreach ($result as $a) {
+            if ($a != null) {
+                $employee = new Employee();
+                $employee->setEmployeeId($a['employee_id']);
+                $employee->setFirstName($a['first_name']);
+                $employee->setLastName($a['last_name']);
+                $employee->setNIC($a['NIC']);
+                $employee->setTelNo($a['tel_no']);
+                $employees[] = $employee;
+            }
+        }
+
+        return $employees;
     }
 }
