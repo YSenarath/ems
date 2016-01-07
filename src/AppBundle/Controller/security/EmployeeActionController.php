@@ -9,6 +9,7 @@
 namespace AppBundle\Controller\security;
 
 
+use AppBundle\Form\security\UpdateEmployeeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ use AppBundle\Form\security\UserType;
 use AppBundle\Form\security\EmployeeType;
 use AppBundle\Form\security\ProfileType;
 
-class SecurityActionController extends Controller
+class EmployeeActionController extends Controller
 {
     /**
      * @Route("/register", name="register")
@@ -141,4 +142,55 @@ class SecurityActionController extends Controller
         );
     }
 
+    /**
+     * @Route("/employee/update", name="updateEmployee")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function employeeUpdateAction(Request $request)
+    {
+        $employee_id = $request->query->get('id');
+        $connection = $this->get('database_connection');
+        $employeeController = new EmployeeController($connection);
+        // build the form
+        $employee = $employeeController->searchEmployee($employee_id);
+
+        $form = $this->createForm(UpdateEmployeeType::class, $employee);
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+            if ($employeeController->searchEmployee($employee->getEmployeeId())) {
+                $employeeController->updateEmployee($employee);
+                $this->addFlash(
+                    'notice',
+                    'Completed Successfully.'
+                );
+            }
+            else {
+                $this->addFlash(
+                    'notice',
+                    'Employee does not exist in the storage.'
+                );
+                return $this->redirectToRoute('addEmployee');
+            }
+        }
+
+        return $this->render(
+            'AppBundle:security:updateEmployee.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/employee/list", name="listEmployees")
+     */
+    public function listEmployeesAction()
+    {
+        $connection = $this->get('database_connection');
+        $employeeController = new EmployeeController($connection);
+        $employees = $employeeController->getAllEmployees();
+
+        return $this->render('@App/security/employeeList.html.twig', array('employees' => $employees));
+    }
 }
