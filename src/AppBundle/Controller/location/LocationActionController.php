@@ -8,7 +8,7 @@
 
 namespace AppBundle\Controller\location;
 
-
+use AppBundle\Controller\location\AreaController;
 use AppBundle\Entity\location\Location;
 use AppBundle\Form\location\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -99,6 +99,9 @@ class LocationActionController extends Controller
             '@App/location/areaView.html.twig',
             array(
                 'locations' => $locationArray,
+                'area_longitude' => $area->getCenterLongitude(),
+                'area_latitude' => $area->getCenterLatitude(),
+                'areaView' => $viewArea,
             )
         );
     }

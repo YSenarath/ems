@@ -16,6 +16,8 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login_route")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function loginAction(Request $request)
     {
@@ -32,7 +34,7 @@ class SecurityController extends Controller
             array(
                 // last username entered by the user
                 'last_username' => $lastUsername,
-                'error'         => $error,
+                'error' => $error,
             )
         );
     }

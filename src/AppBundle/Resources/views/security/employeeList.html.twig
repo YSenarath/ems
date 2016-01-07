@@ -1,0 +1,25 @@
+{# AppBundle/Resources/views/location/areas.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+ {% block otherstylesheets %}
+     {#Sidebar style#}
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+ {% endblock %}
+
+{% block body %}
+    <h1>
+        Employee List
+    </h1>
+    <div class="container " id="areaListContainer">
+        <ul class="list-unstyled">
+            {% for employee in employees %}
+                <li class="col-md-3">
+                    <h3> <a href="{{ path('updateEmployee') }}?id={{ employee.getEmployeeId() }}">
+                            {{ employee.getEmployeeId() }} : {{ employee.getFirstName() }} {{ employee.getLastName() }}
+                        </a> </h3>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if (js is defined) %}{{ js|raw }}{% endif %}
+{% endblock %}

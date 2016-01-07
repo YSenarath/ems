@@ -8,7 +8,7 @@
 // src/AppBundle/Controller/security/EmployeeController.php
 namespace AppBundle\Controller\security;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\security\Employee;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class EmployeeController extends Controller
@@ -20,29 +20,98 @@ class EmployeeController extends Controller
         $this->connection = $connection;
     }
 
-    public function employeeSearchAction($employee_id)
+    /**
+     * @param $employee_id
+     * @return bool | Employee
+     */
+    public function searchEmployee($employee_id)
     {
-        $employee = $this->connection->fetchAssoc('SELECT * FROM employee WHERE employee_id = ?', array($employee_id));
-        if ($employee != null)
+        $sql = 'SELECT * FROM employee WHERE employee_id = ?';
+        $result = $this->connection->fetchAssoc($sql, array($employee_id));
+        if ($result != null) {
+            $employee = new Employee();
+            $employee->setEmployeeId($result['employee_id']);
+            $employee->setFirstName($result['first_name']);
+            $employee->setLastName($result['last_name']);
+            $employee->setNIC($result['NIC']);
+            $employee->setTelNo($result['tel_no']);
             return $employee;
+        }
         return false;
     }
 
-    public function userAddAction($id, $first_name, $last_name, $nic, $tel_no)
+
+    /**
+     * @param Employee $employee
+     */
+    public function addEmployee(Employee $employee)
     {
         $this->connection->beginTransaction();
-        try{
-            $statement = $this->connection->prepare('INSERT INTO employee(employee_id, first_name, last_name, NIC, tel_no) VALUES (?,?,?,? ?,?)');
-            $statement->bindValue(1, $id);
-            $statement->bindValue(2, $first_name);
-            $statement->bindValue(3, $last_name);
-            $statement->bindValue(4, $nic);
-            $statement->bindValue(4, $tel_no);
+        try {
+            $sql = 'INSERT INTO employee(employee_id, first_name, last_name, NIC, tel_no) VALUES (?,?,?,?,?)';
+            $statement = $this->connection->prepare($sql);
+            $statement->bindValue(1, $employee->getEmployeeId());
+            $statement->bindValue(2, $employee->getFirstName());
+            $statement->bindValue(3, $employee->getLastName());
+            $statement->bindValue(4, $employee->getNIC());
+            $statement->bindValue(5, $employee->getTelNo());
             $statement->execute();
+
             $this->connection->commit();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
+            $this->connection->rollBack();
+        }
+    }
+
+
+    /**
+     * @param Employee $employee
+     */
+    public function updateEmployee(Employee $employee)
+    {
+        $this->connection->beginTransaction();
+        try {
+            $sql = 'UPDATE employee SET first_name=?, last_name=?, NIC=?, tel_no=? WHERE employee_id=?';
+            $statement = $this->connection->prepare($sql);
+
+            $statement->bindValue(1, $employee->getFirstName());
+            $statement->bindValue(2, $employee->getLastName());
+            $statement->bindValue(3, $employee->getNIC());
+            $statement->bindValue(4, $employee->getTelNo());
+            $statement->bindValue(5, $employee->getEmployeeId());
+
+            $statement->execute();
+
+            $this->connection->commit();
+        } catch (Exception $e) {
             $this->connection->rollBack();
             // throw $e;
         }
+    }
+
+    /**
+     *
+     */
+    public function getAllEmployees()
+    {
+        $sql = 'SELECT * FROM employee';
+        $result = $this->connection->executeQuery($sql);
+        $result = $result->fetchAll();
+
+        $employees = array();
+
+        foreach ($result as $a) {
+            if ($a != null) {
+                $employee = new Employee();
+                $employee->setEmployeeId($a['employee_id']);
+                $employee->setFirstName($a['first_name']);
+                $employee->setLastName($a['last_name']);
+                $employee->setNIC($a['NIC']);
+                $employee->setTelNo($a['tel_no']);
+                $employees[] = $employee;
+            }
+        }
+
+        return $employees;
     }
 }
