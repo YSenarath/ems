@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\location;
 
+use AppBundle\Controller\location\AreaController;
 use AppBundle\Entity\location\Location;
 use AppBundle\Form\location\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
