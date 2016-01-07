@@ -85,8 +85,36 @@ class SensorController extends  Controller{
 
     public function findSensors(Sensor$sensor)
     {
-        $result = $this->connection->executeQuery('SELECT * FROM sensor  NATURAL JOIN sensor_model WHERE model_id = ? AND type_name = ? AND location_id = ? AND installed_date BETWEEN ? AND ? AND sensor_id LIKE ?'  ,
-            array($sensor->getModelId(), $sensor->getTypeName() , $sensor->getLocId(), $sensor-> getInsDate()->format('Y-m-d') , $sensor->getInsBefore()->format('Y-m-d') , '%'.$sensor->getSensorId().'%' ,));
+        $sql = 'SELECT * FROM sensor  NATURAL JOIN sensor_model WHERE ';
+        $param=array();
+        $passing =array();
+
+        if ($sensor->getModelId() != null){
+            $sql = $sql.' model_id IN (?) AND ' ;
+            $param[] = $sensor->getModelId();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+        if ($sensor->getTypeName() != null){
+            $sql = $sql.' type_name IN (?) AND ' ;
+            $param[] = $sensor->getTypeName();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+        if ($sensor->getLocId() != null){
+            $sql = $sql.' location_id IN (?) AND ' ;
+            $param[] = $sensor->getLocId();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+
+        $sql =  $sql.' installed_date BETWEEN ? AND ? AND sensor_id LIKE ?';
+        $param[]= $sensor-> getInsDate()->format('Y-m-d');
+        $param[]= $sensor->getInsBefore()->format('Y-m-d');
+        $param[]= '%'.$sensor->getSensorId().'%';
+
+
+        $result = $this->connection->executeQuery(
+            $sql,
+            $param,
+            $passing);
         $result = $result->fetchAll();
 
         //print_r($result);

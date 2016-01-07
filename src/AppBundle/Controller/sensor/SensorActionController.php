@@ -128,6 +128,11 @@ class SensorActionController extends  Controller
             //find sensors
             $sensors[] = new Sensor();
 
+
+
+
+
+
             $sensorController = new SensorController($connection);
             $sensors = $sensorController->findSensors($sensor);
 

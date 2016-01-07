@@ -34,14 +34,16 @@ class FindSensor extends AbstractType
             ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
             ->add('loc_id', ChoiceType::class, array(
                 'label' => 'Location ID' ,
+                'required'=>false,
                 'expanded' => false ,
-                'multiple'=>true ,
                 'empty_data'=>null,
+                'multiple'=>true ,
                 'placeholder'=>'--Select Location to search sensors--',
                 'choices' => $locations ))
 
             ->add('type_name', ChoiceType::class, array(
                 'label' => 'Sensor Type',
+                'required'=>false,
                 'expanded' => true ,
                 'multiple'=>true ,
                 'empty_data'=>null,
@@ -50,9 +52,10 @@ class FindSensor extends AbstractType
 
             ->add('model_id', ChoiceType::class, array(
                 'label' => 'Sensor Model' ,
+                'required'=>false,
                 'expanded' => false ,
-                'multiple'=>true ,
                 'empty_data'=>null,
+                'multiple'=>true ,
                 'placeholder'=>'--Select Model to search Sensors--',
                 'choices' => $models ))
 
