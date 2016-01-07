@@ -31,12 +31,34 @@ class FindSensor extends AbstractType
         $locations = $options['locations'];
 
         $builder
-            ->add('sensor_id', SearchType::class, array('label' => 'Sensor ID'))
-            ->add('loc_id', ChoiceType::class, array('label' => 'Location ID' ,  'placeholder'=>'--Select Location to search sensorss--','choices' => $locations ))
-            ->add('type_name', ChoiceType::class, array('label' => 'Sensor ID' ,  'placeholder'=>'--Select Type to search Sensors--','choices' => $types ))
-            ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'placeholder'=>'--Select Model to search Sensors--','choices' => $models ))
-            ->add('ins_date', DateType::class, array('label' => 'Sensor ID'))
-            ->add('ins_before', DateType::class, array('label' => 'Sensor ID'));
+            ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
+            ->add('loc_id', ChoiceType::class, array(
+                'label' => 'Location ID' ,
+                'expanded' => false ,
+                'multiple'=>true ,
+                'empty_data'=>null,
+                'placeholder'=>'--Select Location to search sensors--',
+                'choices' => $locations ))
+
+            ->add('type_name', ChoiceType::class, array(
+                'label' => 'Sensor Type',
+                'expanded' => true ,
+                'multiple'=>true ,
+                'empty_data'=>null,
+                'placeholder'=>'--Select Type to search Sensors--',
+                'choices' => $types ))
+
+            ->add('model_id', ChoiceType::class, array(
+                'label' => 'Sensor Model' ,
+                'expanded' => false ,
+                'multiple'=>true ,
+                'empty_data'=>null,
+                'placeholder'=>'--Select Model to search Sensors--',
+                'choices' => $models ))
+
+            ->add('ins_date', DateType::class, array('label' => 'Installed After'))
+            ->add('ins_before', DateType::class, array('label' => 'Installed Before'))
+            ->add('submit', SubmitType::class, array('label' => 'Search'));
 
     }
 

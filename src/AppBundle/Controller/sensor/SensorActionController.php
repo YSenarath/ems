@@ -125,28 +125,16 @@ class SensorActionController extends  Controller
 
         if ($form->isValid() && $form->isSubmitted()) {
 
-            //add sensor
+            //find sensors
+            $sensors[] = new Sensor();
+
             $sensorController = new SensorController($connection);
+            $sensors = $sensorController->findSensors($sensor);
 
-            if (!$sensorController->searchSensor($sensor->getSensorId())) {
-                if ($sensor->getTMax() > $sensor->getTMin()){
-                    $sensorController->sensorAddAction($sensor);
-                }else{
-                    printf("TMax <= TMin");
-                    return $this->redirectToRoute('add_sensor');
-                }
-
-            } else{
-                //---------------------------------------
-                //------implement later---------------
-                printf("The Sensor ID exists");
-                return $this->redirectToRoute('find_sensor');
-            }
-            return $this->redirectToRoute('sensor_list');
+            return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
         }
-
         return $this->render(
-            'AppBundle:sensor:addSensor.html.twig',
+            'AppBundle:sensor:findSensor.html.twig',
             array('form' => $form->createView())
         );
 

@@ -49,6 +49,86 @@ class SensorController extends  Controller{
         return $sensors;
     }
 
+
+
+    /**
+     * Created by nadheesh
+     * Modified by Shehan
+     * @param $sensor_id
+     * @return Sensor|bool
+     */
+    public function searchSensor($sensor_id)
+    {
+        $s = $this->connection->fetchAssoc(
+            'SELECT * FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?',
+            array($sensor_id)
+        );
+
+        //print_r($result);
+        $sensor = new Sensor();
+
+        if ($s != null) {
+            $sensor->setSensorId($s["sensor_id"]);
+            $sensor->setTypeName($s["type_name"]);
+            $sensor->setModelId($s["model_id"]);
+            $sensor->setInsDate($s["installed_date"]);
+            $sensor->setTMin($s["threshold_min"]);
+            $sensor->setTMax($s["threshold_max"]);
+            $sensor->setLocId($s["location_id"]);
+
+        } else {
+            return false;
+        }
+
+        return $sensor;
+    }
+
+    public function findSensors(Sensor$sensor)
+    {
+        $result = $this->connection->executeQuery('SELECT * FROM sensor  NATURAL JOIN sensor_model WHERE model_id = ? AND type_name = ? AND location_id = ? AND installed_date BETWEEN ? AND ? AND sensor_id LIKE ?'  ,
+            array($sensor->getModelId(), $sensor->getTypeName() , $sensor->getLocId(), $sensor-> getInsDate()->format('Y-m-d') , $sensor->getInsBefore()->format('Y-m-d') , '%'.$sensor->getSensorId().'%' ,));
+        $result = $result->fetchAll();
+
+        //print_r($result);
+        $sensors[] = new Sensor();
+
+        foreach ($result as $s) {
+            if ($s != null) {
+                $sensor = new Sensor();
+                $sensor->setSensorId($s["sensor_id"]);
+                $sensor->setTypeName($s["type_name"]);
+                $sensor->setModelId($s["model_id"]);
+                $sensor->setInsDate($s["installed_date"]);
+                $sensor->setLocId($s["location_id"]);
+                $sensors[] = $sensor;
+            }
+        }
+
+        return $sensors;
+    }
+
+    public function sensorAddAction(Sensor $sensor)
+    {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('INSERT INTO sensor (sensor_id ,threshold_min , threshold_max , location_id, type_name , model_id , installed_date ) VALUES (?,?,?,?, ?, ?, ?)');
+
+            $statement->bindValue(1, $sensor->getSensorId());
+            $statement->bindValue(2, $sensor->getTMin());
+            $statement->bindValue(3, $sensor->getTMax());
+            $statement->bindValue(4, $sensor->getLocId());
+            $statement->bindValue(5, $sensor->getTypeName());
+            $statement->bindValue(6, $sensor->getModelId());
+            $statement->bindValue(7, $sensor->getInsDate()->format('Y-m-d'));
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
     /**
      * Created by Shehan
      * @param $locationId
@@ -113,62 +193,6 @@ class SensorController extends  Controller{
         //print_r($sensorArray);
 
         return $sensorDetailArray;
-    }
-
-
-    /**
-     * Created by nadheesh
-     * Modified by Shehan
-     * @param $sensor_id
-     * @return Sensor|bool
-     */
-    public function searchSensor($sensor_id)
-    {
-        $s = $this->connection->fetchAssoc(
-            'SELECT * FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?',
-            array($sensor_id)
-        );
-
-        //print_r($result);
-        $sensor = new Sensor();
-
-        if ($s != null) {
-            $sensor->setSensorId($s["sensor_id"]);
-            $sensor->setTypeName($s["type_name"]);
-            $sensor->setModelId($s["model_id"]);
-            $sensor->setInsDate($s["installed_date"]);
-            $sensor->setTMin($s["threshold_min"]);
-            $sensor->setTMax($s["threshold_max"]);
-            $sensor->setLocId($s["location_id"]);
-
-        } else {
-            return false;
-        }
-
-        return $sensor;
-    }
-
-    public function sensorAddAction(Sensor $sensor)
-    {
-        $this->connection->beginTransaction();
-
-        try{
-            $statement = $this->connection->prepare('INSERT INTO sensor (sensor_id ,threshold_min , threshold_max , location_id, type_name , model_id , installed_date ) VALUES (?,?,?,?, ?, ?, ?)');
-
-            $statement->bindValue(1, $sensor->getSensorId());
-            $statement->bindValue(2, $sensor->getTMin());
-            $statement->bindValue(3, $sensor->getTMax());
-            $statement->bindValue(4, $sensor->getLocId());
-            $statement->bindValue(5, $sensor->getTypeName());
-            $statement->bindValue(6, $sensor->getModelId());
-            $statement->bindValue(7, $sensor->getInsDate()->format('Y-m-d'));
-
-            $statement->execute();
-            $this->connection->commit();
-        } catch(Exception $e) {
-            $this->connection->rollBack();
-            // throw $e;
-        }
     }
 
 
