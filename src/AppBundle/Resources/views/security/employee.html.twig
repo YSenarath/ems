@@ -10,10 +10,15 @@
 {# {% block nevigationbar %} {% endblock %} #}
 
 {% block body %}
-    <h1>Register</h1>
-
+    <h1>Employee</h1>
     <dev class="container-fluid">
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            {% for flash_message in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        </div>
         <div class="col-md-6">
             {{ form_start(form) }}
             {{ form_widget(form) }}

@@ -171,7 +171,6 @@ class DatabaseUser implements UserInterface, EquatableInterface
 
     public function getRoleId()
     {
-        // TODO: Implement getRoleId() method.
         return $this->roleId;
     }
 

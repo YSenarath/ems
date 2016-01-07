@@ -32,8 +32,6 @@ class LocationType extends AbstractType
             ->add('latitude', TextType::class, array('label' => 'Latitude' ))
             ->add('area_code', ChoiceType::class, array('label' => 'Area','choices'=>$areas ))
             ->add('submit', SubmitType::class, array('label' => 'Add',));
-
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
