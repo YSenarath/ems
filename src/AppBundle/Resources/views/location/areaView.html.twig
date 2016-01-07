@@ -8,7 +8,7 @@
 {% block body %}
     <div class="container">
         <div id="header">
-            <h3>Locations</h3>
+            <h3>{{ areaView }}</h3>
             <hr>
         </div>
         <div class="row">
@@ -18,22 +18,27 @@
                         <th>Address</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 {% for loc in locations %}
                     <tbody>
                         <tr>
-                            <td>{{ loc.getAddress }}</td>
+                            <td><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
                             <td>{{ loc.getLongitude }}</td>
                             <td>{{ loc.getLatitude }}</td>
+                            <th><button type="button" class="btn btn-primary btn-xs"
+                                        onclick="location.href=
+                                        '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'
+                                        ">Change</button></th>
                         </tr>
                     </tbody>
                 {% endfor %}
             </table>
         </div>
 
-        <div>
-            <div id="map" style=" height: 400px;width: 600px;">
+        <div class="row">
+            <div class="center-block col-md-4" id="map" style=" height: 400px;width: 600px;">
                 <script>
                     var map;
                     function initMap() {
@@ -48,8 +53,12 @@
                         var $lati = {{ loc.getLatitude()|json_encode|raw }};
                         var marker = new google.maps.Marker({
                             position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                            url: '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}',
                             map: map,
                             title: $title
+                        });
+                        google.maps.event.addListener(marker, 'click', function() {
+                            window.location.href = this.url;  //changed from markers[i] to this
                         });
                         {% endfor %}
                     }

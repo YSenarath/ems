@@ -101,6 +101,7 @@ class LocationActionController extends Controller
                 'locations' => $locationArray,
                 'area_longitude' => $area->getCenterLongitude(),
                 'area_latitude' => $area->getCenterLatitude(),
+                'areaView' => $viewArea,
             )
         );
     }
