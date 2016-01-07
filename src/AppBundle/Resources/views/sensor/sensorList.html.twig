@@ -2,6 +2,9 @@
 
 {% block otherstylesheets %}
     <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
 {% endblock %}
 
 
@@ -17,10 +20,8 @@
             <hr>
 
         </div>
-        <div class="row">
 
-        </div>
-        <div class="row">
+        <div class="container" id="sensorListContainer">
             <table class="table table-striped sortable">
                 <tr class="customHeader">
                     <th>No</th>

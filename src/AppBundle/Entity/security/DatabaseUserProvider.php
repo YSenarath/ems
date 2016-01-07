@@ -9,7 +9,6 @@
 
 namespace AppBundle\Entity\security;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -31,20 +30,10 @@ class DatabaseUserProvider implements UserProviderInterface
         // TODO: Implement loadUserByUsername() method.
         $userController = new UserController($this->connection);
 
-        $userData = $userController->userSearchAction($username);
+        $userData = $userController->searchUser($username);
 
         if ($userData) {
-            $id = $userData['employee_id'];
-            $password = $userData['password'];
-            $privilege_level = $userData['privilege_level'];
-            $roles = Array();
-            if ($privilege_level == 0)
-                $roles[] = "ROLE_ADMIN";
-            elseif ($privilege_level == 1)
-                $roles[] = "ROLE_MNGR";
-            else
-                $roles[] = 'ROLE_USER';
-            return new DatabaseUser($id, $username, $password, $roles);
+            return $userData;
         }
 
         throw new UsernameNotFoundException(
@@ -55,7 +44,6 @@ class DatabaseUserProvider implements UserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        // TODO: Implement refreshUser() method.
         if (!$user instanceof DatabaseUser) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
@@ -67,7 +55,6 @@ class DatabaseUserProvider implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        // TODO: Implement supportsClass() method.
         return $class === 'AppBundle\Entity\security\DatabaseUser';
     }
 }
