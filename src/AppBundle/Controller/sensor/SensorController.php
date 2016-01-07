@@ -8,6 +8,7 @@
  */
 namespace AppBundle\Controller\sensor;
 
+use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Sensor;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -91,26 +92,27 @@ class SensorController extends  Controller{
             'SELECT sensor_id,type_name,installed_date,manufacturer,unit FROM sensor,sensor_model WHERE location_id=? AND sensor.model_id=sensor_model.model_id ORDER BY sensor_id',
             array($locationId)
         );
+
         $result = $result->fetchAll();
-        $sensorArray = array();
+        $sensorDetailArray = array();
 
         foreach ($result as $a) {
             if ($a != null) {
                 $sensor = new Sensor();
-
+                $model=new Model();
                 $sensor->setSensorId($a["sensor_id"]);
                 $sensor->setTypeName($a["type_name"]);
                 $sensor->setInsDate($a["installed_date"]);
-                $sensor->setManufacturer($a["manufacturer"]);
-                $sensor->setUnit($a["unit"]);
+                $model->setManufacture($a["manufacturer"]);
+                $model->setUnit($a["unit"]);
 
-                $sensorArray[] = $sensor;
+                $sensorDetailArray[] = array('sensor'=>$sensor,'model'=>$model);
             }
         }
 
         //print_r($sensorArray);
 
-        return $sensorArray;
+        return $sensorDetailArray;
     }
 
 

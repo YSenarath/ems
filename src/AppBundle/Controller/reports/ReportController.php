@@ -4,6 +4,7 @@ namespace AppBundle\Controller\reports;
 
 use AppBundle\Controller\location;
 use AppBundle\Controller\location\LocationController;
+use AppBundle\Controller\location\AreaController;
 use AppBundle\Controller\sensor\SensorController;
 use AppBundle\Entity\report\AirQlyReading;
 use AppBundle\Entity\report\Area;
@@ -21,7 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\SubType;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -200,7 +200,7 @@ class ReportController extends Controller
 
         $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
 
-        $sensorArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
+        $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
 
         //print_r($sensorArray);
 
@@ -209,16 +209,19 @@ class ReportController extends Controller
             array(
                 'areaName' => $viewArea,
                 'location' => $locationDetail,
-                'sensorDetail' => $sensorArray,
+                'sensorDetails' => $sensorDetailArray,
             )
         );
     }
 
     /**
-     * @Route("/reports/areas/{viewArea}/{viewLocation}/{sensorId}", name="reportSensorReadings")
+     * @Route("/reports/view_sensor_readings", name="reportSensorReadings")
      */
-    public function reportSensorReadingsAction(Request $request, $sensorId)
+    public function reportSensorReadingsAction(Request $request)
     {
+
+        $sensorId = $request->query->get('id');
+
         $connection = $this->get('database_connection');
 
         $sensorController = new SensorController($connection);
@@ -518,7 +521,6 @@ class ReportController extends Controller
             )
         );
     }
-
 
     /**
      * @Route("/reports/summery", name="reportSummery")

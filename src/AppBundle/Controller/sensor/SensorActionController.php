@@ -98,9 +98,26 @@ class SensorActionController extends  Controller
     public function findAction(Request $request)
     {
         $sensor = new Sensor();
+        $sensor->setInsDate((new \DateTime('today')));
+        $sensor->setInsBefore((new \DateTime('today')));
+
+        $connection = $this->get('database_connection');
+
+        $modelController = new ModelController($connection);
+        $typeController = new TypeController($connection);
+        $locationController = new LocationController($connection);
+
+        $models = $modelController->getAllModelNames();
+        $types = $typeController->getAllTypeNames();
+        $locations = $locationController ->getAllLocationNames();
 
         // build the form
-        $form = $this->createForm(FindSensor::class, $sensor );
+        $form = $this->createForm(FindSensor::class, $sensor ,
+            array(
+                'models' => $models,
+                'types' => $types,
+                'locations' => $locations
+            ));
 
 
         //Handle submission (will only happen on POST)
@@ -108,14 +125,31 @@ class SensorActionController extends  Controller
 
         if ($form->isValid() && $form->isSubmitted()) {
 
+            //add sensor
+            $sensorController = new SensorController($connection);
 
+            if (!$sensorController->searchSensor($sensor->getSensorId())) {
+                if ($sensor->getTMax() > $sensor->getTMin()){
+                    $sensorController->sensorAddAction($sensor);
+                }else{
+                    printf("TMax <= TMin");
+                    return $this->redirectToRoute('add_sensor');
+                }
+
+            } else{
+                //---------------------------------------
+                //------implement later---------------
+                printf("The Sensor ID exists");
+                return $this->redirectToRoute('find_sensor');
+            }
             return $this->redirectToRoute('sensor_list');
         }
 
         return $this->render(
-            'AppBundle:sensor:findSensor.html.twig',
+            'AppBundle:sensor:addSensor.html.twig',
             array('form' => $form->createView())
         );
+
     }
 
     /**

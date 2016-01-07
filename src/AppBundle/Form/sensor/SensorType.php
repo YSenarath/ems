@@ -39,8 +39,8 @@ class SensorType extends AbstractType
         $builder
             ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
             ->add('loc_id', ChoiceType::class, array('label' => 'Location ID' , 'choices' => $locations))
-            ->add('type_name', ChoiceType::class, array('label' => 'Type' , 'choices' => $types))
-            ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'choices' => $models ))
+            ->add('type_name', ChoiceType::class,array('label' => 'Type' ,'placeholder'=>'--Select Type of the Sensor--', 'choices' => $types))
+            ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'placeholder'=>'--Select Model of the Sensor--','choices' => $models ))
             ->add('ins_date', DateType::class, array('label' => 'Installed Date',))
             ->add('t_min', NumberType::class, array('label' => 'Threshold Min'))
             ->add('t_max', NumberType::class, array('label' => 'Threshold Max'));
