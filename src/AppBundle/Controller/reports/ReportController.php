@@ -338,7 +338,6 @@ class ReportController extends Controller
                         'date_widget' => "choice",
                         'time_widget' => "choice",
                         'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
-                        'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
                     )
                 )
                 ->add(
@@ -350,7 +349,6 @@ class ReportController extends Controller
                         'date_widget' => "choice",
                         'time_widget' => "choice",
                         'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
-                        'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
                     )
                 )
                 ->add('Show', SubmitType::class, array('label' => 'Show'))
