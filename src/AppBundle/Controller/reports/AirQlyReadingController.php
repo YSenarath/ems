@@ -82,7 +82,7 @@ class AirQlyReadingController extends Controller
     public function airQtlReadingsSearchAction($sensor_id, $noOfReadings, $startDate, $endDate)
     {
         $quarry = $this->connection->executeQuery(
-            'SELECT timestamp,air_qty_percentage,oxygen_percentage,co2_percentage FROM air_qty WHERE sensor_id = ? AND date(timestamp) BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
+            'SELECT timestamp,air_qty_percentage,oxygen_percentage,co2_percentage FROM air_qty WHERE sensor_id = ? AND timestamp BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
             array($sensor_id, $startDate, $endDate)
         );
         $lastReadings = $quarry->fetchAll();

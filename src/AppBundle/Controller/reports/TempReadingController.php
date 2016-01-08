@@ -87,9 +87,10 @@ class TempReadingController extends Controller
     {
         //print_r($sensor_id);
         $quarry = $this->connection->executeQuery(
-            'SELECT timestamp,temp_value  FROM temp WHERE sensor_id = ? AND date(timestamp) BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
+            'SELECT timestamp,temp_value  FROM temp WHERE sensor_id = ? AND timestamp BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
             array($sensor_id, $startDate, $endDate)
         );
+//        print_r($quarry);
         //$lastReading=$lastReading->();
         $lastReadings = $quarry->fetchAll();
         $tempReadings = array();

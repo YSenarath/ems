@@ -81,7 +81,7 @@ class HumidityReadingController extends Controller
     public function humidityReadingsSearchAction($sensor_id, $noOfReadings, $startDate, $endDate)
     {
         $quarry = $this->connection->executeQuery(
-            'SELECT timestamp,humidity_value FROM humidity WHERE sensor_id = ? AND date(timestamp) BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
+            'SELECT timestamp,humidity_value FROM humidity WHERE sensor_id = ? AND timestamp BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
             array($sensor_id, $startDate, $endDate)
         );
 
