@@ -303,7 +303,7 @@ class ReportController extends Controller
             ->add(
                 'noOfReadings',
                 IntegerType::class,
-                array('attr' => array('min' => 1, 'max' => 1000, 'style' => 'width: 400px'))
+                array('attr' => array('min' => 1, 'max' => 1000))
             )
             ->add(
                 'startDate',

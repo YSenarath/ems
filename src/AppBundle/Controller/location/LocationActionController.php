@@ -99,6 +99,9 @@ class LocationActionController extends Controller
             '@App/location/areaView.html.twig',
             array(
                 'locations' => $locationArray,
+                'area_longitude' => $area->getCenterLongitude(),
+                'area_latitude' => $area->getCenterLatitude(),
+                'areaView' => $viewArea,
             )
         );
     }

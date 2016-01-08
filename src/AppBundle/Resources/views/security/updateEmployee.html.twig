@@ -11,7 +11,7 @@
 
 {% block body %}
     <h1>Update Employee Data</h1>
-    <dev class="container-fluid">
+    <div class="container-fluid">
         <div class="col-md-2">
             {% for flash_message in app.session.flashbag.get('notice') %}
                 <div class="flash-notice">
@@ -24,5 +24,5 @@
             {{ form_widget(form) }}
             {{ form_end(form) }}
         </div>
-    </dev>
+    </div>
 {% endblock body %}
