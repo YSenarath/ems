@@ -87,7 +87,7 @@ class WindReadingController extends Controller
     public function windReadingsSearchAction($sensor_id, $noOfReadings, $startDate, $endDate)
     {
         $quarry = $this->connection->executeQuery(
-            'SELECT timestamp,wind_speed,direction FROM wind WHERE sensor_id = ? AND date(timestamp) BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
+            'SELECT timestamp,wind_speed,direction FROM wind WHERE sensor_id = ? AND timestamp BETWEEN ? AND ? ORDER BY timestamp DESC LIMIT '.$noOfReadings ,
             array($sensor_id, $startDate, $endDate)
         );
         $lastReadings = $quarry->fetchAll();

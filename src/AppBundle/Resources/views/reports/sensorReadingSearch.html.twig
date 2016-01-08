@@ -29,8 +29,21 @@
     <div class="container-fluid ">
 
         <div class="col-sm-4 col-md-offset-4 formContainer">
+            {#{{ form_start(form) }}#}
+            {#{{ form_widget(form) }}#}
+            {#{{ form_end(form) }}#}
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+
+            No of Readings  {{ form_widget(form.noOfReadings) }}
+            <br>
+            Start Date {{ form_widget(form.startDate.date) }}
+            <br>
+            Start time {{ form_widget(form.startDate.time) }}
+            <br>
+            End date{{ form_widget(form.endDate.date) }}
+            <br>
+            End time{{ form_widget(form.endDate.time) }}
+            <br>
             {{ form_end(form) }}
         </div>
     </div>

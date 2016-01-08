@@ -3,8 +3,8 @@
 namespace AppBundle\Controller\reports;
 
 use AppBundle\Controller\location;
-use AppBundle\Controller\location\LocationController;
 use AppBundle\Controller\location\AreaController;
+use AppBundle\Controller\location\LocationController;
 use AppBundle\Controller\sensor\SensorController;
 use AppBundle\Entity\report\AirQlyReading;
 use AppBundle\Entity\report\Area;
@@ -17,9 +17,10 @@ use AppBundle\Entity\report\TempReading;
 use AppBundle\Entity\report\WindReading;
 use AppBundle\Entity\sensor\Sensor;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\LineChart;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -297,7 +298,7 @@ class ReportController extends Controller
         //Create search form
         $srs = new SensorReadingSearcher();
         $srs->setNoOfReadings(50);
-        //$srs->setEndDate(new \DateTime('today'));
+        $srs->setEndDate(new DateTime('today'));
         // 'attr' => array(
         $form = $this->createFormBuilder($srs)
             ->add(
@@ -307,25 +308,26 @@ class ReportController extends Controller
             )
             ->add(
                 'startDate',
-                DateType::class,
+                DateTimeType ::class,
                 array(
                     'input' => 'datetime',
-                    'widget' => 'choice',
+//                    'widget' => 'choice',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
                     'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
                     'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
-                    'attr' => array('style' => 'width: 400px'),
                 )
             )
             ->add(
                 'endDate',
-                DateType::class,
+                DateTimeType::class,
                 array(
                     'input' => 'datetime',
-                    'widget' => 'choice',
-
+//                    'widget' => 'choice',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
                     'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
                     'months' => range(date('m', strtotime($startDate)), date('m', strtotime($endDate))),
-                    'attr' => array('style' => 'width: 400px'),
                 )
             )
             ->add('Show', SubmitType::class, array('label' => 'Show'))
@@ -339,8 +341,8 @@ class ReportController extends Controller
             $startDate = $form["startDate"]->getData();
             $endDate = $form["endDate"]->getData();
 
-            /* @var $startDate \DateTime */
-            /* @var $endDate \DateTime */
+//            /* @var $startDate \DateTime */
+//            /* @var $endDate \DateTime */
 
             $readings = array();
             /* @var $readings SensorReading[] */
@@ -349,8 +351,8 @@ class ReportController extends Controller
                     $readings = $tempController->tempReadingsSearchAction(
                         $sensor->getSensorId(),
                         $readingLimit,
-                        $startDate->format("Y-m-d"),
-                        $endDate->format("Y-m-d")
+                        $startDate->format("Y-m-d H:i:s"),
+                        $endDate->format("Y-m-d H:i:s")
                     );
                     /* @var $readings TempReading[] */
                     break;
@@ -358,8 +360,8 @@ class ReportController extends Controller
                     $readings = $airController->airQtlReadingsSearchAction(
                         $sensor->getSensorId(),
                         $readingLimit,
-                        $startDate->format("Y-m-d"),
-                        $endDate->format("Y-m-d")
+                        $startDate->format("Y-m-d H:i:s"),
+                        $endDate->format("Y-m-d H:i:s")
                     );
                     /* @var $readings AirQlyReading[] */
 
@@ -368,8 +370,8 @@ class ReportController extends Controller
                     $readings = $humidityController->humidityReadingsSearchAction(
                         $sensor->getSensorId(),
                         $readingLimit,
-                        $startDate->format("Y-m-d"),
-                        $endDate->format("Y-m-d")
+                        $startDate->format("Y-m-d H:i:s"),
+                        $endDate->format("Y-m-d H:i:s")
                     );
                     /* @var $readings HumidityReading[] */
 
@@ -378,8 +380,8 @@ class ReportController extends Controller
                     $readings = $pressureController->pressureReadingsSearchAction(
                         $sensor->getSensorId(),
                         $readingLimit,
-                        $startDate->format("Y-m-d"),
-                        $endDate->format("Y-m-d")
+                        $startDate->format("Y-m-d H:i:s"),
+                        $endDate->format("Y-m-d H:i:s")
                     );
                     /* @var $readings PressureReading[] */
 
@@ -388,8 +390,8 @@ class ReportController extends Controller
                     $readings = $windController->windReadingsSearchAction(
                         $sensor->getSensorId(),
                         $readingLimit,
-                        $startDate->format("Y-m-d"),
-                        $endDate->format("Y-m-d")
+                        $startDate->format("Y-m-d H:i:s"),
+                        $endDate->format("Y-m-d H:i:s")
                     );
                     /* @var $readings WindReading[] */
                     break;
@@ -488,7 +490,7 @@ class ReportController extends Controller
             $lineChart->getOptions()->getHAxis()->setSlantedText(true);
             $lineChart->getOptions()->getHAxis()->setShowTextEvery(1);
 
-           // $lineChart->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+            // $lineChart->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
             $lineChart->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
             $lineChart->getOptions()->getVAxis()->getTextStyle()->setBold(true);
 
