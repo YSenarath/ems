@@ -2,8 +2,10 @@
 
 {% block otherstylesheets %}
     <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/tableSearch.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
 
 {% endblock %}
 
@@ -14,15 +16,25 @@
         Sensor
     </h1>
     <div class="container">
-        <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <label for="search">
+                    <strong>Enter keyword to search </strong>
+                </label>
+                <input type="text" id="search">
+                <label>e.g. </label>
+            </div>
+            <div class="row">
+                *Please Click the table column header to sort by.
+                <hr>
+            </p>
+        </div>
 
-            *Please Click the table column header to sort by.
-            <hr>
 
         </div>
 
         <div class="container component" id="tableContainer">
-            <table class="table sortable">
+            <table class="table sortable" id="tblData">
                 <tr class="customHeader">
                     <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                     <th class="col-md-2">Sensor ID</th>
