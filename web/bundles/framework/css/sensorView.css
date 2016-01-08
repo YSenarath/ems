@@ -1,0 +1,68 @@
+h3 {
+    padding: 15px;
+    color: #009688;
+}
+
+table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+th{
+
+    border-bottomr:1px solid #9d9d9d;
+    border-top:1px solid #9d9d9d;
+    background-color: #009688;
+    font-size: 16px;
+}
+td, th {
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+}
+
+td {
+    color: #FF5722;
+    background: #F5F5F5;
+    text-align: left;
+    padding: 5px;
+}
+
+/* Cells in even rows (2,4,6...) are one color */
+tr {
+/ / color:;
+    text-align: center;
+    background: #F5F5F5;
+    padding: 5px;
+}
+
+#areaMean {
+
+}
+#errorMsg{
+    margin: 10px 0px;
+    padding:12px;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+
+.tableScrollable{
+    margin-bottom: 2% ;
+    /*height: 65vh;*/
+    /*overflow-y: scroll;*/
+}
+
+/*background: #FEFEFE;*/
+
+/*tr td:hover {*/
+/*background: #666;*/
+/*color: #FFF;*/
+/*}*/
+
+/* Hover cell effect! */
+
+

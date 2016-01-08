@@ -38,7 +38,7 @@ class SensorActionController extends  Controller
         $connection = $this->get('database_connection');
         $sensorId = $request->query->get('id');
         $sensorController = new SensorController($connection);
-        $sensor=$sensorController ->searchSensor($sensorId);
+        $sensor=$sensorController ->getSensor($sensorId);
 
         if(!$sensor){
             return $this->render('AppBundle:sensor:sensorNotFound.html.twig');

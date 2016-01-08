@@ -30,48 +30,25 @@ class Sensor
     protected $model_id;
     protected $ins_date;
     protected $ins_before;
-    /**
-     * Created by Shehan
-     */
-    private $manufacturer;
-    private $unit;
-
+    protected $locAddress;
 
     /**
      * @return mixed
      */
-    public function getManufacturer()
+    public function getLocAddress()
     {
-        return $this->manufacturer;
+        return $this->locAddress;
     }
 
     /**
-     * @param mixed $manufacturer
+     * @param mixed $locAddress
      */
-    public function setManufacturer($manufacturer)
+    public function setLocAddress($locAddress)
     {
-        $this->manufacturer = $manufacturer;
+        $this->locAddress = $locAddress;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
 
-    /**
-     * @param mixed $unit
-     */
-    public function setUnit($unit)
-    {
-        $this->unit = $unit;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getInsBefore()
     {
         return $this->ins_before;

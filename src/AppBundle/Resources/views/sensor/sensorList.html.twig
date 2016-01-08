@@ -28,8 +28,8 @@
                     <th class="col-md-2">Sensor ID</th>
                     <th class="col-md-2">Sensor Type</th>
                     <th class="col-md-2">Sensor Model</th>
-                    <th class="col-md-2">Sensor Location</th>
-                    <th class="col-md-3">Installed Date</th>
+                    <th class="col-md-3">Sensor Location</th>
+                    <th class="col-md-2">Installed Date</th>
 
                 </tr>
 
@@ -53,13 +53,13 @@
                             {% endif %}
 
                             {% if sensor.getLocId|trim is not empty %}
-                                <td class="col-md-2"> {{ sensor.getLocId }}</td>
+                                <td class="col-md-3"> {{ sensor.getLocAddress }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
 
                             {% if sensor.getInsDate|trim is not empty %}
-                                <td class="col-md-3">{{ sensor.getInsDate }}</td>
+                                <td class="col-md-2">{{ sensor.getInsDate }}</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
