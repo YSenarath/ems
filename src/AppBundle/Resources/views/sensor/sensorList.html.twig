@@ -13,77 +13,79 @@
 {% block body %}
 
     <h1 align="center">
-        Sensor
+        Installed Sensors
     </h1>
     <div class="container">
-        <div class="container-fluid">
-            <div class="row">
+        <div >
+            <div class="row" id= "searchContainer">
                 <label for="search">
                     <strong>Enter keyword to search </strong>
                 </label>
                 <input type="text" id="search">
-                <label>e.g. </label>
+                <label>e.g.  S12, P.O. Box 271, 2016</label>
             </div>
+
             <div class="row">
-                *Please Click the table column header to sort by.
-                <hr>
-            </p>
+                <div  id="tableContainer">
+                    <table class="table sortable" id="tblData">
+                        <tr class="customHeader">
+                            <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                            <th class="col-md-2">Sensor ID</th>
+                            <th class="col-md-2">Sensor Type</th>
+                            <th class="col-md-2">Sensor Model</th>
+                            <th class="col-md-3">Sensor Location</th>
+                            <th class="col-md-2">Installed Date</th>
+
+                        </tr>
+
+                        {% for sensor in sensors  %}
+                            <tr onclick="document.location = '{{ path('viewSensor') }}?id={{ sensor.getSensorId}}';">
+                                {% if sensor.getSensorId|trim is not empty %}
+                                    <td class="col-md-1">{{ loop.index-1 }}</td>
+                                    <td class="col-md-2"><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
+
+                                    {% if sensor.getTypeName|trim is not empty %}
+
+                                        <td class="col-md-2">{{ sensor.getTypename }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getModelId|trim is not empty %}
+                                        <td class="col-md-2">{{ sensor.getModelId }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getLocId|trim is not empty %}
+                                        <td class="col-md-3"> {{ sensor.getLocAddress }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getInsDate|trim is not empty %}
+                                        <td class="col-md-2">{{ sensor.getInsDate }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <p>*Please Click the table column header to sort by.</p>
+            </div>
         </div>
 
-
-        </div>
-
-        <div class="container component" id="tableContainer">
-            <table class="table sortable" id="tblData">
-                <tr class="customHeader">
-                    <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
-                    <th class="col-md-2">Sensor ID</th>
-                    <th class="col-md-2">Sensor Type</th>
-                    <th class="col-md-2">Sensor Model</th>
-                    <th class="col-md-3">Sensor Location</th>
-                    <th class="col-md-2">Installed Date</th>
-
-                </tr>
-
-                {% for sensor in sensors  %}
-                    <tr>
-                        {% if sensor.getSensorId|trim is not empty %}
-                            <td class="col-md-1">{{ loop.index-1 }}</td>
-                            <td class="col-md-2"><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
-
-                            {% if sensor.getTypeName|trim is not empty %}
-
-                                <td class="col-md-2">{{ sensor.getTypename }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-                            {% if sensor.getModelId|trim is not empty %}
-                                <td class="col-md-2">{{ sensor.getModelId }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-                            {% if sensor.getLocId|trim is not empty %}
-                                <td class="col-md-3"> {{ sensor.getLocAddress }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-                            {% if sensor.getInsDate|trim is not empty %}
-                                <td class="col-md-2">{{ sensor.getInsDate }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
 
     </div>
+
 
 
 
