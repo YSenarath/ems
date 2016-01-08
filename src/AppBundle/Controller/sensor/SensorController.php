@@ -8,6 +8,7 @@
  */
 namespace AppBundle\Controller\sensor;
 
+use AppBundle\Entity\location\Location;
 use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Sensor;
 use Doctrine\DBAL\Connection;
@@ -26,7 +27,7 @@ class SensorController extends  Controller{
 
     public function getAllSensors()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM sensor  ORDER BY installed_date DESC');
+        $result = $this->connection->executeQuery('SELECT * FROM sensor NATURAL JOIN location ORDER BY installed_date DESC');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -42,6 +43,7 @@ class SensorController extends  Controller{
                 $sensor->setTMin($s["threshold_min"]);
                 $sensor->setTMax($s["threshold_max"]);
                 $sensor->setLocId($s["location_id"]);
+                $sensor->setLocAddress($s["address"]);
                 $sensors[] = $sensor;
             }
         }
@@ -75,6 +77,46 @@ class SensorController extends  Controller{
             $sensor->setTMin($s["threshold_min"]);
             $sensor->setTMax($s["threshold_max"]);
             $sensor->setLocId($s["location_id"]);
+
+        } else {
+            return false;
+        }
+
+        return $sensor;
+    }
+
+    public function getSensor($sensor_id)
+    {
+        $s = $this->connection->fetchAssoc(
+            'SELECT * FROM (((SELECT * FROM sensor WHERE  sensor_id = ?)s NATURAL JOIN location) NATURAL JOIN sensor_model) NATURAL JOIN sensor_type',
+            array($sensor_id)
+        );
+
+        //print_r($result);
+        $sensor = new Sensor();
+        $model = new Model();
+        $location = new Location();
+
+        if ($s != null) {
+
+            $model->setModelId($s["model_id"]);
+            $model->setManufacture($s["manufacturer"]);
+            $model->setDetRange($s["detection_range"]);
+            $model->setUnit($s["unit"]);
+
+            $location->setLocId($s["location_id"]);
+            $location->setAreaCode($s["area_code"]);
+            $location->setAddress($s["address"]);
+            $location->setLatitude($s["latitude"]);
+            $location->setLongitude($s["longitude"]);
+
+            $sensor->setSensorId($s["sensor_id"]);
+            $sensor->setTypeName($s["type_name"]);
+            $sensor->setModelId($model);
+            $sensor->setInsDate($s["installed_date"]);
+            $sensor->setTMin($s["threshold_min"]);
+            $sensor->setTMax($s["threshold_max"]);
+            $sensor->setLocId($location);
 
         } else {
             return false;

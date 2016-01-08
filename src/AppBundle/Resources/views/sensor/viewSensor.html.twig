@@ -1,134 +1,152 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
-    <style>
-
-        h3 {
-            padding: 15px;
-            color: #009688;
-        }
-
-        table {
-            color: #333;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 20px;
-            width: 25%;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        td, th {
-            border: 1px solid transparent; /* No more visible border */
-            height: 30px;
-            transition: all 0.3s; /* Simple transition for hover effect */
-        }
-
-        td {
-            color: #FF5722;
-            background: #F5F5F5;
-            text-align: left;
-            padding: 5px;
-        }
-
-        /* Cells in even rows (2,4,6...) are one color */
-        tr {
-        / / color:;
-            text-align: center;
-            background: #F5F5F5;
-            padding: 5px;
-        }
-
-        #areaMean {
-
-        }
-        #errorMsg{
-            margin: 10px 0px;
-            padding:12px;
-            color: #D8000C;
-            background-color: #FFBABA;
-        }
-
-        /*background: #FEFEFE;*/
-
-        /*tr td:hover {*/
-        /*background: #666;*/
-        /*color: #FFF;*/
-        /*}*/
-
-        /* Hover cell effect! */
-
-    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorView.css') }}"/>
 
 {% endblock %}
 
 {% block body %}
 
-    <h1 align="center">
-        Sensor
-    </h1>
-    <div class="container">
-
-
+    {% if sensor.getSensorId|trim is not empty %}
         <div>
-            <h3>
-                Sensor : {{sensor.getSensorId}}
-            </h3>
-            <hr>
-        </div>
-        <div class="row">
-            <table class="table table-striped" >
-                 <tr>
-                     <td>Sensor Type</td>
-                     {% if sensor.getTypeName|trim is not empty %}
-                         <td>{{sensor.getTypeName }}</td>
-                     {% else %}
-                         <td >Not Set</td>
-                     {% endif %}
-                 </tr>
-                <tr>
-                    <td>Sensor Model</td>
-                    {% if sensor.getModelId|trim is not empty %}
-                        <td>{{sensor.getModelId }}</td>
-                    {% else %}
-                        <td >Not Set</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Sensor Location</td>
-                    {% if sensor.getLocId|trim is not empty %}
-                        <td>{{sensor.getLocId}}</td>
-                    {% else %}
-                        <td >Not Set</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Installation Date</td>
-                    {% if sensor.getInsDate|trim is not empty %}
-                        <td>{{sensor.getInsDate }}</td>
-                    {% else %}
-                        <td >Not Set</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Threshold Max</td>
-                    {% if sensor.getTMax|trim is not empty %}
-                        <td>{{sensor.getTMax }}</td>
-                    {% else %}
-                        <td >Not Set</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Threshold Min</td>
-                    {% if sensor.getTMin|trim is not empty %}
-                        <td>{{sensor.getTMin }}</td>
-                    {% else %}
-                        <td >Not Set</td>
-                    {% endif %}
-                </tr>
-            </table>
-        </div>
+            <div class="container">
+                <h3>
+                    Sensor : {{sensor.getSensorId}}
+                </h3>
+                <hr>
+            </div>
+            <div class="container">
 
-    </div>
+                <div class="row tableScrollable">
+                    <table class="table table-striped" >
+                        <tr>
+                            <th>
+                                General Details
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        <tr>
+                            <td>Sensor Type</td>
+                            {% if sensor.getTypeName|trim is not empty %}
+                                <td>{{sensor.getTypeName }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+
+                        <tr>
+                            <td>Installation Date</td>
+                            {% if sensor.getInsDate|trim is not empty %}
+                                <td>{{sensor.getInsDate }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Threshold Max</td>
+                            {% if sensor.getTMax|trim is not empty %}
+                                <td>{{sensor.getTMax }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Threshold Min</td>
+                            {% if sensor.getTMin|trim is not empty %}
+                                <td>{{sensor.getTMin }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+
+                        <tr>
+                            <th>
+                                Sensor Model Details
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Model ID</td>
+                            {% if sensor.getModelId.getModelId|trim is not empty %}
+                                <td>{{ sensor.getModelId.getModelId }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Manufacture</td>
+                            {% if sensor.getModelId.getManufacture|trim is not empty %}
+                                <td>{{ sensor.getModelId.getManufacture }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Detection Range</td>
+                            {% if sensor.getModelId.getDetRange|trim is not empty %}
+                                <td>{{ sensor.getModelId.getDetRange }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Primary Measuring Unit</td>
+                            {% if sensor.getModelId.getUnit|trim is not empty %}
+                                <td>{{ sensor.getModelId.getUnit }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>
+                                Sensor Location Details
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Location ID</td>
+                            {% if sensor.getLocId.getLocId|trim is not empty %}
+                                <td>{{ sensor.getLocId.getLocId }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Location Address</td>
+                            {% if sensor.getLocId.getAddress|trim is not empty %}
+                                <td>{{ sensor.getLocId.getAddress }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Sensor Coordinates</td>
+                            {% if ((sensor.getLocId.getLongitude|trim is not empty) and (sensor.getLocId.getLatitude|trim is not empty) ) %}
+                                <td>{{ sensor.getLocId.getLongitude }} , {{ sensor.getLocId.getLatitude }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="container">
+                    <a href="{{ path('reportSensorReadings') }}?id={{sensor.getSensorId}}">
+                        View Readings
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+       <div>
+           Error : sensor not found
+       </div>
+    {% endif %}
+
+
 
 
 
