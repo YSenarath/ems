@@ -298,7 +298,7 @@ class ReportController extends Controller
         //Create search form
         $srs = new SensorReadingSearcher();
         $srs->setNoOfReadings(50);
-        $srs->setEndDate(new DateTime('today'));
+        $srs->setEndDate(new DateTime());
         // 'attr' => array(
         $form = $this->createFormBuilder($srs)
             ->add(
