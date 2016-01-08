@@ -34,7 +34,7 @@ thead ,th {
     border:1px solid #9d9d9d
 }
 
-table ,tr {
+table ,tr ,td{
     border:1px solid #9d9d9d;
 
 }
@@ -48,9 +48,10 @@ thead, tbody tr {
     width:100%;
     table-layout:fixed;/* even columns width , fix width of table too*/
 }
-/*thead {*/
-    /*width: calc( 100% - 0 )!* scrollbar is average 1em/16px width, remove it from thead width *!*/
-/*}*/
+
+thead {
+    width: calc( 100% - 19px )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
 
 #tableContainer{
     margin-right: 0;
