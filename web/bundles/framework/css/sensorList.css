@@ -24,14 +24,24 @@
     cursor: pointer;
 }
 
+tbody tr:hover {
+    background-color: rgba(129, 208, 177, .3);
+}
 
+th{
+
+    border-bottomr:1px solid #9d9d9d;
+    border-top:1px solid #9d9d9d;
+    background-color: #009688;
+    font-size: 15px;
+}
 
 thead ,th {
-    border:1px solid #9d9d9d
+    border:1px solid #5E976E;
 }
 
 table ,tr ,td{
-    border:1px solid #9d9d9d;
+    border:1px solid #5E976E;
 
 }
 tbody {
@@ -39,6 +49,21 @@ tbody {
     height:60vh;
     overflow:auto;
 }
+
+table a{
+    color: #337ab7;
+    background: transparent;
+    text-align: left;
+    padding: 10px;
+}
+
+td {
+    color: #FF5722;
+    background: #F5F5F5;
+    text-align: left;
+    padding: 7px;
+}
+
 thead, tbody tr {
     display:table;
     width:100%;
