@@ -1,6 +1,8 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportSensorReadingsStyle.css') }}"/>
     <style>
 
@@ -8,22 +10,9 @@
 
 {% endblock %}
 {% block body %}
-    <div id="headings">
-        <h2 align="center">
-            Sensor {{ sensor.sensorId }}
-            (
-            {% if sensor.getTypeName()=='air_qty' %} {#Air qty#}
-                Air Quality
-            {% elseif sensor.getTypeName()=='temp' %} {#Temp#}
-                Temperature
-            {% elseif sensor.getTypeName()=='pressure' %} {#Pressure#}
-                Pressure
-            {% elseif sensor.getTypeName()=='wind' %} {#Wind#}
-                Wind
-            {% elseif sensor.getTypeName()=='humidity' %} {#Humidity#}
-                Humidity
-            {% endif %}
-            )
+    <div id="headings" align="center">
+        <h2 >
+            Sensor : {{ sensor.sensorId }} ({{ sensor.getTypeName() }})
         </h2>
     </div>
     {% if readings[0] is defined %}

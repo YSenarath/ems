@@ -1,13 +1,15 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportLocationViewStyle.css') }}"/>
     <style>
     </style>
 {% endblock %}
 
 {% block body %}
-    <div id="headings">
-        <h1 id="loctionHeading" align="center">
+    <div id="headings" align="center">
+        <h1 id="loctionHeading">
             {{ location.getAddress() }}, {{ areaName }}
         </h1>
         <div id="locationCoordinates">
@@ -40,17 +42,7 @@
                             <td id="sensorIdLink" title="view sensor"><a
                                         href="{{ path('viewSensor') }}?id={{ sensorDetail['sensor'].getSensorId() }}">{{ sensorDetail['sensor'].getSensorId() }}</a>
                             </td>
-                            {% if sensorDetail['sensor'].getTypeName()=='air_qty' %} {#Air qty#}
-                                <td>Air Quality</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='temp' %} {#Temp#}
-                                <td>Temperature</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='pressure' %} {#Pressure#}
-                                <td>Pressure</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='wind' %} {#Wind#}
-                                <td>Wind</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='humidity' %} {#Humidity#}
-                                <td>Humidity</td>
-                            {% endif %}
+                            <td>{{ sensorDetail['sensor'].getTypeName() }}</td>
                             <td>{{ sensorDetail['model'].getManufacture() }}</td>
                             {% if sensorDetail['model'].getUnit()=='percent' %} {#Air qty#}
                                 <td>%</td>

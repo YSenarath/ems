@@ -110,14 +110,14 @@ class ReportController extends Controller
             /* @var $sensorDetail Sensor */
             // print_r($sensorDetail);
             switch ($sensorDetail->getTypeName()) {
-                case "temp"://temp
+                case "Temperature"://temp
                     $lastReading = ($tempController->tempLastReadingSearchAction($sensorDetail->getSensorId()));
                     /* @var $lastReading TempReading */
                     if ($lastReading != null) {
                         $areaTemp += $lastReading->getTempValue();
                     }
                     break;
-                case "air_qty"://air
+                case "Air Quality"://air
                     $lastReading = $airController->airQtlLastReadingSearchAction($sensorDetail->getSensorId());
 
                     /* @var $lastReading AirQlyReading */
@@ -127,21 +127,21 @@ class ReportController extends Controller
                         $areaAirCo2 += $lastReading->getCo2Percentage();
                     }
                     break;
-                case  "humidity"://humidity
+                case  "Humidity"://humidity
                     $lastReading = $humidityController->humidityLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading HumidityReading */
                     if ($lastReading != null) {
                         $areaHumidity += $lastReading->getHumidityValue();
                     }
                     break;
-                case "pressure"://pressure
+                case "Pressure"://pressure
                     $lastReading = $pressureController->pressureLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading PressureReading */
                     if ($lastReading != null) {
                         $areaPressure += $lastReading->getPressureValue();
                     }
                     break;
-                case "wind"://wind
+                case "Wind"://wind
                     $lastReading = $windController->windLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading WindReading */
                     if ($lastReading != null) {
@@ -243,7 +243,7 @@ class ReportController extends Controller
         /* @var $sensor Sensor */
         // print_r($sensorDetail);
         switch ($sensor->getTypeName()) {
-            case "temp"://temp
+            case "Temperature"://temp
                 $firstReading = ($tempController->tempFirstReadingSearchAction($sensor->getSensorId()));
                 $lastReading = ($tempController->tempLastReadingSearchAction($sensor->getSensorId()));
                 /* @var $firstReading TempReading */
@@ -257,7 +257,7 @@ class ReportController extends Controller
                     $endDate = date('Y-m-d H:i:s', strtotime($lastReading->getTimestamp()));
                 }
                 break;
-            case "air_qty"://air
+            case "Air Quality"://air
 
                 $firstReading = $airController->airQtlFirstReadingSearchAction($sensor->getSensorId());
                 $lastReading = $airController->airQtlLastReadingSearchAction($sensor->getSensorId());
@@ -273,7 +273,7 @@ class ReportController extends Controller
                     $endDate = date('Y-m-d H:i:s', strtotime($lastReading->getTimestamp()));
                 }
                 break;
-            case  "humidity"://humidity
+            case  "Humidity"://humidity
                 $firstReading = $humidityController->humidityFirstReadingSearchAction($sensor->getSensorId());
                 $lastReading = $humidityController->humidityLastReadingSearchAction($sensor->getSensorId());
                 /* @var $firstReading HumidityReading */
@@ -287,7 +287,7 @@ class ReportController extends Controller
                     $endDate = date('Y-m-d H:i:s', strtotime($lastReading->getTimestamp()));
                 }
                 break;
-            case "pressure"://pressure
+            case "Pressure"://pressure
                 $firstReading = $pressureController->pressureFirstReadingSearchAction($sensor->getSensorId());
                 $lastReading = $pressureController->pressureLastReadingSearchAction($sensor->getSensorId());
                 /* @var $firstReading PressureReading */
@@ -301,7 +301,7 @@ class ReportController extends Controller
                     $endDate = date('Y-m-d H:i:s', strtotime($lastReading->getTimestamp()));
                 }
                 break;
-            case "wind"://wind
+            case "Wind"://wind
                 $firstReading = $windController->windFirstReadingSearchAction($sensor->getSensorId());
                 $lastReading = $windController->windLastReadingSearchAction($sensor->getSensorId());
                 /* @var $firstReading WindReading */
@@ -368,7 +368,7 @@ class ReportController extends Controller
                 $readings = array();
                 /* @var $readings SensorReading[] */
                 switch ($sensor->getTypeName()) {
-                    case "temp"://temp
+                    case "Temperature"://temp
                         $readings = $tempController->tempReadingsSearchAction(
                             $sensor->getSensorId(),
                             $readingLimit,
@@ -377,7 +377,7 @@ class ReportController extends Controller
                         );
                         /* @var $readings TempReading[] */
                         break;
-                    case "air_qty"://air
+                    case "Air Quality"://air
                         $readings = $airController->airQtlReadingsSearchAction(
                             $sensor->getSensorId(),
                             $readingLimit,
@@ -387,7 +387,7 @@ class ReportController extends Controller
                         /* @var $readings AirQlyReading[] */
 
                         break;
-                    case  "humidity"://humidity
+                    case  "Humidity"://humidity
                         $readings = $humidityController->humidityReadingsSearchAction(
                             $sensor->getSensorId(),
                             $readingLimit,
@@ -397,7 +397,7 @@ class ReportController extends Controller
                         /* @var $readings HumidityReading[] */
 
                         break;
-                    case "pressure"://pressure
+                    case "Pressure"://pressure
                         $readings = $pressureController->pressureReadingsSearchAction(
                             $sensor->getSensorId(),
                             $readingLimit,
@@ -407,7 +407,7 @@ class ReportController extends Controller
                         /* @var $readings PressureReading[] */
 
                         break;
-                    case "wind"://wind
+                    case "Wind"://wind
                         $readings = $windController->windReadingsSearchAction(
                             $sensor->getSensorId(),
                             $readingLimit,
@@ -424,7 +424,7 @@ class ReportController extends Controller
                 //
                 $lineChart = new LineChart();
                 switch ($sensor->getTypeName()) {
-                    case "temp"://temp
+                    case "Temperature"://temp
                         /* @var $readings TempReading[] */
                         $arr = array();
                         $arr[] = array(
@@ -438,7 +438,7 @@ class ReportController extends Controller
                         $lineChart->getData()->setArrayToDataTable($arr);
 
                         break;
-                    case "air_qty"://air
+                    case "Air Quality"://air
                         /* @var $readings AirQlyReading[] */
                         $arr = array();
                         $arr[] = array(
@@ -458,7 +458,7 @@ class ReportController extends Controller
 
                         $lineChart->getData()->setArrayToDataTable($arr);
                         break;
-                    case  "humidity"://humidity
+                    case  "Humidity"://humidity
                         /* @var $readings HumidityReading[] */
                         $arr = array();
                         $arr[] = array(
@@ -471,7 +471,7 @@ class ReportController extends Controller
 
                         $lineChart->getData()->setArrayToDataTable($arr);
                         break;
-                    case "pressure"://pressure
+                    case "Pressure"://pressure
                         /* @var $readings PressureReading[] */
                         $arr = array();
                         $arr[] = array(
@@ -484,7 +484,7 @@ class ReportController extends Controller
 
                         $lineChart->getData()->setArrayToDataTable($arr);
                         break;
-                    case "wind"://wind
+                    case "Wind"://wind
                         /* @var $readings WindReading[] */
                         $arr = array();
                         $arr[] = array(
@@ -553,13 +553,5 @@ class ReportController extends Controller
         }
 
 
-    }
-
-    /**
-     * @Route("/reports/summery", name="reportSummery")
-     */
-    public function reportSummeryAction()
-    {
-        return $this->render('@App/reports/summery.html.twig');
     }
 }

@@ -1,15 +1,16 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaViewStyle.css') }}"/>
-    {#<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">#}
 {% endblock %}
 
 {% block body %}
-
-    <h1 align="center">
-        {{ areaName }}
-    </h1>
-
+    <div id="headings" align="center">
+        <h1>
+            {{ areaName }}
+        </h1>
+    </div>
     {% if (error is defined) %}
         <div id="errorMsg" align="center">
             {{ error }}

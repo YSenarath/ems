@@ -221,7 +221,7 @@ class SensorController extends  Controller{
             if ($a != null) {
                 $sensor = new Sensor();
                 $sensor->setSensorId($a["sensor_id"]);
-                $sensor->setTypeName($a["type_name"]);
+                $sensor->setTypeName($this->getTypeName($a["type_name"]));
                 $sensorArray[] = $sensor;
             }
         }
@@ -252,7 +252,7 @@ class SensorController extends  Controller{
                 $sensor = new Sensor();
                 $model=new Model();
                 $sensor->setSensorId($a["sensor_id"]);
-                $sensor->setTypeName($a["type_name"]);
+                $sensor->setTypeName($this->getTypeName($a["type_name"]));
                 $sensor->setInsDate($a["installed_date"]);
                 $model->setManufacture($a["manufacturer"]);
                 $model->setUnit($a["unit"]);

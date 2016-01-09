@@ -1,6 +1,6 @@
 body{
     background-color: #F2F2F2;
-    padding-top: 50px;
+    /*padding-top: 50px;*/
 }
 
 
@@ -19,12 +19,14 @@ body{
 
 
 h1{
-    margin : 40px 0 20px ;
-    font-size: 50px;
-    color: #000000;
-    font-weight: 500;
-    font-family: Courier New , Georgia, "Times New Roman", Times, serif;
-    text-shadow: 5px 5px 5px #9d9d9d ;
+    /*margin : 40px 0 20px ;*/
+    /*font-size: 50px;*/
+    /*color: #000000;*/
+    /*font-weight: 500;*/
+
+    /*Shehan - Please don't use this*/
+    /*font-family: Courier New , Georgia, "Times New Roman", Times, serif;*/
+    /*text-shadow: 5px 5px 5px #9d9d9d ;*/
 }
 
 
