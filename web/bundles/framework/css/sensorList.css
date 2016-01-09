@@ -110,3 +110,13 @@ p{
     color: #D8000C;
     background-color: #FFBABA;
 }
+
+.yellow{
+    background-color:yellow ;
+    color: #0000F0;
+}
+
+.normal{
+    color: #FF5722;
+    background-color:transparent ;
+}

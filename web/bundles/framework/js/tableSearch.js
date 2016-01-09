@@ -1,13 +1,19 @@
 $(document).ready(function()
 {
+
     $('#search').keyup(function()
     {
         searchTable($(this).val());
+
     });
+
+
 });
 
 function searchTable(inputVal)
 {
+
+
     var table = $('#tblData');
     table.find('tr').each(function(index, row)
     {
@@ -20,6 +26,7 @@ function searchTable(inputVal)
                 var regExp = new RegExp(inputVal, 'i');
                 if(regExp.test($(td).text()))
                 {
+
                     found = true;
                     return false;
                 }
@@ -27,4 +34,6 @@ function searchTable(inputVal)
             if(found == true)$(row).show();else $(row).hide();
         }
     });
+
+
 }
