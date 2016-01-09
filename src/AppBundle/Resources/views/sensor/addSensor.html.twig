@@ -10,15 +10,30 @@
 
 {% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
 
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
 {% block body %}
+
     <h1 align="center">
         Add Sensors
         <hr>
     </h1>
     <dev >
         <div class="container">
-            <div class="container">
+            <div class="container formContainer">
+
                 <table class="tableWidth">
+                    {{ form_start(form) }}
                     <tr >
                         <td >
                             {{ form_label(form.sensor_id) }}
@@ -109,7 +124,7 @@
 
                         </td>
                     </tr>
-
+                    {{ form_end(form) }}
                 </table>
             </div>
         </div>

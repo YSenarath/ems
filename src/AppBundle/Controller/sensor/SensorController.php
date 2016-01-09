@@ -11,6 +11,7 @@ namespace AppBundle\Controller\sensor;
 use AppBundle\Entity\location\Location;
 use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Sensor;
+use AppBundle\Entity\sensor\SensorSearch;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -125,9 +126,9 @@ class SensorController extends  Controller{
         return $sensor;
     }
 
-    public function findSensors(Sensor$sensor)
+    public function findSensors(SensorSearch $sensor)
     {
-        $sql = 'SELECT * FROM sensor  NATURAL JOIN sensor_model WHERE ';
+        $sql = 'SELECT * FROM (sensor  NATURAL JOIN sensor_model) NATURAL JOIN location WHERE ';
         $param=array();
         $passing =array();
 
@@ -160,16 +161,16 @@ class SensorController extends  Controller{
         $result = $result->fetchAll();
 
         //print_r($result);
-        $sensors[] = new Sensor();
+        $sensors[] = new SensorSearch();
 
         foreach ($result as $s) {
             if ($s != null) {
-                $sensor = new Sensor();
+                $sensor = new SensorSearch();
                 $sensor->setSensorId($s["sensor_id"]);
                 $sensor->setTypeName($this->getTypeName($s["type_name"]));
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
-                $sensor->setLocId($s["location_id"]);
+                $sensor->setLocAddress($s["address"]);
                 $sensors[] = $sensor;
             }
         }

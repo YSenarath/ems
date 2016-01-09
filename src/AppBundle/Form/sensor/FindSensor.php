@@ -31,7 +31,11 @@ class FindSensor extends AbstractType
         $locations = $options['locations'];
 
         $builder
-            ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
+            ->add('sensor_id', TextType::class, array(
+                'label' => 'Sensor ID',
+                'required'=>false,
+                'empty_data'=>null,))
+
             ->add('loc_id', ChoiceType::class, array(
                 'label' => 'Location ID' ,
                 'required'=>false,
@@ -68,7 +72,7 @@ class FindSensor extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\sensor\Sensor',
+            'data_class' => 'AppBundle\Entity\sensor\SensorSearch',
             'models' => null,
             'types' => null,
             'locations' => null,

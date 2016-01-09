@@ -11,6 +11,7 @@ namespace AppBundle\Controller\sensor;
 
 use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
+use AppBundle\Entity\sensor\SensorSearch;
 use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Type;
 use AppBundle\Form\sensor\FindSensor;
@@ -97,7 +98,7 @@ class SensorActionController extends  Controller
      */
     public function findAction(Request $request)
     {
-        $sensor = new Sensor();
+        $sensor = new SensorSearch();
         $sensor->setInsDate((new \DateTime('today')));
         $sensor->setInsBefore((new \DateTime('today')));
 
@@ -128,14 +129,8 @@ class SensorActionController extends  Controller
             //find sensors
             $sensors[] = new Sensor();
 
-
-
-
-
-
             $sensorController = new SensorController($connection);
             $sensors = $sensorController->findSensors($sensor);
-
             return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
         }
         return $this->render(

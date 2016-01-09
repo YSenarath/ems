@@ -15,7 +15,7 @@
     <h1 align="center">
         Installed Sensors
     </h1>
-    <div class="container">
+    <div class="container ">
         <div >
             <div class="row" id= "searchContainer">
                 <label for="search">
@@ -57,7 +57,7 @@
                                         <td >Not Set</td>
                                     {% endif %}
 
-                                    {% if sensor.getLocId|trim is not empty %}
+                                    {% if sensor.getLocAddress|trim is not empty %}
                                         <td class="col-md-3"> {{ sensor.getLocAddress }}</td>
                                     {% else %}
                                         <td >Not Set</td>

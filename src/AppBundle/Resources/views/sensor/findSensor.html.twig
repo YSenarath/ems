@@ -1,19 +1,63 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/findSensor.css') }}"/>
+
+{% endblock %}
+
 {% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
 {% block body %}
 
     <h1 align="center">
-        Find Sensor
+        Find Sensors
+
     </h1>
 
-    <dev class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    <dev>
+        <div class="container-fluid">
+            <div class="col-sm-5 formContainer">
+                {{ form_start(form) }}
+
+                {{ form_label(form.sensor_id) }} {{ form_widget(form.sensor_id) }}
+                <br>
+                {{ form_label(form.type_name) }}
+
+                <table>
+                    <tr>
+                        <td>{{ form_widget(form.type_name.0) }}</td>
+                        <td>{{ form_widget(form.type_name.1) }}</td>
+                        <td>{{ form_widget(form.type_name.2) }}</td>
+                        <td>{{ form_widget(form.type_name.3) }}</td>
+                        <td>{{ form_widget(form.type_name.4) }}</td>
+                    </tr>
+                </table>
+
+                <br>
+                {{ form_label(form.model_id) }} {{ form_widget(form.model_id) }}
+
+                <br>
+
+                {{ form_label(form.loc_id) }} {{ form_widget(form.loc_id) }}
+
+                <br>
+
+                {{ form_label(form.ins_date) }} {{ form_widget(form.ins_date) }}
+
+                <br>
+
+                {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }}
+
+                <br>
+
+                <div align="right">
+                    {{ form_widget(form.submit) }}
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
         </div>
     </dev>
 

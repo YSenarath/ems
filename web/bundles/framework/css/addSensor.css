@@ -6,8 +6,9 @@
 
 .tableWidth tr td:nth-child(1){
     width: 20%;
-    color: #009688;
+    /*color: #009688;*/
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
 
 }
 
@@ -20,4 +21,13 @@
 .tableWidth tr{
     border-bottom: 20px solid transparent;
     border-top:20px solid transparent;
+}
+
+.formContainer {
+    padding: 25px 40px 25px 40px;
+    background-color: #00897B;
+    color: white;
+    border-radius: 10px;
+    float: none;
+    margin: 0 auto;
 }

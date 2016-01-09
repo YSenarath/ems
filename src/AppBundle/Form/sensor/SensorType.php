@@ -38,13 +38,33 @@ class SensorType extends AbstractType
 
         $builder
             ->add('sensor_id', TextType::class, array('label' => 'Sensor ID'))
-            ->add('loc_id', ChoiceType::class, array('label' => 'Location ID' , 'placeholder'=>'--Select Location of the Sensor--', 'choices' => $locations))
-            ->add('type_name', ChoiceType::class,array('label' => 'Type' ,'placeholder'=>'--Select Type of the Sensor--', 'choices' => $types))
-            ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'placeholder'=>'--Select Model of the Sensor--','choices' => $models ))
+            ->add('loc_id', ChoiceType::class, array(
+                'label' => 'Location ID' ,
+                'placeholder'=>'--Select Location of the Sensor--',
+                'choices' => $locations))
+
+            ->add('type_name', ChoiceType::class,array(
+                'label' => 'Type' ,
+                'placeholder'=>'--Select Type of the Sensor--',
+                'choices' => $types))
+
+            ->add('model_id', ChoiceType::class, array('label' => 'Model' ,
+                'placeholder'=>'--Select Model of the Sensor--',
+                'choices' => $models ))
+
             ->add('ins_date', DateType::class, array('label' => 'Installed Date',))
-            ->add('t_min', NumberType::class, array('label' => 'Threshold Min'))
-            ->add('t_max', NumberType::class, array('label' => 'Threshold Max'))
-            ->add('submit', SubmitType::class, array('label' => 'Submit'));
+
+            ->add('t_min', TextType::class, array(
+                'label' => 'Threshold Min',
+                'required'=>false,
+                'empty_data'=>null,))
+
+            ->add('t_max', NumberType::class, array(
+                'label' => 'Threshold Max',
+                'required'=>false,
+                'empty_data'=>null,))
+
+            ->add('submit', SubmitType::class, array('label' => 'Save'));
 
     }
 
@@ -55,6 +75,8 @@ class SensorType extends AbstractType
             'models' => null,
             'types' => null,
             'locations' => null,
+
+
         ));
     }
 }
