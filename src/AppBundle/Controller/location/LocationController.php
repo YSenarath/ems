@@ -35,11 +35,12 @@ class LocationController extends Controller
 
 
     //by jnj to update my sensor add form
+    //changed method on 9/1/2016
     public function getAllLocationNames()
     {
 
         $result = $this->connection->executeQuery(
-            'SELECT location.location_id , area.name FROM location NATURAL JOIN area ORDER BY area.name '
+            'SELECT location.location_id , area.name , address FROM location NATURAL JOIN area ORDER BY area.name '
         );
         $result = $result->fetchAll();
 
@@ -57,7 +58,7 @@ class LocationController extends Controller
                         $tempLocation = null;
                     }
                 }
-                $tempLocation[$s["location_id"]] = $s["location_id"];
+                $tempLocation[$s["address"]] = $s["location_id"];
             }
         }
 

@@ -46,7 +46,7 @@ tbody tr:hover {
 /*------------------border------------*/
 th{
 
-    border-bottomr:1px solid #9d9d9d;
+    border-bottom:1px solid #9d9d9d;
     border-top:1px solid #9d9d9d;
     background-color: #009688;
     font-size: 15px;

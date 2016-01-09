@@ -1,0 +1,23 @@
+
+.tableWidth {
+    margin-top: 5%;
+    width: inherit;
+}
+
+.tableWidth tr td:nth-child(1){
+    width: 20%;
+    color: #009688;
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+.tableWidth tr td:nth-child(2){
+    width: 40%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.tableWidth tr{
+    border-bottom: 20px solid transparent;
+    border-top:20px solid transparent;
+}

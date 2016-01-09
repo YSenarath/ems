@@ -37,7 +37,7 @@ class SensorController extends  Controller{
             if ($s != null) {
                 $sensor = new Sensor();
                 $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeName($s["type_name"]);
+                $sensor->setTypeName($this->getTypeName($s["type_name"]));
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setTMin($s["threshold_min"]);
@@ -71,7 +71,7 @@ class SensorController extends  Controller{
 
         if ($s != null) {
             $sensor->setSensorId($s["sensor_id"]);
-            $sensor->setTypeName($s["type_name"]);
+            $sensor->setTypeName($this->getTypeName($s["type_name"]));
             $sensor->setModelId($s["model_id"]);
             $sensor->setInsDate($s["installed_date"]);
             $sensor->setTMin($s["threshold_min"]);
@@ -88,7 +88,7 @@ class SensorController extends  Controller{
     public function getSensor($sensor_id)
     {
         $s = $this->connection->fetchAssoc(
-            'SELECT * FROM (((SELECT * FROM sensor WHERE  sensor_id = ?)s NATURAL JOIN location) NATURAL JOIN sensor_model) NATURAL JOIN sensor_type',
+            'SELECT * FROM ((SELECT * FROM sensor WHERE  sensor_id = ?)s NATURAL JOIN location) NATURAL JOIN sensor_model',
             array($sensor_id)
         );
 
@@ -111,7 +111,7 @@ class SensorController extends  Controller{
             $location->setLongitude($s["longitude"]);
 
             $sensor->setSensorId($s["sensor_id"]);
-            $sensor->setTypeName($s["type_name"]);
+            $sensor->setTypeName($this->getTypeName($s["type_name"]));
             $sensor->setModelId($model);
             $sensor->setInsDate($s["installed_date"]);
             $sensor->setTMin($s["threshold_min"]);
@@ -166,7 +166,7 @@ class SensorController extends  Controller{
             if ($s != null) {
                 $sensor = new Sensor();
                 $sensor->setSensorId($s["sensor_id"]);
-                $sensor->setTypeName($s["type_name"]);
+                $sensor->setTypeName($this->getTypeName($s["type_name"]));
                 $sensor->setModelId($s["model_id"]);
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setLocId($s["location_id"]);
@@ -265,5 +265,19 @@ class SensorController extends  Controller{
         return $sensorDetailArray;
     }
 
-
+    public function getTypeName($input)
+    {
+        switch($input) {
+            case 'air_qty' :
+                return 'Air Quality';
+            case 'humidity' :
+                return 'Humidity';
+            case 'pressure' :
+                return 'Pressure';
+            case 'temp' :
+                return 'Temperature';
+            case 'wind' :
+                return 'Wind';
+        }
+    }
 }

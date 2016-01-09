@@ -14,7 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -43,8 +43,8 @@ class SensorType extends AbstractType
             ->add('model_id', ChoiceType::class, array('label' => 'Model' , 'placeholder'=>'--Select Model of the Sensor--','choices' => $models ))
             ->add('ins_date', DateType::class, array('label' => 'Installed Date',))
             ->add('t_min', NumberType::class, array('label' => 'Threshold Min'))
-            ->add('t_max', NumberType::class, array('label' => 'Threshold Max'));
-
+            ->add('t_max', NumberType::class, array('label' => 'Threshold Max'))
+            ->add('submit', SubmitType::class, array('label' => 'Submit'));
 
     }
 

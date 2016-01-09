@@ -52,7 +52,7 @@ class TypeController
             if ($s != null) {
                 $type = new Type();
 
-                $type->setTypeName($s["type_name"]);
+                $type->setTypeName($this->getTypeName($s["type_name"]));
                 $type->setResInterval($s["res_intervel"]);
                 $types[] = $type;
             }
@@ -71,9 +71,25 @@ class TypeController
 
             if ($s != null) {
 
-                $types[$s["type_name"]] = $s["type_name"];
+                $types[$this->getTypeName($s["type_name"])] = $s["type_name"];
             }
         }
         return $types;
+    }
+
+    public function getTypeName($input)
+    {
+      switch($input) {
+          case 'air_qty' :
+            return 'Air Quality';
+          case 'humidity' :
+              return 'Humidity';
+          case 'pressure' :
+              return 'Pressure';
+          case 'temp' :
+              return 'Temperature';
+          case 'wind' :
+              return 'Wind';
+      }
     }
 }
