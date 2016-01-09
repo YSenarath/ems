@@ -22,18 +22,14 @@ use AppBundle\Entity\sensor\Model;
 class ModelType extends AbstractType
 {
 
-
     public function buildForm(FormBuilderInterface $builder, array $options )
     {
-
-
         $builder
             ->add('model_id', TextType::class, array('label' => 'Model ID'))
             ->add('manufacture', TextType::class, array('label' => 'Manufacture' ))
-            ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'placeholder'=>'--Select a Unit--' ,'choices'=>array('°C'=>'°C' , 'Percentage'=>'Percentage','m/s'=>'m/s', 'Pascal' => 'Pa')))
-            ->add('det_range', NumberType::class, array('label' => 'Detection Range' ))
+            ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'placeholder'=>'--Select a Unit--' ,'choices'=>array('°C'=>'°C' , 'Percentage'=>'%','m/s'=>'m/s', 'Pascal' => 'Pa')))
+            ->add('det_range', TextType::class, array('label' => 'Detection Range' ))
             ->add('submit', SubmitType::class, array('label' => 'Save',));
-
 
     }
 

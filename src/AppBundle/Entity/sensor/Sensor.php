@@ -13,30 +13,31 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
-/**
- * @ORM\Entity
- * @UniqueEntity("sensor_id")
- */
 
 class Sensor
 {
 
     /**
-     * @var string $sensor_id
-     *
-     * @ORM\Column(name="sensor_id", type="string", length=8, unique=true)
-     * @ORM\ID
+     * @Assert\Length(
+     *      max = 8,
+     *      maxMessage = "Sensor ID cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $sensor_id;
 
 
     /**
-     *
-     *
      * @Assert\Regex(
      *     pattern="/^[+-]?\d+(\.\d+)?$/",
      *     match=true,
      *     message="The value {{ value }} is not a valid Floating value."
+     * )
+     *
+     * @Assert\Range(
+     *      min = -10000000,
+     *      max = 10000000,
+     *      minMessage = "The min Threshold can be {{ limit }}",
+     *      maxMessage = "The max Threshold can be {{ limit }}"
      * )
      *
      */
@@ -50,8 +51,15 @@ class Sensor
      * )
      *
      * @Assert\Expression(
-     *     value = "this.getTMax() > this.getTMin()",
+     *     value = "this.getTMax() > this.getTMin() or this.getTMax() == null or this.getTMin() == null",
      *     message="The Threshold max should be greater than Threshold Min"
+     * )
+     *
+     * @Assert\Range(
+     *      min = -10000000,
+     *      max = 10000000,
+     *      minMessage = "The min Threshold can be {{ limit }}",
+     *      maxMessage = "The max Threshold can be {{ limit }}"
      * )
      */
     protected $t_max;

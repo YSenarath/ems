@@ -59,7 +59,7 @@ class SensorType extends AbstractType
                 'required'=>false,
                 'empty_data'=>null,))
 
-            ->add('t_max', NumberType::class, array(
+            ->add('t_max', TextType::class, array(
                 'label' => 'Threshold Max',
                 'required'=>false,
                 'empty_data'=>null,))

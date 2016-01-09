@@ -3,6 +3,10 @@
 
 {% block otherstylesheets %}
     <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/tableSearch.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
 {% endblock %}
 
 {% block body %}
@@ -11,47 +15,61 @@
         Sensor Models
     </h1>
     <div class="container">
-        <div class="row">
-            <table class="table table-striped sortable">
-                <tr class="customHeader">
-                    <th>No.</th>
-                    <th>Model ID</th>
-                    <th>Manufacturer</th>
-                    <th>Basic Unit</th>
-                    <th>Detection Range</th>
-
-                </tr>
-                {% for m in models  %}
-                    <tr>
-                        {% if m.modelId|trim is not empty %}
-                            <td class="col-md-1">{{ loop.index-1 }}</td>
-                            <td class="col-md-3">{{ m.modelId }}</td>
-
-                            {% if m.manufacture|trim is not empty %}
-                                <td class="col-md-4">{{ m.manufacture }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-                            {% if m.unit|trim is not empty %}
-                                <td class="col-md-2">{{ m.unit }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-                            {% if m.getDetRange|trim is not empty %}
-                                <td class="col-md-2"> {{ m.getDetRange }}</td>
-                            {% else %}
-                                <td >Not Set</td>
-                            {% endif %}
-
-
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-            </table>
+        <div class="row" id= "searchContainer">
+            <label for="search">
+                <strong>Enter keyword to search </strong>
+            </label>
+            <input type="text" id="search">
+            <label>e.g.  S12, P.O. Box 271, 2016</label>
         </div>
 
+        <div class="row">
+            <div id="tableContainer">
+                <table class="table sortable" id="tblData">
+                    <tr class="customHeader">
+                        <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                        <th class="col-md-3">Model ID</th>
+                        <th class="col-md-4">Manufacturer</th>
+                        <th class="col-md-2">Basic Unit</th>
+                        <th class="col-md-2">Detection Range</th>
+
+                    </tr>
+                    {% for m in models  %}
+                        <tr>
+                            {% if m.modelId|trim is not empty %}
+                                <td class="col-md-1">{{ loop.index-1 }}</td>
+                                <td class="col-md-3">{{ m.modelId }}</td>
+
+                                {% if m.manufacture|trim is not empty %}
+                                    <td class="col-md-4">{{ m.manufacture }}</td>
+                                {% else %}
+                                    <td >Not Set</td>
+                                {% endif %}
+
+                                {% if m.unit|trim is not empty %}
+                                    <td class="col-md-2">{{ m.unit }}</td>
+                                {% else %}
+                                    <td >Not Set</td>
+                                {% endif %}
+
+                                {% if m.getDetRange|trim is not empty %}
+                                    <td class="col-md-2"> {{ m.getDetRange }}</td>
+                                {% else %}
+                                    <td >Not Set</td>
+                                {% endif %}
+
+
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <p>*Please Click the table column header to sort by.</p>
+        </div>
     </div>
 
 

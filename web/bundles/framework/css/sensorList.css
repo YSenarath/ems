@@ -19,6 +19,7 @@
 
 /*}*/
 
+
 table , #searchContainer{
     font-family: Courier New,Helvetica, Arial, sans-serif;
 }
@@ -68,18 +69,14 @@ tr ,td{
 /*}*/
 
 /*----------------------------------------*/
+/*----------------scrollable----------------*/
+
 tbody {
     display:block;
     height:55vh;
     overflow:auto;
 }
 
-#sensorId a{
-    color: #337ab7;
-    background: transparent;
-    text-align: left;
-    padding: 10px;
-}
 
 td {
     color: #FF5722;
@@ -94,6 +91,7 @@ thead, tbody tr {
     table-layout:fixed;/* even columns width , fix width of table too*/
 }
 
+/*--------------------------------------------*/
 thead {
     width: calc( 100% - 19px )/* scrollbar is average 1em/16px width, remove it from thead width */
 }
@@ -104,6 +102,13 @@ thead {
 
 }
 
+#sensorId a{
+    color: #337ab7;
+    background: transparent;
+    text-align: left;
+    padding: 10px;
+}
+
 p{
     margin: 10px 15px;
     padding: 12px 12px 12px 12px;
@@ -111,12 +116,16 @@ p{
     background-color: #FFBABA;
 }
 
-.yellow{
-    background-color:yellow ;
-    color: #0000F0;
+
+#typeTable table tbody{
+    height: auto;
 }
 
-.normal{
-    color: #FF5722;
-    background-color:transparent ;
+#typeTable table{
+    width: 70%;
+    margin: 0 auto;
+}
+
+#typeTable{
+    margin-top: 5%;
 }

@@ -1,6 +1,14 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 
+
+
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
+{% endblock %}
+
 {% block body %}
 
     <h1 align="center">
@@ -9,7 +17,7 @@
     <div class="container">
 
 
-        <div class="row">
+        <div class="row" id = "typeTable">
             <table class="table table-striped">
                 <tr>
                     <th>Type</th>

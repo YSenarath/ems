@@ -7,12 +7,12 @@
 
 {% endblock %}
 
-{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+{% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
 {% block body %}
 
     <h1 align="center">
         Find Sensors
-
+        <hr>
     </h1>
 
     <dev>
@@ -24,7 +24,7 @@
                 <br>
                 {{ form_label(form.type_name) }}
 
-                <table>
+                <table class="tableStyle">
                     <tr>
                         <td>{{ form_widget(form.type_name.0) }}</td>
                         <td>{{ form_widget(form.type_name.1) }}</td>
@@ -47,7 +47,7 @@
 
                 <br>
 
-                {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }}
+                {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }} {{ form_errors(form.ins_before) }}
 
                 <br>
 

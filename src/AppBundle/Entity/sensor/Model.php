@@ -8,14 +8,38 @@
 
 namespace AppBundle\Entity\sensor;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Model
 {
 
+    /**
+     * @Assert\Length(
+     *      max = 8,
+     *      maxMessage = "Model ID cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $model_id;
     protected $manufacture;
     protected $unit;
+
+
+    /**
+     * @Assert\Regex(
+     *     pattern="/^[+-]?\d+(\.\d+)?$/",
+     *     match=true,
+     *     message="The value {{ value }} is not a valid Floating value."
+     * )
+     *
+     * @Assert\Range(
+     *      min= 0,
+     *      max = 20000000,
+     *      maxMessage = "The max Detection Range can be {{ limit }}",
+     *      minMessage = "Detection Range can't be negative"
+     * )
+     */
     protected $det_range;
+
 
     /**
      * @return mixed

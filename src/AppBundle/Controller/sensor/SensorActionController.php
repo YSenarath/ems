@@ -11,8 +11,8 @@ namespace AppBundle\Controller\sensor;
 
 use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
-use AppBundle\Entity\sensor\SensorSearch;
 use AppBundle\Entity\sensor\Model;
+use AppBundle\Entity\sensor\SensorSearch;
 use AppBundle\Entity\sensor\Type;
 use AppBundle\Form\sensor\FindSensor;
 use AppBundle\Form\sensor\SensorType;
@@ -22,6 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\security\EmployeeController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -185,10 +186,11 @@ class SensorActionController extends  Controller
                 }
 
             } else{
-                //---------------------------------------
-                //------implement later---------------
-                printf("The Sensor ID exists");
-                return $this->redirectToRoute('find_sensor');
+                $form->get('sensor_id')->addError(new FormError('The Sensor ID already exists'));
+                return $this->render(
+                    'AppBundle:sensor:addSensor.html.twig',
+                    array('form' => $form->createView() , 'sensor'=>$sensor)
+                );
             }
             return $this->redirectToRoute('sensor_list');
         }
@@ -225,8 +227,11 @@ class SensorActionController extends  Controller
             } else{
                 //---------------------------------------
                 //------implement later---------------
-                printf("The Model ID exists");
-                return $this->redirectToRoute('add_model');
+                $form->get('model_id')->addError(new FormError('The Model already exists'));
+                return $this->render(
+                    'AppBundle:sensor:addModel.html.twig',
+                    array('form' => $form->createView() , 'model'=>$model)
+                );
             }
             return $this->redirectToRoute('model_list');
         }

@@ -10,20 +10,29 @@ namespace AppBundle\Entity\sensor;
 
 
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SensorSearch
 {
 
     protected $sensor_id;
+
+
+    /**
+     * @Assert\Expression(
+     *     value = "this.getInsDate() <= this.getInsBefore() ",
+     *     message="The date selection invalid"
+     * )
+     */
+    protected $ins_before;
+
+    protected $locAddress;
     protected $t_min;
     protected $t_max;
-
     protected $loc_id;
     protected $type_name;
     protected $model_id;
     protected $ins_date;
-    protected $ins_before;
-    protected $locAddress;
 
     /**
      * @return mixed
@@ -42,6 +51,9 @@ class SensorSearch
     }
 
 
+    /**
+     * @return mixed
+     */
     public function getInsBefore()
     {
         return $this->ins_before;

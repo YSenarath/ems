@@ -1,17 +1,85 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block stylesheets %}
-{% endblock stylesheets %}
+{% block otherstylesheets %}
 
-{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
+
+{% endblock %}
+
+
+{% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
+
 
 {% block body %}
-    <dev class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    <h1 align="center">
+        Add Model
+        <hr>
+    </h1>
+    <dev >
+        <div class="container">
+            <div class="container formContainer">
+
+                <table class="tableWidth">
+                    {{ form_start(form) }}
+                    <tr >
+                        <td >
+                            {{ form_label(form.model_id) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.model_id) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.model_id) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+                            {{ form_label(form.manufacture) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.manufacture) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.manufacture) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+                            {{ form_label(form.unit) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.unit) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.unit) }}
+                        </td>
+                    </tr>
+
+                    <tr >
+                        <td >
+                            {{ form_label(form.det_range) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.det_range) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.det_range) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+
+                        </td>
+                        <td align="right" >
+                            {{ form_widget(form.submit) }}
+                        </td>
+                        <td >
+
+                        </td>
+                    </tr>
+                    {{ form_end(form) }}
+                </table>
+            </div>
         </div>
     </dev>
 {% endblock body %}

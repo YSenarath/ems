@@ -3,24 +3,14 @@
 
 {% block otherstylesheets %}
 
-    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addSensor.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
 
 {% endblock %}
 
 
-{% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+{% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
 
-{% block form_errors %}
-    {% spaceless %}
-        {% if errors|length > 0 %}
-            <ul>
-                {% for error in errors %}
-                    <li>{{ error.message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endspaceless %}
-{% endblock form_errors %}
+
 
 {% block body %}
 
@@ -64,10 +54,14 @@
                             {{ form_widget(form.model_id) }}
                         </td>
                         <td >
-                            <a href={{ path('add_model') }}>Add New Model</a>
                             {{ form_errors(form.model_id) }}
                         </td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href={{ path('add_model') }}><span class="glyphicon glyphicon-plus"></span> Add New Model</a></td>
+                    </tr>
+
                     <tr >
                         <td >
                             {{ form_label(form.loc_id) }}
@@ -76,9 +70,12 @@
                             {{ form_widget(form.loc_id) }}
                         </td>
                         <td >
-                            <a href={{ path('addLocations') }}>Add New Location</a>
                             {{ form_errors(form.loc_id) }}
                         </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href={{ path('addLocations') }}><span class="glyphicon glyphicon-plus"></span> Add New Location</a></td>
                     </tr>
                     <tr >
                         <td >

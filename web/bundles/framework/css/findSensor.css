@@ -3,11 +3,16 @@ body {
 }
 .formContainer {
     padding: 25px 40px 25px 40px;
-    background-color: #00897B;
-    color: white;
+    background-color: #eaeaea;
+    border:10px solid #EFEFEF;
+    color: #009688;
     border-radius: 10px;
     float: none;
     margin: 0 auto;
+}
+
+.formContainer table tr td {
+    color: black;
 }
 
 #headings {
@@ -25,4 +30,8 @@ body {
     padding: 15px;
     color: #D8000C;
     background-color: #FFBABA;
+}
+
+.tableStyle td{
+    border-right: 15px solid transparent;
 }
