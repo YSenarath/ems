@@ -77,14 +77,15 @@ body {
     /*height: 2000px;*/
     /*color: #000;*/
     background-color: #00796B;
-    padding: 10px;
+    padding: 50px;
     /*margin-bottom: 5px;*/
 }
 
 #section1 {
-    height: 370px;
+    /*height: 370px;*/
     color: #fff;
     background-color: #009688;
+    padding: 50px 0 100px 0;
 }
 
 #sensorReading table {
