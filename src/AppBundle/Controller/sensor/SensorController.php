@@ -72,7 +72,7 @@ class SensorController extends  Controller{
 
         if ($s != null) {
             $sensor->setSensorId($s["sensor_id"]);
-            $sensor->setTypeName($this->getTypeName($s["type_name"]));
+            $sensor->setTypeName($s["type_name"]);
             $sensor->setModelId($s["model_id"]);
             $sensor->setInsDate($s["installed_date"]);
             $sensor->setTMin($s["threshold_min"]);
@@ -200,6 +200,30 @@ class SensorController extends  Controller{
             // throw $e;
         }
     }
+
+    public function sensorUpdateAction(Sensor $sensor)
+    {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('UPDATE sensor SET  threshold_min = ?, threshold_max = ? , location_id = ?, type_name =? , model_id=? , installed_date=? WHERE sensor_id = ?');
+
+            $statement->bindValue(7, $sensor->getSensorId());
+            $statement->bindValue(1, $sensor->getTMin());
+            $statement->bindValue(2, $sensor->getTMax());
+            $statement->bindValue(3, $sensor->getLocId());
+            $statement->bindValue(4, $sensor->getTypeName());
+            $statement->bindValue(5, $sensor->getModelId());
+            $statement->bindValue(6, $sensor->getInsDate()->format('Y-m-d'));
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
+
     /**
      * Created by Shehan
      * @param $locationId

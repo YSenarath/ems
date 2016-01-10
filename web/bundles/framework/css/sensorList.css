@@ -116,6 +116,9 @@ p{
     background-color: #FFBABA;
 }
 
+.editColumn{
+    width: 5%;
+}
 
 #typeTable table tbody{
     height: auto;

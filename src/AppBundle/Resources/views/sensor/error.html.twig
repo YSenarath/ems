@@ -1,0 +1,18 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+
+{#<div class="errorMsg" align="center">#}
+    {#<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>#}
+    {#ERROR : {{ msg }}#}
+{#</div>#}
+{#<br>#}
+
+    <div class="alert alert-danger" align="center" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only"> Error </span>
+        ERROR : {{ msg }}
+    </div>
+
+
+{%  endblock %}

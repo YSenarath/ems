@@ -133,9 +133,15 @@
 
 
                 <div class="container">
-                    <a href="{{ path('reportSensorReadings') }}?id={{sensor.getSensorId}}">
-                        View Readings
-                    </a>
+                    <div class="row">
+                        <a href="{{ path('reportSensorReadings') }}?id={{sensor.getSensorId}}">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span> View Readings |
+                        </a>
+                        <a href="{{ path('edit_sensor') }}?id={{sensor.getSensorId}}">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit Sensor details
+                        </a>
+                    </div>
+
                 </div>
 
             </div>

@@ -113,4 +113,24 @@ class ModelController
         }
     }
 
+    public function updateModelAction(Model $model)
+    {
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('UPDATE sensor_model SET manufacturer = ?, unit = ? , detection_range= ? WHERE model_id =?');
+
+            $statement->bindValue(4, $model->getModelId());
+            $statement->bindValue(1, $model->getManufacture());
+            $statement->bindValue(2, $model->getUnit());
+            $statement->bindValue(3, $model->getDetRange());
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
+
 }

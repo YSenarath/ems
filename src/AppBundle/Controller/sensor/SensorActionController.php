@@ -39,11 +39,16 @@ class SensorActionController extends  Controller
 
         $connection = $this->get('database_connection');
         $sensorId = $request->query->get('id');
+
+        if ($sensorId == null){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor ID is null'));
+        }
+
         $sensorController = new SensorController($connection);
         $sensor=$sensorController ->getSensor($sensorId);
 
         if(!$sensor){
-            return $this->render('AppBundle:sensor:sensorNotFound.html.twig');
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor "'.$sensorId.'" not fount'));
         }else{
             return $this->render('AppBundle:sensor:viewSensor.html.twig', array('sensor' => $sensor));
         }
@@ -141,6 +146,52 @@ class SensorActionController extends  Controller
 
     }
 
+
+    /**
+     * @Route("/model/add", name="add_model")
+     */
+    public function addModelAction(Request $request)
+    {
+
+        $model = new Model();
+
+        // build the form
+        $form = $this->createForm(ModelType::class, $model ,
+            array(
+            'type'=> 'add'
+        ));
+
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            //add model
+            $connection = $this->get('database_connection');
+            $modelController = new ModelController($connection);
+
+            if (!$modelController->searchModel($model->getModelId())) {
+                    $modelController->addModelAction($model);
+            } else{
+                //---------------------------------------
+                //------implement later---------------
+                $form->get('model_id')->addError(new FormError('The Model already exists'));
+                return $this->render(
+                    'AppBundle:sensor:addModel.html.twig',
+                    array('form' => $form->createView() , 'model'=>$model ,'title'=>'Add Model')
+                );
+            }
+            return $this->redirectToRoute('model_list');
+        }
+
+        return $this->render(
+            'AppBundle:sensor:addModel.html.twig',
+            array('form' => $form->createView(), 'title'=>'Add Model')
+        );
+    }
+
+
     /**
      * @Route("/sensor/add", name="add_sensor")
      */
@@ -165,7 +216,8 @@ class SensorActionController extends  Controller
             array(
                 'models' => $models,
                 'types' => $types,
-                'locations' => $locations
+                'locations' => $locations,
+                'type'=> 'add'
             ));
 
 
@@ -184,33 +236,118 @@ class SensorActionController extends  Controller
                     printf("TMax <= TMin");
                     return $this->redirectToRoute('add_sensor');
                 }
-
             } else{
                 $form->get('sensor_id')->addError(new FormError('The Sensor ID already exists'));
                 return $this->render(
                     'AppBundle:sensor:addSensor.html.twig',
-                    array('form' => $form->createView() , 'sensor'=>$sensor)
+                    array('form' => $form->createView() , 'sensor'=>$sensor ,'title'=>'Add Model' )
                 );
             }
-            return $this->redirectToRoute('sensor_list');
+            return $this->redirectToRoute('viewSensor', array('id'=> $sensor->getSensorId()));
         }
 
         return $this->render(
             'AppBundle:sensor:addSensor.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView() ,'title' => 'Add Sensor')
         );
     }
 
+//    ----------update methods-----------------
     /**
-     * @Route("/model/add", name="add_model")
+     * @Route("/sensor/edit", name="edit_sensor")
      */
-    public function addModelAction(Request $request)
+    public function editSensorAction(Request $request)
+    {
+        $connection = $this->get('database_connection');
+
+        $sensorId = $request->query->get('id');
+        if ($sensorId != null ){
+
+            $sensorController = new SensorController($connection);
+
+            $sensor=$sensorController ->searchSensor($sensorId);
+
+            if (!$sensor){
+                return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor "'.$sensorId.'" not fount'));
+            }
+
+            $sensor->setInsDate((new \DateTime($sensor->getInsDate())));
+            $modelController = new ModelController($connection);
+            $typeController = new TypeController($connection);
+            $locationController = new LocationController($connection);
+
+            $models = $modelController->getAllModelNames();
+            $types = $typeController->getAllTypeNames();
+            $locations = $locationController ->getAllLocationNames();
+
+            // build the form
+            $form = $this->createForm(SensorType::class, $sensor ,
+                array(
+                    'models' => $models,
+                    'types' => $types,
+                    'locations' => $locations,
+                    'type'=> 'edit'
+                ));
+
+
+            //Handle submission (will only happen on POST)
+            $form->handleRequest($request);
+
+            if ($form->isValid() && $form->isSubmitted()) {
+
+                if ($sensor->getTMax() > $sensor->getTMin()){
+                    $sensorController->sensorUpdateAction($sensor);
+                }else{
+                    printf("TMax <= TMin");
+                    return $this->redirectToRoute('add_sensor');
+                }
+
+
+                return $this->redirectToRoute('viewSensor', array('id'=> $sensor->getSensorId()));
+            }
+
+            return $this->render(
+                'AppBundle:sensor:addSensor.html.twig',
+                array('form' => $form->createView() , 'title' => 'Edit Sensor')
+            );
+        }
+        else{
+
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor ID is null'));
+        }
+
+    }
+
+
+    /**
+     * @Route("/model/edit", name="edit_model")
+     */
+    public function editModelAction(Request $request)
     {
 
-        $model = new Model();
+
+        $modelId = $request->query->get('id');
+
+        if ($modelId == null){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Model ID is null'));
+        }
+
+
+        $connection = $this->get('database_connection');
+        $modelController = new ModelController($connection);
+        $model = $modelController->searchModel($modelId);
+
+        if (!$model){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Model "'.$modelId.'" not fount'));
+
+        }
+
 
         // build the form
-        $form = $this->createForm(ModelType::class, $model );
+        $form = $this->createForm(ModelType::class, $model,
+        array(
+            'type'=> 'edit'
+        ));
 
 
         //Handle submission (will only happen on POST)
@@ -218,27 +355,16 @@ class SensorActionController extends  Controller
 
         if ($form->isValid() && $form->isSubmitted()) {
 
-            //add model
-            $connection = $this->get('database_connection');
-            $modelController = new ModelController($connection);
+                $modelController->updateModelAction($model);
 
-            if (!$modelController->searchModel($model->getModelId())) {
-                    $modelController->addModelAction($model);
-            } else{
-                //---------------------------------------
-                //------implement later---------------
-                $form->get('model_id')->addError(new FormError('The Model already exists'));
-                return $this->render(
-                    'AppBundle:sensor:addModel.html.twig',
-                    array('form' => $form->createView() , 'model'=>$model)
-                );
-            }
             return $this->redirectToRoute('model_list');
         }
 
         return $this->render(
             'AppBundle:sensor:addModel.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView() , 'title'=>'Edit Model')
         );
     }
+
+
 }

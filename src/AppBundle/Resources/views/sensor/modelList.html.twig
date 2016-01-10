@@ -53,10 +53,22 @@
                                 {% endif %}
 
                                 {% if m.getDetRange|trim is not empty %}
-                                    <td class="col-md-2"> {{ m.getDetRange }}</td>
+                                    <td class="col-md-2"> {{ m.getDetRange }}
+                                        <button
+                                                onclick="document.location = '{{ path('edit_model') }}?id={{ m.getModelId}}'"
+                                                class="btn glyphicon glyphicon-pencil pull-right" >
+                                        </button>
+                                    </td>
                                 {% else %}
-                                    <td >Not Set</td>
+                                    <td >
+                                        Not Set
+                                        <button
+                                                onclick="document.location = '{{ path('edit_model') }}?id={{ m.getModelId}}'"
+                                                class="btn glyphicon glyphicon-pencil pull-right" >
+                                        </button>
+                                    </td>
                                 {% endif %}
+
 
 
                             {% endif %}

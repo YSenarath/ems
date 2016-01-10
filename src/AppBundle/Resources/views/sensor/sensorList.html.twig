@@ -39,7 +39,7 @@
                         </tr>
 
                         {% for sensor in sensors  %}
-                            <tr onclick="document.location = '{{ path('viewSensor') }}?id={{ sensor.getSensorId}}';">
+                            <tr onclick="document.location = '{{ path('viewSensor') }}?id={{ sensor.getSensorId}}'">
                                 {% if sensor.getSensorId|trim is not empty %}
                                     <td class="col-md-1">{{ loop.index-1 }}</td>
                                     <td class="col-md-2"><a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a></td>
