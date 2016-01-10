@@ -39,7 +39,7 @@ body {
 
 #sensorInformation td, #sensorInformation th {
     /*border: 1 px solid; !* No more visible border *!*/
-    height: 50px;
+    height: 45px;
     transition: all 0.3s; /* Simple transition for hover effect */
 
 }
@@ -76,15 +76,15 @@ body {
     /*padding-top: 50px;*/
     /*height: 2000px;*/
     /*color: #000;*/
-    background-color: #009688;
+    background-color: #00796B;
     padding: 10px;
     /*margin-bottom: 5px;*/
 }
 
 #section1 {
-    height: 400px;
+    height: 370px;
     color: #fff;
-    background-color: #00796B;
+    background-color: #009688;
 }
 
 #sensorReading table {
@@ -129,7 +129,7 @@ body {
 }
 
 #locationReadings {
-    padding: 25px 40px 25px 40px;
+    padding: 10px 40px 5px 40px;
     background-color: #eaeaea;
     border: 10px solid #EFEFEF;
     color: #009688;

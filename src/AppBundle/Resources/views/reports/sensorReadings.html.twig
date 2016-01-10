@@ -11,7 +11,7 @@
 {% endblock %}
 {% block body %}
     <div id="headings" align="center">
-        <h2 >
+        <h2>
             Sensor : {{ sensor.sensorId }} ({{ sensor.getTypeName() }})
         </h2>
     </div>
@@ -75,11 +75,76 @@
 
                 </div>
                 <div id="graphical" class="tab">
-                    <div id="div_chart" align="center"></div>
+
+                    <section id="section1">
+                        <div id="div_chart_generic" align="center">
+                        </div>
+                    </section>
+
+                    {% if lineChart_windDir is not null %}
+                        <section id="section2">
+                            <div id="div_chart_windDir" align="center">
+                            </div>
+                        </section>
+                    {% endif %}
+
+                    {% if lineChart_airQly is not null %}
+                        <section id="section2">
+                            <div id="div_chart_airQly" align="center">
+                            </div>
+                        </section>
+                    {% endif %}
+
+                    {% if lineChart_airCO2 is not null %}
+                        <section id="section3">
+                            <div id="div_chart_airCO2" align="center">
+                            </div>
+                        </section>
+                    {% endif %}
+
+                    {% if lineChart_airOxygen is not null %}
+                        <section id="section4">
+                            <div id="div_chart_airOxygen" align="center">
+                            </div>
+                        </section>
+                    {% endif %}
+
                     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
                     <script type="text/javascript">
-                        {{ gc_draw(lineChart, 'div_chart') }}
+                        {{ gc_draw(lineChart_generic, 'div_chart_generic') }}
                     </script>
+                    {% if lineChart_windDir is not null %}
+
+                        <script type="text/javascript">
+                            {{ gc_draw(lineChart_windDir, 'div_chart_windDir') }}
+                        </script>
+
+                    {% endif %}
+
+                    {% if lineChart_airQly is not null %}
+
+                        <script type="text/javascript">
+                            {{ gc_draw(lineChart_airQly, 'div_chart_airQly') }}
+                        </script>
+
+                    {% endif %}
+
+                    {% if lineChart_airCO2 is not null %}
+
+                        <script type="text/javascript">
+                            {{ gc_draw(lineChart_airCO2, 'div_chart_airCO2') }}
+                        </script>
+
+                    {% endif %}
+
+                    {% if lineChart_airOxygen is not null %}
+
+                        <script type="text/javascript">
+                            {{ gc_draw(lineChart_airOxygen, 'div_chart_airOxygen') }}
+                        </script>
+
+                    {% endif %}
+
                 </div>
             </div>
             <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>

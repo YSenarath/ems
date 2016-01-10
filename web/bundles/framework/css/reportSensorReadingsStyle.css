@@ -22,6 +22,11 @@ body {
     overflow: auto;
 }
 
+#graphical {
+    height: 75vh;
+    overflow: auto;
+}
+
 #errorMsg {
     margin: 15px 0;
     padding: 15px;
@@ -227,4 +232,23 @@ li.active a, li.active a:hover {
     margin-bottom: 0;
     text-align: center;
     font-weight: normal;
+}
+
+#graphical{
+    /*overflow-y: hidden;*/
+}
+#graphical #section1 {
+    height: 100%;
+}
+
+#graphical #section2 {
+    height: 100%;
+}
+
+#graphical #section3 {
+    height: 100%;
+}
+
+#graphical #section4 {
+    height: 100%;
 }

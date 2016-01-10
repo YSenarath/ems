@@ -267,14 +267,14 @@ class ReportController extends Controller
         $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
 
         $locationTemp = round($locationTemp, 2);
-        $locationHumidity = round($locationHumidity , 2);
-        $locationPressure = round($locationPressure  / 1000, 2);
+        $locationHumidity = round($locationHumidity, 2);
+        $locationPressure = round($locationPressure / 1000, 2);
 
         $locationWindSpeed = round($locationWindSpeed, 2);
         $locationWindDirection = round($locationWindDirection, 2);
 
         $locationAirQty = round($locationAirQty, 2);
-        $locationAirO2 = round($locationAirO2 , 2);
+        $locationAirO2 = round($locationAirO2, 2);
         $locationAirCo2 = round($locationAirCo2, 4);
 
         //print_r($sensorArray);
@@ -501,102 +501,261 @@ class ReportController extends Controller
 
                 //google graphs
                 //
-                $lineChart = new LineChart();
+                $lineChart_generic = new LineChart();
+                $lineChart_airQly = null;
+                $lineChart_airOxygen = null;
+                $lineChart_airCO2 = null;
+
+                $lineChart_windDir = null;
+
                 switch ($sensor->getTypeName()) {
                     case "Temperature"://temp
                         /* @var $readings TempReading[] */
-                        $arr = array();
-                        $arr[] = array(
+                        $arr_generic = array();
+                        $arr_generic[] = array(
                             array('label' => 'Timestamp', 'type' => 'string'),
                             array('label' => 'temperature (°C)', 'type' => 'number'),
                         );
                         foreach ($readings as $reading) {
-                            $arr[] = array($reading->getTimestamp(), $reading->getTempValue());
+                            $arr_generic[] = array($reading->getTimestamp(), $reading->getTempValue());
                         }
 
-                        $lineChart->getData()->setArrayToDataTable($arr);
+                        $lineChart_generic->getData()->setArrayToDataTable($arr_generic);
 
                         break;
                     case "Air Quality"://air
                         /* @var $readings AirQlyReading[] */
-                        $arr = array();
-                        $arr[] = array(
+
+                        //All
+                        $arr_generic = array();
+                        $arr_generic[] = array(
                             array('label' => 'Timestamp', 'type' => 'string'),
                             array('label' => 'Air Quality (%)', 'type' => 'number'),
                             array('label' => 'CO2 (%)', 'type' => 'number'),
                             array('label' => 'Oxygen (%)', 'type' => 'number'),
                         );
                         foreach ($readings as $reading) {
-                            $arr[] = array(
+                            $arr_generic[] = array(
                                 $reading->getTimestamp(),
                                 $reading->getAirQtyPercentage(),
                                 $reading->getCo2Percentage(),
                                 $reading->getOxygenPercentage(),
                             );
                         }
+                        $lineChart_generic->getData()->setArrayToDataTable($arr_generic);
 
-                        $lineChart->getData()->setArrayToDataTable($arr);
+                        //Air Quality
+                        $arr_airQly = array();
+                        $arr_airQly[] = array(
+                            array('label' => 'Timestamp', 'type' => 'string'),
+                            array('label' => 'Air Quality (%)', 'type' => 'number'),
+                        );
+                        foreach ($readings as $reading) {
+                            $arr_airQly[] = array(
+                                $reading->getTimestamp(),
+                                $reading->getAirQtyPercentage(),
+                            );
+                        }
+                        $lineChart_airQly = new LineChart();
+                        $lineChart_airQly->getData()->setArrayToDataTable($arr_airQly);
+
+                        //CO2
+                        $arr_airCO2 = array();
+                        $arr_airCO2[] = array(
+                            array('label' => 'Timestamp', 'type' => 'string'),
+                            array('label' => 'CO2 (%)', 'type' => 'number'),
+                        );
+                        foreach ($readings as $reading) {
+                            $arr_airCO2[] = array(
+                                $reading->getTimestamp(),
+                                $reading->getCo2Percentage(),
+                            );
+                        }
+                        $lineChart_airCO2 = new LineChart();
+                        $lineChart_airCO2->getData()->setArrayToDataTable($arr_airCO2);
+
+                        //Oxygen
+                        $arr_airOxygen = array();
+                        $arr_airOxygen[] = array(
+                            array('label' => 'Timestamp', 'type' => 'string'),
+                            array('label' => 'Oxygen (%)', 'type' => 'number'),
+                        );
+                        foreach ($readings as $reading) {
+                            $arr_airOxygen[] = array(
+                                $reading->getTimestamp(),
+                                $reading->getOxygenPercentage(),
+                            );
+                        }
+                        $lineChart_airOxygen = new LineChart();
+                        $lineChart_airOxygen->getData()->setArrayToDataTable($arr_airOxygen);
+
                         break;
                     case  "Humidity"://humidity
                         /* @var $readings HumidityReading[] */
-                        $arr = array();
-                        $arr[] = array(
+                        $arr_generic = array();
+                        $arr_generic[] = array(
                             array('label' => 'Timestamp', 'type' => 'string'),
                             array('label' => 'humidity (%)', 'type' => 'number'),
                         );
                         foreach ($readings as $reading) {
-                            $arr[] = array($reading->getTimestamp(), $reading->getHumidityValue());
+                            $arr_generic[] = array($reading->getTimestamp(), $reading->getHumidityValue());
                         }
 
-                        $lineChart->getData()->setArrayToDataTable($arr);
+                        $lineChart_generic->getData()->setArrayToDataTable($arr_generic);
                         break;
                     case "Pressure"://pressure
                         /* @var $readings PressureReading[] */
-                        $arr = array();
-                        $arr[] = array(
+                        $arr_generic = array();
+                        $arr_generic[] = array(
                             array('label' => 'Timestamp', 'type' => 'string'),
                             array('label' => 'pressure (KPa)', 'type' => 'number'),
                         );
                         foreach ($readings as $reading) {
-                            $arr[] = array($reading->getTimestamp(), $reading->getPressureValue() / 1000);
+                            $arr_generic[] = array($reading->getTimestamp(), $reading->getPressureValue() / 1000);
                         }
 
-                        $lineChart->getData()->setArrayToDataTable($arr);
+                        $lineChart_generic->getData()->setArrayToDataTable($arr_generic);
                         break;
                     case "Wind"://wind
                         /* @var $readings WindReading[] */
-                        $arr = array();
-                        $arr[] = array(
+                        $arr_generic = array();
+                        $arr_generic[] = array(
                             array('label' => 'Timestamp', 'type' => 'string'),
                             array('label' => 'Wind speed (m/s)', 'type' => 'number'),
                         );
                         foreach ($readings as $reading) {
-                            $arr[] = array($reading->getTimestamp(), $reading->getWindSpeed());
+                            $arr_generic[] = array($reading->getTimestamp(), $reading->getWindSpeed());
                         }
 
-                        $lineChart->getData()->setArrayToDataTable($arr);
+                        $lineChart_generic->getData()->setArrayToDataTable($arr_generic);
+
+
+                        $arr_wind = array();
+                        $arr_wind[] = array(
+                            array('label' => 'Timestamp', 'type' => 'string'),
+                            array('label' => 'Wind Direction (°)', 'type' => 'number'),
+                        );
+                        foreach ($readings as $reading) {
+                            $arr_wind[] = array($reading->getTimestamp(), $reading->getDirection());
+                        }
+
+                        $lineChart_windDir= new LineChart();
+                        $lineChart_windDir->getData()->setArrayToDataTable($arr_wind);
                         break;
                 }
 
-                $lineChart->getOptions()->getChartArea()->setTop(50);
-                //$lineChart->getOptions()->getChartArea()->setLeft(50);
-                //$lineChart->getOptions()->setEnableInteractivity(true);
-                $lineChart->getOptions()->setCurveType('function');
+                $lineChart_generic->getOptions()->getChartArea()->setTop(50);
+                //$lineChart_generic->getOptions()->getChartArea()->setLeft(50);
+                //$lineChart_generic->getOptions()->setEnableInteractivity(true);
+                $lineChart_generic->getOptions()->setCurveType('function');
 
-                $lineChart->getOptions()->setHeight(700);
-                $lineChart->getOptions()->setWidth(1500);
+                $lineChart_generic->getOptions()->setHeight(700);
+                $lineChart_generic->getOptions()->setWidth(1500);
 
-                $lineChart->getOptions()->getHAxis()->setSlantedTextAngle(90);
-                $lineChart->getOptions()->getHAxis()->setSlantedText(true);
-                $lineChart->getOptions()->getHAxis()->setShowTextEvery(1);
+                $lineChart_generic->getOptions()->getHAxis()->setSlantedTextAngle(90);
+                $lineChart_generic->getOptions()->getHAxis()->setSlantedText(true);
+                $lineChart_generic->getOptions()->getHAxis()->setShowTextEvery(1);
 
-                // $lineChart->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
-                $lineChart->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
-                $lineChart->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+                // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+                $lineChart_generic->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+                $lineChart_generic->getOptions()->getVAxis()->getTextStyle()->setBold(true);
 
-                $lineChart->getOptions()->getTooltip()->setIsHtml(true);
-                $lineChart->getOptions()->getTooltip()->setIgnoreBounds(true);
+                $lineChart_generic->getOptions()->getTooltip()->setIsHtml(true);
+                $lineChart_generic->getOptions()->getTooltip()->setIgnoreBounds(true);
 
+                if ($lineChart_airQly != null) {
+                    /* @var $lineChart_airQly LineChart] */
+                    $lineChart_airQly->getOptions()->getChartArea()->setTop(50);
+                    //$lineChart_generic->getOptions()->getChartArea()->setLeft(50);
+                    //$lineChart_generic->getOptions()->setEnableInteractivity(true);
+                    $lineChart_airQly->getOptions()->setCurveType('function');
+
+                    $lineChart_airQly->getOptions()->setHeight(700);
+                    $lineChart_airQly->getOptions()->setWidth(1500);
+
+                    $lineChart_airQly->getOptions()->getHAxis()->setSlantedTextAngle(90);
+                    $lineChart_airQly->getOptions()->getHAxis()->setSlantedText(true);
+                    $lineChart_airQly->getOptions()->getHAxis()->setShowTextEvery(1);
+
+                    // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+                    $lineChart_airQly->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+                    $lineChart_airQly->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+
+                    $lineChart_airQly->getOptions()->getTooltip()->setIsHtml(true);
+                    $lineChart_airQly->getOptions()->getTooltip()->setIgnoreBounds(true);
+                    $lineChart_airQly->getOptions()->setColors(['#3366cc']);
+
+
+                }
+                if ($lineChart_airOxygen != null) {
+                    /* @var $lineChart_airOxygen LineChart] */
+                    $lineChart_airOxygen->getOptions()->getChartArea()->setTop(50);
+                    //$lineChart_generic->getOptions()->getChartArea()->setLeft(50);
+                    //$lineChart_generic->getOptions()->setEnableInteractivity(true);
+                    $lineChart_airOxygen->getOptions()->setCurveType('function');
+
+                    $lineChart_airOxygen->getOptions()->setHeight(700);
+                    $lineChart_airOxygen->getOptions()->setWidth(1500);
+
+                    $lineChart_airOxygen->getOptions()->getHAxis()->setSlantedTextAngle(90);
+                    $lineChart_airOxygen->getOptions()->getHAxis()->setSlantedText(true);
+                    $lineChart_airOxygen->getOptions()->getHAxis()->setShowTextEvery(1);
+
+                    // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+                    $lineChart_airOxygen->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+                    $lineChart_airOxygen->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+
+                    $lineChart_airOxygen->getOptions()->getTooltip()->setIsHtml(true);
+                    $lineChart_airOxygen->getOptions()->getTooltip()->setIgnoreBounds(true);
+                    $lineChart_airOxygen->getOptions()->setColors(['#ff9900']);
+
+                }
+                if ($lineChart_airCO2 != null) {
+                    /* @var $lineChart_airCO2 LineChart] */
+                    $lineChart_airCO2->getOptions()->getChartArea()->setTop(50);
+                    //$lineChart_generic->getOptions()->getChartArea()->setLeft(50);
+                    //$lineChart_generic->getOptions()->setEnableInteractivity(true);
+                    $lineChart_airCO2->getOptions()->setCurveType('function');
+
+                    $lineChart_airCO2->getOptions()->setHeight(700);
+                    $lineChart_airCO2->getOptions()->setWidth(1500);
+
+                    $lineChart_airCO2->getOptions()->getHAxis()->setSlantedTextAngle(90);
+                    $lineChart_airCO2->getOptions()->getHAxis()->setSlantedText(true);
+                    $lineChart_airCO2->getOptions()->getHAxis()->setShowTextEvery(1);
+
+                    // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+                    $lineChart_airCO2->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+                    $lineChart_airCO2->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+
+                    $lineChart_airCO2->getOptions()->getTooltip()->setIsHtml(true);
+                    $lineChart_airCO2->getOptions()->getTooltip()->setIgnoreBounds(true);
+                    $lineChart_airCO2->getOptions()->setColors(['#c4492c']);
+
+                }
+                if ($lineChart_windDir != null) {
+                    /* @var $lineChart_windDir LineChart] */
+                    $lineChart_windDir->getOptions()->getChartArea()->setTop(50);
+                    //$lineChart_generic->getOptions()->getChartArea()->setLeft(50);
+                    //$lineChart_generic->getOptions()->setEnableInteractivity(true);
+                    $lineChart_windDir->getOptions()->setCurveType('function');
+
+                    $lineChart_windDir->getOptions()->setHeight(700);
+                    $lineChart_windDir->getOptions()->setWidth(1500);
+
+                    $lineChart_windDir->getOptions()->getHAxis()->setSlantedTextAngle(90);
+                    $lineChart_windDir->getOptions()->getHAxis()->setSlantedText(true);
+                    $lineChart_windDir->getOptions()->getHAxis()->setShowTextEvery(1);
+
+                    // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
+                    $lineChart_windDir->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
+                    $lineChart_windDir->getOptions()->getVAxis()->getTextStyle()->setBold(true);
+
+                    $lineChart_windDir->getOptions()->getTooltip()->setIsHtml(true);
+                    $lineChart_windDir->getOptions()->getTooltip()->setIgnoreBounds(true);
+                    $lineChart_windDir->getOptions()->setColors(['#c4492c']);
+
+                }
 
                 //end of charts
 
@@ -606,10 +765,14 @@ class ReportController extends Controller
                     array(
                         'sensor' => $sensor,
                         'readings' => $readings,
-                        'lineChart' => $lineChart,
+                        'lineChart_generic' => $lineChart_generic,
+                        'lineChart_airQly' => $lineChart_airQly,
+                        'lineChart_airOxygen' => $lineChart_airOxygen,
+                        'lineChart_airCO2' => $lineChart_airCO2,
+                        'lineChart_windDir' => $lineChart_windDir,
+
                     )
                 );
-
 
             }//end of form submission
 

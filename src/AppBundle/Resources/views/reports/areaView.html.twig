@@ -22,29 +22,9 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-md-6" >
-                    <div id="areaReadings" align="center" >
+                <div class="col-md-6">
+                    <div id="areaReadings" align="center">
                         <table>
-                            <tr>
-                                <td>Temperature</td>
-                                <td>{{ meanTemp }} °C</td>
-                            </tr>
-                            <tr>
-                                <td>Humidity</td>
-                                <td>{{ meanHumidity }} %</td>
-                            </tr>
-                            <tr>
-                                <td>Pressure</td>
-                                <td>{{ meanPressure }} KPa</td>
-                            </tr>
-                            <tr>
-                                <td>Wind speed</td>
-                                <td>{{ meanWind['speed'] }} m/s</td>
-                            </tr>
-                            <tr>
-                                <td>Wind Direction</td>
-                                <td>{{ meanWind['direction'] }} °</td>
-                            </tr>
                             <tr>
                                 <td>Air Quality</td>
                                 <td> {{ meanAir['airQly'] }} %</td>
@@ -56,6 +36,26 @@
                             <tr>
                                 <td>Carbon diaoxide content</td>
                                 <td> {{ meanAir['CO2'] }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Humidity</td>
+                                <td>{{ meanHumidity }} %</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure</td>
+                                <td>{{ meanPressure }} KPa</td>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>{{ meanTemp }} °C</td>
+                            </tr>
+                            <tr>
+                                <td>Wind speed</td>
+                                <td>{{ meanWind['speed'] }} m/s</td>
+                            </tr>
+                            <tr>
+                                <td>Wind Direction</td>
+                                <td>{{ meanWind['direction'] }} °</td>
                             </tr>
                         </table>
                     </div>
