@@ -22,8 +22,8 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-md-6">
-                    <div id="areaMean" align="center">
+                <div class="col-md-6" >
+                    <div id="areaReadings" align="center" >
                         <table>
                             <tr>
                                 <td>Temperature</td>
@@ -109,6 +109,9 @@
     <script>
         (function ($) {
             // custom css expression for a case-insensitive contains()
+            /**
+             * @return {boolean}
+             */
             jQuery.expr[':'].Contains = function (a, i, m) {
                 return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
             };

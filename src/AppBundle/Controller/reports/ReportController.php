@@ -198,10 +198,84 @@ class ReportController extends Controller
         $locationController = new LocationController($connection);
 
         $sensorController = new SensorController($connection);
+        $tempController = new TempReadingController($connection);
+        $humidityController = new HumidityReadingController($connection);
+        $pressureController = new PressureReadingController($connection);
+        $windController = new WindReadingController($connection);
+        $airController = new AirQlyReadingController($connection);
 
         $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
 
+        $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getLocationId());
+
+        $locationHumidity = 0;
+        $locationTemp = 0;
+        $locationWindSpeed = 0;
+        $locationWindDirection = 0;
+        $locationPressure = 0;
+
+        $locationAirQty = 0;
+        $locationAirO2 = 0;
+        $locationAirCo2 = 0;
+
+        foreach ($sensorArray as $sensorDetail) {
+            /* @var $sensorDetail Sensor */
+            // print_r($sensorDetail);
+            switch ($sensorDetail->getTypeName()) {
+                case "Temperature"://temp
+                    $lastReading = ($tempController->tempLastReadingSearchAction($sensorDetail->getSensorId()));
+                    /* @var $lastReading TempReading */
+                    if ($lastReading != null) {
+                        $locationTemp = $lastReading->getTempValue();
+                    }
+                    break;
+                case "Air Quality"://air
+                    $lastReading = $airController->airQtlLastReadingSearchAction($sensorDetail->getSensorId());
+
+                    /* @var $lastReading AirQlyReading */
+                    if ($lastReading != null) {
+                        $locationAirQty = $lastReading->getAirQtyPercentage();
+                        $locationAirO2 = $lastReading->getOxygenPercentage();
+                        $locationAirCo2 = $lastReading->getCo2Percentage();
+                    }
+                    break;
+                case  "Humidity"://humidity
+                    $lastReading = $humidityController->humidityLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading HumidityReading */
+                    if ($lastReading != null) {
+                        $locationHumidity = $lastReading->getHumidityValue();
+                    }
+                    break;
+                case "Pressure"://pressure
+                    $lastReading = $pressureController->pressureLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading PressureReading */
+                    if ($lastReading != null) {
+                        $locationPressure = $lastReading->getPressureValue();
+                    }
+                    break;
+                case "Wind"://wind
+                    $lastReading = $windController->windLastReadingSearchAction($sensorDetail->getSensorId());
+                    /* @var $lastReading WindReading */
+                    if ($lastReading != null) {
+                        $locationWindSpeed = $lastReading->getWindSpeed();
+                        $locationWindDirection = $lastReading->getDirection();
+                    }
+                    break;
+            }
+        }
+
         $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
+
+        $locationTemp = round($locationTemp, 2);
+        $locationHumidity = round($locationHumidity , 2);
+        $locationPressure = round($locationPressure  / 1000, 2);
+
+        $locationWindSpeed = round($locationWindSpeed, 2);
+        $locationWindDirection = round($locationWindDirection, 2);
+
+        $locationAirQty = round($locationAirQty, 2);
+        $locationAirO2 = round($locationAirO2 , 2);
+        $locationAirCo2 = round($locationAirCo2, 4);
 
         //print_r($sensorArray);
 
@@ -211,6 +285,11 @@ class ReportController extends Controller
                 'areaName' => $viewArea,
                 'location' => $locationDetail,
                 'sensorDetails' => $sensorDetailArray,
+                'meanTemp' => $locationTemp,
+                'meanHumidity' => $locationHumidity,
+                'meanPressure' => $locationPressure,
+                'meanWind' => array('speed' => $locationWindSpeed, 'direction' => $locationWindDirection),
+                'meanAir' => array('airQly' => $locationAirQty, 'O2' => $locationAirO2, 'CO2' => $locationAirCo2),
             )
         );
     }

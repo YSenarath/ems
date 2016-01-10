@@ -1,5 +1,5 @@
 .col-md-3 {
-    padding: 25px 25px 0px 25px;
+    padding: 25px 25px 0 25px;
 }
 
 .container .list-unstyled .col-md-3 a {
@@ -12,8 +12,9 @@
     color: #80CBC4;
     text-decoration: none;
 }
-#areaListContainer{
-    margin-top:100px;
+
+#areaListContainer {
+    margin-top: 100px;
     height: 60vh;
     overflow: auto;
 }

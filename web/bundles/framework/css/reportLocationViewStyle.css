@@ -1,24 +1,25 @@
- body {
+body {
     /*background-color: #E0E0E0;*/
 }
+
 #loctionHeading {
     color: #E91E63;
 }
 
 #locationCoordinates {
     text-align: center;
-    padding: 5px 0px 25px 0px;
+    padding: 5px 0 25px 0;
     color: #EC407A;
 }
 
 #installedSensors {
-    padding: 5px 0px 25px 50px;
+    padding: 5px 0 25px 50px;
     color: #FFFFFF;
 }
 
 #sensorReadings {
-    padding: 0px 0px 25px 50px;
-/ / color: #FFFFFF;
+    padding: 0 0 25px 50px;
+    /*color: #FFFFFF;*/
 }
 
 #sensorInformation table {
@@ -29,16 +30,6 @@
     border-collapse: collapse;
     margin: 10px;
 
-/ / border: #000 1 px solid;
-
-/ / -moz-border-radius: 3 px;
-/ / -webkit-border-radius: 3 px;
-/ / border-radius: 10 px;
-
-/ / -moz-box-shadow: 0 1 px 2 px #000;
-/ / -webkit-box-shadow: 0 1 px 2 px #000;
-/ / box-shadow: 0 1 px 2 px #000;
-
 }
 
 #sensorInformation th {
@@ -47,25 +38,25 @@
 }
 
 #sensorInformation td, #sensorInformation th {
-/ / border: 1 px solid; /* No more visible border */
+    /*border: 1 px solid; !* No more visible border *!*/
     height: 50px;
     transition: all 0.3s; /* Simple transition for hover effect */
 
 }
 
 #sensorInformation #sensorIdLink a {
-    color:#EEEEEE;
+    color: #EEEEEE;
     text-decoration: none;
 }
 
 #sensorInformation #sensorReadingLink a {
-    color:#FFC400;
+    color: #FFC400;
     text-decoration: none;
 }
 
 #sensorInformation th {
     text-align: center;
-/ / border-bottom: 1 px solid #000;
+    /*border-bottom: 1 px solid #000;*/
 }
 
 #sensorInformation td {
@@ -81,17 +72,19 @@
     /*padding: 5 px;*/
 }
 
-#section1 {
-    height: 500px;
-    color: #fff;
-    background-color: #1976D2;
+#section0 {
+    /*padding-top: 50px;*/
+    /*height: 2000px;*/
+    /*color: #000;*/
+    background-color: #009688;
+    padding: 10px;
+    /*margin-bottom: 5px;*/
 }
 
-#section2 {
-    padding-top: 50px;
-    height: 2000px;
-/ / color: #000;
-/ / background-color: #039BE5;
+#section1 {
+    height: 400px;
+    color: #fff;
+    background-color: #00796B;
 }
 
 #sensorReading table {
@@ -128,9 +121,47 @@
     /*padding: 5 px;*/
 }
 
- #errorMsg {
-     margin: 15px 0px;
-     padding: 15px;
-     color: #D8000C;
-     background-color: #FFBABA;
- }
+#errorMsg {
+    margin: 15px 0;
+    padding: 15px;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+#locationReadings {
+    padding: 25px 40px 25px 40px;
+    background-color: #eaeaea;
+    border: 10px solid #EFEFEF;
+    color: #009688;
+    border-radius: 10px;
+    float: none;
+    margin: 0 auto;
+}
+
+#locationReadings table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    width: 75%;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+#locationReadings td, #locationReadings th {
+    border: 1px solid transparent; /* No more visible border */
+    height: 50px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+}
+
+#locationReadings td {
+    color: #FF5722;
+    /*background: #F5F5F5;*/
+    text-align: left;
+    padding: 5px;
+}
+
+#locationReadings tr {
+    text-align: center;
+    /*background: #F5F5F5;*/
+    padding: 5px;
+}

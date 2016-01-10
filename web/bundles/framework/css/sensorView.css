@@ -4,19 +4,21 @@ h1 {
 
 table {
     color: #333;
-    font-family: Courier New,Helvetica, Arial, sans-serif;
+    font-family: Courier New, Helvetica, Arial, sans-serif;
     font-size: 15px;
     border-collapse: collapse;
     border-spacing: 0;
 
 }
-th{
-    border-bottomr:1px solid #9d9d9d;
-    border-top:1px solid #0d9d9d;
+
+th {
+    border-bottom: 1px solid #9d9d9d;
+    border-top: 1px solid #0d9d9d;
     background-color: #009688;
     font-size: 20px;
-    text-shadow: 5px 5px 5px #00897B  ;
+    text-shadow: 5px 5px 5px #00897B;
 }
+
 td, th {
     border: 1px solid transparent; /* No more visible border */
     height: 30px;
@@ -32,7 +34,7 @@ td {
 
 /* Cells in even rows (2,4,6...) are one color */
 tr {
-/ / color:;
+    /*color:;*/
     text-align: center;
     background: #F5F5F5;
     padding: 5px;
@@ -41,16 +43,16 @@ tr {
 #areaMean {
 
 }
-#errorMsg{
-    margin: 10px 0px;
-    padding:12px;
+
+#errorMsg {
+    margin: 10px 0;
+    padding: 12px;
     color: #D8000C;
     background-color: #FFBABA;
 }
 
-
-.tableScrollable{
-    margin-bottom: 2% ;
+.tableScrollable {
+    margin-bottom: 2%;
     /*height: 65vh;*/
     /*overflow-y: scroll;*/
 }
