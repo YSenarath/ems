@@ -1,47 +1,56 @@
-
 h1 {
     padding: 10px;
     color: #009688;
 }
 
-table {
+#areaReadings {
+    /*padding: 25px 40px 25px 40px;*/
+    background-color: #eaeaea;
+    border: 10px solid #EFEFEF;
+    color: #009688;
+    border-radius: 10px;
+    float: none;
+    margin: 0 auto;
+}
+
+#areaReadings table {
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 20px;
-    width: 50%;
+    width: 75%;
     border-collapse: collapse;
     padding: 10px;
 }
 
-td, th {
+#areaReadings td, #areaReadings th {
     border: 1px solid transparent; /* No more visible border */
     height: 50px;
     transition: all 0.3s; /* Simple transition for hover effect */
 }
 
-td {
+#areaReadings td {
     color: #FF5722;
-    background: #F5F5F5;
+    /*background: #F5F5F5;*/
     text-align: left;
     padding: 5px;
 }
 
-tr {
+#areaReadings tr {
     text-align: center;
-    background: #F5F5F5;
+    /*background: #F5F5F5;*/
     padding: 5px;
 }
 
 #errorMsg {
-    margin: 10px 0px;
+    margin: 10px 0;
     padding: 12px;
     color: #D8000C;
     background-color: #FFBABA;
 }
 
 #map {
-    height: 400px;
-    width: 600px;
+    height: 420px;
+    width: 45vw;
 
 }
 
@@ -51,7 +60,7 @@ tr {
 
 .locLi {
     padding: 5px;
-    //margin: 1px;
+    /*margin: 1px;*/
     font-size: 12pt;
 }
 
@@ -67,7 +76,7 @@ tr {
     width: 220px;
     font-size: 15px;
     display: block;
-    padding: 10px 0px 25px 250px;
+    padding: 10px 0 25px 250px;
 }
 
 .filterform input {
@@ -104,11 +113,11 @@ tr {
     background: #ffffff;
 }
 
-#header  {
+#header {
     padding: 25px 5px 5px 50px;
 }
 
-#locationAddressList{
+#locationAddressList {
     height: 18vh;
     overflow: auto;
 }

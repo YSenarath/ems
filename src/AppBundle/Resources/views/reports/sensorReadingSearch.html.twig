@@ -1,7 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
+
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportSensorReadingSearcherStyle.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <style>
     </style>
 {% endblock %}
@@ -9,20 +11,7 @@
 {% block body %}
     <div id="headings" align="center">
         <h2>
-            Sensor {{ sensor.getSensorId() }}
-            (
-            {% if sensor.getTypeName()=='air_qty' %} {#Air qty#}
-                Air Quality
-            {% elseif sensor.getTypeName()=='temp' %} {#Temp#}
-                Temperature
-            {% elseif sensor.getTypeName()=='pressure' %} {#Pressure#}
-                Pressure
-            {% elseif sensor.getTypeName()=='wind' %} {#Wind#}
-                Wind
-            {% elseif sensor.getTypeName()=='humidity' %} {#Humidity#}
-                Humidity
-            {% endif %}
-            )
+            Sensor : {{ sensor.sensorId }} ({{ sensor.getTypeName() }})
         </h2>
         <h3 style="padding: 3px 0px 40px 0px;">Filter sensor readings</h3>
     </div>

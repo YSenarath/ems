@@ -1,13 +1,15 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportLocationViewStyle.css') }}"/>
     <style>
     </style>
 {% endblock %}
 
 {% block body %}
-    <div id="headings">
-        <h1 id="loctionHeading" align="center">
+    <div id="headings" align="center">
+        <h1 id="loctionHeading">
             {{ location.getAddress() }}, {{ areaName }}
         </h1>
         <div id="locationCoordinates">
@@ -15,6 +17,44 @@
         </div>
     </div>
     {% if sensorDetails[0]['sensor'].getTypeName is defined %}
+        <div id="section0" class="container-fluid">
+            <div class="col-sm-5" id="locationReadings" align="center">
+                <table>
+                    <tr>
+                        <td>Air Quality</td>
+                        <td> {{ meanAir['airQly'] }} %</td>
+                    </tr>
+                    <tr>
+                        <td>Oxygen content</td>
+                        <td> {{ meanAir['O2'] }} %</td>
+                    </tr>
+                    <tr>
+                        <td>Carbon diaoxide content</td>
+                        <td> {{ meanAir['CO2'] }} %</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>{{ meanHumidity }} %</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure</td>
+                        <td>{{ meanPressure }} KPa</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>{{ meanTemp }} °C</td>
+                    </tr>
+                    <tr>
+                        <td>Wind speed</td>
+                        <td>{{ meanWind['speed'] }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td>Wind Direction</td>
+                        <td>{{ meanWind['direction'] }} °</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div id="section1" class="container-fluid">
 
             <div>
@@ -40,17 +80,7 @@
                             <td id="sensorIdLink" title="view sensor"><a
                                         href="{{ path('viewSensor') }}?id={{ sensorDetail['sensor'].getSensorId() }}">{{ sensorDetail['sensor'].getSensorId() }}</a>
                             </td>
-                            {% if sensorDetail['sensor'].getTypeName()=='air_qty' %} {#Air qty#}
-                                <td>Air Quality</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='temp' %} {#Temp#}
-                                <td>Temperature</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='pressure' %} {#Pressure#}
-                                <td>Pressure</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='wind' %} {#Wind#}
-                                <td>Wind</td>
-                            {% elseif sensorDetail['sensor'].getTypeName()=='humidity' %} {#Humidity#}
-                                <td>Humidity</td>
-                            {% endif %}
+                            <td>{{ sensorDetail['sensor'].getTypeName() }}</td>
                             <td>{{ sensorDetail['model'].getManufacture() }}</td>
                             {% if sensorDetail['model'].getUnit()=='percent' %} {#Air qty#}
                                 <td>%</td>

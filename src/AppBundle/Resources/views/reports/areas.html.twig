@@ -1,15 +1,18 @@
 {# AppBundle/Resources/views/reports/areas.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
  {% block otherstylesheets %}
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
      {#Sidebar style#}
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+
  {% endblock %}
 
 {% block body %}
-
-    <h1 align="center">
-        Areas
-    </h1>
+    <div id="headings" align="center">
+        <h1>
+            Areas
+        </h1>
+    </div>
 
     <div class="container " id="areaListContainer">
         <ul class="list-unstyled" id="list">

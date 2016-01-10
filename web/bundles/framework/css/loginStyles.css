@@ -1,27 +1,27 @@
 body {
-    background-color:#000;
-    margin:0;
-    padding:0;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
 }
 
 span {
-    color:#fff;
+    color: #fff;
     font-family: 'Raleway', sans-serif;
-    font-size:18px;
+    font-size: 18px;
 }
 
 p {
-    color:#fff;
+    color: #fff;
     font-family: 'Raleway', sans-serif;
-    font-size:10px;
+    font-size: 10px;
 }
 
 .col-centered {
     float: none;
     margin: 0 auto;
-    margin-top:150px;
+    margin-top: 150px;
 }
 
 .wrath-content-box {
