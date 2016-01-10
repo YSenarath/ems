@@ -305,7 +305,7 @@ class ReportController extends Controller
         $connection = $this->get('database_connection');
 
         $sensorController = new SensorController($connection);
-        $sensor = $sensorController->searchSensor($sensorId);
+        $sensor = $sensorController->searchReportSensor($sensorId);
 
         $tempController = new TempReadingController($connection);
         $humidityController = new HumidityReadingController($connection);

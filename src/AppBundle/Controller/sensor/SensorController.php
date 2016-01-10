@@ -86,6 +86,37 @@ class SensorController extends  Controller{
         return $sensor;
     }
 
+    /**
+     * Created by Shehan
+     * @param $sensor_id
+     * @return Sensor|bool
+     */
+    public function searchReportSensor($sensor_id)
+    {
+        $s = $this->connection->fetchAssoc(
+            'SELECT sensor_id,type_name  FROM sensor NATURAL JOIN sensor_type WHERE sensor_id = ?',
+            array($sensor_id)
+        );
+
+        //print_r($result);
+        $sensor = new Sensor();
+
+        if ($s != null) {
+            $sensor->setSensorId($s["sensor_id"]);
+            $sensor->setTypeName($this->getTypeName($s["type_name"]));
+//            $sensor->setModelId($s["model_id"]);
+//            $sensor->setInsDate($s["installed_date"]);
+//            $sensor->setTMin($s["threshold_min"]);
+//            $sensor->setTMax($s["threshold_max"]);
+//            $sensor->setLocId($s["location_id"]);
+
+        } else {
+            return false;
+        }
+
+        return $sensor;
+    }
+
     public function getSensor($sensor_id)
     {
         $s = $this->connection->fetchAssoc(
