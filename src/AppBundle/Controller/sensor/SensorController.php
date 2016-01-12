@@ -14,7 +14,7 @@ use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Entity\sensor\SensorSearch;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 
 class SensorController extends  Controller{
@@ -225,37 +225,6 @@ class SensorController extends  Controller{
     }
 
     /**
-     * Created by Shehan
-     * @param $locationId
-     * @return array
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function getSensorDetailsByLocationAction($locationId)
-    {
-
-        $result = $this->connection->executeQuery(
-            'SELECT sensor_id,type_name FROM sensor WHERE location_id=? ORDER BY sensor_id',
-            array($locationId)
-        );
-        $result = $result->fetchAll();
-        //print_r($result);
-        $sensorArray = array();
-
-        foreach ($result as $a) {
-            if ($a != null) {
-                $sensor = new Sensor();
-                $sensor->setSensorId($a["sensor_id"]);
-                $sensor->setTypeName($this->getTypeName($a["type_name"]));
-                $sensorArray[] = $sensor;
-            }
-        }
-
-        //print_r($sensorArray);
-
-        return $sensorArray;
-    }
-
-    /**
      * @param $locationId
      * @return array
      * @throws \Doctrine\DBAL\DBALException
@@ -305,4 +274,53 @@ class SensorController extends  Controller{
                 return 'Wind';
         }
     }
+
+    public function removeSensor($sensorId){
+
+        try{
+            $statement = $this->connection->prepare('DELETE FORM sensor WHERE sensor_id = ?');
+            $statement->bindValue(1, $sensorId);
+            $statement->execute();
+            $this->connection->commit();
+
+            return true;
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }
+    }
+
+    /**
+     * Created by Shehan
+     * @param $locationId
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSensorDetailsByLocationAction($locationId)
+    {
+
+        $result = $this->connection->executeQuery(
+            'SELECT sensor_id,type_name FROM sensor WHERE location_id=? ORDER BY sensor_id',
+            array($locationId)
+        );
+        $result = $result->fetchAll();
+        //print_r($result);
+        $sensorArray = array();
+
+        foreach ($result as $a) {
+            if ($a != null) {
+                $sensor = new Sensor();
+                $sensor->setSensorId($a["sensor_id"]);
+                $sensor->setTypeName($this->getTypeName($a["type_name"]));
+                $sensorArray[] = $sensor;
+            }
+        }
+
+        //print_r($sensorArray);
+
+        return $sensorArray;
+    }
+
+
 }

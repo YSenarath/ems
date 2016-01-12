@@ -12,11 +12,14 @@ namespace AppBundle\Controller\sensor;
 use AppBundle\Controller\location\LocationController;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Entity\sensor\Model;
+use AppBundle\Entity\sensor\SensorError;
 use AppBundle\Entity\sensor\SensorSearch;
 use AppBundle\Entity\sensor\Type;
 use AppBundle\Form\sensor\FindSensor;
 use AppBundle\Form\sensor\SensorType;
 use AppBundle\Form\sensor\ModelType;
+use AppBundle\Form\sensor\ErrorType;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,6 +69,21 @@ class SensorActionController extends  Controller
         $sensors=$sensorController ->getAllSensors();
 
         return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
+
+    }
+
+    /**
+     * @Route("/sensor/error/list", name="sensor_error_list")
+     */
+    public function listSensorErrorAction()
+    {
+        $sensorErrs[] = new SensorError();
+
+        $connection = $this->get('database_connection');
+        $sensorErrorController = new SensorErrorController($connection);
+        $sensorErrs = $sensorErrorController ->getAllErrors();
+
+        return $this->render('AppBundle:sensor:sensorErrorList.html.twig', array('sensors' => $sensorErrs));
 
     }
 
@@ -366,5 +384,105 @@ class SensorActionController extends  Controller
         );
     }
 
+
+    /**
+     * @Route("/sensor/error/set", name="set_error")
+     */
+    public function setErrorAction(Request $request)
+    {
+
+        $sensorId = $request->query->get('id1');
+        $reportId = $request->query->get('id2');
+
+        if ($sensorId == null){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor ID is null'));
+        }
+        if ($reportId == null){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Report ID is null'));
+        }
+
+
+        $connection = $this->get('database_connection');
+        $errorController = new SensorErrorController($connection);
+        $error = $errorController->searchError($sensorId, $reportId);
+
+        if (!$error){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Error data "'.$sensorId.'-'.$reportId.'" not fount'));
+
+        }
+
+
+        // build the form
+        $form = $this->createForm(ErrorType::class, $error);
+
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            $errorController->updateErrorAction($error);
+
+            return $this->redirectToRoute('sensor_error_list');
+        }
+
+        return $this->render(
+            'AppBundle:sensor:setErrorInfo.Html.twig',
+            array('form' => $form->createView() )
+        );
+    }
+
+
+
+//    /**
+//     * @Route("/sensor/remove", name="remove_sensor")
+//     */
+//    private function deleteSensorAction(Request $request)
+//    {
+//        $sensorErrs[] = new SensorError();
+//
+//        $connection = $this->get('database_connection');
+//        $sensorErrorController = new SensorErrorController($connection);
+//        $sensorErrs = $sensorErrorController ->getAllErrors();
+//
+//        return $this->render('AppBundle:sensor:sensorErrorList.html.twig', array('sensors' => $sensorErrs));
+//
+//        $sensorId = $request->query->get('id');
+//
+//        // build the form
+//        $form = $this->createFormBuilder()
+//            ->add('submit', 'submit', array('label' => '',
+//                'attr' => array(
+//                    'onclick' => 'return confirm("Are you sure do you want to remove sensor :'.$sensorId.'?")'
+//                )))
+//            ->getForm();
+//
+//
+//        //Handle submission (will only happen on POST)
+//        $form->handleRequest($request);
+//
+//        if ($form->isValid() && $form->isSubmitted()) {
+//
+//            $connection = $this->get('database_connection');
+//            $sensorController = new SensorController($connection);
+//
+//            if ($sensorController->removeSensor($sensorId)){
+//                return $this->redirectToRoute('sensor_error_list');
+//            } else{
+//
+//                $this->get('session')->getFlashBag()->add(
+//                    'notice',
+//                    'Sensor Delete Succeed'
+//                );
+//            }
+//
+//        }
+//
+//        return $this->render(
+//            'AppBundle:sensor:addSensor.html.twig',
+//            array('form' => $form->createView())
+//        );
+//
+//    }
 
 }

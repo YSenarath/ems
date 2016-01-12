@@ -19,7 +19,7 @@
 /*}*/
 
 table, #searchContainer {
-    font-family: Courier New, Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .customHeader th {
@@ -28,6 +28,9 @@ table, #searchContainer {
     text-shadow: 5px 5px 5px #00897B;
 }
 
+.customPointer{
+    cursor: pointer;
+}
 tbody tr:hover {
     background-color: rgba(129, 208, 177, .3);
 }
@@ -74,7 +77,7 @@ tbody {
 }
 
 td {
-    color: #FF5722;
+    color: #000000;
     background: transparent;
     text-align: left;
     padding: 7px;

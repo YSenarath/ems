@@ -1,3 +1,5 @@
+
+
 $(document).ready(function()
 {
 
@@ -12,7 +14,6 @@ $(document).ready(function()
 
 function searchTable(inputVal)
 {
-
 
     var table = $('#tblData');
     table.find('tr').each(function(index, row)

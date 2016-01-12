@@ -1,0 +1,85 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
+
+{% endblock %}
+
+
+{% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
+
+
+{% block body %}
+    <h1 align="center">
+        Set Error Info
+        <hr>
+    </h1>
+    <dev >
+        <div class="container">
+            <div class="container formContainer">
+
+                <table class="tableWidth">
+                    {{ form_start(form) }}
+                    <tr >
+                        <td >
+                            {{ form_label(form.sensor_id) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.sensor_id) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.sensor_id) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+                            {{ form_label(form.report_id) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.report_id) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.report_id) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+                            {{ form_label(form.error_desc) }}
+                        </td>
+                        <td >
+                            {{ form_widget(form.error_desc) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.error_desc) }}
+                        </td>
+                    </tr>
+
+                    <tr >
+                        <td >
+                            {{ form_label(form.is_fixed )}}
+                        </td>
+                        <td >
+                            {{ form_widget(form.is_fixed) }}
+                        </td>
+                        <td >
+                            {{ form_errors(form.is_fixed) }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+
+                        </td>
+                        <td align="right" >
+                            {{ form_widget(form.submit) }}
+                        </td>
+                        <td >
+
+                        </td>
+                    </tr>
+                    {{ form_end(form) }}
+                </table>
+            </div>
+        </div>
+    </dev>
+{% endblock body %}

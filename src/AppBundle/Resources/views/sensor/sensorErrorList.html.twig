@@ -1,0 +1,118 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/tableSearch.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+    <h1 align="center">
+        Sensor Error Report
+    </h1>
+    <div class="container ">
+        <div >
+            <div class="row" id= "searchContainer">
+                <label for="search">
+                    <strong>Enter keyword to search </strong>
+                </label>
+                <input type="text" id="search">
+                <label>e.g.  S12, P.O. Box 271, 2016</label>
+            </div>
+
+            <div class="row">
+                <div  id="tableContainer">
+                    <table class="table sortable" id="tblData">
+                        <tr class="customHeader">
+                            <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                            <th class="col-md-2">Sensor ID</th>
+                            <th class="col-md-2">Sensor Type</th>
+                            <th class="col-md-2">Sensor Location</th>
+                            <th class="col-md-3">Error Description</th>
+                            <th class="col-md-2">Timestamp</th>
+                            <th class="col-md-2">Fixed</th>
+                        </tr>
+                        {% for sensor in sensors  %}
+                            <tr>
+                                {% if sensor.getSensorId|trim is not empty %}
+                                    <td class="col-md-1">{{ loop.index-1 }}</td>
+                                    <td class="col-md-2 customPointer" onclick="document.location = '{{ path('viewSensor') }}?id={{ sensor.getSensorId}}'">
+                                        <a href="{{ path('viewSensor') }}?id={{ sensor.getSensorId}}">{{ sensor.getSensorId }}</a>
+                                    </td>
+
+                                    {% if sensor.getType|trim is not empty %}
+
+                                        <td class="col-md-2">{{ sensor.getType }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getLocation|trim is not empty %}
+                                        <td class="col-md-2">{{ sensor.getLocation }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getErrorDesc|trim is not empty %}
+                                        <td class="col-md-3"> {{ sensor.getErrorDesc }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getTimestamp|trim is not empty %}
+                                        <td class="col-md-2">{{ sensor.getTimestamp }}</td>
+                                    {% else %}
+                                        <td >Not Set</td>
+                                    {% endif %}
+
+                                    {% if sensor.getIsFixed|trim is not empty %}
+                                        <td class="col-md-2">{{ sensor.getIsFixed }}
+
+                                        {% if sensor.getIsFixed == "Not Fixed" %}
+                                            <button
+                                                    onclick="document.location = '{{ path('set_error') }}?id1={{ sensor.getSensorId}}&id2={{ sensor.getReportId }}'"
+                                                    class="btn glyphicon glyphicon-pencil pull-right" >
+                                            </button>
+                                        {% endif %}
+                                        </td>
+
+
+                                    {% else %}
+                                        <td >Not Set
+
+                                            {% if sensor.getIsFixed == "Not Fixed" %}
+                                                <button
+                                                        onclick="document.location = '{{ path('set_error') }}?id1={{ sensor.getSensorId}}&id2={{ sensor.getReportId }}'"
+                                                        class="btn glyphicon glyphicon-pencil pull-right" >
+                                                </button>
+                                            {% endif %}
+                                        </td>
+
+                                    {% endif %}
+
+
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <p>*Please Click the table column header to sort by.</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}
