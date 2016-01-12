@@ -8,6 +8,7 @@
 
     </style>
 
+
 {% endblock %}
 {% block body %}
     <div id="headings" align="center">
@@ -74,36 +75,36 @@
                     </div>
 
                 </div>
-                <div id="graphical" class="tab">
+                <div id="graphical" class="tab snap">
 
-                    <section id="section1">
-                        <div id="div_chart_generic" align="center">
+                    <section id="section1" class="section">
+                        <div id="div_chart_generic" align="center" style="position:relative">
                         </div>
                     </section>
 
                     {% if lineChart_windDir is not null %}
-                        <section id="section2">
+                        <section id="section2" class="section">
                             <div id="div_chart_windDir" align="center">
                             </div>
                         </section>
                     {% endif %}
 
                     {% if lineChart_airQly is not null %}
-                        <section id="section2">
+                        <section id="section2" class="section">
                             <div id="div_chart_airQly" align="center">
                             </div>
                         </section>
                     {% endif %}
 
                     {% if lineChart_airCO2 is not null %}
-                        <section id="section3">
+                        <section id="section3" class="section">
                             <div id="div_chart_airCO2" align="center">
                             </div>
                         </section>
                     {% endif %}
 
                     {% if lineChart_airOxygen is not null %}
-                        <section id="section4">
+                        <section id="section4" class="section">
                             <div id="div_chart_airOxygen" align="center">
                             </div>
                         </section>
@@ -148,6 +149,8 @@
                 </div>
             </div>
             <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+            <script src="{{ asset('bundles/framework/js/jquery.panelSnap.js') }}"></script>
+
             <script>
                 jQuery(document).ready(function () {
                     jQuery('.tabs .tab-links a').on('click', function (e) {
@@ -162,6 +165,43 @@
                         e.preventDefault();
                     });
                 });
+
+                //                jQuery(function($) {
+                //                    $('.snap').panelSnap();
+                //                });
+
+                jQuery(function ($) {
+                    var options = {
+                        $menu: false,
+                        menuSelector: 'a',
+                        panelSelector: '> section',
+                        namespace: '.panelSnap',
+                        onSnapStart: function () {
+                        },
+                        onSnapFinish: function () {
+                        },
+                        onActivate: function () {
+                        },
+                        directionThreshold: 50,
+                        slideSpeed: 200,
+                        easing: 'linear',
+                        offset: 100,
+                        navigation: {
+                            keys: {
+                                nextKey: false,
+                                prevKey: false
+                            },
+                            buttons: {
+                                $nextButton: false,
+                                $prevButton: false
+                            },
+                            wrapAround: false
+                        }
+                    };
+
+                    $('.snap').panelSnap(options);
+                });
+
             </script>
         </div>
     {% else %}

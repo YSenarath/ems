@@ -305,7 +305,7 @@ class ReportController extends Controller
         $connection = $this->get('database_connection');
 
         $sensorController = new SensorController($connection);
-        $sensor = $sensorController->searchSensor($sensorId);
+        $sensor = $sensorController->searchReportSensor($sensorId);
 
         $tempController = new TempReadingController($connection);
         $humidityController = new HumidityReadingController($connection);
@@ -655,6 +655,8 @@ class ReportController extends Controller
                 $lineChart_generic->getOptions()->getHAxis()->setSlantedTextAngle(90);
                 $lineChart_generic->getOptions()->getHAxis()->setSlantedText(true);
                 $lineChart_generic->getOptions()->getHAxis()->setShowTextEvery(1);
+                $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setFontSize(10);
+//                $lineChart_generic->getOptions()->getHAxis()->;
 
                 // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
                 $lineChart_generic->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
@@ -676,6 +678,7 @@ class ReportController extends Controller
                     $lineChart_airQly->getOptions()->getHAxis()->setSlantedTextAngle(90);
                     $lineChart_airQly->getOptions()->getHAxis()->setSlantedText(true);
                     $lineChart_airQly->getOptions()->getHAxis()->setShowTextEvery(1);
+                    $lineChart_airQly->getOptions()->getHAxis()->getTextStyle()->setFontSize(10);
 
                     // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
                     $lineChart_airQly->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
@@ -700,6 +703,7 @@ class ReportController extends Controller
                     $lineChart_airOxygen->getOptions()->getHAxis()->setSlantedTextAngle(90);
                     $lineChart_airOxygen->getOptions()->getHAxis()->setSlantedText(true);
                     $lineChart_airOxygen->getOptions()->getHAxis()->setShowTextEvery(1);
+                    $lineChart_airOxygen->getOptions()->getHAxis()->getTextStyle()->setFontSize(10);
 
                     // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
                     $lineChart_airOxygen->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
@@ -723,6 +727,7 @@ class ReportController extends Controller
                     $lineChart_airCO2->getOptions()->getHAxis()->setSlantedTextAngle(90);
                     $lineChart_airCO2->getOptions()->getHAxis()->setSlantedText(true);
                     $lineChart_airCO2->getOptions()->getHAxis()->setShowTextEvery(1);
+                    $lineChart_airCO2->getOptions()->getHAxis()->getTextStyle()->setFontSize(10);
 
                     // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
                     $lineChart_airCO2->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
@@ -746,6 +751,7 @@ class ReportController extends Controller
                     $lineChart_windDir->getOptions()->getHAxis()->setSlantedTextAngle(90);
                     $lineChart_windDir->getOptions()->getHAxis()->setSlantedText(true);
                     $lineChart_windDir->getOptions()->getHAxis()->setShowTextEvery(1);
+                    $lineChart_windDir->getOptions()->getHAxis()->getTextStyle()->setFontSize(10);
 
                     // $lineChart_generic->getOptions()->getHAxis()->getTextStyle()->setColor('#FF5722');
                     $lineChart_windDir->getOptions()->getVAxis()->getTextStyle()->setColor('#2196F3');
