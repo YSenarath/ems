@@ -87,7 +87,6 @@ class SensorActionController extends  Controller
 
     }
 
-
     /**
      * @Route("/model/list", name="model_list")
      */
@@ -145,7 +144,6 @@ class SensorActionController extends  Controller
                 'locations' => $locations
             ));
 
-
         //Handle submission (will only happen on POST)
         $form->handleRequest($request);
 
@@ -164,7 +162,6 @@ class SensorActionController extends  Controller
         );
 
     }
-
 
     /**
      * @Route("/model/add", name="add_model")

@@ -37,3 +37,9 @@ body {
 .tableStyle td {
     border-right: 15px solid transparent;
 }
+#find_sensor_model_id{
+    height: 20vh;
+}
+#find_sensor_loc_id{
+    height: 20vh;
+}

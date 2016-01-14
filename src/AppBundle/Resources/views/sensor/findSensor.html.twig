@@ -17,46 +17,62 @@
 
     <dev>
         <div class="container-fluid">
-            <div class="col-sm-5 formContainer">
-                {{ form_start(form) }}
+            <div class="col-sm-7 formContainer">
+                <div>
+                    {{ form_start(form) }}
 
-                {{ form_label(form.sensor_id) }} {{ form_widget(form.sensor_id) }}
-                <br>
-                {{ form_label(form.type_name) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_label(form.sensor_id) }} {{ form_widget(form.sensor_id) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(form.type_name) }}
 
-                <table class="tableStyle">
-                    <tr>
-                        <td>{{ form_widget(form.type_name.0) }}</td>
-                        <td>{{ form_widget(form.type_name.1) }}</td>
-                        <td>{{ form_widget(form.type_name.2) }}</td>
-                        <td>{{ form_widget(form.type_name.3) }}</td>
-                        <td>{{ form_widget(form.type_name.4) }}</td>
-                    </tr>
-                </table>
+                            <table class="tableStyle">
+                                <tr>
+                                    <td>{{ form_widget(form.type_name.0) }}</td>
+                                    <td>{{ form_widget(form.type_name.1) }}</td>
+                                    <td>{{ form_widget(form.type_name.2) }}</td>
+                                    <td>{{ form_widget(form.type_name.3) }}</td>
+                                    <td>{{ form_widget(form.type_name.4) }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
-                <br>
-                {{ form_label(form.model_id) }} {{ form_widget(form.model_id) }}
+                    <br>
 
-                <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_label(form.model_id) }} {{ form_widget(form.model_id) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(form.loc_id) }} {{ form_widget(form.loc_id) }}
+                        </div>
 
-                {{ form_label(form.loc_id) }} {{ form_widget(form.loc_id) }}
+                    </div>
 
-                <br>
+                    <br>
 
-                {{ form_label(form.ins_date) }} {{ form_widget(form.ins_date) }}
+                    <div class="row">
+                        <div>
+                            {{ form_label(form.ins_date) }} {{ form_widget(form.ins_date) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }} {{ form_errors(form.ins_before) }}
+                        </div>
 
-                <br>
+                    </div>
 
-                {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }} {{ form_errors(form.ins_before) }}
+                    <br>
 
-                <br>
+                    <div align="right">
+                        {{ form_widget(form.submit) }}
+                    </div>
 
-                <div align="right">
-                    {{ form_widget(form.submit) }}
+                    {{ form_end(form) }}
+
                 </div>
-
-                {{ form_end(form) }}
-
             </div>
         </div>
     </dev>
