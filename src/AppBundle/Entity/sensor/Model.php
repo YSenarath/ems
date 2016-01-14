@@ -20,7 +20,16 @@ class Model
      * )
      */
     protected $model_id;
+
+    /**
+     * @Assert\Length(
+     *      max = 100,
+     *      maxMessage = "Manufacturer cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $manufacture;
+
+
     protected $unit;
 
 

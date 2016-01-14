@@ -93,6 +93,7 @@ class SensorActionController extends  Controller
      */
     public function listModelAction()
     {
+
         $models[] = new Model();
 
         $connection = $this->get('database_connection');
@@ -434,55 +435,48 @@ class SensorActionController extends  Controller
 
 
 
-//    /**
-//     * @Route("/sensor/remove", name="remove_sensor")
-//     */
-//    private function deleteSensorAction(Request $request)
-//    {
-//        $sensorErrs[] = new SensorError();
-//
-//        $connection = $this->get('database_connection');
-//        $sensorErrorController = new SensorErrorController($connection);
-//        $sensorErrs = $sensorErrorController ->getAllErrors();
-//
-//        return $this->render('AppBundle:sensor:sensorErrorList.html.twig', array('sensors' => $sensorErrs));
-//
-//        $sensorId = $request->query->get('id');
-//
-//        // build the form
-//        $form = $this->createFormBuilder()
-//            ->add('submit', 'submit', array('label' => '',
-//                'attr' => array(
-//                    'onclick' => 'return confirm("Are you sure do you want to remove sensor :'.$sensorId.'?")'
-//                )))
-//            ->getForm();
-//
-//
-//        //Handle submission (will only happen on POST)
-//        $form->handleRequest($request);
-//
-//        if ($form->isValid() && $form->isSubmitted()) {
-//
-//            $connection = $this->get('database_connection');
-//            $sensorController = new SensorController($connection);
-//
-//            if ($sensorController->removeSensor($sensorId)){
-//                return $this->redirectToRoute('sensor_error_list');
-//            } else{
-//
-//                $this->get('session')->getFlashBag()->add(
-//                    'notice',
-//                    'Sensor Delete Succeed'
-//                );
-//            }
-//
-//        }
-//
-//        return $this->render(
-//            'AppBundle:sensor:addSensor.html.twig',
-//            array('form' => $form->createView())
-//        );
-//
-//    }
+    /**
+     * @Route("/model/remove", name="remove_model")
+     */
+    public function deleteSensorModelAction(Request $request)
+    {
+
+        $modelId = $request->query->get('id');
+
+        $connection = $this->get('database_connection');
+        $modelController = new ModelController($connection);
+
+        if ($modelController->removeModel($modelId)){
+
+            $this->get('session')->getFlashBag()->add('msg', 'Sensor Model : '.$modelId.' Delete Succeed');
+        }
+        else{
+            $this->get('session')->getFlashBag()->add('msg', 'Sensor Model : '.$modelId.' Delete Failed (Warning - can not remove model having registered sensors)');
+        }
+
+        return $this->redirectToRoute('model_list');
+    }
+
+    /**
+     * @Route("/sensor/remove", name="remove_sensor")
+     */
+    public function deleteSensorAction(Request $request)
+    {
+
+        $sensorId = $request->query->get('id');
+
+        $connection = $this->get('database_connection');
+        $sensorController = new SensorController($connection);
+
+        if ($sensorController->removeSensor($sensorId)){
+
+            $this->get('session')->getFlashBag()->add('msg', 'Sensor  : '.$sensorId.' Delete Succeed');
+        }
+        else{
+            $this->get('session')->getFlashBag()->add('msg', 'Sensor : '.$sensorId.' Delete Failed (Warning - can not remove sensors having sensor readings)');
+        }
+
+        return $this->redirectToRoute('sensor_list');
+    }
 
 }

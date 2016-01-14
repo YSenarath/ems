@@ -1,6 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block otherstylesheets %}
+
+    <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
+
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorView.css') }}"/>
 
 {% endblock %}
@@ -138,7 +141,11 @@
                             <span class="glyphicon glyphicon-menu-hamburger"></span> View Readings |
                         </a>
                         <a href="{{ path('edit_sensor') }}?id={{sensor.getSensorId}}">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit Sensor details
+                            <span class="glyphicon glyphicon-pencil"></span> Edit Sensor details |
+                        </a>
+                        <a href="#" onclick="confirmation( 'Are you sure to remove model : {{sensor.getSensorId}} '
+                        ,'{{ path('remove_sensor') }}?id={{sensor.getSensorId}}')">
+                            <span class="glyphicon glyphicon-remove "></span> Remove Sensor
                         </a>
                     </div>
 

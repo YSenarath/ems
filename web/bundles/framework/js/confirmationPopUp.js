@@ -3,12 +3,17 @@
  */
 
 
-function myFunction(msg) {
-    var x;
+function confirmation(msg , path ) {
+
     if (confirm(msg) == true) {
-        window.open();
+        window.location=path;
     } else {
 
     }
-    document.getElementById("jnj").innerHTML = x;
+
+}
+
+
+function infoPopUp(msg){
+    alert(msg);
 }

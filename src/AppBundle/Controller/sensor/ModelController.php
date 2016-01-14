@@ -11,6 +11,9 @@ namespace AppBundle\Controller\sensor;
 
 use Doctrine\DBAL\Connection;
 use AppBundle\Entity\sensor\Model;
+use Doctrine\ORM\ORMException;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class ModelController
 {
@@ -133,4 +136,32 @@ class ModelController
         }
     }
 
+
+    public function removeModel($modelId){
+
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('DELETE FROM sensor_model WHERE model_id = ?');
+            $statement->bindValue(1, $modelId);
+            $statement->execute();
+            $this->connection->commit();
+
+            return true;
+        } catch(ORMException $e) {
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }catch (\PDOException $e){
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }catch (ForeignKeyConstraintViolationException $e){
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }
+
+
+    }
 }

@@ -13,6 +13,8 @@ use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Entity\sensor\SensorSearch;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -255,6 +257,33 @@ class SensorController extends  Controller{
         }
     }
 
+    public function removeSensor($sensorId){
+
+        $this->connection->beginTransaction();
+
+        try{
+            $statement = $this->connection->prepare('DELETE FROM sensor WHERE sensor_id = ?');
+            $statement->bindValue(1, $sensorId);
+            $statement->execute();
+            $this->connection->commit();
+
+            return true;
+        } catch(ORMException $e) {
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }catch (\PDOException $e){
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }catch (ForeignKeyConstraintViolationException $e){
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }
+    }
+
+
     /**
      * @param $locationId
      * @return array
@@ -290,6 +319,7 @@ class SensorController extends  Controller{
         return $sensorDetailArray;
     }
 
+
     public function getTypeName($input)
     {
         switch($input) {
@@ -306,21 +336,6 @@ class SensorController extends  Controller{
         }
     }
 
-    public function removeSensor($sensorId){
-
-        try{
-            $statement = $this->connection->prepare('DELETE FORM sensor WHERE sensor_id = ?');
-            $statement->bindValue(1, $sensorId);
-            $statement->execute();
-            $this->connection->commit();
-
-            return true;
-        } catch(Exception $e) {
-            $this->connection->rollBack();
-            // throw $e;
-            return false;
-        }
-    }
 
     /**
      * Created by Shehan
