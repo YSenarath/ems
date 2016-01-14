@@ -1,0 +1,22 @@
+{# AppBundle/Resources/views/location/areas.html.twig #}
+{% extends 'AppBundle::base.html.twig' %}
+ {% block otherstylesheets %}
+     {#Sidebar style#}
+ {% endblock %}
+
+{% block body %}
+    <h1>
+        Login List
+    </h1>
+    <div class="container " id="areaListContainer">
+        <ul class="list-unstyled">
+            {% for session in sessions %}
+                <li>
+                    <h3>{{ session.getSessionId() }} : {{ session.getUserName() }} {{ session.getStartTime() }} </h3>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if (js is defined) %}{{ js|raw }}{% endif %}
+{% endblock %}

@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/animsition.min.css') }}"/>
     <script src="{{ asset('bundles/framework/js/animsition.min.js') }}"></script>
 
+    <script src="{{ asset('bundles/framework/js/notify.js') }}"></script>
+
     <!-- Latest compiled JavaScript -->
     {#Dropdowns dont work because of this#}
     {#<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>#}
@@ -105,13 +107,16 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('addEmployee') }}">Add</a></li>
                             <li><a href="{{ path('listEmployees') }}">Update</a></li>
+                            <li><hr class="navhr"></li>
+                            <li><a href="{{ path('loginList') }}">Login List</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ path('about') }}"> About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    {% endif %}
                     <li class="dropdown">
                         {% set user = app.user %}
                         {% if (user != null) %}
@@ -174,6 +179,9 @@
                 });
             });
         </script>
+    {% endblock %}
+
+    {% block customScript %}
     {% endblock %}
 </div>
 

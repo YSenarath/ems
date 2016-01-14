@@ -1,12 +1,91 @@
 {# AppBundle/Resources/views/home.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block otherstylesheets %}
+    <style>
+        .notifyjs-sample-base {
+            width: 200px;
+            background: #D8000C;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .notifyjs-sample-base .title {
+            width: 100px;
+            float: left;
+            margin: 10px 0 0 10px;
+            text-align: right;
+        }
+
+        .notifyjs-sample-base .buttons {
+            width: 70px;
+            float: right;
+            font-size: 9px;
+            padding: 5px;
+            margin: 2px;
+        }
+
+        .notifyjs-sample-base button {
+            font-size: 9px;
+            padding: 5px;
+            margin: 2px;
+            width: 60px;
+        }
+
+        .title {
+            color: white;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <h1 align="center" class="text-primary">
         Welcome
     </h1>
     {#<img src="http://www.bittersandjiggers.com/icons/icon_6496.png" alt="App Logo" align="middle" style="width:30%;height:40%; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)">#}
-    <img class="img-responsive center-block" src="{{ asset('bundles/framework/images/app_logo.png') }}" alt="App Logo" align="middle"
+    <img class="img-responsive center-block" src="{{ asset('bundles/framework/images/app_logo.png') }}" alt="App Logo"
+         align="middle"
          style=" height: 65vh;
     overflow: auto;">
+{% endblock %}
+
+{% block customScript %}
+    <script>
+        $(document).on('click', '.notifyjs-sample-base .no', function () {
+            $(this).trigger('notify-hide');
+        });
+
+        $(document).on('click', '.notifyjs-sample-base .yes', function () {
+            window.location.href = window.location.href + "/#";
+            $(this).trigger('notify-hide');
+        });
+
+        function createNotification(text) {
+            $.notify.addStyle('sample', {
+                html: "<div>" +
+                "<div class='clearfix'>" +
+                "<div class='title' data-notify-html='title'/>" +
+                "<div class='buttons'>" +
+                "<button class='no'>Dismiss</button>" +
+                "<button class='yes' data-notify-text='button'></button>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+            });
+
+            $.notify({
+                title: text,
+                button: 'Fix'
+            }, {
+                style: 'sample',
+                autoHide: false,
+                clickToHide: false,
+                position: "right bottom"
+            });
+        }
+
+        {% for error in errors %}
+            createNotification("{{ error.getErrorDesc() }}");
+        {% endfor %}
+    </script>
 {% endblock %}
