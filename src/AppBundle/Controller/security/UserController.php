@@ -40,7 +40,7 @@ class UserController extends Controller
             elseif ($privilege_level == 1)
                 $roles[] = "ROLE_MNGR";
             else
-                $roles[] = 'ROLE_USER';
+                $roles[] = 'ROLE_TECH';
 
             return new DatabaseUser($id, $username, $password, $roles);
         }

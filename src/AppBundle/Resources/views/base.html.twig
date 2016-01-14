@@ -73,13 +73,14 @@
                             <li><a href="{{ path('areaView') }}">Areas</a></li>
                         </ul>
                     </li>
-
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="true">Sensors<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('sensor_list') }}">Sensor Installed </a></li>
                             <li><a href="{{ path('find_sensor') }}">Find Sensor</a></li>
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                             <li><a href="{{ path('add_sensor') }}">Add Sensor </a></li>
                             <li><hr class="navhr"></li>
                             <li><a href="{{ path('add_model') }}">Add Model </a></li>
@@ -88,8 +89,10 @@
                             <li><a href="{{ path('type_list') }}">Sensor Types </a></li>
                             <li><hr class="navhr"></li>
                             <li><a href="{{ path('sensor_error_list') }}">Sensor Error Report </a></li>
+                            {% endif %}
                         </ul>
                     </li>
+                    {% endif %}
 
                     {#u can enter the link here  like  <li><a href="{{ path('about') }}"> About</a></li> #}
                     {#<li class="dropdown">#}

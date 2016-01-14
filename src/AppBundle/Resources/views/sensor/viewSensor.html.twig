@@ -140,6 +140,7 @@
                         <a href="{{ path('reportSensorReadings') }}?id={{sensor.getSensorId}}">
                             <span class="glyphicon glyphicon-menu-hamburger"></span> View Readings |
                         </a>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                         <a href="{{ path('edit_sensor') }}?id={{sensor.getSensorId}}">
                             <span class="glyphicon glyphicon-pencil"></span> Edit Sensor details |
                         </a>
@@ -147,6 +148,7 @@
                         ,'{{ path('remove_sensor') }}?id={{sensor.getSensorId}}')">
                             <span class="glyphicon glyphicon-remove "></span> Remove Sensor
                         </a>
+                        {% endif %}
                     </div>
 
                 </div>

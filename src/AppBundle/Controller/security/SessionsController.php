@@ -44,7 +44,7 @@ class SessionsController
      */
     public function getTopSessions()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM `session` ORDER BY start_time DESC LIMIT 5');
+        $result = $this->connection->executeQuery('SELECT * FROM `session` ORDER BY start_time DESC LIMIT 100');
         $result = $result->fetchAll();
 
         //print_r($result);

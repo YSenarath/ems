@@ -1,22 +1,47 @@
 {# AppBundle/Resources/views/location/areas.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
- {% block otherstylesheets %}
-     {#Sidebar style#}
- {% endblock %}
+
+{% block otherstylesheets %}
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/tableSearch.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
+{% endblock %}
 
 {% block body %}
-    <h1>
-        Login List
+
+    <h1 align="center">
+        Sensor Models
     </h1>
-    <div class="container " id="areaListContainer">
-        <ul class="list-unstyled">
-            {% for session in sessions %}
-                <li>
-                    <h3>{{ session.getSessionId() }} : {{ session.getUserName() }} {{ session.getStartTime() }} </h3>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="container">
+        <div class="row">
+            <div id="tableContainer">
+                <table class="table sortable" id="tblData">
+                    <tr class="customHeader">
+                        <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                        <th class="col-md-3">Login ID</th>
+                        <th class="col-md-4">Username</th>
+                        <th class="col-md-2">Start Time</th>
+                    </tr>
+                    {% for session in sessions %}
+                        <tr>
+                            <td class="col-md-1">{{ loop.index - 1 }}</td>
+                            <td class="col-md-3">{{ session.getSessionId() }}</td>
+                            <td class="col-md-4">{{ session.getUserName() }}</td>
+                            <td class="col-md-2">{{ session.getStartTime() }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <p>*Please Click the table column header to sort by.</p>
+        </div>
     </div>
 
-    {% if (js is defined) %}{{ js|raw }}{% endif %}
+
+
 {% endblock %}
