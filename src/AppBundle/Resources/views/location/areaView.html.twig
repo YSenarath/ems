@@ -3,7 +3,12 @@
  {% block otherstylesheets %}
      {#Sidebar style#}
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
  {% endblock %}
+
+
+
 
 {% block body %}
     <div class="container">
@@ -11,61 +16,65 @@
             <h3>{{ areaView }}</h3>
             <hr>
         </div>
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>Longitude</th>
-                        <th>Latitude</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                {% for loc in locations %}
-                    <tbody>
+        <div class="col-md-7">
+            <div class="row">
+                <div id="tableContainer">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
-                            <td>{{ loc.getLongitude }}</td>
-                            <td>{{ loc.getLatitude }}</td>
-                            <th><button type="button" class="btn btn-primary btn-xs"
-                                        onclick="location.href=
-                                        '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'
-                                        ">Change</button></th>
+                            <th>Address</th>
+                            <th>Longitude</th>
+                            <th>Latitude</th>
+                            <th></th>
                         </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        </div>
-
-        <div class="row">
-            <div class="center-block col-md-4" id="map" style=" height: 400px;width: 600px;">
-                <script>
-                    var map;
-                    function initMap() {
-                        map = new google.maps.Map(document.getElementById('map'), {
-                            center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
-                            zoom: 12
-                        });
-
+                        </thead>
                         {% for loc in locations %}
-                        var $title = {{ loc.getAddress()|json_encode|raw }};
-                        var $long = {{ loc.getLongitude()|json_encode|raw }};
-                        var $lati = {{ loc.getLatitude()|json_encode|raw }};
-                        var marker = new google.maps.Marker({
-                            position: {lat: parseFloat($lati), lng: parseFloat($long)},
-                            url: '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}',
-                            map: map,
-                            title: $title
-                        });
-                        google.maps.event.addListener(marker, 'click', function() {
-                            window.location.href = this.url;  //changed from markers[i] to this
-                        });
+                            <tr>
+                                <td><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
+                                <td>{{ loc.getLongitude }}</td>
+                                <td>{{ loc.getLatitude }}</td>
+                                <td><button type="button" class="btn btn-primary btn-xs"
+                                            onclick="location.href=
+                                                    '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'
+                                                    ">Change</button></td>
+                            </tr>
                         {% endfor %}
-                    }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
-                        async defer></script>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div class="col-md-4" style="margin-left: 20px">
+            <div class="row">
+                <div class="center-block col-md-4" id="map" style=" height: 400px;width: 450px;">
+                    <script>
+                        var map;
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
+                                zoom: 12
+                            });
+
+                            {% for loc in locations %}
+                            var $title = {{ loc.getAddress()|json_encode|raw }};
+                            var $long = {{ loc.getLongitude()|json_encode|raw }};
+                            var $lati = {{ loc.getLatitude()|json_encode|raw }};
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                                url: '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}',
+                                map: map,
+                                title: $title
+                            });
+                            google.maps.event.addListener(marker, 'click', function() {
+                                window.location.href = this.url;  //changed from markers[i] to this
+                            });
+                            {% endfor %}
+                        }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                            async defer></script>
+                </div>
+            </div>
+
         </div>
 
     </div>
