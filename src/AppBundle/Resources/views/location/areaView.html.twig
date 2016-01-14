@@ -1,17 +1,14 @@
 {# AppBundle/Resources/views/location/areaView.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
- {% block otherstylesheets %}
+{% block otherstylesheets %}
      {#Sidebar style#}
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
 
- {% endblock %}
-
-
-
+{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <div id="header">
             <h3>{{ areaView }}</h3>
             <hr>
@@ -29,7 +26,8 @@
                         </tr>
                         </thead>
                         {% for loc in locations %}
-                            <tr>
+                            <tr onclick="location.href=
+                                    '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'">
                                 <td><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
                                 <td>{{ loc.getLongitude }}</td>
                                 <td>{{ loc.getLatitude }}</td>
@@ -45,7 +43,7 @@
         </div>
         <div class="col-md-4" style="margin-left: 20px">
             <div class="row">
-                <div class="center-block col-md-4" id="map" style=" height: 400px;width: 450px;">
+                <div class="center-block col-md-4" id="map" style=" height: 400px;width: 39vw;">
                     <script>
                         var map;
                         function initMap() {
@@ -74,9 +72,6 @@
                             async defer></script>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 {% endblock %}
