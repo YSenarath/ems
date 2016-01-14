@@ -20,7 +20,7 @@ use AppBundle\Form\security\UserType;
 use AppBundle\Form\security\EmployeeType;
 use AppBundle\Form\security\ProfileType;
 
-class EmployeeActionController extends Controller
+class SecurityActionController extends Controller
 {
     /**
      * @Route("/register", name="register")
@@ -192,5 +192,17 @@ class EmployeeActionController extends Controller
         $employees = $employeeController->getAllEmployees();
 
         return $this->render('@App/security/employeeList.html.twig', array('employees' => $employees));
+    }
+
+    /**
+     * @Route("/login/list", name="loginList")
+     */
+    public function listLoginAction()
+    {
+        $connection = $this->get('database_connection');
+        $employeeController = new SessionsController($connection);
+        $sessions = $employeeController->getTopSessions();
+
+        return $this->render('@App/security/loginList.html.twig', array('sessions' => $sessions));
     }
 }

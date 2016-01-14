@@ -11,3 +11,9 @@ services:
     database_user_provider:
         class: AppBundle\Entity\security\DatabaseUserProvider
         arguments: [ "@database_connection" ]
+
+    success_handler:
+        class: AppBundle\Controller\security\LoginSuccessHandler
+        arguments: ["@security.http_utils", "@service_container", {}]
+        tags:
+            - { name: 'monolog.logger', channel: 'security'}

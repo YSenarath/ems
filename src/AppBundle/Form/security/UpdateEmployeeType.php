@@ -24,7 +24,7 @@ class UpdateEmployeeType extends AbstractType
             ->add('first_name', TextType::class)
             ->add('last_name', TextType::class)
             ->add('NIC', TextType::class, array('label'=>'NIC', ))
-            ->add('tel_no', IntegerType::class, array('label'=>'Telephone Number', ))
+            ->add('tel_no', TextType::class, array('label'=>'Telephone Number', ))
             ->add('submit', SubmitType::class, array('label' => 'Update', ));
     }
 

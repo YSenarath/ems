@@ -128,4 +128,34 @@ class SensorErrorController extends Controller
         }
     }
 
+    /**
+     * Added by YASAS
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getTopErrors()
+    {
+        $result = $this->connection->executeQuery('SELECT * FROM (err_sens_report NATURAL JOIN sensor) NATURAL JOIN location WHERE is_fixed=0 ORDER BY is_fixed, timestamp DESC LIMIT 5');
+        $result = $result->fetchAll();
+
+        //print_r($result);
+        $sensorErrs = array();
+
+        foreach ($result as $s) {
+            if ($s != null) {
+                $sensorErr = new SensorError();
+                $sensorErr->setSensorId($s["sensor_id"]);
+                $sensorErr->setType($this->getTypeName($s["type_name"]));
+                $sensorErr->setErrorDesc($s["error_desc"]);
+                $sensorErr->setReportId($s["report_id"]);
+                $sensorErr->setTimestamp($s["timestamp"]);
+                $sensorErr->setIsFixed($this->booleanFilter($s["is_fixed"]));
+                $sensorErr->setLocation($s["address"]);
+                $sensorErrs[] = $sensorErr;
+            }
+        }
+
+        return $sensorErrs;
+    }
+
 }
