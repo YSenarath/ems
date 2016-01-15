@@ -33,7 +33,7 @@ function CustomAlert(){
         dialogoverlay.style.display = "block";
         dialogoverlay.style.height = winH+"px";
         dialogbox.style.left = (winW/2) - (550 * .5)+"px";
-        dialogbox.style.top = "100px";
+        dialogbox.style.bottom = (winH/2)+"px";
         dialogbox.style.display = "block";
         document.getElementById('dialogboxhead').innerHTML = "Acknowledge This Message";
         document.getElementById('dialogboxbody').innerHTML = dialog;
@@ -63,7 +63,7 @@ function CustomConfirm(){
         dialogoverlay.style.display = "block";
         dialogoverlay.style.height = winH+"px";
         dialogbox.style.left = (winW/2) - (550 * .5)+"px";
-        dialogbox.style.top = "100px";
+        dialogbox.style.bottom = (winH/2)+"px";
         dialogbox.style.display = "block";
 
         document.getElementById('dialogboxhead').innerHTML = "Confirm remove action";
