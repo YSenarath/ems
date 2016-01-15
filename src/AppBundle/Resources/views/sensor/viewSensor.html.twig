@@ -5,10 +5,24 @@
     <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorView.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+
+
 
 {% endblock %}
 
 {% block body %}
+
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
 
     {% if sensor.getSensorId|trim is not empty %}
         <div>
@@ -144,8 +158,10 @@
                         <a href="{{ path('edit_sensor') }}?id={{sensor.getSensorId}}">
                             <span class="glyphicon glyphicon-pencil"></span> Edit Sensor details |
                         </a>
-                        <a href="#" onclick="confirmation( 'Are you sure to remove model : {{sensor.getSensorId}} '
-                        ,'{{ path('remove_sensor') }}?id={{sensor.getSensorId}}')">
+                        <a href="#" onclick="Confirm.render(
+                                'Are you sure to remove sensor : {{sensor.getSensorId}} ',
+                                'delete_row',
+                                '{{ path('remove_sensor') }}?id={{sensor.getSensorId}}')">
                             <span class="glyphicon glyphicon-remove "></span> Remove Sensor
                         </a>
                         {% endif %}

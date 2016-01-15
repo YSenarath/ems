@@ -7,6 +7,9 @@
 
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+
+
 
 
 {% endblock %}
@@ -14,9 +17,21 @@
 
 {% block body %}
 
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+
     {% for msg in app.session.flashbag.get('msg') %}
         <script type="text/javascript">
-            infoPopUp('{{ msg }}')
+            var alert = new CustomAlert();
+            alert.render('{{ msg }}');
         </script>
     {% endfor %}
 

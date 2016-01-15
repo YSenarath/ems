@@ -25,7 +25,8 @@ table, #searchContainer {
 .customHeader th {
     cursor: pointer;
     font-size: 18px;
-    text-shadow: 5px 5px 5px #00897B;
+    text-shadow: 2px 2px 2px #00897B;
+    color: #ccc;
 }
 
 .customPointer{
@@ -126,3 +127,8 @@ p {
 #typeTable {
     margin-top: 5%;
 }
+
+
+
+
+
