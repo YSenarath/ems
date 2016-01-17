@@ -22,7 +22,7 @@ class TypeController
 
     public function searchType($type_name)
     {
-        $s =$this->connection->fetchAssoc('SELECT * FROM sensor_type WHERE type_name = ?', array($type_name));
+        $s =$this->connection->fetchAssoc('SELECT * FROM sensor_type WHERE type_name = ?', array($this->getDBTypeName($type_name)));
 
         //print_r($result);
         $type = new Type();
@@ -77,6 +77,28 @@ class TypeController
         return $types;
     }
 
+    public function changeResponseTime(Type $type){
+
+        $this->connection->beginTransaction();
+
+        try{
+
+            $statement = $this->connection->prepare('UPDATE sensor_type SET res_intervel = ? WHERE type_name =?');
+
+
+            $statement->bindValue(1, $type->getResInterval());
+            $statement->bindValue(2, $type->getTypeName());
+
+            $statement->execute();
+            $this->connection->commit();
+            return true;
+
+        } catch(Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+            return false;
+        }
+    }
     public function getTypeName($input)
     {
       switch($input) {
@@ -91,5 +113,23 @@ class TypeController
           case 'wind' :
               return 'Wind';
       }
+    }
+
+    public function getDBTypeName($input)
+    {
+        switch($input) {
+            case 'Air Quality' :
+                return 'air_qty';
+            case 'Humidity' :
+                return 'humidity';
+            case 'Pressure' :
+                return 'pressure';
+            case 'Temperature' :
+                return 'temp';
+            case 'Wind' :
+                return 'wind';
+            default:
+                return $input;
+        }
     }
 }

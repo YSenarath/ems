@@ -32,10 +32,10 @@
                             <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                             <th class="col-md-2">Sensor ID</th>
                             <th class="col-md-2">Sensor Type</th>
-                            <th class="col-md-2">Sensor Location</th>
+                            <th class="col-md-3">Sensor Location</th>
                             <th class="col-md-3">Error Description</th>
                             <th class="col-md-2">Timestamp</th>
-                            <th class="col-md-2">Fixed</th>
+                            <th class="col-md-1">Fixed</th>
                         </tr>
                         {% for sensor in sensors  %}
                             <tr>
@@ -53,7 +53,7 @@
                                     {% endif %}
 
                                     {% if sensor.getLocation|trim is not empty %}
-                                        <td class="col-md-2">{{ sensor.getLocation }}</td>
+                                        <td class="col-md-3">{{ sensor.getLocation }}</td>
                                     {% else %}
                                         <td >Not Set</td>
                                     {% endif %}
@@ -71,13 +71,17 @@
                                     {% endif %}
 
                                     {% if sensor.getIsFixed|trim is not empty %}
-                                        <td class="col-md-2">{{ sensor.getIsFixed }}
+                                        <td class="col-md-1">
 
                                         {% if sensor.getIsFixed == "Not Fixed" %}
+                                            <label><input type='checkbox' onclick="this.checked=!this.checked;" /></label>
                                             <button
                                                     onclick="document.location = '{{ path('set_error') }}?id1={{ sensor.getSensorId}}&id2={{ sensor.getReportId }}'"
                                                     class="btn glyphicon glyphicon-pencil pull-right" >
                                             </button>
+                                        {% else %}
+                                            <label><input type='checkbox' checked="checked" onclick="this.checked=!this.checked;" /></label>
+
                                         {% endif %}
                                         </td>
 

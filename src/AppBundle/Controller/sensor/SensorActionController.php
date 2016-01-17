@@ -154,6 +154,10 @@ class SensorActionController extends  Controller
 
             $sensorController = new SensorController($connection);
             $sensors = $sensorController->findSensors($sensor);
+
+            if (sizeof($sensors)<=1){
+                $this->get('session')->getFlashBag()->add('msg', 'No sensor found');
+            }
             return $this->render('AppBundle:sensor:sensorList.html.twig', array('sensors' => $sensors));
         }
         return $this->render(
@@ -269,6 +273,7 @@ class SensorActionController extends  Controller
     }
 
 //    ----------update methods-----------------
+
     /**
      * @Route("/sensor/edit", name="edit_sensor")
      */
@@ -284,7 +289,7 @@ class SensorActionController extends  Controller
             $sensor=$sensorController ->searchSensor($sensorId);
 
             if (!$sensor){
-                return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor "'.$sensorId.'" not fount'));
+                return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Sensor "'.$sensorId.'" is not found'));
             }
 
             $sensor->setInsDate((new \DateTime($sensor->getInsDate())));
@@ -354,7 +359,7 @@ class SensorActionController extends  Controller
         $model = $modelController->searchModel($modelId);
 
         if (!$model){
-            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Model "'.$modelId.'" not fount'));
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Model "'.$modelId.'" is not found'));
 
         }
 
@@ -405,7 +410,7 @@ class SensorActionController extends  Controller
         $error = $errorController->searchError($sensorId, $reportId);
 
         if (!$error){
-            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Error data "'.$sensorId.'-'.$reportId.'" not fount'));
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Error data "'.$sensorId.'-'.$reportId.'" is not found'));
 
         }
 
@@ -431,7 +436,44 @@ class SensorActionController extends  Controller
     }
 
 
+    /**
+     * @Route("/type/update", name="edit_type")
+     */
+    public function editTypeAction(Request $request)
+    {
 
+        $typeId = $request->query->get('id');
+        $range = $request->query->get('value');
+
+
+        if ($typeId == null || $range == null){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Invalid values'));
+        }
+
+
+        $connection = $this->get('database_connection');
+        $typeController = new TypeController($connection);
+        $type = $typeController->searchType($typeId);
+        $type->setResInterval($range);
+
+        if (!$type){
+            return $this->render('AppBundle:sensor:error.html.twig', array('msg' => 'Type "'.$typeId.'" is not found'));
+
+        }
+
+        if ($typeController->changeResponseTime($type)){
+            $this->get('session')->getFlashBag()->add('msg', 'Sensor Type :'.$typeId.' response interval is changed to : '.$range);
+
+        }else{
+            $this->get('session')->getFlashBag()->add('msg', 'Changing the response interval to : '.$range.' of Type :'.$typeId.' is failed' );
+
+        }
+
+        return $this->redirectToRoute('type_list');
+
+    }
+
+    //--------------------delete methods-------------------//
     /**
      * @Route("/model/remove", name="remove_model")
      */
@@ -468,12 +510,16 @@ class SensorActionController extends  Controller
         if ($sensorController->removeSensor($sensorId)){
 
             $this->get('session')->getFlashBag()->add('msg', 'Sensor  : '.$sensorId.' Delete Succeed');
+            return $this->redirectToRoute('sensor_list');
+
         }
         else{
             $this->get('session')->getFlashBag()->add('msg', 'Sensor : '.$sensorId.' Delete Failed (Warning - can not remove sensors having sensor readings)');
+            if (!$sensorController->searchSensor($sensorId)) {
+                return $this->redirectToRoute('sensor_list');
+            }
+            return $this->redirectToRoute('viewSensor', array('id' => $sensorId));
         }
-
-        return $this->redirectToRoute('sensor_list');
     }
 
 }

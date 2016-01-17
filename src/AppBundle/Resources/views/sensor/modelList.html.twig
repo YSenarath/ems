@@ -17,7 +17,6 @@
 
 {% block body %}
 
-
     <div id="dialogoverlay"></div>
     <div id="dialogbox">
         <div>
@@ -30,8 +29,7 @@
 
     {% for msg in app.session.flashbag.get('msg') %}
         <script type="text/javascript">
-            var alert = new CustomAlert();
-            alert.render('{{ msg }}');
+            Alert.render('{{ msg }}');
         </script>
     {% endfor %}
 
@@ -55,7 +53,7 @@
                 <table class="table sortable" id="tblData">
                     <tr class="customHeader">
                         <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
-                        <th class="col-md-3">Model ID</th>
+                        <th class="col-md-2">Model ID</th>
                         <th class="col-md-4">Manufacturer</th>
                         <th class="col-md-2">Basic Unit</th>
                         <th class="col-md-3">Detection Range</th>
@@ -65,7 +63,7 @@
                         <tr id = "{{ m.modelId }}">
                             {% if m.modelId|trim is not empty %}
                                 <td class="col-md-1">{{ loop.index-1 }}</td>
-                                <td class="col-md-3">{{ m.modelId }}</td>
+                                <td class="col-md-2">{{ m.modelId }}</td>
 
                                 {% if m.manufacture|trim is not empty %}
                                     <td class="col-md-4">{{ m.manufacture }}</td>

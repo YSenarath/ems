@@ -26,7 +26,7 @@ table, #searchContainer {
     cursor: pointer;
     font-size: 18px;
     text-shadow: 2px 2px 2px #00897B;
-    color: #ccc;
+    color: #000;
 }
 
 .customPointer{
@@ -111,8 +111,10 @@ thead {
 p {
     margin: 10px 15px;
     padding: 12px 12px 12px 12px;
-    color: #D8000C;
-    background-color: #FFBABA;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #009688;
+    border-radius: 5px;
 }
 
 #typeTable table tbody {

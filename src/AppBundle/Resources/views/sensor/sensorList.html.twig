@@ -30,8 +30,7 @@
 
     {% for msg in app.session.flashbag.get('msg') %}
         <script type="text/javascript">
-            var alert = new CustomAlert();
-            alert.render('{{ msg }}');
+            Alert.render('{{ msg }}');
         </script>
     {% endfor %}
 

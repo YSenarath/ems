@@ -21,7 +21,7 @@
     border-radius:25px;
     width:550px;
     z-index: 10;
-    border: 5px solid #009688;
+    border: 2px solid #009688;
 }
 
 #dialogbox > div{
@@ -44,6 +44,12 @@
     color:#000;
 }
 
+
+
+.inputError{
+    height: 5vh;
+    margin: 0;
+}
 
 #dialogbox > div > #dialogboxfoot{
     background: #F2F2F2 ;

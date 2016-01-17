@@ -23,6 +23,11 @@
     </div>
 
 
+    {% for msg in app.session.flashbag.get('msg') %}
+        <script type="text/javascript">
+            Alert.render('{{ msg }}');
+        </script>
+    {% endfor %}
 
     {% if sensor.getSensorId|trim is not empty %}
         <div>
@@ -63,7 +68,11 @@
                         <tr>
                             <td>Threshold Max</td>
                             {% if sensor.getTMax|trim is not empty %}
-                                <td>{{sensor.getTMax }}</td>
+                                {% if sensor.getModelId.getUnit == "percent" %}
+                                    <td>{{sensor.getTMax }}%</td>
+                                {% else%}
+                                    <td>{{sensor.getTMax }}{{ sensor.getModelId.getUnit }}</td>
+                                {% endif %}
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
@@ -71,7 +80,11 @@
                         <tr>
                             <td>Threshold Min</td>
                             {% if sensor.getTMin|trim is not empty %}
-                                <td>{{sensor.getTMin }}</td>
+                                {% if sensor.getModelId.getUnit == "percent" %}
+                                    <td>{{sensor.getTMin }}%</td>
+                                {% else%}
+                                    <td>{{sensor.getTMin }}{{ sensor.getModelId.getUnit }}</td>
+                                {% endif %}
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}

@@ -5,11 +5,34 @@
 
 {% block otherstylesheets %}
 
+    <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
+
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+
 
 {% endblock %}
 
 {% block body %}
+
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id ="inputError"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+    {% for msg in app.session.flashbag.get('msg') %}
+        <script type="text/javascript">
+            var alert = new CustomAlert();
+            alert.render('{{ msg }}');
+        </script>
+    {% endfor %}
+
 
     <h1 align="center">
         Sensor Types
@@ -18,10 +41,10 @@
 
 
         <div class="row" id = "typeTable">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>Type</th>
-                    <th>Response Interval</th>
+                    <th>Response Interval(s)</th>
                 </tr>
 
                 {% for t in types  %}
@@ -30,7 +53,17 @@
                             <td>{{t.typeName }}</td>
 
                             {% if t.getResInterval|trim is not empty %}
-                                <td>{{ t.getResInterval }} | <a href="#" >change</a> </td>
+                                <td>{{ t.getResInterval }}
+
+                                    <button
+                                            onclick="Input.render(
+                                                    'New Response Range',
+                                                    'input',
+                                                    '{{ path('edit_type') }}?id={{ t.typeName}}',{{ t.getResInterval }})"
+                                            class="glyphicon glyphicon-pencil btn  pull-right" > Change
+                                    </button>
+
+                                </td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
