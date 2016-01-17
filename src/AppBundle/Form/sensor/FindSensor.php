@@ -65,7 +65,7 @@ class FindSensor extends AbstractType
 
             ->add('ins_date', DateType::class, array('label' => 'Installed After'))
             ->add('ins_before', DateType::class, array('label' => 'Installed Before'))
-            ->add('submit', SubmitType::class, array('label' => 'Search'));
+            ->add('submit', SubmitType::class, array('label' => 'Search' , 'attr'=> array('class'=> 'btn-default glyphicon glyphicon-search')));
 
     }
 

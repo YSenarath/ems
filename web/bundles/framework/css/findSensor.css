@@ -12,6 +12,9 @@ body {
     margin: 0 auto;
 }
 
+.btn{
+    font-size: 17px;
+}
 .formContainer table tr td {
     color: black;
 }
@@ -34,9 +37,25 @@ body {
     background-color: #FFBABA;
 }
 
+.coltype1{
+    width: 110px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #000000;
+}
+
+.coltype2{
+    width: 90px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #000000;
+}
+
 .tableStyle td {
     border-right: 15px solid transparent;
 }
+
+
 #find_sensor_model_id{
     height: 20vh;
 }

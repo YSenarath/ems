@@ -44,8 +44,8 @@
             <label for="search">
                 <strong>Enter keyword to search </strong>
             </label>
-            <input type="text" id="search">
-            <label>e.g.  S12, P.O. Box 271, 2016</label>
+            <input type="text" id="search"  placeholder="Search...">
+            <label>e.g.  Ornare LLC, m/s, 2016</label>
         </div>
 
         <div class="row">
@@ -97,6 +97,14 @@
                                 {% else %}
                                     <td >
                                         Not Set
+                                        <button
+                                                onclick="Confirm.render(
+                                                        'Are you sure to remove model : {{m.getModelId}}',
+                                                        'delete_row',
+                                                        '{{ path('remove_model') }}?id={{ m.getModelId}}')"
+                                                class="btn glyphicon glyphicon-remove pull-right" >
+                                        </button>
+
                                         <button
                                                 onclick="document.location = '{{ path('edit_model') }}?id={{ m.getModelId}}'"
                                                 class="btn glyphicon glyphicon-pencil pull-right" >

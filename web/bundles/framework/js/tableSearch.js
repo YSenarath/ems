@@ -27,7 +27,6 @@ function searchTable(inputVal)
                 var regExp = new RegExp(inputVal, 'i');
                 if(regExp.test($(td).text()))
                 {
-
                     found = true;
                     return false;
                 }
