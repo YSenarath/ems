@@ -134,6 +134,7 @@ class LocationActionController extends Controller
 
             //add location
             $locationController->changeLocation($newLoc);
+            $this->get('session')->getFlashBag()->add('msg', 'ABC');
             return $this->redirectToRoute('locationAreaView', array('viewArea'=> $viewArea));
         }
 
@@ -150,12 +151,11 @@ class LocationActionController extends Controller
     {
         $connection = $this->get('database_connection');
         $locationController = new LocationController($connection);
-        try {
-            $locationController->deleteLocation($viewLocation);
-        }catch (Exception $e){
-
+        if($locationController->deleteLocation($viewLocation)) {
+            $this->get('session')->getFlashBag()->add('msg', 'Location \''.$viewLocation.'\' Delete Successfully.');
+        } else {
+            $this->get('session')->getFlashBag()->add('msg', 'Location \''.$viewLocation.'\' Delete Failed (Warning - can not remove locations having registered sensors)');
         }
-
         return $this->redirectToRoute('locationAreaView', array('viewArea' => $viewArea));
 
     }

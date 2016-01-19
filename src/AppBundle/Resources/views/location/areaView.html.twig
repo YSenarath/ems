@@ -4,10 +4,26 @@
     {#Sidebar style#}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
-
+    <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
 {% endblock %}
 
 {% block body %}
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+    {% for msg in app.session.flashbag.get('msg') %}
+        <script type="text/javascript">
+            Alert.render('{{ msg }}');
+        </script>
+    {% endfor %}
     <div class="container-fluid">
         <div id="header">
             <h3>{{ areaView }}</h3>
@@ -32,10 +48,14 @@
                                 <td class="col-md-2">{{ loc.getLatitude }}</td>
 
                                 <td class="col-md-2">
+
                                     <button type="button" class="btn glyphicon glyphicon-pencil" title="Change Location Information"
                                             onclick="location.href='{{ path('changeLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
                                     <button type="button" class="btn glyphicon glyphicon-remove" title="Delete Location"
-                                            onclick="location.href='{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
+                                            onclick="Confirm.render(
+                                                    'Are you sure to remove location : {{loc.getAddress}}',
+                                                    'delete_row',
+                                                    '{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}')"></button>
                                 </td>
                             </tr>
                         {% endfor %}
