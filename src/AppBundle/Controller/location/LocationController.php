@@ -12,6 +12,8 @@ use AppBundle\Entity\report\Area;
 use AppBundle\Entity\report\LocationEntity;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class LocationController extends Controller
 {
@@ -295,8 +297,11 @@ class LocationController extends Controller
             $statement->bindValue(1, $locationView);
             $statement->execute();
             $this->connection->commit();
-        } catch (Exception $e) {
+            return true;
+        } catch (ForeignKeyConstraintViolationException $e) {
             $this->connection->rollBack();
+            return false;
         }
+
     }
 }
