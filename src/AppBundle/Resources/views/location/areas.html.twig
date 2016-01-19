@@ -4,7 +4,7 @@
      {#Sidebar style#}
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/locationAreas.css') }}"/>
-
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
  {% endblock %}
 
 {% block body %}
@@ -62,6 +62,9 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
                             async defer></script>
                 </div>
+            </div>
+            <div class="row" style="margin-left: 1px">
+                <p style="background-color: #5eb5e0">*Click on the Markers to View Locations</p>
             </div>
         </div>
     </div>
