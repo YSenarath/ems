@@ -30,7 +30,7 @@
                         zoom: 12
                     });
 
-                    {% for district in areas %}
+                    {% for district in districts %}
                     var $title = {{ district['name']|json_encode|raw }};
                     var $long = {{ district['center_longitude']|json_encode|raw }};
                     var $lati = {{ district['center_latitude']|json_encode|raw }};
