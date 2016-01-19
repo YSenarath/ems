@@ -141,12 +141,12 @@ p {
     height: 15px;
 }
 ::-webkit-scrollbar-track-piece  {
-    background-color: #fff;
+    background-color: #c4c4c4;
     border-radius: 1em;
 }
 ::-webkit-scrollbar-thumb:vertical {
     height: 30px;
-    background-color: #c5e3ff;
+    background-color: #646e81;
     border-radius: 1ex;
 
 }

@@ -13,14 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
-
+/**
+ * @Assert\GroupSequence({"Sensor", "Strict", "Third" })
+ */
 class Sensor
 {
 
     /**
      * @Assert\Length(
      *      max = 8,
-     *      maxMessage = "Sensor ID cannot be longer than {{ limit }} characters"
+     *      maxMessage = "Sensor ID cannot be longer than {{ limit }} characters",
+     *
      * )
      */
     protected $sensor_id;
@@ -30,14 +33,16 @@ class Sensor
      * @Assert\Regex(
      *     pattern="/^[+-]?\d+(\.\d+)?$/",
      *     match=true,
-     *     message="The value {{ value }} is not a valid Floating value."
+     *     message="The value {{ value }} is not a valid Floating value.",
+     *
      * )
      *
      * @Assert\Range(
      *      min = -10000000,
      *      max = 10000000,
      *      minMessage = "The min Threshold can be {{ limit }}",
-     *      maxMessage = "The max Threshold can be {{ limit }}"
+     *      maxMessage = "The max Threshold can be {{ limit }}",
+     *      groups={"Strict"}
      * )
      *
      */
@@ -47,19 +52,22 @@ class Sensor
      * @Assert\Regex(
      *     pattern="/^[+-]?\d+(\.\d+)?$/",
      *     match=true,
-     *     message="The value {{ value }} is not a valid Floating value."
+     *     message="The value {{ value }} is not a valid Floating value.",
+     *
      * )
      *
      * @Assert\Expression(
      *     value = "this.getTMax() > this.getTMin() or this.getTMax() == null or this.getTMin() == null",
-     *     message="The Threshold max should be greater than Threshold Min"
+     *     message="The Threshold max should be greater than Threshold Min",
+     *     groups={"Third"}
      * )
      *
      * @Assert\Range(
      *      min = -10000000,
      *      max = 10000000,
      *      minMessage = "The min Threshold can be {{ limit }}",
-     *      maxMessage = "The max Threshold can be {{ limit }}"
+     *      maxMessage = "The max Threshold can be {{ limit }}",
+     *      groups={"Strict"}
      * )
      */
     protected $t_max;
