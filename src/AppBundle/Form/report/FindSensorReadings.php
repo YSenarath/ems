@@ -4,6 +4,7 @@ namespace AppBundle\Form\report;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -56,8 +57,8 @@ class FindSensorReadings extends AbstractType
                 'placeholder'=>'--Select Model to search Sensor readings--',
                 'choices' => $models ))
 
-            ->add('ins_date', DateType::class, array('label' => 'Start Date'))
-            ->add('ins_before', DateType::class, array('label' => 'End Date'))
+            ->add('ins_date', DateTimeType::class, array('label' => 'Start Date'))
+            ->add('ins_before', DateTimeType::class, array('label' => 'End Date'))
             ->add('submit', SubmitType::class, array('label' => 'Search' , 'attr'=> array('class'=> 'btn-default glyphicon glyphicon-search')));
 
     }
