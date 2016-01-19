@@ -32,9 +32,7 @@ class LocationChangeType extends AbstractType
             ->add('longitude', NumberType::class, array('label' => 'Longitude'))
             ->add('latitude', NumberType::class, array('label' => 'Latitude' ))
             ->add('area_code', ChoiceType::class, array('label' => 'Area','choices'=>$areas,))
-            ->add('submit', SubmitType::class, array('label' => 'Save Changes','attr' => array(
-                'onclick' => 'return confirm("Are you sure?")'
-            )));
+            ->add('submit', SubmitType::class, array('label' => 'Save Changes',));
     }
 
     public function configureOptions(OptionsResolver $resolver)

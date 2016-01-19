@@ -134,7 +134,6 @@ class LocationActionController extends Controller
 
             //add location
             $locationController->changeLocation($newLoc);
-            $this->get('session')->getFlashBag()->add('msg', 'ABC');
             return $this->redirectToRoute('locationAreaView', array('viewArea'=> $viewArea));
         }
 
