@@ -169,7 +169,7 @@ class LocationActionController extends Controller
         $newLoc = new Location();
         $connection = $this->get('database_connection');
         $locationController = new LocationController($connection);
-        $areas = $locationController->getAllAreas();
+        $areas = $locationController->getAllAreaCodes();
 
         //build the form
         $form = $this->createForm(LocationType::class, $newLoc, array(
