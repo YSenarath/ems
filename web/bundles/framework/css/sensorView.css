@@ -1,5 +1,5 @@
 h1 {
-    color: #009688;
+    color: #2d5c8a;
 }
 
 table {
@@ -13,10 +13,11 @@ table {
 
 th {
     border-bottom: 1px solid #9d9d9d;
-    border-top: 1px solid #0d9d9d;
-    background-color: #009688;
+    border-top: 1px solid #2d5c8a;
+    background-color: #2d5c8a;
     font-size: 20px;
-    text-shadow: 5px 5px 5px #00897B;
+    text-shadow: 5px 5px 5px #2d5c8a;
+    color: #fff;
 }
 
 td, th {

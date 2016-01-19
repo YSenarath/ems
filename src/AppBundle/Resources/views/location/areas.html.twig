@@ -6,10 +6,15 @@
  {% endblock %}
 
 {% block body %}
-    <h1 align="center">
-        Areas
-    </h1>
-    <div class="container "  id="areaListContainer">
+    <div class="container-fluid">
+        <div class="header">
+            <h1>
+                Districts
+            </h1>
+            <hr>
+        </div>
+    </div>
+    <div class="container">
         <ul class="list-unstyled">
             {% for area in areas %}
                 {% if area.name|trim is not empty %}
