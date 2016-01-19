@@ -30,10 +30,10 @@
                         zoom: 12
                     });
 
-                    {% for loc in locations %}
-                    var $title = {{ loc['address']|json_encode|raw }};
-                    var $long = {{ loc['longitude']|json_encode|raw }};
-                    var $lati = {{ loc['latitude']|json_encode|raw }};
+                    {% for district in areas %}
+                    var $title = {{ district['name']|json_encode|raw }};
+                    var $long = {{ district['center_longitude']|json_encode|raw }};
+                    var $lati = {{ district['center_latitude']|json_encode|raw }};
                     var marker = new google.maps.Marker({
                         position: {lat: parseFloat($lati), lng: parseFloat($long)},
                         map: map,

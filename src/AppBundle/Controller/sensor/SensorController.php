@@ -138,7 +138,7 @@ class SensorController extends  Controller{
             $model->setDetRange($s["detection_range"]);
             $model->setUnit($s["unit"]);
 
-            $location->setLocId($s["location_id"]);
+            $location->setId($s["location_id"]);
             $location->setAreaCode($s["area_code"]);
             $location->setAddress($s["address"]);
             $location->setLatitude($s["latitude"]);

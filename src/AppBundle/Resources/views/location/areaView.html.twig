@@ -1,9 +1,9 @@
 {# AppBundle/Resources/views/location/areaView.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
-     {#Sidebar style#}
-     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
-     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+    {#Sidebar style#}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
 
 {% endblock %}
 
@@ -19,22 +19,24 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Address</th>
-                            <th>Longitude</th>
-                            <th>Latitude</th>
-                            <th></th>
+                            <th class="col-md-6">Address</th>
+                            <th class="col-md-2">Longitude</th>
+                            <th class="col-md-2">Latitude</th>
+                            <th class="col-md-2"></th>
                         </tr>
                         </thead>
                         {% for loc in locations %}
-                            <tr onclick="location.href=
-                                    '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'">
-                                <td><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
-                                <td>{{ loc.getLongitude }}</td>
-                                <td>{{ loc.getLatitude }}</td>
-                                <td><button type="button" class="btn btn-primary btn-xs"
-                                            onclick="location.href=
-                                                    '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}'
-                                                    ">Change</button></td>
+                            <tr>
+                                <td class="col-md-6"><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
+                                <td class="col-md-2">{{ loc.getLongitude }}</td>
+                                <td class="col-md-2">{{ loc.getLatitude }}</td>
+
+                                <td class="col-md-2">
+                                    <button type="button" class="btn glyphicon glyphicon-pencil" title="Change Location Information"
+                                            onclick="location.href='{{ path('changeLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
+                                    <button type="button" class="btn glyphicon glyphicon-remove" title="Delete Location"
+                                            onclick="location.href='{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -71,7 +73,23 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
                             async defer></script>
                 </div>
+                <div class="row">
+                    <p style="background-color: transparent">*Click on the Markers to View Sensors</p>
+                </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="col-md-10">
+                    <p style="background-color: transparent; margin-top: -30px">* Click on any Location to View Sensor Details</p>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn glyphicon glyphicon-new-window" title="Add New Location"
+                            style="background-color: #0d9d9d; margin-top: -40px; margin-left: -10px;"
+                            onclick="location.href='{{ path('addLocationView', {'viewArea': areaView}) }}'"></button>
+                </div>
+            </div>
+            <div class="col-md-5"></div>
         </div>
     </div>
 {% endblock %}
