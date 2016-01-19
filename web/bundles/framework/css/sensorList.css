@@ -25,15 +25,15 @@ table, #searchContainer {
 .customHeader th {
     cursor: pointer;
     font-size: 18px;
-    text-shadow: 2px 2px 2px #00897B;
-    color: #000;
+    text-shadow: 2px 2px 2px #2d5c8a;
+    color: #fff;
 }
 
 .customPointer{
     cursor: pointer;
 }
 tbody tr:hover {
-    background-color: rgba(129, 208, 177, .3);
+    background-color: #c5e3ff;
 }
 
 #searchContainer {
@@ -49,14 +49,13 @@ th {
 
     border-bottom: 1px solid #9d9d9d;
     border-top: 1px solid #9d9d9d;
-    background-color: #009688;
+    background-color: #2d5c8a;
     font-size: 15px;
 }
 
 table, thead, th {
     /*border:1px solid #5E976E;*/
-    border-bottom: 1px solid #5E976E;
-
+    border-bottom: 1px solid #2d5c8a;
 }
 
 tr, td {
@@ -113,7 +112,7 @@ p {
     padding: 12px 12px 12px 12px;
     color: #000;
     background-color: #fff;
-    border: 1px solid #009688;
+    border: 1px solid #2d5c8a;
     border-radius: 5px;
 }
 
@@ -131,6 +130,19 @@ p {
 }
 
 
+/*---------------------Scroll bar------------------------------------------------*/
+/* Chrome, Safari */
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+::-webkit-scrollbar-track-piece  {
+    background-color: #fff;
+    border-radius: 1em;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: #c5e3ff;
+    border-radius: 1ex;
 
-
-
+}

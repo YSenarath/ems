@@ -21,7 +21,7 @@
     border-radius:25px;
     width:550px;
     z-index: 10;
-    border: 2px solid #009688;
+    border: 2px solid #2d5c8a;
 }
 
 #dialogbox > div{
@@ -30,7 +30,7 @@
 }
 
 #dialogbox > div > #dialogboxhead{
-    background: #009688 ;
+    background: #2d5c8a ;
     font-size:19px;
     padding:10px;
     color:#CCC;
