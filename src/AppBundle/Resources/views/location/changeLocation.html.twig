@@ -4,6 +4,7 @@
     {#Sidebar style#}
     <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
 {% endblock %}
 
 {% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
@@ -25,18 +26,18 @@
         </script>
     {% endfor %}
 
-
+    <h1 align="center">
+        Change Location
+        <hr>
+    </h1>
     <div class="container">
-        <div class="page-header">
-            <h2>Change Location</h2>
-        </div>
-    </div>
-    <div class="container">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+        <div class="container formContainer col-md-6">
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}
