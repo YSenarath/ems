@@ -2,11 +2,23 @@ body {
     /*background-color: #E0E0E0;*/
 }
 
+/*.formContainer {*/
+    /*padding: 50px;*/
+    /*background-color: #00897B;*/
+    /*color: white;*/
+    /*border-radius: 10px;*/
+/*}*/
+
+
 .formContainer {
-    padding: 50px;
-    background-color: #00897B;
-    color: white;
+    padding: 25px 40px 25px 40px;
+    background-color: #eaeaea;
+    border: 10px solid #EFEFEF;
+    color: #2d5c8a;
     border-radius: 10px;
+
+    float: none;
+    margin: 0 auto;
 }
 
 #headings {

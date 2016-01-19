@@ -97,6 +97,7 @@ class WindReadingController extends Controller
 
                 // print_r($lastReading);
                 $windReading = new WindReading();
+                $windReading->setSensorId($sensor_id);
                 $windReading->setTimestamp($lastReading["timestamp"]);
                 $windReading->setWindSpeed($lastReading["wind_speed"]);
                 $windReading->setDirection($lastReading["direction"]);

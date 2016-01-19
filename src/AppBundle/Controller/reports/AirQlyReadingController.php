@@ -90,6 +90,7 @@ class AirQlyReadingController extends Controller
         foreach ($lastReadings as $lastReading) {
             if ($lastReading != null) {
                 $airQtyReading = new AirQlyReading();
+                $airQtyReading->setSensorId($sensor_id);
                 $airQtyReading->setTimestamp($lastReading["timestamp"]);
                 $airQtyReading->setAirQtyPercentage($lastReading["air_qty_percentage"]);
                 $airQtyReading->setOxygenPercentage($lastReading["oxygen_percentage"]);

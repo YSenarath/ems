@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
 
 
-
 {% endblock %}
 
 
@@ -30,6 +29,8 @@
     {% for msg in app.session.flashbag.get('msg') %}
         <script type="text/javascript">
             Alert.render('{{ msg }}');
+
+
         </script>
     {% endfor %}
 
