@@ -80,6 +80,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('sensor_list') }}">Sensor Installed </a></li>
                             <li><a href="{{ path('find_sensor') }}">Find Sensor</a></li>
+                            <li><a href="{{ path('reportSensorReadingFinder') }}">Find Sensor Readings</a></li>
                             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                             <li><a href="{{ path('add_sensor') }}">Add Sensor </a></li>
                             <li><hr class="navhr"></li>

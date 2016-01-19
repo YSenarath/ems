@@ -90,6 +90,7 @@ class HumidityReadingController extends Controller
         foreach ($lastReadings as $lastReading) {
             if ($lastReading != null) {
                 $humidityReading = new HumidityReading();
+                $humidityReading->setSensorId($sensor_id);
                 $humidityReading->setTimestamp($lastReading["timestamp"]);
                 $humidityReading->setHumidityValue($lastReading["humidity_value"]);
                 $humidityReadings[] = $humidityReading;

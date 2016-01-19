@@ -9,6 +9,7 @@
 namespace AppBundle\Controller\sensor;
 
 use AppBundle\Entity\location\Location;
+use AppBundle\Entity\report\SensorReadingFilter;
 use AppBundle\Entity\sensor\Model;
 use AppBundle\Entity\sensor\Sensor;
 use AppBundle\Entity\sensor\SensorSearch;
@@ -205,6 +206,61 @@ class SensorController extends  Controller{
                 $sensor->setInsDate($s["installed_date"]);
                 $sensor->setLocAddress($s["address"]);
                 $sensors[] = $sensor;
+            }
+        }
+
+        return $sensors;
+    }
+
+    //gives an array of sensors
+    /**
+     * @param SensorReadingFilter $sensorFilter
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function findSensorReadingFilterIds(SensorReadingFilter $sensorFilter)
+    {
+        $sql = 'SELECT * FROM (sensor  NATURAL JOIN sensor_model) NATURAL JOIN location WHERE ';
+        $param=array();
+        $passing =array();
+
+        if ($sensorFilter->getModelId() != null){
+            $sql = $sql.' model_id IN (?) AND ' ;
+            $param[] = $sensorFilter->getModelId();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+        if ($sensorFilter->getTypeName() != null){
+            $sql = $sql.' type_name IN (?) AND ' ;
+            $param[] = $sensorFilter->getTypeName();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+        if ($sensorFilter->getLocId() != null){
+            $sql = $sql.' location_id IN (?) AND ' ;
+            $param[] = $sensorFilter->getLocId();
+            $passing[] = \Doctrine\DBAL\Connection::PARAM_STR_ARRAY;
+        }
+
+        $sql =  $sql.' installed_date BETWEEN ? AND ? AND sensor_id LIKE ?';
+        $param[]= $sensorFilter-> getInsDate()->format('Y-m-d');
+        $param[]= $sensorFilter->getInsBefore()->format('Y-m-d');
+        $param[]= '%'.$sensorFilter->getSensorId().'%';
+
+
+        $result = $this->connection->executeQuery(
+            $sql,
+            $param,
+            $passing);
+        $result = $result->fetchAll();
+
+        //print_r($result);
+        $sensors[] = new Sensor();
+
+        foreach ($result as $s) {
+            if ($s != null and $s["sensor_id"]!=null) {
+                $sensDet = new Sensor();
+                $sensDet->setSensorId($s["sensor_id"]);
+                $sensDet->setTypeName($this->getTypeName($s["type_name"]));
+                $sensors[] = $sensDet;
             }
         }
 
