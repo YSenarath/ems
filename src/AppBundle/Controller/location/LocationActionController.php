@@ -196,5 +196,6 @@ class LocationActionController extends Controller
             'AppBundle:location:addLocations.html.twig',
             array('form' => $form->createView())
         );
+
     }
 }
