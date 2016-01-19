@@ -56,7 +56,6 @@ class SensorController extends  Controller{
     }
 
 
-
     /**
      * Created by nadheesh
      * Modified by Shehan

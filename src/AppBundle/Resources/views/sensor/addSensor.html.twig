@@ -5,11 +5,17 @@
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
 
+    <style>
+
+        .formContainer {
+            padding: 05px 40px 05px 40px;
+
+        }
+    </style>
 {% endblock %}
 
 
 {% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
-
 
 
 {% block body %}
@@ -20,109 +26,109 @@
     </h1>
     <dev >
         <div class="container">
-            <div class="container formContainer">
+            <div class="col-md-7 formContainer">
+                <div class="row">
+                    <table class="tableWidth">
+                        {{ form_start(form) }}
+                        <tr >
+                            <td >
+                                {{ form_label(form.sensor_id) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.sensor_id) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-                <table class="tableWidth">
-                    {{ form_start(form) }}
-                    <tr >
-                        <td >
-                            {{ form_label(form.sensor_id) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.sensor_id) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.sensor_id) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.type_name) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.type_name) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.type_name) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.model_id) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.model_id) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.model_id) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href={{ path('add_model') }}><span class="glyphicon glyphicon-plus"></span> Add New Model</a></td>
-                    </tr>
+                            </td>
+                            <td >
+                                {{ form_errors(form.sensor_id) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+                                {{ form_label(form.type_name) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.type_name) }}
+                            </td>
+                        </tr>
 
-                    <tr >
-                        <td >
-                            {{ form_label(form.loc_id) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.loc_id) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.loc_id) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href={{ path('addLocations') }}><span class="glyphicon glyphicon-plus"></span> Add New Location</a></td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.ins_date) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.ins_date) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.ins_date) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.t_min) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.t_min) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.t_min) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.t_max) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.t_max) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.t_max) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
+                        <tr >
+                            <td >
+                                {{ form_label(form.model_id) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.model_id) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a href={{ path('add_model') }}><span class="glyphicon glyphicon-plus"></span> Add New Model</a></td>
+                        </tr>
 
-                        </td>
-                        <td align="right" >
-                            {{ form_widget(form.submit) }}
-                        </td>
-                        <td >
+                        <tr >
+                            <td >
+                                {{ form_label(form.loc_id) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.loc_id) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a href={{ path('addLocations') }}><span class="glyphicon glyphicon-plus"></span> Add New Location</a></td>
+                        </tr>
+                        <tr >
+                            <td >
+                                {{ form_label(form.ins_date) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.ins_date) }}
+                            </td>
+                        </tr>
 
-                        </td>
-                    </tr>
-                    {{ form_end(form) }}
-                </table>
+                        <tr >
+                            <td >
+                                {{ form_label(form.t_min) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.t_min) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td >
+                                {{ form_errors(form.t_min) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+                                {{ form_label(form.t_max) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.t_max) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td >
+                                {{ form_errors(form.t_max) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+
+                            </td>
+                            <td align="right" >
+                                {{ form_widget(form.submit) }}
+                            </td>
+
+                        </tr>
+                        {{ form_end(form) }}
+                    </table>
+                </div>
             </div>
         </div>
     </dev>
