@@ -20,10 +20,13 @@
 
 
     {% for msg in app.session.flashbag.get('msg') %}
-        <script type="text/javascript">
-            Alert.render('{{ msg }}');
-        </script>
+
+            <script type="text/javascript">
+                Alert.render('{{ msg }}', '{{ app.session.flashbag.get('title').0 }}' );
+            </script>
+
     {% endfor %}
+
     <div class="container-fluid">
         <div id="header">
             <h3>{{ areaView }}</h3>

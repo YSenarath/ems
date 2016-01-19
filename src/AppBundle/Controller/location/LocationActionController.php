@@ -153,8 +153,11 @@ class LocationActionController extends Controller
         $locationController = new LocationController($connection);
         if($locationController->deleteLocation($viewLocation)) {
             $this->get('session')->getFlashBag()->add('msg', 'Location \''.$viewLocation.'\' Delete Successfully.');
+            $this->get('session')->getFlashBag()->add('title', 'Message');
+
         } else {
             $this->get('session')->getFlashBag()->add('msg', 'Location \''.$viewLocation.'\' Delete Failed (Warning - can not remove locations having registered sensors)');
+            $this->get('session')->getFlashBag()->add('title', 'Warning');
         }
         return $this->redirectToRoute('locationAreaView', array('viewArea' => $viewArea));
 
