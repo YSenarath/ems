@@ -7,7 +7,7 @@
 namespace AppBundle\Entity\location;
 
 class Location {
-    protected $loc_id;
+    protected $id;
     protected $address;
     protected $longitude;
     protected $latitude;
@@ -16,18 +16,20 @@ class Location {
     /**
      * @return mixed
      */
-    public function getLocId()
+    public function getId()
     {
-        return $this->loc_id;
+        return $this->id;
     }
 
     /**
-     * @param mixed $loc_id
+     * @param mixed $id
      */
-    public function setLocId($loc_id)
+    public function setId($id)
     {
-        $this->loc_id = $loc_id;
+        $this->id = $id;
     }
+
+
 
     /**
      * @return mixed

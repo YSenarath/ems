@@ -189,7 +189,7 @@ class LocationController extends Controller
     }
 
     /*By Dulanjaya*/
-    public function getAllAreas()
+    public function getAllAreaCodes()
     {
         $result = $this->connection->executeQuery('SELECT area_code,name FROM area ORDER BY area_code');
         $results = $result->fetchAll();
@@ -227,5 +227,76 @@ class LocationController extends Controller
 
         return $areas;
     }
-}
 
+    public function getAllDistrictsAction()
+    {
+        $districts = $this->connection->fetchAll('SELECT name, center_longitude, center_latitude FROM area');
+
+        if ($districts != null) {
+            return $districts;
+        }
+
+        return false;
+    }
+
+    public function getLocationbyIDAction($locationID)
+    {
+        $location = $this->connection->fetchAssoc(
+            'SELECT location_id,address, longitude, latitude, area_code FROM location WHERE location_id=?',
+            array($locationID)
+        );
+        //print_r($result);
+        if ($location != null) {
+
+            $tmpLocation = new Location();
+            $tmpLocation->setId($location["location_id"]);
+            $tmpLocation->setAddress($location["address"]);
+            $tmpLocation->setLongitude($location["longitude"]);
+            $tmpLocation->setLatitude($location["latitude"]);
+            $tmpLocation->setAreaCode($location["area_code"]);
+            return $tmpLocation;
+            //return array($locationsResult["location_id"],$locationsResult["address"],$locationsResult["longitude"],$locationsResult["latitude"]);
+        }
+        //print_r($locationArray);
+        return false;
+
+    }
+    public function changeLocation(Location $location)
+    {
+        $this->connection->beginTransaction();
+
+        try {
+            $statement = $this->connection->prepare(
+                'UPDATE location SET address = ?, longitude = ?, latitude = ?, area_code = ? WHERE location_id=?'
+            );
+
+            $statement->bindValue(1, $location->getAddress());
+            $statement->bindValue(2, $location->getLongitude());
+            $statement->bindValue(3, $location->getLatitude());
+            $statement->bindValue(4, $location->getAreaCode());
+            $statement->bindValue(5, $location->getId());
+
+            $statement->execute();
+            $this->connection->commit();
+        } catch (Exception $e) {
+            $this->connection->rollBack();
+            // throw $e;
+        }
+    }
+
+    public function deleteLocation($locationView)
+    {
+        $this->connection->beginTransaction();
+        try {
+            $statement = $this->connection->prepare(
+                'DELETE FROM Location WHERE location_id = ?'
+            );
+
+            $statement->bindValue(1, $locationView);
+            $statement->execute();
+            $this->connection->commit();
+        } catch (Exception $e) {
+            $this->connection->rollBack();
+        }
+    }
+}
