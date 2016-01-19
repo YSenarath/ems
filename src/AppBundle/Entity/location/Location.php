@@ -16,7 +16,7 @@ class Location {
 
     /**
      * @Assert\Regex(
-     *     pattern="/^[+-]?\d+(\.\d{1,6})?$/",
+     *     pattern="/^[+]?\d+(\.\d{1,6})?$/",
      *     match=true,
      *     message="The value {{ value }} is not a valid Floating value."
      * )
@@ -30,9 +30,11 @@ class Location {
      */
     protected $longitude;
 
+
+
     /**
      * @Assert\Regex(
-     *     pattern="/^[+-]?\d+(\.\d{1,6})?$/",
+     *     pattern="/^[+]?\d+(\.\d{1,6})?$/",
      *     match=true,
      *     message="The value {{ value }} is not a valid Floating value."
      * )
