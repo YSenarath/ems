@@ -112,7 +112,7 @@ p {
     padding: 12px 12px 12px 12px;
     color: #000;
     background-color: #fff;
-    border: 1px solid #2d5c8a;
+    /*border: 1px solid #2d5c8a;*/
     border-radius: 5px;
 }
 
@@ -127,6 +127,10 @@ p {
 
 #typeTable {
     margin-top: 5%;
+}
+
+#typeTable th {
+    color: #fff;
 }
 
 

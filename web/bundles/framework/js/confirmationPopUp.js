@@ -41,6 +41,11 @@ function CustomAlert(){
     }
 
     this.render = function(dialog, msgType){
+
+        if (msgType == null){
+            msgType = "Message";
+        }
+
         var winW = window.innerWidth;
         var winH = window.innerHeight;
         var dialogoverlay = document.getElementById('dialogoverlay');
