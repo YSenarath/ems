@@ -109,15 +109,14 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-7">
-                <div class="col-md-2">
-                    <button class="btn glyphicon glyphicon-new-window" title="Add New Location"
-                            style="background-color: #0d9d9d; margin-top: -40px; margin-left: -10px;"
-                            onclick="location.href='{{ path('addLocationView', {'viewArea': areaView}) }}'"></button>
-                </div>
-            </div>
-            <div class="col-md-5"></div>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <a href="{{ path('addLocationView', {'viewArea': areaView}) }}">
+                <span class="glyphicon glyphicon-new-window"></span> Add New Location
+            </a>
         </div>
+
     </div>
 {% endblock %}
