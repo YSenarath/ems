@@ -3,19 +3,28 @@
 
 
 {% form_theme form 'AppBundle:Form:bootstrap_3_layout.html.twig' %}
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addForm.css') }}"/>
+
+{% endblock %}
 
 {% block body %}
+    <h1 align="center">
+        Add Locations
+        <hr>
+    </h1>
     <div class="container">
-        <div class="page-header">
-            <h2>Add Locations</h2>
+        <div class="comtainer formContainer col-md-5">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
-        </div>
+
     </div>
 {% endblock %}
