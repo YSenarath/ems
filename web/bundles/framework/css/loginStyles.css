@@ -1,29 +1,69 @@
+/*body {*/
+/*color: #202020;*/
+/*margin: 0;*/
+/*padding: 0;*/
+/*height: 100%;*/
+/*width: 100%;*/
+/*}*/
+
+/*span {*/
+/*color: #202020;*/
+/*font-family: 'Raleway', sans-serif;*/
+/*font-size: 18px;*/
+/*}*/
+
+/*p {*/
+/*color: #202020;*/
+/*font-family: 'Raleway', sans-serif;*/
+/*font-size: 10px;*/
+/*}*/
+
+/*.col-centered {*/
+/*float: none;*/
+/*margin: 0 auto;*/
+/*margin-top: 150px;*/
+/*}*/
+
+/*.wrath-content-box {*/
+/*padding: 15px;*/
+/*}*/
+
+/*@import "bourbon";*/
+
 body {
-    color: #6c6159;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    background: #eee !important;
 }
 
-span {
-    color: #fff;
-    font-family: 'Raleway', sans-serif;
-    font-size: 18px;
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
-p {
-    color: #fff;
-    font-family: 'Raleway', sans-serif;
-    font-size: 10px;
-}
-
-.col-centered {
-    float: none;
+.form-signin {
+    border-radius: 10px;
+    max-width: 380px;
+    padding: 15px 35px 45px;
     margin: 0 auto;
-    margin-top: 150px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.wrath-content-box {
-    padding: 15px;
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+@include box-sizing(border-box);
+}
+
+input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
