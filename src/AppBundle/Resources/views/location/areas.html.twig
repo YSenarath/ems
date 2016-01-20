@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class="col-md-3">
-            <div class="row">
-                <ul class="list-unstyled">
+        <div class="col-md-3" id="nameColumn">
+            <div class="row height100" >
+                <ul class="list-unstyled height100" >
                     {% for area in areas %}
                         {% if area.name|trim is not empty %}
                             <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"

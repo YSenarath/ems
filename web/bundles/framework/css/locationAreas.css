@@ -33,11 +33,14 @@ html, body {
     height: 100%;
 }
 
-.margin , #mapColumn , #mapContainer, #map{
+.margin , #mapColumn , #mapContainer, #map , .height100{
     height: 100%;
 }
 
 #nameColumn{
-    height: 85%;
+    height: 95%;
+}
+
+.height100 > ul{
     overflow: auto;
 }
