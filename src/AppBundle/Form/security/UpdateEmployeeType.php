@@ -25,7 +25,8 @@ class UpdateEmployeeType extends AbstractType
             ->add('last_name', TextType::class)
             ->add('NIC', TextType::class, array('label'=>'NIC', ))
             ->add('tel_no', TextType::class, array('label'=>'Telephone Number', ))
-            ->add('submit', SubmitType::class, array('label' => 'Update', ));
+            ->add('submit', SubmitType::class, array('label' => 'Update', 'attr' => array('style' => 'float: left'), ))
+            ->add('delete', SubmitType::class, array('label' => 'Delete', 'validation_groups' => false, 'attr' => array('style' => 'float: left; margin: 0px 10px'),));
     }
 
     public function configureOptions(OptionsResolver $resolver)

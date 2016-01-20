@@ -53,15 +53,17 @@ class LocationController extends Controller
         foreach ($result as $s) {
             if ($s != null) {
                 if ($tempArea != $s["name"]) {
-                    $tempArea = $s["name"];
+
                     if ($tempLocation != null) {
-                        $locations[$s["name"]] = $tempLocation;
+                        $locations[$tempArea] = $tempLocation;
                         $tempLocation = null;
                     }
+                    $tempArea = $s["name"];
                 }
                 $tempLocation[$s["address"]] = $s["location_id"];
             }
         }
+
 
         return $locations;
     }
