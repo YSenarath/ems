@@ -16,5 +16,11 @@ h2 {
 #map {
     height: 468px;
     width: 45vw;
-
+    /*height: 500px;*/
+    /*width: 50vw;*/
+    /*position: relative;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
 }

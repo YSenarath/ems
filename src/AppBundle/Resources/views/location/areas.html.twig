@@ -21,19 +21,18 @@
                         {% for area in areas %}
                             {% if area.name|trim is not empty %}
                                 <li class="col-md-6"><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
-                                        >{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
+                                        >&nbsp;&nbsp;&nbsp;{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
                                         </a>
                                     </h3>
                                 </li>
                             {% endif %}
                         {% endfor %}
-
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class = "container">
+            <div style="height: 100%; width: 100%">
                 <div id="map">
                     <script>
                         var map;
@@ -54,7 +53,7 @@
                                 title: $title
                             });
                             google.maps.event.addListener(marker, 'click', function() {
-                                window.location.href = this.url;  //changed from markers[i] to this
+                                window.location.href = this.url;
                             });
                             {% endfor %}
                         }
@@ -63,7 +62,10 @@
                             async defer></script>
                 </div>
             </div>
-            <div class="row" style="margin-left: 1px">
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6" style="margin-left: -13px">
                 <p style="background-color: #5eb5e0">*Click on the Markers to View Locations</p>
             </div>
         </div>
