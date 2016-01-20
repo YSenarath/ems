@@ -4,7 +4,13 @@
 {% block otherstylesheets %}
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/findSensor.css') }}"/>
+    <style>
 
+        .formContainer {
+            padding: 05px 40px 05px 40px;
+
+        }
+    </style>
 {% endblock %}
 
 {% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
@@ -74,7 +80,6 @@
                     <div class="col-md-4">
                         <b> Max. readings per sensor</b> {{ form_widget(form.noOfReadings) }}
                     </div>
-
                 </div>
                 <br>
                 <div class="row">
@@ -88,9 +93,7 @@
 
                     </div>
                 </div>
-                <div class="row">
 
-                </div>
                 <br>
                 <div class="row">
                     <div class="col-md-4">
@@ -100,11 +103,10 @@
                         <b> End time</b> {{ form_widget(form.endDate.time) }}
                     </div>
                      <div class="col-md-8">
-
                     </div>
                 </div>
 
-                <br>
+
                 <div align="right">
                     {{ form_widget(form.submit) }}
                 </div>
