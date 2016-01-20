@@ -9,7 +9,10 @@
 namespace AppBundle\Controller\security;
 
 use AppBundle\Entity\security\Employee;
+use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class EmployeeController extends Controller
 {
@@ -113,5 +116,24 @@ class EmployeeController extends Controller
         }
 
         return $employees;
+    }
+
+    public function deleteEmployee($employee_id)
+    {
+        $this->connection->beginTransaction();
+        try {
+            $sql = 'DELETE FROM employee WHERE employee_id=?';
+            $statement = $this->connection->prepare($sql);
+
+            $statement->bindValue(1, $employee_id);
+
+            $statement->execute();
+
+            $this->connection->commit();
+            return true;
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $this->connection->rollBack();
+            return false;
+        }
     }
 }

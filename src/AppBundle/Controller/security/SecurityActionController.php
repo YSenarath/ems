@@ -174,24 +174,33 @@ class SecurityActionController extends Controller
         //Handle submission (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
-            if ($employeeController->searchEmployee($employee->getEmployeeId())) {
-                $employeeController->updateEmployee($employee);
+            if ($form->get('delete')->isClicked()) {
+                $validDelete = $employeeController->deleteEmployee($employee->getEmployeeId());
+                if ($validDelete) {
+                    return $this->redirectToRoute('listEmployees');
+                } else {
+                    $this->get('session')->getFlashBag()->add('msg', 'Can\'t remove: A user exist for this employee.' );
+                    $this->get('session')->getFlashBag()->add('title', 'Warning');
+                }
+            } else {
+                if ($employeeController->searchEmployee($employee->getEmployeeId())) {
+                    $employeeController->updateEmployee($employee);
 //                $this->addFlash(
 //                    'notice',
 //                    'Completed Successfully.'
 //                );
-            }
-            else {
-                $form->get('employee_id')->addError(new FormError('The employee ID does not exist'));
+                } else {
+                    $form->get('employee_id')->addError(new FormError('The employee ID does not exist'));
 //                $this->addFlash(
 //                    'notice',
 //                    'Employee does not exist in the storage.'
 //                );
 //                return $this->redirectToRoute('addEmployee');
-                return $this->render(
-                    'AppBundle:security:updateEmployee.html.twig',
-                    array('form' => $form->createView())
-                );
+                    return $this->render(
+                        'AppBundle:security:updateEmployee.html.twig',
+                        array('form' => $form->createView())
+                    );
+                }
             }
         }
 
