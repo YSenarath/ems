@@ -77,10 +77,10 @@ class LocationActionController extends Controller
             $connection = $this->get('database_connection');
             $locationController = new LocationController($connection);
 
-            if (!$locationController->searchAddressInArea($newLoc->getAddress(),$areaId)){
+            if (!$locationController->searchAddressInArea($newLoc->getAddress(),$newLoc->getAreaCode())){
                 $locationController->addLocation($newLoc);
             } else{
-                $form->get('address')->addError(new FormError('The Address already exists in area :'.$area->getName()));
+                $form->get('address')->addError(new FormError('The Address already exists in area :'.$newLoc->getAreaCode()));
                 return $this->render(
                     'AppBundle:location:addLocations.html.twig',
                     array('form' => $form->createView() , 'location'=>$newLoc )
