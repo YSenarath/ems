@@ -13,8 +13,29 @@ h2 {
     margin: 0 auto;
 }
 
-#map {
-    height: 468px;
-    width: 45vw;
+/*#map {*/
+    /*height: 468px;*/
+    /*width: 45vw;*/
+
+/*}*/
+
+
+html, body {
+    height: 80%;
+}
+
+.container-fluid {
+    height: 100%;
+    overflow-y: hidden; /* don't show content that exceeds my height */
+}
+
+#content{
+    height: 100%;
+}
+
+.margin , .col-md-6 , #mapContainer, #map{
+    height: 100%;
+}
+#mapContainer{
 
 }
