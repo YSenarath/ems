@@ -9,7 +9,7 @@
 namespace AppBundle\Controller\location;
 
 
-use AppBundle\Entity\report\Area;
+use AppBundle\Entity\location\Area;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

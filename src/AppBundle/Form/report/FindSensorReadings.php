@@ -57,8 +57,34 @@ class FindSensorReadings extends AbstractType
                 'placeholder'=>'--Select Model to search Sensor readings--',
                 'choices' => $models ))
 
-            ->add('ins_date', DateTimeType::class, array('label' => 'Start Date'))
-            ->add('ins_before', DateTimeType::class, array('label' => 'End Date'))
+            ->add('ins_date', DateType::class, array('label' => 'Installed After'))
+            ->add('ins_before', DateType::class, array('label' => 'Installed Before'))
+
+//            Sensor filter
+            ->add(
+                'noOfReadings',
+                IntegerType::class,
+                array('attr' => array('label' => 'Max. readings per sensor','min' => 1, 'max' => 1000))
+            )
+            ->add(
+                'startDate',
+                DateTimeType ::class,
+                array(
+                    'input' => 'datetime',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
+                )
+            )
+            ->add(
+                'endDate',
+                DateTimeType::class,
+                array(
+                    'input' => 'datetime',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
+                )
+            )
+
             ->add('submit', SubmitType::class, array('label' => 'Search' , 'attr'=> array('class'=> 'btn-default glyphicon glyphicon-search')));
 
     }

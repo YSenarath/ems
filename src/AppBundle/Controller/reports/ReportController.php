@@ -9,9 +9,8 @@ use AppBundle\Controller\sensor\ModelController;
 use AppBundle\Controller\sensor\SensorController;
 use AppBundle\Controller\sensor\TypeController;
 use AppBundle\Entity\report\AirQlyReading;
-use AppBundle\Entity\report\Area;
+use AppBundle\Entity\location\Area;
 use AppBundle\Entity\report\HumidityReading;
-use AppBundle\Entity\report\LocationEntity;
 use AppBundle\Entity\report\PressureReading;
 use AppBundle\Entity\report\SensorReading;
 use AppBundle\Entity\report\SensorReadingFilter;
@@ -92,11 +91,11 @@ class ReportController extends Controller
 
         $sensorArray = array();
         foreach ($locationArray as $location) {
-            /* @var $location LocationEntity */
+            /* @var $location \AppBundle\Entity\location\Location */
             //print_r($location[0]."<br>");
             $sensorArray = array_merge(
                 $sensorArray,
-                $sensorController->getSensorDetailsByLocationAction($location->getLocationId())
+                $sensorController->getSensorDetailsByLocationAction($location->getId())
             );
         }
         //print_r($sensorArray);
@@ -210,7 +209,7 @@ class ReportController extends Controller
 
         $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
 
-        $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getLocationId());
+        $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getId());
 
         $locationHumidity = 0;
         $locationTemp = 0;
@@ -268,7 +267,7 @@ class ReportController extends Controller
             }
         }
 
-        $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
+        $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getId());
 
         $locationTemp = round($locationTemp, 2);
         $locationHumidity = round($locationHumidity, 2);
@@ -304,8 +303,9 @@ class ReportController extends Controller
     public function reportFilterSensorReadingsAction(Request $request)
     {
         $sensorReadingFilter = new SensorReadingFilter();
-        $sensorReadingFilter->setInsDate((new \DateTime('today')));
         $sensorReadingFilter->setInsBefore((new \DateTime('today')));
+        $sensorReadingFilter->setNoOfReadings(5);
+        $sensorReadingFilter->setEndDate((new \DateTime('today')));
 
         $connection = $this->get('database_connection');
 
@@ -334,10 +334,9 @@ class ReportController extends Controller
             $sensorsList[] = new Sensor();
 
             $sensorController = new SensorController($connection);
+            //get filtered sensor list
             $sensorsList = $sensorController->findSensorReadingFilterIds($sensorReadingFilter);
 
-            $startDate = $form["ins_date"]->getData();
-            $endDate = $form["ins_before"]->getData();
 
             $tempController = new TempReadingController($connection);
             $humidityController = new HumidityReadingController($connection);
@@ -350,7 +349,10 @@ class ReportController extends Controller
             $pressureReadings = array();
             $tempReadings = array();
             $windReadings = array();
-            $readingLimit = 10;
+
+            $readingLimit = $form["noOfReadings"]->getData();
+            $startDate = $form["startDate"]->getData();
+            $endDate = $form["endDate"]->getData();
 
             foreach ($sensorsList as $sensorDetail) {
                 /* @var $sensorDetail Sensor */
@@ -419,7 +421,21 @@ class ReportController extends Controller
                         break;
                 }
             }
-//            print_r($sensorsList);
+//            if(count($airReadings)==0){
+//                $airReadings=false;
+//            }
+//            if(count($humidityReadings)==0){
+//                $humidityReadings=false;
+//            }
+//            if(count($pressureReadings)==0){
+//                $pressureReadings=false;
+//            }
+//            if(count($tempReadings)==0){
+//                $tempReadings=false;
+//            }
+//            if(count($windReadings)==0){
+//                $windReadings=false;
+//            }
             return $this->render('AppBundle:reports:filteredSensorReadings.html.twig',
                 array('airQualityReadings' => $airReadings,
                     'humidityReadings' => $humidityReadings,
