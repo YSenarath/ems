@@ -24,8 +24,8 @@ class Location {
      * @Assert\Range(
      *      min = 79.761600,
      *      max = 79.938755,
-     *      minMessage = "The longitude is not withing the Colombo City Limits",
-     *      maxMessage = "The longitude is not withing the Colombo City Limits"
+     *      minMessage = "The longitude is lower than the Colombo City Limits ({{ limit }})",
+     *      maxMessage = "The longitude is greater than the Colombo City Limits ({{ limit }})"
      * )
      */
     protected $longitude;
@@ -42,8 +42,8 @@ class Location {
      * @Assert\Range(
      *      min = 6.852805,
      *      max = 6.977547,
-     *      minMessage = "The latitude is not withing the Colombo City Limits",
-     *      maxMessage = "The latitude is not withing the Colombo City Limits"
+     *      minMessage = "The latitude is lower than the Colombo City Limits ({{ limit }})",
+     *      maxMessage = "The latitude is greater than the Colombo City Limits ({{ limit }})"
      * )
      */
     protected $latitude;
