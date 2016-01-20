@@ -17,9 +17,9 @@
     </h1>
     <dev >
         <div class="container">
-            <div class="container formContainer">
-
-                <table class="tableWidth">
+            <div class="col-md-7 formContainer">
+                <div class="row">
+                    <table class="tableWidth">
                     {{ form_start(form) }}
                     <tr >
                         <td >
@@ -28,9 +28,7 @@
                         <td >
                             {{ form_widget(form.sensor_id) }}
                         </td>
-                        <td >
-                            {{ form_errors(form.sensor_id) }}
-                        </td>
+
                     </tr>
                     <tr >
                         <td >
@@ -39,9 +37,7 @@
                         <td >
                             {{ form_widget(form.report_id) }}
                         </td>
-                        <td >
-                            {{ form_errors(form.report_id) }}
-                        </td>
+
                     </tr>
                     <tr >
                         <td >
@@ -50,6 +46,8 @@
                         <td >
                             {{ form_widget(form.error_desc) }}
                         </td>
+                    </tr>
+                    <tr >
                         <td >
                             {{ form_errors(form.error_desc) }}
                         </td>
@@ -62,10 +60,8 @@
                         <td >
                             {{ form_widget(form.is_fixed) }}
                         </td>
-                        <td >
-                            {{ form_errors(form.is_fixed) }}
-                        </td>
                     </tr>
+
                     <tr >
                         <td >
 
@@ -73,12 +69,10 @@
                         <td align="right" >
                             {{ form_widget(form.submit) }}
                         </td>
-                        <td >
-
-                        </td>
                     </tr>
                     {{ form_end(form) }}
                 </table>
+                </div>
             </div>
         </div>
     </dev>
