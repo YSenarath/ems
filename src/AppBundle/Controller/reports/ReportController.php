@@ -211,11 +211,18 @@ class ReportController extends Controller
 
         $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getId());
 
+
         $locationHumidity = 0;
         $locationTemp = 0;
         $locationWindSpeed = 0;
         $locationWindDirection = 0;
         $locationPressure = 0;
+
+        $noOfTempSensors = 0;
+        $noOfAirQlySensors = 0;
+        $noOfHumiditySensors = 0;
+        $noOfPressureSensors = 0;
+        $noOfWindSensors = 0;
 
         $locationAirQty = 0;
         $locationAirO2 = 0;
@@ -228,59 +235,76 @@ class ReportController extends Controller
                 case "Temperature"://temp
                     $lastReading = ($tempController->tempLastReadingSearchAction($sensorDetail->getSensorId()));
                     /* @var $lastReading TempReading */
-                    if ($lastReading != null) {
-                        $locationTemp = $lastReading->getTempValue();
+                    if ($lastReading != false) {
+                        $noOfTempSensors += 1;
+                        $locationTemp += $lastReading->getTempValue();
+                        $locationTemp = round($locationTemp / $noOfTempSensors, 2);
+                    } else {
+                        $locationTemp = "N/A";
                     }
                     break;
                 case "Air Quality"://air
                     $lastReading = $airController->airQtlLastReadingSearchAction($sensorDetail->getSensorId());
 
                     /* @var $lastReading AirQlyReading */
-                    if ($lastReading != null) {
-                        $locationAirQty = $lastReading->getAirQtyPercentage();
-                        $locationAirO2 = $lastReading->getOxygenPercentage();
-                        $locationAirCo2 = $lastReading->getCo2Percentage();
+                    if ($lastReading != false) {
+                        $noOfAirQlySensors += 1;
+                        $locationAirQty += $lastReading->getAirQtyPercentage();
+                        $locationAirO2 += $lastReading->getOxygenPercentage();
+                        $locationAirCo2 += $lastReading->getCo2Percentage();
+
+                        $locationAirQty = round($locationAirQty / $noOfAirQlySensors, 2);
+                        $locationAirO2 = round($locationAirO2 / $noOfAirQlySensors, 2);
+                        $locationAirCo2 = round($locationAirCo2 / $noOfAirQlySensors, 4);
+                    } else {
+                        $locationAirQty = "N/A";
+                        $locationAirO2 = "N/A";
+                        $locationAirCo2 = "N/A";
                     }
                     break;
                 case  "Humidity"://humidity
                     $lastReading = $humidityController->humidityLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading HumidityReading */
-                    if ($lastReading != null) {
-                        $locationHumidity = $lastReading->getHumidityValue();
+                    if ($lastReading != false) {
+                        $noOfHumiditySensors += 1;
+                        $locationHumidity += $lastReading->getHumidityValue();
+
+                        $locationHumidity = round($locationHumidity / $noOfHumiditySensors, 2);
+                    } else {
+                        $locationHumidity = "N/A";
                     }
                     break;
                 case "Pressure"://pressure
                     $lastReading = $pressureController->pressureLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading PressureReading */
-                    if ($lastReading != null) {
-                        $locationPressure = $lastReading->getPressureValue();
+                    if ($lastReading != false) {
+                        $noOfPressureSensors += 1;
+                        $locationPressure += $lastReading->getPressureValue();
+
+                        $locationPressure = round(($locationPressure / $noOfPressureSensors) / 1000, 2);
+                    } else {
+                        $locationPressure = "N/A";
                     }
                     break;
                 case "Wind"://wind
                     $lastReading = $windController->windLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading WindReading */
-                    if ($lastReading != null) {
-                        $locationWindSpeed = $lastReading->getWindSpeed();
-                        $locationWindDirection = $lastReading->getDirection();
+                    if ($lastReading != false) {
+                        $noOfWindSensors += 1;
+                        $locationWindSpeed += $lastReading->getWindSpeed();
+                        $locationWindDirection += $lastReading->getDirection();
+
+                        $locationWindSpeed = round($locationWindSpeed / $noOfWindSensors, 2);
+                        $locationWindDirection = round($locationWindDirection / $noOfWindSensors, 2);
+                    } else {
+                        $locationWindSpeed = "N/A";
+                        $locationWindDirection = "N/A";
                     }
                     break;
             }
         }
 
         $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getId());
-
-        $locationTemp = round($locationTemp, 2);
-        $locationHumidity = round($locationHumidity, 2);
-        $locationPressure = round($locationPressure / 1000, 2);
-
-        $locationWindSpeed = round($locationWindSpeed, 2);
-        $locationWindDirection = round($locationWindDirection, 2);
-
-        $locationAirQty = round($locationAirQty, 2);
-        $locationAirO2 = round($locationAirO2, 2);
-        $locationAirCo2 = round($locationAirCo2, 4);
-
-        //print_r($sensorArray);
 
         return $this->render(
             '@App/reports/locationView.html.twig',
@@ -552,12 +576,13 @@ class ReportController extends Controller
         }
 
 
-        return $this->showFilter($request,$noReadings,$startDate,$endDate,$sensor);
+        return $this->showFilter($request, $noReadings, $startDate, $endDate, $sensor);
 
     }
 
-    private function makeForm($srs,$startDate,$endDate){
-        return  $this->createFormBuilder($srs)
+    private function makeForm($srs, $startDate, $endDate)
+    {
+        return $this->createFormBuilder($srs)
             ->add(
                 'noOfReadings',
                 IntegerType::class,
@@ -589,7 +614,8 @@ class ReportController extends Controller
             ->getForm();
     }
 
-    private function showFilter(Request $request,$noReadings,$startDate,$endDate,Sensor $sensor){
+    private function showFilter(Request $request, $noReadings, $startDate, $endDate, Sensor $sensor)
+    {
         if (!$noReadings) {
 
             $connection = $this->get('database_connection');
@@ -604,7 +630,7 @@ class ReportController extends Controller
             $srs->setNoOfReadings(50);
             $srs->setEndDate(new DateTime());
 
-            $form = $this->makeForm($srs,$startDate,$endDate);
+            $form = $this->makeForm($srs, $startDate, $endDate);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
