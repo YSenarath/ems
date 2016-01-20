@@ -23,6 +23,33 @@ class LocationController extends Controller
         $this->connection = $connection;
     }
 
+
+    /**created by jnj
+     * bug fixes
+     * add location
+     * */
+    public function searchAddressInArea($address,$area)
+    {
+        $location = $this->connection->fetchAssoc(
+            'SELECT location_id,address, longitude, latitude, area_code FROM location WHERE address = ? AND area_code = ?',
+            array($address,$area)
+        );
+        //print_r($result);
+        if ($location != null) {
+
+            $tmpLocation = new Location();
+            $tmpLocation->setId($location["location_id"]);
+            $tmpLocation->setAddress($location["address"]);
+            $tmpLocation->setLongitude($location["longitude"]);
+            $tmpLocation->setLatitude($location["latitude"]);
+            $tmpLocation->setAreaCode($location["area_code"]);
+            return $tmpLocation;
+            //return array($locationsResult["location_id"],$locationsResult["address"],$locationsResult["longitude"],$locationsResult["latitude"]);
+        }
+        //print_r($locationArray);
+        return false;
+
+    }
     public function getLocationsAction()
     {
         $locations = $this->connection->fetchAll('SELECT address, longitude, latitude FROM location');

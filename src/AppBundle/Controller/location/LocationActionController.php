@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\location\LocationController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 class LocationActionController extends Controller
 {
@@ -76,9 +77,16 @@ class LocationActionController extends Controller
             $connection = $this->get('database_connection');
             $locationController = new LocationController($connection);
 
-            $locationController->addLocation($newLoc);
-
-            return $this->redirectToRoute('locationAreaView', array('viewArea'=> $viewArea)    );
+            if (!$locationController->searchAddressInArea($newLoc->getAddress(),$areaId)){
+                $locationController->addLocation($newLoc);
+            } else{
+                $form->get('address')->addError(new FormError('The Address already exists in area :'.$area->getName()));
+                return $this->render(
+                    'AppBundle:location:addLocations.html.twig',
+                    array('form' => $form->createView() , 'location'=>$newLoc )
+                );
+            }
+            return $this->redirectToRoute('locationAreaView', array('viewArea'=> $viewArea));
         }
 
         return $this->render(
