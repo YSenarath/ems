@@ -63,19 +63,6 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav"  >
 
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="true">Area<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('areaView') }}">Districts</a></li>
-                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
-                            <li><hr class="navhr"></li>
-                            <li><a href="{{ path('addLocations') }}">Add New Location</a></li>
-                            {% endif %}
-                        </ul>
-                    </li>
-                    {% endif %}
 
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
                     <li class="dropdown">
@@ -83,21 +70,34 @@
                            aria-expanded="true">Sensors<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('sensor_list') }}">Sensor Installed </a></li>
-                            <li><a href="{{ path('find_sensor') }}">Find Sensor</a></li>
-                            <li><a href="{{ path('reportSensorReadingFinder') }}">Find Sensor Readings</a></li>
                             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                             <li><a href="{{ path('add_sensor') }}">Add Sensor </a></li>
                             <li><hr class="navhr"></li>
-                            <li><a href="{{ path('add_model') }}">Add Model </a></li>
                             <li><a href="{{ path('model_list') }}">Sensor Models </a></li>
+                            <li><a href="{{ path('add_model') }}">Add Model </a></li>
+
                             <li><hr class="navhr"></li>
                             <li><a href="{{ path('type_list') }}">Sensor Types </a></li>
                             <li><hr class="navhr"></li>
-                            <li><a href="{{ path('sensor_error_list') }}">Sensor Error Report </a></li>
+                            <li><a href="{{ path('sensor_error_list') }}">Sensor Error Logs</a></li>
                             {% endif %}
                         </ul>
                     </li>
                     {% endif %}
+
+
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="true">Filters<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('find_sensor') }}">Sensors</a></li>
+                                <li><a href="{{ path('reportSensorReadingFinder') }}">Sensor Readings</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+
 
                     {#u can enter the link here  like  <li><a href="{{ path('about') }}"> About</a></li> #}
                     {#<li class="dropdown">#}
@@ -111,6 +111,21 @@
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MNGR') %}
                     <li><a href="{{ path('reportAreas') }}">Reports</a></li>
                     {% endif %}
+
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="true">Area<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('areaView') }}">Districts</a></li>
+                                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
+                                    <li><hr class="navhr"></li>
+                                    <li><a href="{{ path('addLocations') }}">Add New Location</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
+
 
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="dropdown">
