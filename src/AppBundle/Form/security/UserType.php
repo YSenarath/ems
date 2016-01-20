@@ -24,7 +24,7 @@ class UserType extends AbstractType
     {
         $choices = array(
             'Administrator' => 0,
-            'Manager' => 1,
+            'City Mayor' => 1,
             'Technician' => 2,
         );
         $builder
