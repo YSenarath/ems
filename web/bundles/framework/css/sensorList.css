@@ -36,6 +36,11 @@ tbody tr:hover {
     background-color: #C5E3FF;
 }
 
+
+th{
+    color : #fff;
+
+}
 #searchContainer {
     padding: 1% 2% 1% 2%;
     /*background-color: #009688;*/

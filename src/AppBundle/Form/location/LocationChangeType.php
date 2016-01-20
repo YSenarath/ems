@@ -29,8 +29,8 @@ class LocationChangeType extends AbstractType
         $builder
             ->add('id', TextType::class, array('label'=>'ID', 'disabled' => true))
             ->add('address', TextType::class, array('label' => 'Address'))
-            ->add('longitude', NumberType::class, array('label' => 'Longitude'))
-            ->add('latitude', NumberType::class, array('label' => 'Latitude' ))
+            ->add('longitude',TextType::class, array('label' => 'Longitude(°)'))
+            ->add('latitude', TextType::class, array('label' => 'Latitude(°)' ))
             ->add('area_code', ChoiceType::class, array('label' => 'Area','choices'=>$areas,))
             ->add('submit', SubmitType::class, array('label' => 'Save Changes',));
     }

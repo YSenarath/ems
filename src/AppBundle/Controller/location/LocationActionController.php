@@ -30,7 +30,21 @@ class LocationActionController extends Controller
         $locations = new LocationController($conn);
         $districts = $locations->getAllDistrictsAction();
         return $this->render(
-            'AppBundle:location:location.html.twig', array('areas'=>$districts)
+            'AppBundle:location:location.html.twig', array('districts'=>$districts)
+        );
+    }
+
+    /**
+     * @Route("/location/area", name="areaView")
+     */
+    public function areaAction()
+    {
+        $conn = $this->get('database_connection');
+        $locations = new LocationController($conn);
+        $districts = $locations->getAllDistrictsAction();
+        $areas = $locations->getArea();
+        return $this->render(
+            'AppBundle:location:areas.html.twig', array('areas'=>$areas,'districts'=>$districts)
         );
     }
 
@@ -73,18 +87,6 @@ class LocationActionController extends Controller
         );
     }
 
-    /**
-     * @Route("/location/area", name="areaView")
-     */
-    public function areaAction()
-    {
-        $conn = $this->get('database_connection');
-        $locations = new LocationController($conn);
-        $areas = $locations->getArea();
-        return $this->render(
-            'AppBundle:location:areas.html.twig', array('areas'=>$areas)
-        );
-    }
 
     /**
      * @Route("/location/area/{viewArea}", name="locationAreaView")
@@ -134,6 +136,8 @@ class LocationActionController extends Controller
 
             //add location
             $locationController->changeLocation($newLoc);
+            $this->get('session')->getFlashBag()->add('msg', 'Location \''.$viewLocation.'\' Changed Successfully.');
+            $this->get('session')->getFlashBag()->add('title', 'Message');
             return $this->redirectToRoute('locationAreaView', array('viewArea'=> $viewArea));
         }
 

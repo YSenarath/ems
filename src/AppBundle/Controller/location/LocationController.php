@@ -211,7 +211,7 @@ class LocationController extends Controller
 //    In order to view the areas
     public function getArea()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY name');
+        $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY area_code');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -232,7 +232,7 @@ class LocationController extends Controller
 
     public function getAllDistrictsAction()
     {
-        $districts = $this->connection->fetchAll('SELECT name, center_longitude, center_latitude FROM area');
+        $districts = $this->connection->fetchAll('SELECT area_code,name, center_longitude, center_latitude FROM area ORDER BY area_code');
 
         if ($districts != null) {
             return $districts;

@@ -1,0 +1,203 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportFilteredSensorReadingsStyle.css') }}"/>
+    <style>
+
+    </style>
+{% endblock %}
+{% block body %}
+    {#{% if noReadings ==1 %}#}
+    <div class="tabs">
+        <ul class="tab-links">
+            <li class="active"><a href="#airTab">Air Quality</a></li>
+            <li><a href="#humidityTab">Humidity</a></li>
+            <li><a href="#pressureTab">Pressure</a></li>
+            <li><a href="#temperatureTab">Temperature</a></li>
+            <li><a href="#windTab">Wind</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="airTab" class="tab active">
+                <div class="component" id="sensorReading" align="center">
+                    {% if airQualityReadings is defined %} {#Air qty#}
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+
+                                <th>Sensor Id<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Date</th>
+                                <th>Time</th>
+
+                                <th>Air Quality (%)</th>
+                                <th>CO<sub>2</sub> (%)</th>
+                                <th>Oxygen (%)</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in airQualityReadings %}
+                                <tr>
+                                    <td>{{ reading.getSensorId() }}</td>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+
+                                    <td>{{ reading.getAirQtyPercentage() }}</td>
+                                    <td>{{ reading.getCo2Percentage() }}</td>
+                                    <td>{{ reading.getOxygenPercentage() }}</td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div id="humidityTab" class="tab snap">
+                <div class="component" id="sensorReading" align="center">
+                    {% if humidityReadings is defined %}
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+                                <th>Sensor Id<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Date</th>
+                                <th>Time</th>
+
+                                <th>Humidity (%)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in humidityReadings %}
+                                <tr>
+                                    <td>{{ reading.getSensorId() }}</td>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+
+
+                                    <td>{{ reading.getHumidityValue() }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="pressureTab" class="tab snap">
+                <div class="component" id="sensorReading" align="center">
+                    {% if pressureReadings is defined %}
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+                                <th>Sensor Id<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Date</th>
+                                <th>Time</th>
+
+                                <th>Pressure( KPa)</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in pressureReadings %}
+                                <tr>
+                                    <td>{{ reading.getSensorId() }}</td>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+
+
+                                    <td>{{ reading.getPressureValue() /1000 }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="temperatureTab" class="tab snap">
+                <div class="component" id="sensorReading" align="center">
+                    {% if tempReadings is defined %}
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+                                <th>Sensor Id<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Date<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Time</th>
+
+                                <th>Temperature( °C)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in tempReadings %}
+                                <tr>
+                                    <td>{{ reading.getSensorId() }}</td>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+
+                                    <td>{{ reading.getTempValue() }}
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="windTab" class="tab snap">
+                <div class="component" id="sensorReading" align="center">
+                    {% if windReadings is defined %}
+                        <table id="sensorReadingTable" class="sortable">
+                            <thead>
+                            <tr>
+                                <th>Sensor Id<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Date<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                <th>Time</th>
+
+                                <th>Speed (m/s)</th>
+                                <th>Direction (°)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reading in windReadings %}
+                                <tr>
+                                    <td>{{ reading.getSensorId() }}</td>
+                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+
+
+                                    <td>{{ reading.getWindSpeed() }}</td>
+                                    <td>{{ reading.getDirection() }}</td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+        <script>
+            jQuery(document).ready(function () {
+                jQuery('.tabs .tab-links a').on('click', function (e) {
+                    var currentAttrValue = jQuery(this).attr('href');
+
+                    // Show/Hide Tabs
+                    jQuery('.tabs ' + currentAttrValue).slideDown(1500).siblings().slideUp(1500);
+
+                    // Change/remove current tab to active
+                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                    e.preventDefault();
+                });
+            });
+
+        </script>
+    </div>
+    {#{% else %}#}
+    {#<div id="errorMsg" align="center">#}
+    {#No sensor readings for filter#}
+    {#</div>#}
+    {#{% endif %}#}
+{% endblock %}

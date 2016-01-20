@@ -89,6 +89,7 @@ class PressureReadingController extends Controller
         foreach ($lastReadings as $lastReading) {
             if ($lastReading != null) {
                 $pressureReading = new PressureReading();
+                $pressureReading->setSensorId($sensor_id);
                 $pressureReading->setTimestamp($lastReading["timestamp"]);
                 $pressureReading->setPressureValue($lastReading["pressure_value"]);
 
