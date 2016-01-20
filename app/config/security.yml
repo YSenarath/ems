@@ -49,6 +49,7 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/employee, roles: ROLE_ADMIN }
         - { path: ^/sensor/list, roles: [ROLE_ADMIN, ROLE_TECH, ROLE_MNGR] }
         - { path: ^/sensor/find, roles: [ROLE_ADMIN, ROLE_TECH, ROLE_MNGR] }
         - { path: ^/sensor, roles: [ROLE_ADMIN, ROLE_TECH] }

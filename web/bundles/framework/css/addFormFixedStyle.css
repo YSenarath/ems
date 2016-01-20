@@ -1,0 +1,36 @@
+
+.tableWidth {
+    width: 40%;
+}
+
+.tableWidth tr td:nth-child(1) {
+    width: 20%;
+    color: #2d5c8a;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+
+}
+
+.tableWidth tr td:nth-child(2) {
+    width: 40%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.tableWidth tr {
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid transparent;
+}
+
+.formContainer {
+    width: 75%;
+    display: inline-block;
+    padding: 25px 40px 25px 40px;
+    background-color: #eaeaea;
+    border: 10px solid #EFEFEF;
+    /*color: white;*/
+    border-radius: 10px;
+
+    float: none;
+    margin: 0 auto;
+}

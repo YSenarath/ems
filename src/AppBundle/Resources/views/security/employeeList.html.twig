@@ -1,25 +1,45 @@
-{# AppBundle/Resources/views/location/areas.html.twig #}
+{# AppBundle/Resources/views/location/employeesList.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
- {% block otherstylesheets %}
-     {#Sidebar style#}
-     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
- {% endblock %}
+
+{% block otherstylesheets %}
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/tableSearch.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
+
+{% endblock %}
 
 {% block body %}
-    <h1>
+
+    <h1 align="center">
         Employee List
     </h1>
-    <div class="container " id="areaListContainer">
-        <ul class="list-unstyled">
-            {% for employee in employees %}
-                <li class="col-md-3">
-                    <h3> <a href="{{ path('updateEmployee') }}?id={{ employee.getEmployeeId() }}">
-                            {{ employee.getEmployeeId() }} : {{ employee.getFirstName() }} {{ employee.getLastName() }}
-                        </a> </h3>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="container">
+        <div class="row">
+            <div id="tableContainer">
+                <table class="table sortable" id="tblData">
+                    <tr class="customHeader">
+                        <th class="col-md-1 sorttable_sorted">No<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                        <th class="col-md-3">Employee ID</th>
+                        <th class="col-md-4">Name</th>
+                    </tr>
+                    {% for employee in employees %}
+                        <tr onclick="document.location = '{{ path('updateEmployee') }}?id={{ employee.getEmployeeId() }}'">
+                            <td class="col-md-1">{{ loop.index - 1 }}</td>
+                            <td class="col-md-3">{{ employee.getEmployeeId() }}</td>
+                            <td class="col-md-4">{{ employee.getFirstName() }} {{ employee.getLastName() }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <p>*Please Click the table column header to sort by.</p>
+        </div>
     </div>
 
-    {% if (js is defined) %}{{ js|raw }}{% endif %}
+
+
 {% endblock %}

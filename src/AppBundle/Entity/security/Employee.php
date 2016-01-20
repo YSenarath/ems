@@ -8,13 +8,62 @@
 
 namespace AppBundle\Entity\security;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class Employee
 {
+    /**
+     * @Assert\Length(
+     *      max = 8,
+     *      maxMessage = "Employee ID cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $employee_id;
+
+    /**
+     * @Assert\Length(
+     *      max = 30,
+     *      maxMessage = "First name cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $first_name;
+
+    /**
+     * @Assert\Length(
+     *      max = 30,
+     *      maxMessage = "Last name cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $last_name;
+
+    /**
+     * @Assert\Regex(
+     *     pattern="/^\d{9}[vVxX]$/",
+     *     match=true,
+     *     message="The value {{ value }} is not a National ID number."
+     * )
+     *
+     * @Assert\Length(
+     *      max = 10,
+     *      maxMessage = "NIC cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $NIC;
+
+    /**
+     * @Assert\Regex(
+     *     pattern="/^\d{10}$/",
+     *     match=true,
+     *     message="The value {{ value }} is not a Telephone number."
+     * )
+     *
+     * @Assert\Length(
+     *      max = 11,
+     *      maxMessage = "Tel. No cannot be longer than {{ limit }} characters"
+     * )
+     */
     protected $tel_no;
 
     /**
