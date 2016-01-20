@@ -13,6 +13,7 @@ use AppBundle\Form\security\UpdateEmployeeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 use AppBundle\Entity\security\DatabaseUser;
 use AppBundle\Entity\security\Employee;
@@ -53,7 +54,11 @@ class SecurityActionController extends Controller
                 }
                 return $this->redirectToRoute('homepage');
             } else {
-                return $this->redirectToRoute('register');
+                $form->get('id')->addError(new FormError('The employee ID does not exist'));
+                return $this->render(
+                    'AppBundle:security:register.html.twig',
+                    array('form' => $form->createView())
+                );
             }
         }
 
@@ -87,14 +92,18 @@ class SecurityActionController extends Controller
             $userController = new UserController($connection);
             $employeeController = new EmployeeController($connection);
             if ($employeeController->searchEmployee($user->getId())) {
-                if (!$userController->searchUser($user->getUsername())) {
-                    $userController->addUser($user);
+                if ($userController->searchUser($user->getUsername())) {
+                    $userController->updateUser($user);
                 } else {
                     return $this->redirectToRoute('register');
                 }
                 return $this->redirectToRoute('homepage');
             } else {
-                return $this->redirectToRoute('register');
+                $form->get('employee_id')->addError(new FormError('The employee ID already exists'));
+                return $this->render(
+                    'AppBundle:security:register.html.twig',
+                    array('form' => $form->createView())
+                );
             }
         }
 
@@ -122,17 +131,22 @@ class SecurityActionController extends Controller
             $employeeController = new EmployeeController($connection);
             if (!$employeeController->searchEmployee($employee->getEmployeeId())) {
                 $employeeController->addEmployee($employee);
-                $this->addFlash(
-                    'notice',
-                    'Completed Successfully.'
-                );
+//                $this->addFlash(
+//                    'notice',
+//                    'Completed Successfully.'
+//                );
+                return $this->redirectToRoute('listEmployees');
             }
             else {
-                $this->addFlash(
-                    'notice',
-                    'Employee exists with the same ID.'
+                $form->get('employee_id')->addError(new FormError('The employee ID already exists'));
+//                $this->addFlash(
+//                    'notice',
+//                    'Employee exists with the same ID.'
+//                );
+                return $this->render(
+                    'AppBundle:security:employee.html.twig',
+                    array('form' => $form->createView())
                 );
-                return $this->redirectToRoute('addEmployee');
             }
         }
 
@@ -162,17 +176,22 @@ class SecurityActionController extends Controller
         if ($form->isValid() && $form->isSubmitted()) {
             if ($employeeController->searchEmployee($employee->getEmployeeId())) {
                 $employeeController->updateEmployee($employee);
-                $this->addFlash(
-                    'notice',
-                    'Completed Successfully.'
-                );
+//                $this->addFlash(
+//                    'notice',
+//                    'Completed Successfully.'
+//                );
             }
             else {
-                $this->addFlash(
-                    'notice',
-                    'Employee does not exist in the storage.'
+                $form->get('employee_id')->addError(new FormError('The employee ID does not exist'));
+//                $this->addFlash(
+//                    'notice',
+//                    'Employee does not exist in the storage.'
+//                );
+//                return $this->redirectToRoute('addEmployee');
+                return $this->render(
+                    'AppBundle:security:updateEmployee.html.twig',
+                    array('form' => $form->createView())
                 );
-                return $this->redirectToRoute('addEmployee');
             }
         }
 

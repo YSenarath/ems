@@ -1,6 +1,12 @@
 {# AppBundle/Resources/views/security/login.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addFormFixedStyle.css') }}"/>
+
+{% endblock %}
+
 {% block stylesheets %}
 {% endblock stylesheets %}
 
@@ -10,14 +16,15 @@
 {# {% block nevigationbar %} {% endblock %} #}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1 align="center">Register</h1>
 
-    <dev class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    <dev>
+        <div class="container" align="center">
+            <div class="container formContainer" align="left">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </dev>
 {% endblock body %}

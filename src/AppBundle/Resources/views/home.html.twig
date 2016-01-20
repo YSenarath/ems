@@ -84,8 +84,10 @@
             });
         }
 
+        {% if is_granted('ROLE_TECH') %}
         {% for error in errors %}
             createNotification("{{ error.getErrorDesc() }}");
         {% endfor %}
+        {% endif %}
     </script>
 {% endblock %}

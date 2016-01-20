@@ -1,6 +1,12 @@
 {# AppBundle/Resources/views/security/login.html.twig #}
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block otherstylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/addFormFixedStyle.css') }}"/>
+
+{% endblock %}
+
 {% block stylesheets %}
 {% endblock stylesheets %}
 
@@ -10,19 +16,14 @@
 {# {% block nevigationbar %} {% endblock %} #}
 
 {% block body %}
-    <h1>Update Employee Data</h1>
-    <div class="container-fluid">
-        <div class="col-md-2">
-            {% for flash_message in app.session.flashbag.get('notice') %}
-                <div class="flash-notice">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
+    <h1 align="center">Update Employee Data</h1>
+    <dev>
+        <div class="container" align="center">
+            <div class="container formContainer" align="left">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
-        </div>
-    </div>
+    </dev>
 {% endblock body %}
