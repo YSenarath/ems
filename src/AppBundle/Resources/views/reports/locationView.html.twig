@@ -26,7 +26,7 @@
     {% if sensorDetails[0]['sensor'].getTypeName is defined %}
         <div class="tabs">
             <ul class="tab-links">
-                <li class="active"><a href="#section0">Summery</a></li>
+                <li class="active"><a href="#section0">Summary</a></li>
                 <li><a href="#section1">Installed Sensors</a></li>
             </ul>
 
@@ -44,7 +44,7 @@
                                 <td> {{ meanAir['O2'] }} %</td>
                             </tr>
                             <tr>
-                                <td>Carbon diaoxide content</td>
+                                <td>Carbon dioxide content</td>
                                 <td> {{ meanAir['CO2'] }} %</td>
                             </tr>
                             <tr>
@@ -80,7 +80,7 @@
                                 <th>Type</th>
                                 <th>Manufacturer</th>
                                 <th>Unit</th>
-                                <th>Insalled Date</th>
+                                <th>Installed Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -107,7 +107,7 @@
                                     <td>{{ sensorDetail['sensor'].getInsDate() }}</td>
                                     <td id="sensorReadingLink">
                                         <a href="{{ path('reportSensorReadings') }}?id={{ sensorDetail['sensor'].getSensorId() }}">View
-                                            Readings
+                                            readings
                                         </a>
                                     </td>
                                 </tr>

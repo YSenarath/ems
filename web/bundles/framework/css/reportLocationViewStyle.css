@@ -14,7 +14,7 @@ body {
 
 #section0 {
     /*padding-top: 50px;*/
-    height: 70vh;
+    height: 65vh;
     /*color: #000;*/
     background-color: #00796B;
     padding-top: 100px;
@@ -26,7 +26,7 @@ body {
 #section1 {
     /*height: 370px;*/
     color: #fff;
-    height: 70vh;
+    height: 65vh;
     background-color: #009688;
     padding: 100px 0 100px 0;
     overflow: auto;
