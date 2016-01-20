@@ -53,6 +53,7 @@ security:
         - { path: ^/sensor/list, roles: [ROLE_ADMIN, ROLE_TECH, ROLE_MNGR] }
         - { path: ^/sensor/find, roles: [ROLE_ADMIN, ROLE_TECH, ROLE_MNGR] }
         - { path: ^/sensor, roles: [ROLE_ADMIN, ROLE_TECH] }
+        - { path: ^/location/area/.+/.+, roles: [ROLE_ADMIN, ROLE_TECH] }
         - { path: ^/reports, roles: [ROLE_ADMIN, ROLE_MNGR] }
         - { path: ^/register, roles: ROLE_ADMIN }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -35,7 +35,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/area", name="areaView")
+     * @Route("/area", name="areaView")
      */
     public function areaAction()
     {
@@ -49,7 +49,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/area/{viewArea}/addLocation", name="addLocationView")
+     * @Route("/area/{viewArea}/addLocation", name="addLocationView")
      */
     public function addLocationsAction($viewArea, Request $request)
     {
@@ -89,7 +89,7 @@ class LocationActionController extends Controller
 
 
     /**
-     * @Route("/location/area/{viewArea}", name="locationAreaView")
+     * @Route("/area/{viewArea}", name="locationAreaView")
      */
     public function specificLocationAction($viewArea) {
         $conn = $this->get('database_connection');
@@ -110,7 +110,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/area/{viewArea}/{viewLocation}", name="changeLocationView")
+     * @Route("/area/{viewArea}/{viewLocation}", name="changeLocationView")
      */
     public function changeLocationViewAction($viewArea, $viewLocation, Request $request)
     {
@@ -148,7 +148,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/area/{viewArea}/{viewLocation}/delete", name="deleteLocationView")
+     * @Route("/area/{viewArea}/{viewLocation}/delete", name="deleteLocationView")
      */
     public function deleteLocationAction($viewArea, $viewLocation)
     {
@@ -167,7 +167,7 @@ class LocationActionController extends Controller
     }
 
     /**
-     * @Route("/location/add", name="addLocations")
+     * @Route("/add", name="addLocations")
      */
     public function addLocationAction(Request $request)
     {
