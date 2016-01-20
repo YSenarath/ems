@@ -17,61 +17,93 @@
             Latitude: {{ location.getLatitude() }} | Longitude: {{ location.getLongitude() }}
         </div>
     </div>
-    {% if sensorDetails[0]['sensor'].getTypeName is not defined %}
-        <div id="errorMsg" align="center">
-            No sensors installed
-        </div>
-    {% endif %}
 
-    {% if sensorDetails[0]['sensor'].getTypeName is defined %}
-        <div class="tabs">
-            <ul class="tab-links">
-                <li class="active"><a href="#section0">Summery</a></li>
-                <li><a href="#section1">Installed Sensors</a></li>
-            </ul>
+    {#{% if sensorDetails[0]['sensor'].getTypeName is defined %}#}
+    <div class="tabs">
+        <ul class="tab-links">
+            <li class="active"><a href="#section0">Summary</a></li>
+            <li><a href="#section1">Installed Sensors</a></li>
+        </ul>
 
-            <div class="tab-content">
+        <div class="tab-content">
 
-                <div id="section0" class="tab active ">
-                    <div class="col-sm-5" id="locationReadings" align="center">
-                        <table>
-                            <tr>
-                                <td>Air Quality</td>
+            <div id="section0" class="tab active ">
+                <div class="col-sm-5" id="locationReadings" align="center">
+                    <table>
+                        <tr>
+                            <td>Air Quality</td>
+                            {% if meanAir['airQly']!="N/A" %}
                                 <td> {{ meanAir['airQly'] }} %</td>
-                            </tr>
-                            <tr>
-                                <td>Oxygen content</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Oxygen content</td>
+                            {% if meanAir['O2']!="N/A" %}
                                 <td> {{ meanAir['O2'] }} %</td>
-                            </tr>
-                            <tr>
-                                <td>Carbon diaoxide content</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Carbon dioxide content</td>
+                            {% if meanAir['CO2']!="N/A" %}
                                 <td> {{ meanAir['CO2'] }} %</td>
-                            </tr>
-                            <tr>
-                                <td>Humidity</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Humidity</td>
+                            {% if meanHumidity!="N/A" %}
                                 <td>{{ meanHumidity }} %</td>
-                            </tr>
-                            <tr>
-                                <td>Pressure</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Pressure</td>
+                            {% if meanPressure!="N/A" %}
                                 <td>{{ meanPressure }} KPa</td>
-                            </tr>
-                            <tr>
-                                <td>Temperature</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            {% if meanTemp!="N/A" %}
                                 <td>{{ meanTemp }} °C</td>
-                            </tr>
-                            <tr>
-                                <td>Wind speed</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Wind speed</td>
+                            {% if  meanWind['speed']!="N/A" %}
                                 <td>{{ meanWind['speed'] }} m/s</td>
-                            </tr>
-                            <tr>
-                                <td>Wind Direction</td>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Wind Direction</td>
+                            {% if meanWind['direction']!="N/A" %}
                                 <td>{{ meanWind['direction'] }} °</td>
-                            </tr>
-                        </table>
-                    </div>
+                            {% else %}
+                                <td>N/A</td>
+                            {% endif %}
+                        </tr>
+                    </table>
                 </div>
+            </div>
 
-                <div id="section1" class="tab">
+            <div id="section1" class="tab">
+                {% if sensorDetails[0]['sensor'].getTypeName is not defined %}
+                    <div id="errorMsg" align="center">
+                        No sensors installed
+                    </div>
+                {% else %}
                     <div id="sensorInformation" align="center">
                         <table id="sensorTable" class="sortable">
                             <thead>
@@ -80,7 +112,7 @@
                                 <th>Type</th>
                                 <th>Manufacturer</th>
                                 <th>Unit</th>
-                                <th>Insalled Date</th>
+                                <th>Installed Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -107,7 +139,7 @@
                                     <td>{{ sensorDetail['sensor'].getInsDate() }}</td>
                                     <td id="sensorReadingLink">
                                         <a href="{{ path('reportSensorReadings') }}?id={{ sensorDetail['sensor'].getSensorId() }}">View
-                                            Readings
+                                            readings
                                         </a>
                                     </td>
                                 </tr>
@@ -115,30 +147,32 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                {% endif %}
+
             </div>
-
         </div>
-        <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
-        <script src="{{ asset('bundles/framework/js/jquery.panelSnap.js') }}"></script>
 
-        <script>
-            jQuery(document).ready(function () {
-                jQuery('.tabs .tab-links a').on('click', function (e) {
-                    var currentAttrValue = jQuery(this).attr('href');
+    </div>
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.panelSnap.js') }}"></script>
 
-                    // Show/Hide Tabs
-                    jQuery('.tabs ' + currentAttrValue).slideDown(1500).siblings().slideUp(1500);
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('.tabs .tab-links a').on('click', function (e) {
+                var currentAttrValue = jQuery(this).attr('href');
 
-                    // Change/remove current tab to active
-                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+                // Show/Hide Tabs
+                jQuery('.tabs ' + currentAttrValue).slideDown(1500).siblings().slideUp(1500);
 
-                    e.preventDefault();
-                });
+                // Change/remove current tab to active
+                jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                e.preventDefault();
             });
+        });
 
-        </script>
+    </script>
 
-    {% endif %}
+    {#{% endif %}#}
 
 {% endblock %}

@@ -2,8 +2,11 @@
 
 {% block otherstylesheets %}
 
+    <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.panelSnap.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportSensorReadingsStyle.css') }}"/>
+
     <style>
 
     </style>
@@ -24,57 +27,61 @@
             </ul>
 
             <div class="tab-content">
-                <div id="tabular" class="tab active">
+                <div id="tabular" class="tab active ">
 
-                    <div class="component" id="sensorReading" align="center">
-                        <table id="sensorReadingTable" class="sortable">
-                            <thead>
-                            <tr>
-                                <th>Date<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
-                                <th>Time</th>
+                    <div class="container-fluid">
+                        <div class="row ">
+                            <div id="sensorReading" >
+                                <table id="sensorReadingTable" class="table sortable">
 
-                                {% if readings[0].getAirQtyPercentage is defined %} {#Air qty#}
-                                    <th>Air Quality (%)</th>
-                                    <th>CO<sub>2</sub> (%)</th>
-                                    <th>Oxygen (%)</th>
-                                {% elseif readings[0].getTempValue is defined %} {#Temp#}
-                                    <th>Temperature( °C)</th>
-                                {% elseif readings[0].getPressureValue is defined %} {#Pressure#}
-                                    <th>Pressure( KPa)</th>
-                                {% elseif readings[0].getWindSpeed is defined %} {#Wind#}
-                                    <th>Speed (m/s)</th>
-                                    <th>Direction (°)</th>
-                                {% elseif readings[0].getHumidityValue is defined %} {#Humidity#}
-                                    <th>Humidity (%)</th>
-                                {% endif %}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for reading in readings %}
-                                <tr>
-                                    <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
-                                    <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
-                                    {% if reading.getAirQtyPercentage is defined %} {#Air qty#}
-                                        <td>{{ reading.getAirQtyPercentage() }}</td>
-                                        <td>{{ reading.getCo2Percentage() }}</td>
-                                        <td>{{ reading.getOxygenPercentage() }}</td>
-                                    {% elseif reading.getTempValue is defined %} {#Temp#}
-                                        <td>{{ reading.getTempValue() }}
-                                    {% elseif reading.getPressureValue is defined %} {#Pressure#}
-                                        <td>{{ reading.getPressureValue() /1000 }}</td>
-                                    {% elseif reading.getWindSpeed is defined %} {#Wind#}
-                                        <td>{{ reading.getWindSpeed() }}</td>
-                                        <td>{{ reading.getDirection() }}</td>
-                                    {% elseif reading.getHumidityValue is defined %} {#Humidity#}
-                                        <td>{{ reading.getHumidityValue() }}</td>
-                                    {% endif %}
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                    <tr class="customHeader">
+                                        <th>Date<span id="sorttable_sortfwdind">&nbsp;▴</span></th>
+                                        <th>Time</th>
+
+                                        {% if readings[0].getAirQtyPercentage is defined %} {#Air qty#}
+                                            <th>Air Quality (%)</th>
+                                            <th>CO<sub>2</sub> (%)</th>
+                                            <th>Oxygen (%)</th>
+                                        {% elseif readings[0].getTempValue is defined %} {#Temp#}
+                                            <th>Temperature( °C)</th>
+                                        {% elseif readings[0].getPressureValue is defined %} {#Pressure#}
+                                            <th>Pressure( KPa)</th>
+                                        {% elseif readings[0].getWindSpeed is defined %} {#Wind#}
+                                            <th>Speed (m/s)</th>
+                                            <th>Direction (°)</th>
+                                        {% elseif readings[0].getHumidityValue is defined %} {#Humidity#}
+                                            <th>Humidity (%)</th>
+                                        {% endif %}
+                                    </tr>
+                                    {% for reading in readings %}
+                                        <tr>
+                                            <td>{{ reading.getTimestamp()|date('Y-m-d') }}</td>
+                                            <td>{{ reading.getTimestamp()|date('h:i:s a') }}</td>
+                                            {% if reading.getAirQtyPercentage is defined %} {#Air qty#}
+                                                <td>{{ reading.getAirQtyPercentage() }}</td>
+                                                <td>{{ reading.getCo2Percentage() }}</td>
+                                                <td>{{ reading.getOxygenPercentage() }}</td>
+                                            {% elseif reading.getTempValue is defined %} {#Temp#}
+                                                <td>{{ reading.getTempValue() }}
+                                            {% elseif reading.getPressureValue is defined %} {#Pressure#}
+                                                <td>{{ reading.getPressureValue() /1000 }}</td>
+                                            {% elseif reading.getWindSpeed is defined %} {#Wind#}
+                                                <td>{{ reading.getWindSpeed() }}</td>
+                                                <td>{{ reading.getDirection() }}</td>
+                                            {% elseif reading.getHumidityValue is defined %} {#Humidity#}
+                                                <td>{{ reading.getHumidityValue() }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>*Please Click the table column header to sort by.</p>
+                        </div>
                     </div>
-
                 </div>
+
                 <div id="graphical" class="tab snap">
 
                     <section id="section1" class="section">
@@ -148,8 +155,6 @@
 
                 </div>
             </div>
-            <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
-            <script src="{{ asset('bundles/framework/js/jquery.panelSnap.js') }}"></script>
 
             <script>
                 jQuery(document).ready(function () {

@@ -1,5 +1,5 @@
 h1 {
-    padding: 10px;
+    /*padding: 10px;*/
     color: #009688;
 }
 
@@ -118,6 +118,6 @@ h1 {
 }
 
 #locationAddressList {
-    height: 18vh;
+    height: 16vh;
     overflow: auto;
 }

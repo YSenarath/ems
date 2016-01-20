@@ -6,7 +6,7 @@
  * Time: 12:21 AM
  */
 
-namespace AppBundle\Entity\report;
+namespace AppBundle\Entity\location;
 
 class Area
 {

@@ -9,9 +9,8 @@ use AppBundle\Controller\sensor\ModelController;
 use AppBundle\Controller\sensor\SensorController;
 use AppBundle\Controller\sensor\TypeController;
 use AppBundle\Entity\report\AirQlyReading;
-use AppBundle\Entity\report\Area;
+use AppBundle\Entity\location\Area;
 use AppBundle\Entity\report\HumidityReading;
-use AppBundle\Entity\report\LocationEntity;
 use AppBundle\Entity\report\PressureReading;
 use AppBundle\Entity\report\SensorReading;
 use AppBundle\Entity\report\SensorReadingFilter;
@@ -92,11 +91,11 @@ class ReportController extends Controller
 
         $sensorArray = array();
         foreach ($locationArray as $location) {
-            /* @var $location LocationEntity */
+            /* @var $location \AppBundle\Entity\location\Location */
             //print_r($location[0]."<br>");
             $sensorArray = array_merge(
                 $sensorArray,
-                $sensorController->getSensorDetailsByLocationAction($location->getLocationId())
+                $sensorController->getSensorDetailsByLocationAction($location->getId())
             );
         }
         //print_r($sensorArray);
@@ -210,13 +209,20 @@ class ReportController extends Controller
 
         $locationDetail = $locationController->getLocationDetailsAction($viewLocation);
 
-        $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getLocationId());
+        $sensorArray = $sensorController->getSensorDetailsByLocationAction($locationDetail->getId());
+
 
         $locationHumidity = 0;
         $locationTemp = 0;
         $locationWindSpeed = 0;
         $locationWindDirection = 0;
         $locationPressure = 0;
+
+        $noOfTempSensors = 0;
+        $noOfAirQlySensors = 0;
+        $noOfHumiditySensors = 0;
+        $noOfPressureSensors = 0;
+        $noOfWindSensors = 0;
 
         $locationAirQty = 0;
         $locationAirO2 = 0;
@@ -229,59 +235,76 @@ class ReportController extends Controller
                 case "Temperature"://temp
                     $lastReading = ($tempController->tempLastReadingSearchAction($sensorDetail->getSensorId()));
                     /* @var $lastReading TempReading */
-                    if ($lastReading != null) {
-                        $locationTemp = $lastReading->getTempValue();
+                    if ($lastReading != false) {
+                        $noOfTempSensors += 1;
+                        $locationTemp += $lastReading->getTempValue();
+                        $locationTemp = round($locationTemp / $noOfTempSensors, 2);
+                    } else {
+                        $locationTemp = "N/A";
                     }
                     break;
                 case "Air Quality"://air
                     $lastReading = $airController->airQtlLastReadingSearchAction($sensorDetail->getSensorId());
 
                     /* @var $lastReading AirQlyReading */
-                    if ($lastReading != null) {
-                        $locationAirQty = $lastReading->getAirQtyPercentage();
-                        $locationAirO2 = $lastReading->getOxygenPercentage();
-                        $locationAirCo2 = $lastReading->getCo2Percentage();
+                    if ($lastReading != false) {
+                        $noOfAirQlySensors += 1;
+                        $locationAirQty += $lastReading->getAirQtyPercentage();
+                        $locationAirO2 += $lastReading->getOxygenPercentage();
+                        $locationAirCo2 += $lastReading->getCo2Percentage();
+
+                        $locationAirQty = round($locationAirQty / $noOfAirQlySensors, 2);
+                        $locationAirO2 = round($locationAirO2 / $noOfAirQlySensors, 2);
+                        $locationAirCo2 = round($locationAirCo2 / $noOfAirQlySensors, 4);
+                    } else {
+                        $locationAirQty = "N/A";
+                        $locationAirO2 = "N/A";
+                        $locationAirCo2 = "N/A";
                     }
                     break;
                 case  "Humidity"://humidity
                     $lastReading = $humidityController->humidityLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading HumidityReading */
-                    if ($lastReading != null) {
-                        $locationHumidity = $lastReading->getHumidityValue();
+                    if ($lastReading != false) {
+                        $noOfHumiditySensors += 1;
+                        $locationHumidity += $lastReading->getHumidityValue();
+
+                        $locationHumidity = round($locationHumidity / $noOfHumiditySensors, 2);
+                    } else {
+                        $locationHumidity = "N/A";
                     }
                     break;
                 case "Pressure"://pressure
                     $lastReading = $pressureController->pressureLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading PressureReading */
-                    if ($lastReading != null) {
-                        $locationPressure = $lastReading->getPressureValue();
+                    if ($lastReading != false) {
+                        $noOfPressureSensors += 1;
+                        $locationPressure += $lastReading->getPressureValue();
+
+                        $locationPressure = round(($locationPressure / $noOfPressureSensors) / 1000, 2);
+                    } else {
+                        $locationPressure = "N/A";
                     }
                     break;
                 case "Wind"://wind
                     $lastReading = $windController->windLastReadingSearchAction($sensorDetail->getSensorId());
                     /* @var $lastReading WindReading */
-                    if ($lastReading != null) {
-                        $locationWindSpeed = $lastReading->getWindSpeed();
-                        $locationWindDirection = $lastReading->getDirection();
+                    if ($lastReading != false) {
+                        $noOfWindSensors += 1;
+                        $locationWindSpeed += $lastReading->getWindSpeed();
+                        $locationWindDirection += $lastReading->getDirection();
+
+                        $locationWindSpeed = round($locationWindSpeed / $noOfWindSensors, 2);
+                        $locationWindDirection = round($locationWindDirection / $noOfWindSensors, 2);
+                    } else {
+                        $locationWindSpeed = "N/A";
+                        $locationWindDirection = "N/A";
                     }
                     break;
             }
         }
 
-        $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getLocationId());
-
-        $locationTemp = round($locationTemp, 2);
-        $locationHumidity = round($locationHumidity, 2);
-        $locationPressure = round($locationPressure / 1000, 2);
-
-        $locationWindSpeed = round($locationWindSpeed, 2);
-        $locationWindDirection = round($locationWindDirection, 2);
-
-        $locationAirQty = round($locationAirQty, 2);
-        $locationAirO2 = round($locationAirO2, 2);
-        $locationAirCo2 = round($locationAirCo2, 4);
-
-        //print_r($sensorArray);
+        $sensorDetailArray = $sensorController->getSensorsByLocationAction($locationDetail->getId());
 
         return $this->render(
             '@App/reports/locationView.html.twig',
@@ -295,6 +318,158 @@ class ReportController extends Controller
                 'meanWind' => array('speed' => $locationWindSpeed, 'direction' => $locationWindDirection),
                 'meanAir' => array('airQly' => $locationAirQty, 'O2' => $locationAirO2, 'CO2' => $locationAirCo2),
             )
+        );
+    }
+
+    /**
+     * @Route("/reports/find", name="reportSensorReadingFinder")
+     */
+    public function reportFilterSensorReadingsAction(Request $request)
+    {
+        $sensorReadingFilter = new SensorReadingFilter();
+        $sensorReadingFilter->setInsBefore((new \DateTime('today')));
+        $sensorReadingFilter->setNoOfReadings(5);
+        $sensorReadingFilter->setEndDate((new \DateTime('today')));
+
+        $connection = $this->get('database_connection');
+
+        $modelController = new ModelController($connection);
+        $typeController = new TypeController($connection);
+        $locationController = new LocationController($connection);
+
+        $models = $modelController->getAllModelNames();
+        $types = $typeController->getAllTypeNames();
+        $locations = $locationController->getAllLocationNames();
+
+        // build the form
+        $form = $this->createForm(FindSensorReadings::class, $sensorReadingFilter,
+            array(
+                'models' => $models,
+                'types' => $types,
+                'locations' => $locations
+            ));
+
+        //Handle submission (will only happen on POST)
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            //find sensorsList
+            $sensorsList[] = new Sensor();
+
+            $sensorController = new SensorController($connection);
+            //get filtered sensor list
+            $sensorsList = $sensorController->findSensorReadingFilterIds($sensorReadingFilter);
+
+
+            $tempController = new TempReadingController($connection);
+            $humidityController = new HumidityReadingController($connection);
+            $pressureController = new PressureReadingController($connection);
+            $windController = new WindReadingController($connection);
+            $airController = new AirQlyReadingController($connection);
+
+            $airReadings = array();
+            $humidityReadings = array();
+            $pressureReadings = array();
+            $tempReadings = array();
+            $windReadings = array();
+
+            $readingLimit = $form["noOfReadings"]->getData();
+            $startDate = $form["startDate"]->getData();
+            $endDate = $form["endDate"]->getData();
+
+            foreach ($sensorsList as $sensorDetail) {
+                /* @var $sensorDetail Sensor */
+                switch ($sensorDetail->getTypeName()) {
+                    case "Temperature"://temp
+                        $tempReadings = array_merge(
+                            $tempReadings,
+                            $tempController->tempReadingsSearchAction(
+                                $sensorDetail->getSensorId(),
+                                $readingLimit,
+                                $startDate->format("Y-m-d H:i:s"),
+                                $endDate->format("Y-m-d H:i:s")
+                            )
+                        );
+                        /* @var $tempReadings TempReading[] */
+                        break;
+                    case "Air Quality"://air
+                        $airReadings = array_merge(
+                            $airReadings,
+                            $airController->airQtlReadingsSearchAction(
+                                $sensorDetail->getSensorId(),
+                                $readingLimit,
+                                $startDate->format("Y-m-d H:i:s"),
+                                $endDate->format("Y-m-d H:i:s")
+                            )
+                        );
+                        break;
+                    case  "Humidity"://humidity
+                        $humidityReadings = array_merge(
+                            $humidityReadings,
+                            $humidityController->humidityReadingsSearchAction(
+                                $sensorDetail->getSensorId(),
+                                $readingLimit,
+                                $startDate->format("Y-m-d H:i:s"),
+                                $endDate->format("Y-m-d H:i:s")
+                            )
+                        );
+                        /* @var $humidityReadings HumidityReading[] */
+
+                        break;
+                    case "Pressure"://pressure
+                        $pressureReadings = array_merge(
+                            $pressureReadings,
+                            $pressureController->pressureReadingsSearchAction(
+                                $sensorDetail->getSensorId(),
+                                $readingLimit,
+                                $startDate->format("Y-m-d H:i:s"),
+                                $endDate->format("Y-m-d H:i:s")
+                            )
+                        );
+
+                        /* @var $pressureReadings PressureReading[] */
+
+                        break;
+                    case "Wind"://wind
+                        $windReadings = array_merge(
+                            $windReadings,
+                            $windController->windReadingsSearchAction(
+                                $sensorDetail->getSensorId(),
+                                $readingLimit,
+                                $startDate->format("Y-m-d H:i:s"),
+                                $endDate->format("Y-m-d H:i:s")
+                            )
+                        );
+                        /* @var $windReadings WindReading[] */
+                        break;
+                }
+            }
+//            if(count($airReadings)==0){
+//                $airReadings=false;
+//            }
+//            if(count($humidityReadings)==0){
+//                $humidityReadings=false;
+//            }
+//            if(count($pressureReadings)==0){
+//                $pressureReadings=false;
+//            }
+//            if(count($tempReadings)==0){
+//                $tempReadings=false;
+//            }
+//            if(count($windReadings)==0){
+//                $windReadings=false;
+//            }
+            return $this->render('AppBundle:reports:filteredSensorReadings.html.twig',
+                array('airQualityReadings' => $airReadings,
+                    'humidityReadings' => $humidityReadings,
+                    'pressureReadings' => $pressureReadings,
+                    'tempReadings' => $tempReadings,
+                    'windReadings' => $windReadings));
+        }
+        return $this->render(
+            'AppBundle:reports:filterSensorReadings.html.twig',
+            array('form' => $form->createView())
         );
     }
 
@@ -400,43 +575,62 @@ class ReportController extends Controller
                 break;
         }
 
+
+        return $this->showFilter($request, $noReadings, $startDate, $endDate, $sensor);
+
+    }
+
+    private function makeForm($srs, $startDate, $endDate)
+    {
+        return $this->createFormBuilder($srs)
+            ->add(
+                'noOfReadings',
+                IntegerType::class,
+                array('attr' => array('min' => 1, 'max' => 1000))
+            )
+            ->add(
+                'startDate',
+                DateTimeType ::class,
+                array(
+                    'input' => 'datetime',
+//                    'widget' => 'choice',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
+                    'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
+                )
+            )
+            ->add(
+                'endDate',
+                DateTimeType::class,
+                array(
+                    'input' => 'datetime',
+//                    'widget' => 'choice',
+                    'date_widget' => "choice",
+                    'time_widget' => "choice",
+                    'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
+                )
+            )
+            ->add('Show', SubmitType::class, array('label' => 'Show'))
+            ->getForm();
+    }
+
+    private function showFilter(Request $request, $noReadings, $startDate, $endDate, Sensor $sensor)
+    {
         if (!$noReadings) {
+
+            $connection = $this->get('database_connection');
+            $tempController = new TempReadingController($connection);
+            $humidityController = new HumidityReadingController($connection);
+            $pressureController = new PressureReadingController($connection);
+            $windController = new WindReadingController($connection);
+            $airController = new AirQlyReadingController($connection);
+
             //Create search form
             $srs = new SensorReadingSearcher();
             $srs->setNoOfReadings(50);
             $srs->setEndDate(new DateTime());
-            // 'attr' => array(
-            $form = $this->createFormBuilder($srs)
-                ->add(
-                    'noOfReadings',
-                    IntegerType::class,
-                    array('attr' => array('min' => 1, 'max' => 1000))
-                )
-                ->add(
-                    'startDate',
-                    DateTimeType ::class,
-                    array(
-                        'input' => 'datetime',
-//                    'widget' => 'choice',
-                        'date_widget' => "choice",
-                        'time_widget' => "choice",
-                        'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
-                    )
-                )
-                ->add(
-                    'endDate',
-                    DateTimeType::class,
-                    array(
-                        'input' => 'datetime',
-//                    'widget' => 'choice',
-                        'date_widget' => "choice",
-                        'time_widget' => "choice",
-                        'years' => range(date('Y', strtotime($startDate)), date('Y', strtotime($endDate))),
-                    )
-                )
-                ->add('Show', SubmitType::class, array('label' => 'Show'))
-                ->getForm();
 
+            $form = $this->makeForm($srs, $startDate, $endDate);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -808,142 +1002,5 @@ class ReportController extends Controller
                 )
             );
         }
-
-
-    }
-
-    /**
-     * @Route("/reports/find", name="reportSensorReadingFinder")
-     */
-    public function reportFilterSensorReadingsAction(Request $request)
-    {
-        $sensorReadingFilter = new SensorReadingFilter();
-        $sensorReadingFilter->setInsDate((new \DateTime('today')));
-        $sensorReadingFilter->setInsBefore((new \DateTime('today')));
-
-        $connection = $this->get('database_connection');
-
-        $modelController = new ModelController($connection);
-        $typeController = new TypeController($connection);
-        $locationController = new LocationController($connection);
-
-        $models = $modelController->getAllModelNames();
-        $types = $typeController->getAllTypeNames();
-        $locations = $locationController->getAllLocationNames();
-
-        // build the form
-        $form = $this->createForm(FindSensorReadings::class, $sensorReadingFilter,
-            array(
-                'models' => $models,
-                'types' => $types,
-                'locations' => $locations
-            ));
-
-        //Handle submission (will only happen on POST)
-        $form->handleRequest($request);
-
-        if ($form->isValid() && $form->isSubmitted()) {
-
-            //find sensorsList
-            $sensorsList[] = new Sensor();
-
-            $sensorController = new SensorController($connection);
-            $sensorsList = $sensorController->findSensorReadingFilterIds($sensorReadingFilter);
-
-            $startDate = $form["ins_date"]->getData();
-            $endDate = $form["ins_before"]->getData();
-
-            $tempController = new TempReadingController($connection);
-            $humidityController = new HumidityReadingController($connection);
-            $pressureController = new PressureReadingController($connection);
-            $windController = new WindReadingController($connection);
-            $airController = new AirQlyReadingController($connection);
-
-            $airReadings = array();
-            $humidityReadings = array();
-            $pressureReadings = array();
-            $tempReadings = array();
-            $windReadings = array();
-            $readingLimit = 10;
-
-            foreach ($sensorsList as $sensorDetail) {
-                /* @var $sensorDetail Sensor */
-                switch ($sensorDetail->getTypeName()) {
-                    case "Temperature"://temp
-                        $tempReadings = array_merge(
-                            $tempReadings,
-                            $tempController->tempReadingsSearchAction(
-                                $sensorDetail->getSensorId(),
-                                $readingLimit,
-                                $startDate->format("Y-m-d H:i:s"),
-                                $endDate->format("Y-m-d H:i:s")
-                            )
-                        );
-                        /* @var $tempReadings TempReading[] */
-                        break;
-                    case "Air Quality"://air
-                        $airReadings = array_merge(
-                            $airReadings,
-                            $airController->airQtlReadingsSearchAction(
-                                $sensorDetail->getSensorId(),
-                                $readingLimit,
-                                $startDate->format("Y-m-d H:i:s"),
-                                $endDate->format("Y-m-d H:i:s")
-                            )
-                        );
-                        break;
-                    case  "Humidity"://humidity
-                        $humidityReadings = array_merge(
-                            $humidityReadings,
-                            $humidityController->humidityReadingsSearchAction(
-                                $sensorDetail->getSensorId(),
-                                $readingLimit,
-                                $startDate->format("Y-m-d H:i:s"),
-                                $endDate->format("Y-m-d H:i:s")
-                            )
-                        );
-                        /* @var $humidityReadings HumidityReading[] */
-
-                        break;
-                    case "Pressure"://pressure
-                        $pressureReadings = array_merge(
-                            $pressureReadings,
-                            $pressureController->pressureReadingsSearchAction(
-                                $sensorDetail->getSensorId(),
-                                $readingLimit,
-                                $startDate->format("Y-m-d H:i:s"),
-                                $endDate->format("Y-m-d H:i:s")
-                            )
-                        );
-
-                        /* @var $pressureReadings PressureReading[] */
-
-                        break;
-                    case "Wind"://wind
-                        $windReadings = array_merge(
-                            $windReadings,
-                            $windController->windReadingsSearchAction(
-                                $sensorDetail->getSensorId(),
-                                $readingLimit,
-                                $startDate->format("Y-m-d H:i:s"),
-                                $endDate->format("Y-m-d H:i:s")
-                            )
-                        );
-                        /* @var $windReadings WindReading[] */
-                        break;
-                }
-            }
-//            print_r($sensorsList);
-            return $this->render('AppBundle:reports:filteredSensorReadings.html.twig',
-                array('airQualityReadings' => $airReadings,
-                    'humidityReadings' => $humidityReadings,
-                    'pressureReadings' => $pressureReadings,
-                    'tempReadings' => $tempReadings,
-                    'windReadings' => $windReadings));
-        }
-        return $this->render(
-            'AppBundle:reports:filterSensorReadings.html.twig',
-            array('form' => $form->createView())
-        );
     }
 }

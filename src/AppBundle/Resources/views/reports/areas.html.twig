@@ -15,17 +15,23 @@
     </div>
 
     <div class="container " id="areaListContainer">
-        <ul class="list-unstyled" id="list">
-            {% for area in areas %}
-                {% if area.name|trim is not empty %}
-                    <li class="col-md-3"><h3><a
-                                    href="{{ path('reportAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a>
-                        </h3>
-                    </li>
-                {% endif %}
-            {% endfor %}
+        {% if areas|length>0 %}
+            <ul class="list-unstyled" id="list">
+                {% for area in areas %}
+                    {% if area.name|trim is not empty %}
+                        <li class="col-md-3"><h3><a
+                                        href="{{ path('reportAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a>
+                            </h3>
+                        </li>
+                    {% endif %}
+                {% endfor %}
 
-        </ul>
+            </ul>
+        {% else %}
+            <div id="errorMsg" align="center">
+              No Administrative Districts available
+            </div>
+        {% endif %}
     </div>
 
     {% if (js is defined) %}{{ js|raw }}{% endif %}
