@@ -16,12 +16,7 @@
             text-shadow:rgba(0,0,0,.2) 2px 6px 5px,rgba(255,255,255,.4) 0 -4px 30px;
         }
 
-        #logoImage {
-            position: relative;
-            bottom: 0;
-            right: 0;
 
-        }
 
     </style>
 {% endblock %}
@@ -39,15 +34,17 @@
             <li>Yasas Senarath</li>
             <li>Dulanjaya Tennekoon</li>
         </ul>
-        <div id="logoImage">
-            <img class="img-responsive pull-right pull-bottom" src="{{ asset('bundles/framework/images/logo.png') }}"
-                 alt="Company Logo"
-                 style="width:250px;height:100px;">
-        </div>
+
+    </div>
+    <div id="logoImage" style="bottom: 0;" >
+        <img class="img-responsive pull-right pull-bottom" src="{{ asset('bundles/framework/images/logo.png') }}"
+             alt="Company Logo"
+             style="width:250px;height:100px;">
+    </div>
+
 
 
     </div>
-
 
 
 {% endblock %}

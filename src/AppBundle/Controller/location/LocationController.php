@@ -12,6 +12,8 @@ use AppBundle\Entity\report\Area;
 use AppBundle\Entity\report\LocationEntity;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class LocationController extends Controller
 {
@@ -209,7 +211,7 @@ class LocationController extends Controller
 //    In order to view the areas
     public function getArea()
     {
-        $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY name');
+        $result = $this->connection->executeQuery('SELECT * FROM area ORDER BY area_code');
         $result = $result->fetchAll();
 
         //print_r($result);
@@ -230,7 +232,7 @@ class LocationController extends Controller
 
     public function getAllDistrictsAction()
     {
-        $districts = $this->connection->fetchAll('SELECT name, center_longitude, center_latitude FROM area');
+        $districts = $this->connection->fetchAll('SELECT area_code,name, center_longitude, center_latitude FROM area ORDER BY area_code');
 
         if ($districts != null) {
             return $districts;
@@ -295,8 +297,11 @@ class LocationController extends Controller
             $statement->bindValue(1, $locationView);
             $statement->execute();
             $this->connection->commit();
-        } catch (Exception $e) {
+            return true;
+        } catch (ForeignKeyConstraintViolationException $e) {
             $this->connection->rollBack();
+            return false;
         }
+
     }
 }

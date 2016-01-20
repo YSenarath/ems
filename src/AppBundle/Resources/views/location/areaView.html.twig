@@ -4,10 +4,33 @@
     {#Sidebar style#}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
-
+    <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+    <style>
+        #info {
+            background-color: #5eb5e0;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+    {% for msg in app.session.flashbag.get('msg') %}
+
+            <script type="text/javascript">
+                Alert.render('{{ msg }}', '{{ app.session.flashbag.get('title').0 }}' );
+            </script>
+    {% endfor %}
+
     <div class="container-fluid">
         <div id="header">
             <h3>{{ areaView }}</h3>
@@ -20,8 +43,8 @@
                         <thead>
                         <tr>
                             <th class="col-md-6">Address</th>
-                            <th class="col-md-2">Longitude</th>
-                            <th class="col-md-2">Latitude</th>
+                            <th class="col-md-2">Longitude(°)</th>
+                            <th class="col-md-2">Latitude(°)</th>
                             <th class="col-md-2"></th>
                         </tr>
                         </thead>
@@ -32,14 +55,21 @@
                                 <td class="col-md-2">{{ loc.getLatitude }}</td>
 
                                 <td class="col-md-2">
+
                                     <button type="button" class="btn glyphicon glyphicon-pencil" title="Change Location Information"
                                             onclick="location.href='{{ path('changeLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
                                     <button type="button" class="btn glyphicon glyphicon-remove" title="Delete Location"
-                                            onclick="location.href='{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
+                                            onclick="Confirm.render(
+                                                    'Are you sure to remove location : {{loc.getAddress}}',
+                                                    'delete_row',
+                                                    '{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}')"></button>
                                 </td>
                             </tr>
                         {% endfor %}
                     </table>
+                    <div class="row">
+                        <p id="info" style="margin-top: -10px">*Click on the Locations to View Sensors</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,23 +103,19 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
                             async defer></script>
                 </div>
-                <div class="row">
-                    <p style="background-color: transparent">*Click on the Markers to View Sensors</p>
+                <div class="row" style="margin-top: 406px">
+                    <p id="info">*Click on the Markers to View Sensors</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-7">
-                <div class="col-md-10">
-                    <p style="background-color: transparent; margin-top: -30px">* Click on any Location to View Sensor Details</p>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn glyphicon glyphicon-new-window" title="Add New Location"
-                            style="background-color: #0d9d9d; margin-top: -40px; margin-left: -10px;"
-                            onclick="location.href='{{ path('addLocationView', {'viewArea': areaView}) }}'"></button>
-                </div>
-            </div>
-            <div class="col-md-5"></div>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <a href="{{ path('addLocationView', {'viewArea': areaView}) }}">
+                <span class="glyphicon glyphicon-new-window"></span> Add New Location
+            </a>
         </div>
+
     </div>
 {% endblock %}

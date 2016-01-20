@@ -98,6 +98,7 @@ class TempReadingController extends Controller
             if ($lastReading != null) {
                 //print_r($lastReading);
                 $tempReading = new TempReading();
+                $tempReading->setSensorId($sensor_id);
                 $tempReading->setTimestamp($lastReading["timestamp"]);
                 $tempReading->setTempValue($lastReading["temp_value"]);
 

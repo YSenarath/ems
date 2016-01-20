@@ -17,68 +17,87 @@
     </h1>
     <dev >
         <div class="container">
-            <div class="container formContainer">
+            <div class="container formContainer col-md-7">
+                <div class="row">
+                    <table class="tableWidth">
+                        {{ form_start(form) }}
+                        <tr >
+                            <td >
+                                {{ form_label(form.model_id) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.model_id) }}
+                        </tr>
+                        <tr>
+                            <td>
 
-                <table class="tableWidth">
-                    {{ form_start(form) }}
-                    <tr >
-                        <td >
-                            {{ form_label(form.model_id) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.model_id) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.model_id) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.manufacture) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.manufacture) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.manufacture) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            {{ form_label(form.unit) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.unit) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.unit) }}
-                        </td>
-                    </tr>
+                            </td>
+                            <td >
+                                {{ form_errors(form.model_id) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+                                {{ form_label(form.manufacture) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.manufacture) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-                    <tr >
-                        <td >
-                            {{ form_label(form.det_range) }}
-                        </td>
-                        <td >
-                            {{ form_widget(form.det_range) }}
-                        </td>
-                        <td >
-                            {{ form_errors(form.det_range) }}
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
+                            </td>
+                            <td >
+                                {{ form_errors(form.manufacture) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+                                {{ form_label(form.unit) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.unit) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-                        </td>
-                        <td align="right" >
-                            {{ form_widget(form.submit) }}
-                        </td>
-                        <td >
+                            </td>
+                            <td >
+                                {{ form_errors(form.unit) }}
+                            </td>
+                        </tr>
 
-                        </td>
-                    </tr>
-                    {{ form_end(form) }}
-                </table>
+                        <tr >
+                            <td >
+                                {{ form_label(form.det_range) }}
+                            </td>
+                            <td >
+                                {{ form_widget(form.det_range) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td >
+                                {{ form_errors(form.det_range) }}
+                            </td>
+                        </tr>
+                        <tr >
+                            <td >
+
+                            </td>
+                            <td align="right" >
+                                {{ form_widget(form.submit) }}
+                            </td>
+
+                        </tr>
+                        {{ form_end(form) }}
+                    </table>
+                </div>
+
             </div>
         </div>
     </dev>

@@ -66,12 +66,15 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="true">Locations<span class="caret"></span></a>
+                           aria-expanded="true">Area<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('mapView') }}">Map</a></li>
                             <li><a href="{{ path('areaView') }}">Districts</a></li>
+                            <li><hr class="navhr"></li>
+                            <li><a href="{{ path('addLocations') }}">Add New Location</a></li>
                         </ul>
                     </li>
+
+
 
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
                     <li class="dropdown">
@@ -80,6 +83,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('sensor_list') }}">Sensor Installed </a></li>
                             <li><a href="{{ path('find_sensor') }}">Find Sensor</a></li>
+                            <li><a href="{{ path('reportSensorReadingFinder') }}">Find Sensor Readings</a></li>
                             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                             <li><a href="{{ path('add_sensor') }}">Add Sensor </a></li>
                             <li><hr class="navhr"></li>

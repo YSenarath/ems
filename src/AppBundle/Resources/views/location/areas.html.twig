@@ -3,29 +3,70 @@
  {% block otherstylesheets %}
      {#Sidebar style#}
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/locationAreas.css') }}"/>
+     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
  {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container">
         <div class="header">
-            <h1>
-                Districts
-            </h1>
-            <hr>
+            <h2>Administrative Districts</h2>
         </div>
     </div>
-    <div class="container">
-        <ul class="list-unstyled">
-            {% for area in areas %}
-                {% if area.name|trim is not empty %}
-                    <li class="col-md-3"><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}">{{ area.name }}</a>
-                        </h3>
-                    </li>
-                {% endif %}
-            {% endfor %}
+    <div class="container-fluid">
+        <div class="col-md-6">
+            <div id="areaReadings">
+                <div class="row" >
+                    <ul class="list-unstyled">
+                        {% for area in areas %}
+                            {% if area.name|trim is not empty %}
+                                <li class="col-md-6"><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
+                                        >{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
+                                        </a>
+                                    </h3>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
 
-        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class = "container">
+                <div id="map">
+                    <script>
+                        var map;
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: {lat: 6.93, lng: 79.86},
+                                zoom: 12
+                            });
+
+                            {% for district in districts %}
+                            var $title = {{ district['name']|json_encode|raw }};
+                            var $long = {{ district['center_longitude']|json_encode|raw }};
+                            var $lati = {{ district['center_latitude']|json_encode|raw }};
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                                url: '{{ path('locationAreaView', {'viewArea':  district.name}) }}',
+                                map: map,
+                                title: $title
+                            });
+                            google.maps.event.addListener(marker, 'click', function() {
+                                window.location.href = this.url;  //changed from markers[i] to this
+                            });
+                            {% endfor %}
+                        }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                            async defer></script>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 1px">
+                <p style="background-color: #5eb5e0">*Click on the Markers to View Locations</p>
+            </div>
+        </div>
     </div>
-
     {% if (js is defined) %}{{ js|raw }}{% endif %}
 {% endblock %}

@@ -26,15 +26,15 @@
                 {#{{ form_end(form) }}#}
                 {{ form_start(form) }}
 
-                No of Readings {{ form_widget(form.noOfReadings) }}
+                <strong>No of Readings</strong> {{ form_widget(form.noOfReadings) }}
                 <br>
-                Start Date {{ form_widget(form.startDate.date) }}
+                <strong>Start Date</strong> {{ form_widget(form.startDate.date) }}
                 <br>
-                Start time {{ form_widget(form.startDate.time) }}
+                <strong>Start time</strong> {{ form_widget(form.startDate.time) }}
                 <br>
-                End date{{ form_widget(form.endDate.date) }}
+                <strong>End date</strong>{{ form_widget(form.endDate.date) }}
                 <br>
-                End time{{ form_widget(form.endDate.time) }}
+                <strong>End time</strong>{{ form_widget(form.endDate.time) }}
                 <br>
                 {{ form_end(form) }}
             </div>
