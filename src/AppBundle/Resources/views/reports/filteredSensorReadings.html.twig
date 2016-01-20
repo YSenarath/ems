@@ -10,7 +10,7 @@
 {% endblock %}
 {% block body %}
     <h1 align="center">
-       Sensor Readings
+        Sensor Readings
     </h1>
     {% if( airQualityReadings|length==0 and humidityReadings|length==0 and pressureReadings|length==0 and tempReadings|length==0 and windReadings|length==0 ) %}
         <div id="errorMsg" align="center">
@@ -98,8 +98,15 @@
                         </div>
                     </div>
                 {% endif %}
+
+
                 {% if humidityReadings|length>0 %}
-                    <div id="humidityTab" class="tab snap">
+                    {% if airQualityReadings|length==0 %}
+                        {% set activeTab = 'active' %}
+                    {% else %}
+                        {% set activeTab = 'snap' %}
+                    {% endif %}
+                    <div id="humidityTab" class="tab {{ activeTab }}">
                         <div class="container-fluid">
                             <div class="row ">
                                 <div class="component" id="sensorReading" align="center">
@@ -132,9 +139,17 @@
                             </div>
                         </div>
                     </div>
+
                 {% endif %}
+
+
                 {% if pressureReadings|length>0 %}
-                    <div id="pressureTab" class="tab snap">
+                    {% if airQualityReadings|length==0 and humidityReadings|length==0 %}
+                        {% set activeTab = 'active' %}
+                    {% else %}
+                        {% set activeTab = 'snap' %}
+                    {% endif %}
+                    <div id="pressureTab" class="tab {{ activeTab }}">
                         <div class="container-fluid">
                             <div class="row ">
                                 <div class="component" id="sensorReading" align="center">
@@ -169,8 +184,15 @@
                         </div>
                     </div>
                 {% endif %}
+
+
                 {% if tempReadings|length>0 %}
-                    <div id="temperatureTab" class="tab snap">
+                    {% if airQualityReadings|length==0 and humidityReadings|length==0  and pressureReadings|length==0 %}
+                        {% set activeTab = 'active' %}
+                    {% else %}
+                        {% set activeTab = 'snap' %}
+                    {% endif %}
+                    <div id="temperatureTab" class="tab {{ activeTab }}">
                         <div class="container-fluid">
                             <div class="row ">
                                 <div class="component" id="sensorReading" align="center">
@@ -203,8 +225,15 @@
                         </div>
                     </div>
                 {% endif %}
+
+
                 {% if windReadings|length>0 %}
-                    <div id="windTab" class="tab snap">
+                    {% if airQualityReadings|length==0 and humidityReadings|length==0 and pressureReadings|length==0  and tempReadings|length==0 %}
+                        {% set activeTab = 'active' %}
+                    {% else %}
+                        {% set activeTab = 'snap' %}
+                    {% endif %}
+                    <div id="windTab" class="tab {{ activeTab }}">
                         <div class="row ">
                             <div class="component" id="sensorReading" align="center">
                                 <div class="component" id="sensorReading" align="center">
@@ -240,6 +269,8 @@
                         </div>
                     </div>
                 {% endif %}
+
+
             </div>
             <script src="{{ asset('bundles/framework/js/sorttable.js') }}"></script>
             <script>
