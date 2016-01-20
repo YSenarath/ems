@@ -86,16 +86,6 @@
                     {% endif %}
 
 
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="true">Filters<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('find_sensor') }}">Sensors</a></li>
-                                <li><a href="{{ path('reportSensorReadingFinder') }}">Sensor Readings</a></li>
-                            </ul>
-                        </li>
-                    {% endif %}
 
 
 
@@ -122,6 +112,17 @@
                                     <li><hr class="navhr"></li>
                                     <li><a href="{{ path('addLocations') }}">Add New Location</a></li>
                                 {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') or is_granted('ROLE_MNGR') %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="true">Filters<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('find_sensor') }}">Sensors</a></li>
+                                <li><a href="{{ path('reportSensorReadingFinder') }}">Sensor Readings</a></li>
                             </ul>
                         </li>
                     {% endif %}
