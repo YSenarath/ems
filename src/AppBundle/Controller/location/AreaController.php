@@ -25,7 +25,31 @@ class AreaController extends Controller
     {
         $this->connection = $connection;
     }
+    /**method by jnj
+     *
+     * bug fixed
+     * add location
+     * to locationview
+     * */
+    /**
+     * @param $areaName
+     * @return Area|bool
+     */
+    public function getAreaName($areaCode)
+    {
+        $result = $this->connection->fetchAssoc('SELECT name FROM area WHERE area_code= ?', array($areaCode));
+        // $result = $result->fetchAll();
 
+        if ($result != null) {
+            //print_r($result["area_code"]);
+
+            return $result["name"];
+            // return array("area_code"=>$result["area_code"],"center_longitude"=>$result["center_longitude"],"center_latitude"=>$result["center_latitude"]);
+        }
+
+        return false;
+
+    }
     /**
      * @return array
      * @throws \Doctrine\DBAL\DBALException

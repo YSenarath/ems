@@ -194,16 +194,20 @@ class LocationActionController extends Controller
 
         if ($form->isValid() && $form->isSubmitted()) {
 
-            //add location
-            $connection = $this->get('database_connection');
-            $locationController = new LocationController($connection);
 
-            $locationController->addLocation($newLoc);
+            if (!$locationController->searchAddressInArea($newLoc->getAddress(),$newLoc->getAreaCode())){
+                $locationController->addLocation($newLoc);
+            } else{
+                $form->get('address')->addError(new FormError('The Address already exists in area :'.$newLoc->getAreaCode()));
+                return $this->render(
+                    'AppBundle:location:addLocations.html.twig',
+                    array('form' => $form->createView() , 'location'=>$newLoc )
+                );
+            }
+            $areaController = new AreaController($connection);
+            $name = $areaController->getAreaName($newLoc->getAreaCode());
+            return $this->redirectToRoute('locationAreaView', array('viewArea'=> $name));
 
-            return $this->render(
-                'AppBundle:location:addLocations.html.twig',
-                array('form' => $form->createView())
-            );
         }
 
         return $this->render(
