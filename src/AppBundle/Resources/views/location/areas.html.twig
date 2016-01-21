@@ -2,7 +2,7 @@
 {% extends 'AppBundle::base.html.twig' %}
  {% block otherstylesheets %}
      {#Sidebar style#}
-     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/locationAreas.css') }}"/>
      <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
  {% endblock %}
@@ -13,14 +13,14 @@
             <h2>Administrative Districts</h2>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="col-md-3" id="nameColumn">
-            <div class="row height100" >
+            <div class="row height100" id="areaReadings">
                 <ul class="list-unstyled height100" >
                     {% for area in areas %}
                         {% if area.name|trim is not empty %}
                             <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
-                                    >{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
+                                    >&nbsp;&nbsp;&nbsp;{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
                                     </a>
                                 </h3>
                             </li>

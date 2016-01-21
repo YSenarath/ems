@@ -1,25 +1,15 @@
-h2 {
-    color: #009688;
-    text-align: center;
+html, body {
+    height: 70%;
 }
 
 #areaReadings {
     /*padding: 25px 40px 25px 40px;*/
     background-color: #eaeaea;
-    border: 10px solid #9e9e9e;
-    color: #2196F3;
+    border: 10px solid #EFEFEF;
+    color: #83f1f3;
     border-radius: 10px;
-}
-
-/*#map {*/
-    /*height: 468px;*/
-    /*width: 45vw;*/
-
-/*}*/
-
-
-html, body {
-    height: 70%;
+    float: none;
+    margin: 0 auto;
 }
 
 .container-fluid {
@@ -31,14 +21,11 @@ html, body {
     height: 100%;
 }
 
-.margin , #mapColumn , #mapContainer, #map , .height100{
+.margin , #mapColumn , #mapContainer, #map{
     height: 100%;
 }
 
 #nameColumn{
-    height: 95%;
-}
-
-.height100 > ul{
+    height: 85%;
     overflow: auto;
 }

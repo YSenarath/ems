@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
     <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/locationAreaView.css') }}"/>
     <style>
         #info {
             background-color: #5eb5e0;
@@ -76,39 +77,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="margin-left: 20px">
-            <div class="row">
-                <div class="center-block col-md-4" id="map" style=" height: 400px;width: 39vw;">
-                    <script>
-                        var map;
-                        function initMap() {
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
-                                zoom: 12
-                            });
+        <div class="col-md-4" id="mapColumn" style="margin-left: 20px">
+            <script>
+                var map;
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: {{ area_latitude }}, lng: {{ area_longitude }}},
+                        zoom: 12
+                    });
 
-                            {% for loc in locations %}
-                            var $title = {{ loc.getAddress()|json_encode|raw }};
-                            var $long = {{ loc.getLongitude()|json_encode|raw }};
-                            var $lati = {{ loc.getLatitude()|json_encode|raw }};
-                            var marker = new google.maps.Marker({
-                                position: {lat: parseFloat($lati), lng: parseFloat($long)},
-                                url: '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}',
-                                map: map,
-                                title: $title
-                            });
-                            google.maps.event.addListener(marker, 'click', function() {
-                                window.location.href = this.url;  //changed from markers[i] to this
-                            });
-                            {% endfor %}
-                        }
-                    </script>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
-                            async defer></script>
-                </div>
-                <div class="row" style="margin-top: 406px">
-                    <p id="info">*Click on the Markers to View Sensors</p>
-                </div>
+                    {% for loc in locations %}
+                    var $title = {{ loc.getAddress()|json_encode|raw }};
+                    var $long = {{ loc.getLongitude()|json_encode|raw }};
+                    var $lati = {{ loc.getLatitude()|json_encode|raw }};
+                    var marker = new google.maps.Marker({
+                        position: {lat: parseFloat($lati), lng: parseFloat($long)},
+                        url: '{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}',
+                        map: map,
+                        title: $title
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        window.location.href = this.url;  //changed from markers[i] to this
+                    });
+                    {% endfor %}
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
+                    async defer></script>
+            <div class="row" style="margin-top: 406px">
+                <p id="info">*Click on the Markers to View Sensors</p>
             </div>
         </div>
     </div>
