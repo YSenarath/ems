@@ -19,7 +19,7 @@
                 <ul class="list-unstyled height100" >
                     {% for area in areas %}
                         {% if area.name|trim is not empty %}
-                            <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
+                            <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}" style="text-decoration: blink"
                                     >&nbsp;{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
                                     </a>
                                 </h3>
