@@ -27,6 +27,7 @@ html, body {
     overflow-y: hidden; /* don't show content that exceeds my height */
 }
 
+
 #content{
     height: 95%;
 }

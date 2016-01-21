@@ -1,5 +1,5 @@
 html, body {
-    height: 100%;
+    height: 90%;
 }
 
 .container-fluid {
@@ -12,10 +12,24 @@ html, body {
 }
 
 .margin , #mapColumn , #mapContainer, #map{
-    height: 88%;
+    height: 95%;
 }
 
+#tableContainer{
+    height: 100%;
+}
+
+.table{
+    height: 88%;
+}
 #nameColumn{
     height: 100%;
     overflow: auto;
+}
+
+
+h3{
+    margin-left: 1%;
+    color: #337ab7;
+
 }
