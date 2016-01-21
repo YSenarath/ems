@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportSensorReadingsStyle.css') }}"/>
 
     <style>
-
+        .sensorReadingRow{
+            margin: 0;
+            width: 100%;
+        }
+        #sensorReading{
+            width: 100%;
+        }
     </style>
 
 
@@ -29,8 +35,8 @@
             <div class="tab-content">
                 <div id="tabular" class="tab active ">
 
-                    <div class="container-fluid">
-                        <div class="row ">
+                    <div class="container">
+                        <div class="row sensorReadingRow">
                             <div id="sensorReading" >
                                 <table id="sensorReadingTable" class="table sortable">
 
@@ -76,7 +82,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row sensorReadingRow">
                             <p>*Please Click the table column header to sort by.</p>
                         </div>
                     </div>

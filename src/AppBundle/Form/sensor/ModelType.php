@@ -31,7 +31,7 @@ class ModelType extends AbstractType
                 ->add('model_id', TextType::class, array('label' => 'Model ID'))
                 ->add('manufacture', TextType::class, array('label' => 'Manufacture' ))
                 ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'placeholder'=>'--Select a Unit--' ,'choices'=>array('°C'=>'°C' , 'Percentage'=>'percent','m/s'=>'m/s', 'Pascal' => 'Pa')))
-                ->add('det_range', TextType::class, array('label' => 'Detection Range' ))
+                ->add('det_range', TextType::class, array('label' => 'Detection Precision' ))
                 ->add('submit', SubmitType::class, array('label' => 'Save',));
         }
         else if ($type == 'edit'){
@@ -39,7 +39,7 @@ class ModelType extends AbstractType
                 ->add('model_id', TextType::class, array('label' => 'Model ID' , 'disabled' => true))
                 ->add('manufacture', TextType::class, array('label' => 'Manufacture' ))
                 ->add('unit', ChoiceType::class, array('label' => 'Unit' , 'placeholder'=>'--Select a Unit--' ,'choices'=>array('°C'=>'°C' , 'Percentage'=>'%','m/s'=>'m/s', 'Pascal' => 'Pa')))
-                ->add('det_range', TextType::class, array('label' => 'Detection Range' ))
+                ->add('det_range', TextType::class, array('label' => 'Detection Precision' ))
                 ->add('submit', SubmitType::class, array('label' => 'Save',));
         }
 
