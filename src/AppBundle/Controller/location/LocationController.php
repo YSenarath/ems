@@ -8,8 +8,7 @@
 namespace AppBundle\Controller\location;
 
 use AppBundle\Entity\location\Location;
-use AppBundle\Entity\report\Area;
-use AppBundle\Entity\report\LocationEntity;
+use AppBundle\Entity\location\Area;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -24,6 +23,33 @@ class LocationController extends Controller
         $this->connection = $connection;
     }
 
+
+    /**created by jnj
+     * bug fixes
+     * add location
+     * */
+    public function searchAddressInArea($address,$area)
+    {
+        $location = $this->connection->fetchAssoc(
+            'SELECT location_id,address, longitude, latitude, area_code FROM location WHERE address = ? AND area_code = ?',
+            array($address,$area)
+        );
+        //print_r($result);
+        if ($location != null) {
+
+            $tmpLocation = new Location();
+            $tmpLocation->setId($location["location_id"]);
+            $tmpLocation->setAddress($location["address"]);
+            $tmpLocation->setLongitude($location["longitude"]);
+            $tmpLocation->setLatitude($location["latitude"]);
+            $tmpLocation->setAreaCode($location["area_code"]);
+            return $tmpLocation;
+            //return array($locationsResult["location_id"],$locationsResult["address"],$locationsResult["longitude"],$locationsResult["latitude"]);
+        }
+        //print_r($locationArray);
+        return false;
+
+    }
     public function getLocationsAction()
     {
         $locations = $this->connection->fetchAll('SELECT address, longitude, latitude FROM location');
@@ -54,51 +80,25 @@ class LocationController extends Controller
         foreach ($result as $s) {
             if ($s != null) {
                 if ($tempArea != $s["name"]) {
-                    $tempArea = $s["name"];
+
                     if ($tempLocation != null) {
-                        $locations[$s["name"]] = $tempLocation;
+                        $locations[$tempArea] = $tempLocation;
                         $tempLocation = null;
                     }
+                    $tempArea = $s["name"];
                 }
                 $tempLocation[$s["address"]] = $s["location_id"];
             }
         }
 
+
         return $locations;
     }
 
-//    /**
-//     * Created by Shehan
-//     * @param $areaId
-//     * @return array
-//     * @throws \Doctrine\DBAL\DBALException
-//     */
-//    public function getLocationIdsAction($areaId)
-//    {
-//        $result = $this->connection->executeQuery(
-//            'SELECT location_id FROM location WHERE area_code=? ORDER BY location_id',
-//            array($areaId)
-//        );
-//        $result = $result->fetchAll();
-//        //print_r($result);
-//        $locationIdArray = array();
-//
-//        foreach ($result as $a) {
-//            if ($a != null) {
-//                $locationIdArray[] = $a["location_id"];
-//            }
-//        }
-//
-//        //print_r($locationIdArray);
-//
-//        return $locationIdArray;
-//
-//    }
-//
     /**
      * Created by Shehan
      * @param $areaId
-     * @return LocationEntity[]|bool
+     * @return array|bool
      * @throws \Doctrine\DBAL\DBALException
      */
     public function getLocationDetailsByAreaAction($areaId)
@@ -114,8 +114,8 @@ class LocationController extends Controller
         if ($locationsResult != null) {
             foreach ($locationsResult as $loc) {
                 if ($loc != null) {
-                    $tmpLocation = new LocationEntity();
-                    $tmpLocation->setLocationId($loc["location_id"]);
+                    $tmpLocation = new Location();
+                    $tmpLocation->setId($loc["location_id"]);
                     $tmpLocation->setAddress($loc["address"]);
                     $tmpLocation->setLongitude($loc["longitude"]);
                     $tmpLocation->setLatitude($loc["latitude"]);
@@ -133,8 +133,7 @@ class LocationController extends Controller
     /**
      * Created by Shehan
      * @param $locationAddress
-     * @return LocationEntity|bool
-     * @throws \Doctrine\DBAL\DBALException
+     * @return Location|bool
      */
     public function getLocationDetailsAction($locationAddress)
     {
@@ -146,8 +145,8 @@ class LocationController extends Controller
         //print_r($result);
         if ($location != null) {
 
-            $tmpLocation = new LocationEntity();
-            $tmpLocation->setLocationId($location["location_id"]);
+            $tmpLocation = new Location();
+            $tmpLocation->setId($location["location_id"]);
             $tmpLocation->setAddress($location["address"]);
             $tmpLocation->setLongitude($location["longitude"]);
             $tmpLocation->setLatitude($location["latitude"]);
@@ -167,7 +166,6 @@ class LocationController extends Controller
      * Date: 1/4/2016
      * Time: 5.12pm
      */
-
     public function addLocation(Location $location)
     {
         $this->connection->beginTransaction();

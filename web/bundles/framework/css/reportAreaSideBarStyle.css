@@ -18,3 +18,9 @@
     height: 60vh;
     overflow: auto;
 }
+#errorMsg {
+    margin: 10px 0;
+    padding: 12px;
+    color: #D8000C;
+    background-color: #FFBABA;
+}

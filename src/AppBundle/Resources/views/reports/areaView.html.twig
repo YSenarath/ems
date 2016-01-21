@@ -3,6 +3,12 @@
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportBaseStyle.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaViewStyle.css') }}"/>
+
+    <style>
+        #headings{
+            margin-top: 20px;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -34,7 +40,7 @@
                                 <td> {{ meanAir['O2'] }} %</td>
                             </tr>
                             <tr>
-                                <td>Carbon diaoxide content</td>
+                                <td>Carbon dioxide content</td>
                                 <td> {{ meanAir['CO2'] }} %</td>
                             </tr>
                             <tr>

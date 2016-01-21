@@ -9,18 +9,18 @@
 
 {% block body %}
     <div class="container">
-        <div class="header">
-            <h2>Administrative Districts</h2>
+        <div align="center">
+            <h1>Administrative Districts</h1>
         </div>
     </div>
-    <div class="container-fluid" >
-        <div class="col-md-3" id="nameColumn">
-            <div class="row height100" id="areaReadings">
+    <div class="container-fluid">
+        <div class="col-md-3" id="nameColumn" style="border-top: 1px solid #337ab7; border-bottom: 1px solid #337ab7;">
+            <div class="row height100" style="color: #337ab7" >
                 <ul class="list-unstyled height100" >
                     {% for area in areas %}
                         {% if area.name|trim is not empty %}
                             <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
-                                    >&nbsp;&nbsp;&nbsp;{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
+                                    >{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
                                     </a>
                                 </h3>
                             </li>

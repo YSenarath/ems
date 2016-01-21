@@ -121,7 +121,12 @@
                         <tr>
                             <td>Primary Measuring Unit</td>
                             {% if sensor.getModelId.getUnit|trim is not empty %}
-                                <td>{{ sensor.getModelId.getUnit }}</td>
+                                {% if sensor.getModelId.getUnit == "percent" %}
+                                    <td>Percentage</td>
+                                {% else%}
+                                    <td>{{ sensor.getModelId.getUnit }}</td>
+                                {% endif %}
+
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}
@@ -151,7 +156,7 @@
                         <tr>
                             <td>Sensor Coordinates</td>
                             {% if ((sensor.getLocId.getLongitude|trim is not empty) and (sensor.getLocId.getLatitude|trim is not empty) ) %}
-                                <td>{{ sensor.getLocId.getLongitude }} , {{ sensor.getLocId.getLatitude }}</td>
+                                <td>{{ sensor.getLocId.getLongitude }}° , {{ sensor.getLocId.getLatitude }}°</td>
                             {% else %}
                                 <td >Not Set</td>
                             {% endif %}

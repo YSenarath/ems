@@ -4,7 +4,8 @@
 {% block otherstylesheets %}
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/addFormFixedStyle.css') }}"/>
-
+    <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,6 +17,23 @@
 {# {% block nevigationbar %} {% endblock %} #}
 
 {% block body %}
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+    {% for msg in app.session.flashbag.get('msg') %}
+
+        <script type="text/javascript">
+            Alert.render('{{ msg }}', '{{ app.session.flashbag.get('title').0 }}');
+        </script>
+    {% endfor %}
+
     <h1 align="center">Update Employee Data</h1>
     <dev>
         <div class="container" align="center">

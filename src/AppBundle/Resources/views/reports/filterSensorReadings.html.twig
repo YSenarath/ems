@@ -4,21 +4,27 @@
 {% block otherstylesheets %}
 
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/findSensor.css') }}"/>
+    <style>
 
+        .formContainer {
+            padding: 05px 40px 05px 40px;
+
+        }
+    </style>
 {% endblock %}
 
 {% form_theme form 'AppBundle:Form:customizedTheme.html.twig' %}
 {% block body %}
 
-    <h1 align="center">
-        Find Sensor Readings
+    <h1 align="center" >
+        Filter Sensor Readings
         <hr>
     </h1>
 
     <div>
         <div class="container-fluid">
             <div class="col-sm-7 formContainer">
-                <div >
+                <div>
                     {{ form_start(form) }}
 
                     <div class="row">
@@ -29,7 +35,7 @@
                             <div>
                                 {{ form_label(form.type_name) }}
                             </div>
-                            <div class="row" >
+                            <div class="row">
                                 <div class="col-md-2 coltype1">{{ form_widget(form.type_name.0) }}</div>
                                 <div class="col-md-2 coltype2">{{ form_widget(form.type_name.1) }}</div>
                                 <div class="col-md-2 coltype2">{{ form_widget(form.type_name.2) }}</div>
@@ -39,7 +45,6 @@
                         </div>
                     </div>
 
-                    <br>
                     <br>
 
                     <div class="row">
@@ -53,29 +58,64 @@
                     </div>
 
                     <br>
-                    <br>
 
                     <div class="row">
-                        <div>
+                        <div class="col-md-4">
                             {{ form_label(form.ins_date) }} {{ form_widget(form.ins_date) }}
                         </div>
-                        <div>
+                        <div class="col-md-4">
                             {{ form_label(form.ins_before) }} {{ form_widget(form.ins_before) }} {{ form_errors(form.ins_before) }}
                         </div>
+                        <div class="col-md-6">
 
+                        </div>
                     </div>
 
-                    <br>
-
-                    <div align="right">
-                        {{ form_widget(form.submit) }}
-                    </div>
-
-                    {{ form_end(form) }}
 
                 </div>
+
+                <hr>
+                {#Insert sensor filter#}
+                <div class="row">
+                    <div class="col-md-4">
+                        <b> Max. readings per sensor</b> {{ form_widget(form.noOfReadings) }}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <b> Start Date</b> {{ form_widget(form.startDate.date) }}
+                    </div>
+                    <div class="col-md-3">
+                        <b> Start time </b>{{ form_widget(form.startDate.time) }}
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <b> End date</b> {{ form_widget(form.endDate.date) }}
+                    </div>
+                    <div class="col-md-3">
+                        <b> End time</b> {{ form_widget(form.endDate.time) }}
+                    </div>
+                     <div class="col-md-8">
+                    </div>
+                </div>
+
+
+                <div align="right">
+                    {{ form_widget(form.submit) }}
+                </div>
+
+                {{ form_end(form) }}
+
             </div>
         </div>
+    </div>
     </div>
 
 

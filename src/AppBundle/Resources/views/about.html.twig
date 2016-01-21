@@ -16,12 +16,26 @@
             text-shadow:rgba(0,0,0,.2) 2px 6px 5px,rgba(255,255,255,.4) 0 -4px 30px;
         }
 
+        html, body{
+            height: calc(100% - 120px);
+        }
+        #content{
+            height:100%;
+        }
+        .margin{
+            height: 100%;
+        }
 
-
+        #logoImage{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
+
     <h1 align="center">Environment Monitoring System</h1>
     <br>
     <div style="padding: 20px 0 10px 100px;">
@@ -36,7 +50,7 @@
         </ul>
 
     </div>
-    <div id="logoImage" style="bottom: 0;" >
+    <div id="logoImage"  >
         <img class="img-responsive pull-right pull-bottom" src="{{ asset('bundles/framework/images/logo.png') }}"
              alt="Company Logo"
              style="width:250px;height:100px;">

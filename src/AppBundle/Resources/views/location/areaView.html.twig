@@ -60,12 +60,12 @@
                                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
                                 <td class="col-md-2">
                                     <button type="button" class="btn glyphicon glyphicon-pencil" title="Change Location Information"
-                                            onclick="location.href='{{ path('changeLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}'"></button>
+                                            onclick="location.href='{{ path('changeLocationView', {'viewArea': areaView,'viewLocation': loc.getId()}) }}'"></button>
                                     <button type="button" class="btn glyphicon glyphicon-remove" title="Delete Location"
                                             onclick="Confirm.render(
                                                     'Are you sure to remove location : {{loc.getAddress}}',
                                                     'delete_row',
-                                                    '{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getLocationId()}) }}')"></button>
+                                                    '{{ path('deleteLocationView', {'viewArea': areaView,'viewLocation': loc.getId()}) }}')"></button>
                                 </td>
                                 {% endif %}
                             </tr>
