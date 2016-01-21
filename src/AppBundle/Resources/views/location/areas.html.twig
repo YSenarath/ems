@@ -20,7 +20,7 @@
                     {% for area in areas %}
                         {% if area.name|trim is not empty %}
                             <li><h3><a  href="{{ path('locationAreaView', {'viewArea':  area.name}) }}"
-                                    >{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
+                                    >&nbsp;{{ area.areacode }}&nbsp;&nbsp;&nbsp;{{ area.name }}
                                     </a>
                                 </h3>
                             </li>
@@ -37,7 +37,7 @@
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
                                 center: {lat: 6.93, lng: 79.86},
-                                zoom: 12
+                                zoom: 13
                             });
 
                             {% for district in districts %}
@@ -51,7 +51,7 @@
                                 title: $title
                             });
                             google.maps.event.addListener(marker, 'click', function() {
-                                window.location.href = this.url;  //changed from markers[i] to this
+                                window.location.href = this.url;
                             });
                             {% endfor %}
                         }
