@@ -2,10 +2,11 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block otherstylesheets %}
     {#Sidebar style#}
-    <link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>
+    {#<link rel="stylesheet" href="{{ asset('bundles/framework/css/reportAreaSideBarStyle.css') }}"/>#}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/sensorList.css') }}"/>
     <script src="{{ asset('bundles/framework/js/confirmationPopUp.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/dialog.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/locationAreaView.css') }}"/>
     <style>
         #info {
             background-color: #5eb5e0;
@@ -31,13 +32,14 @@
             </script>
     {% endfor %}
 
+
+    <div id="header">
+        <h3>{{ areaView }}</h3>
+        <hr>
+    </div>
     <div class="container-fluid">
-        <div id="header">
-            <h3>{{ areaView }}</h3>
-            <hr>
-        </div>
-        <div class="col-md-7">
-            <div class="row">
+        <div class="col-md-7" id="mapColumn">
+            <div class="row" id="mapContainer">
                 <div id="tableContainer">
                     <table class="table">
                         <thead>
@@ -53,7 +55,7 @@
                         {% for loc in locations %}
                             <tr>
                                 <td class="col-md-6"><a href="{{ path('reportLocationView', {'viewArea': areaView,'viewLocation': loc.getAddress()}) }}"> {{ loc.getAddress() }} </a></td>
-                                <td class="col-md-2">{{ loc.getLongitude }}</td>
+                                 <td class="col-md-2">{{ loc.getLongitude }}</td>
                                 <td class="col-md-2">{{ loc.getLatitude }}</td>
 
                                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
@@ -76,9 +78,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="margin-left: 20px">
-            <div class="row">
-                <div class="center-block col-md-4" id="map" style=" height: 400px;width: 39vw;">
+        <div class="col-md-5" id="mapColumn">
+            <div id="mapContainer">
+                <div id="map">
                     <script>
                         var map;
                         function initMap() {
@@ -106,21 +108,18 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfolL32-vwpZgGcIkYMFA5Ajy2svBwbM&callback=initMap"
                             async defer></script>
                 </div>
-                <div class="row" style="margin-top: 406px">
-                    <p id="info">*Click on the Markers to View Sensors</p>
-                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="margin-top: -60px">
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
+                    <a href="{{ path('addLocationView', {'viewArea': areaView}) }}">
+                        <span class="glyphicon glyphicon-new-window"></span> Add New Location
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="container">
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TECH') %}
-            <a href="{{ path('addLocationView', {'viewArea': areaView}) }}">
-                <span class="glyphicon glyphicon-new-window"></span> Add New Location
-            </a>
-            {% endif %}
-        </div>
 
-    </div>
 {% endblock %}

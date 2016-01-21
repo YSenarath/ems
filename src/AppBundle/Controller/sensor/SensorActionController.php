@@ -261,7 +261,7 @@ class SensorActionController extends  Controller
                 $form->get('sensor_id')->addError(new FormError('The Sensor ID already exists'));
                 return $this->render(
                     'AppBundle:sensor:addSensor.html.twig',
-                    array('form' => $form->createView() , 'sensor'=>$sensor ,'title'=>'Add Model' )
+                    array('form' => $form->createView() , 'sensor'=>$sensor ,'title'=>'Add Sensor' )
                 );
             }
             return $this->redirectToRoute('viewSensor', array('id'=> $sensor->getSensorId()));

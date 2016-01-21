@@ -9,8 +9,6 @@ h2 {
     border: 10px solid #9e9e9e;
     color: #2196F3;
     border-radius: 10px;
-    float: none;
-    margin: 0 auto;
 }
 
 /*#map {*/
@@ -30,7 +28,7 @@ html, body {
 }
 
 #content{
-    height: 100%;
+    height: 95%;
 }
 
 .margin , #mapColumn , #mapContainer, #map , .height100{
@@ -38,7 +36,7 @@ html, body {
 }
 
 #nameColumn{
-    height: 95%;
+    height: 100%;
 }
 
 .height100 > ul{
