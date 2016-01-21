@@ -28,7 +28,7 @@ html, body {
 }
 
 #content{
-    height: 70%;
+    height: 95%;
 }
 
 .margin , #mapColumn , #mapContainer, #map , .height100{
@@ -36,7 +36,7 @@ html, body {
 }
 
 #nameColumn{
-    height: 95%;
+    height: 100%;
 }
 
 .height100 > ul{
