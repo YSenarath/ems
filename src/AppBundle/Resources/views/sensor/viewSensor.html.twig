@@ -138,6 +138,15 @@
                             <th></th>
                         </tr>
                         <tr>
+                            <td>Area</td>
+                            {% if sensor.getLocId.getAreaCode|trim is not empty %}
+                                <td>{{ sensor.getLocId.getAreaCode }}</td>
+                            {% else %}
+                                <td >Not Set</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+
                             <td>Location ID</td>
                             {% if sensor.getLocId.getId|trim is not empty %}
                                 <td>{{ sensor.getLocId.getId }}</td>

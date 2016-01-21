@@ -122,7 +122,7 @@ class SensorController extends  Controller{
     public function getSensor($sensor_id)
     {
         $s = $this->connection->fetchAssoc(
-            'SELECT * FROM ((SELECT * FROM sensor WHERE  sensor_id = ?)s NATURAL JOIN location) NATURAL JOIN sensor_model',
+            'SELECT * FROM (((SELECT * FROM sensor WHERE  sensor_id = ?)s NATURAL JOIN location) NATURAL JOIN sensor_model) NATURAL JOIN area',
             array($sensor_id)
         );
 
@@ -143,6 +143,7 @@ class SensorController extends  Controller{
             $location->setAddress($s["address"]);
             $location->setLatitude($s["latitude"]);
             $location->setLongitude($s["longitude"]);
+            $location->setAreaCode($s["name"]);
 
             $sensor->setSensorId($s["sensor_id"]);
             $sensor->setTypeName($this->getTypeName($s["type_name"]));
